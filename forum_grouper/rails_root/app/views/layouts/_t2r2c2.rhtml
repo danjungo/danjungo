@@ -1,0 +1,57 @@
+<hr />
+<span class="r2c2logo"><%= bcrmb('<a href="/">http://ForumGrouper.com</a>') %></span>
+<hr />
+
+<!-- Use tertiary operator: A ? B : C , which means if A then B else C -->
+You are logged in as:
+<span class="r2c2login"> <%=  (session[:usr_id]) ? (Usr.find(session[:usr_id]).login.to_s) : "Guest" %> </span>
+<p />
+<%= bcrmb('<a  href="/sttc/about">About</a>') %>
+<p />
+<%= bcrmb('<a  href="/sttc/contact">Contact</a>') %>
+<p />
+<!-- Sending e-mail on Heroku a challenge. Register and login are commented out.
+Also https costs money on Heroku. So, https is unavailable.
+<a  href="https://forumgrouper.com/usr/signup">Register</a>
+<p />
+<a  href="https://forumgrouper.com/usr/login">Login</a> [to gain https privacy]
+<p />
+<%= bcrmb('<a  href="/usr/logout">Logout</a>') %>
+<p />
+<a  href="https://forumgrouper.com/usr/change_password">Change Password</a>
+<p />
+<a  href="https://forumgrouper.com/usr/forgot_password">Forgot Password</a>
+<hr />
+-->
+
+Links available to Guests:
+<p />
+<%= bcrmb('<a href="/asp/gcategs">Public Categories of Groups</a>') %><br />
+<%= bcrmb('<a href="/asp/grps">Public Groups of Forums</a>') %><br />
+<%= bcrmb('<a href="/asp/frms">Public Forums</a>') %><br />
+<p />
+<%= bcrmb('<a href="/asnp/gcategs">Non-Private Categories of Groups</a>') %><br />
+<%= bcrmb('<a href="/asnp/grps">Non-Private Groups of Forums</a>') %><br />
+<%= bcrmb('<a href="/asnp/frms">Non-Private Forums</a>') %><br />
+<p />
+<a target="fg" href="http://groups.google.com/group/forumgrouper">FG-Posts Datastore</a><br />
+<!-- Now that I have turned off registration, the links below are confusing.  I comment them out.
+
+<p />
+<%= bcrmb('<a href="/sttc/public_data">Here, Public Data is What?</a>') %>
+<p />
+<%= bcrmb('<a href="/sttc/private_data">Private Data is What?</a>') %>
+<p />
+<%= bcrmb('<a href="/sttc/non_private_data">Non-Private Data is What?</a>') %>
+-->
+<hr />
+
+<% if(session[:usr_id]) %>
+Links available to Registered Users:
+<p />
+<%= bcrmb('<a href="/asmy/gcategs">My Categories of Groups</a>') %><br />
+<%= bcrmb('<a href="/asmy/grps">My Groups of Forums</a>') %><br />
+<%= bcrmb('<a href="/asmy/frms">My List of Forums</a>') %><br />
+<hr />
+<% end %>
+

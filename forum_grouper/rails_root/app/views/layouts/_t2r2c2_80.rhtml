@@ -1,0 +1,45 @@
+<hr />
+<span class="r2c2logo"><a href="http://ForumGrouper.com">http://ForumGrouper.com</a></span>
+<hr />
+
+<!-- Use tertiary operator: A ? B : C , which means if A then B else C -->
+<!-- Assume each Usr has a login -->
+You are logged in as:
+<span class="r2c2login"> <%=  (session[:usr_id]) ? (Usr.find(session[:usr_id]).login.to_s) : "Guest" %> </span>
+<p />
+<a  href="http://ForumGrouper.com/sttc/about">About</a>
+<p />
+<!-- Sending e-mail on Heroku a challenge. Register and login are commented out.
+Also https costs money on Heroku. So, https is unavailable.
+<a  href="https://forumgrouper.com/usr/signup">Register</a>
+<p />
+<a  href="https://forumgrouper.com/usr/login">Login</a> [to gain https privacy]
+<p />
+<a  href="http://ForumGrouper.com/usr/logout">Logout</a>
+<p />
+<a  href="https://ForumGrouper.com/usr/change_password">Change Password</a>
+<p />
+<a  href="https://ForumGrouper.com/usr/forgot_password">Forgot Password</a>
+<hr />
+-->
+
+Links available to Guests:
+<p />
+<a href="http://ForumGrouper.com/asp/gcategs">Public Categories of Groups</a><br />
+<a href="http://ForumGrouper.com/asp/grps">Public Groups of Forums</a><br />
+<a href="http://ForumGrouper.com/asp/frms">Public Forums</a><br />
+<p />
+<a href="http://ForumGrouper.com/asnp/gcategs">Non-Private Categories of Groups</a><br />
+<a href="http://ForumGrouper.com/asnp/grps">Non-Private Groups of Forums</a><br />
+<a href="http://ForumGrouper.com/asnp/frms">Non-Private Forums</a><br />
+
+<!-- Now that I have turned off registration, the links below are confusing.  I comment them out.
+<p />
+<a href="http://ForumGrouper.com/sttc/public_data">Here, Public Data is What?</a>
+<p />
+<a href="http://ForumGrouper.com/sttc/private_data">Private Data is What?</a>
+<p />
+<a href="http://ForumGrouper.com/sttc/non_private_data">Non-Private Data is What?</a>
+-->
+
+<hr />

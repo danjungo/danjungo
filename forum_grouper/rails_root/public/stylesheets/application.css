@@ -1,0 +1,13 @@
+
+.r2c2logo {  font-weight: bold; font-size: 18px; }
+
+span.r2c2login {  font-weight: bold; font-size: 18px; color: #1F7F00; }
+
+span.bcrmb {  font-weight: bold; color: #1F7F00; }
+
+
+/* I like a-tags to hover better */
+a:hover, .active-scaffold a:hover {color: 000000; background-color:#ffff00;}
+
+/* Darken a-tags.  Dont change the visited ones.  Override AS a-tags */
+a, a:visited, .active-scaffold a, .active-scaffold a:visited{color:#000077; text-decoration:none;}

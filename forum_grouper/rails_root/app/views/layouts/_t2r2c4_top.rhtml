@@ -1,0 +1,19 @@
+
+<span class="r2c2logo"> | </span>
+Public:
+<%= bcrmb(' [ <a href="/asp/gcategs">Categories</a> of <a href="/asp/grps">Groups</a> of <a href="/asp/frms">Forums</a> ] ') %>
+<br />
+<span class="r2c2logo"> | </span>
+Non-Private:
+<%= bcrmb(' [ <a href="/asnp/gcategs">Categories</a> of <a href="/asnp/grps">Groups</a> of <a href="/asnp/frms">Forums</a> ] ') %>
+<br />
+<% if (session[:usr_id] != nil ) %>
+<span class="r2c2logo"> | </span>
+Mine:
+<%= bcrmb(' [ <a href="/asmy/gcategs">My Categories</a> of <a href="/asmy/grps">My Groups</a> of <a href="/asmy/frms">My list of Forums</a> ] ') %>
+<%= bcrmb(' [ <a href="/asmy/psts">My Posts</a> of <a href="/asmy/prsnas">My Personas</a> to <a href="/asmy/frms">Forums</a> ] ') %>
+<% end %>
+
+<hr />
+<%= render(:partial => "layouts/middle_google_table") %>
+

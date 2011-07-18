@@ -1,0 +1,2 @@
+module Asnp::FrmsHelper
+end

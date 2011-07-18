@@ -1,0 +1,2 @@
+module Asp::PstsHelper
+end

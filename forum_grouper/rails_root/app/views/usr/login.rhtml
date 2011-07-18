@@ -1,0 +1,24 @@
+<div title="<%= title_helper %>" class="form">
+  <%= head_helper 'Please login' %>
+
+  <div class="form-padding">
+    <% form_tag(url_for(:action => "#{@controller.action_name}")) do %>
+      <table>
+        <tr class="two_columns">
+          <td class="prompt"><label>Login:</label></td>
+          <td class="value"><%= text_field 'usr', 'login', :size => 30 %></td>
+        </tr>
+        <tr class="two_columns">
+          <td class="prompt"><label>Password:</label></td>
+          <td class="value"><%= password_field 'usr', 'password', :size => 30 %></td>
+        </tr>
+      </table>
+
+      <div class="button-bar">
+        <%= submit_tag 'login' %>
+        <%= link_to 'Register for an account', :action => 'signup' %> |
+        <%= link_to 'Forgot my password', :action => 'forgot_password' %>      </div>
+    <% end %>
+  </div>
+</div>
+                                                                                

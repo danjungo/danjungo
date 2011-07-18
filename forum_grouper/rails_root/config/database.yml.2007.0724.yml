@@ -1,0 +1,14 @@
+development:
+  encoding: unicode
+  adapter: postgresql
+  database: fg12d
+
+test:
+  encoding: unicode
+  adapter: postgresql
+  database: fg12t
+
+production:
+  encoding: unicode
+  adapter: postgresql
+  database: fg11p

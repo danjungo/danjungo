@@ -1,0 +1,2 @@
+module Asmy::UsrsHelper
+end

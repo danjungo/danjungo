@@ -1,0 +1,2 @@
+module Asp::GcategsHelper
+end

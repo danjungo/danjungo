@@ -1,0 +1,19 @@
+<div title="<%= title_helper %>" class="form">
+  <%= head_helper 'Edit Usr', :error => true %>
+
+    <% form_tag(url_for(:action => "#{@controller.action_name}")) do %>
+      <%= render_partial 'edit', :usr => @usr, :submit => true %>
+    <% end %>
+    </br>
+    <% form_tag(url_for(:action => "#{@controller.action_name}")) do %>
+      <%= render_partial 'password', :submit => true %>
+    <% end %>
+
+    <% form_tag(url_for(:action => "#{@controller.action_name}")) do %>
+      <div class="usr_delete">
+        <%= hidden_field 'usr', 'form', :value => 'delete' %>
+        <%= submit_tag 'Delete' %>
+      </div>
+    <% end %>
+  </div>
+</div>

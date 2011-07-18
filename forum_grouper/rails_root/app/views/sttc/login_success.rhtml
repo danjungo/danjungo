@@ -1,0 +1,12 @@
+<div id="login_success">
+<hr />
+<p />
+Login successful!
+<p />
+
+You are
+logged in as: <span class="r1c2login"> <%=  (session[:usr_id]) ? (Usr.find(session[:usr_id]).login.to_s) : "Not Logged In" %> </span>
+<p />
+Enjoy your stay!
+<hr />
+</div>
