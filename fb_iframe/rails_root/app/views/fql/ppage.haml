@@ -1,0 +1,58 @@
+= render(:partial => "shared/page_top", :locals => {:ffname => __FILE__})
+%br/
+This is a simple demo which sends a query to the FQL table named "page".
+%br/
+The page table is wide:
+%br/
+%a(target="p" href="http://wiki.developers.facebook.com/index.php/Page_(FQL)")http://wiki.developers.facebook.com/index.php/Page_(FQL)
+%br/
+%br/
+If you look at the above documentation it appears that Facebook intends for the "page" table to hold information about the following types of organizations:
+%ul
+  %li Companies
+  %li Businesess
+  %li Restaurants
+  %li Film Productions
+  %li TV Shows
+  %li Bands
+  %li Persons
+  %li Cars
+
+For this demo I decided to query data from the "page" table for this page:
+%a(target="p" href="http://www.facebook.com/pages/American-English-Beatles-Tribute/95146358477")http://www.facebook.com/pages/American-English-Beatles-Tribute/95146358477
+%br/
+Here is the query behind this demo:
+%br/
+%br/
+=@fql_query
+%br/
+%br/
+Here is the call of the query:
+%br/
+@qry_output= @facebook_session.fql_query(fql_query).first
+%br/
+%br/
+Here is the output in YAML format:
+%br/
+=debug @qry_output
+%hr/
+With Rails it is easy to transform the query output into HTML elements.
+%br/
+%br/
+For example we can create an a-element from just the page_id:
+%br/
+%br/
+%a(target="p" href="http://facebook.com/profile.php?id=95146358477")http://facebook.com/profile.php?id=95146358477
+%br/
+%br/
+We can create an a-element from the values of pic, name, and website:
+%br/
+%br/
+%a(target="w" href="http://#{@website}")
+  =@website
+  %br/
+  =@name
+  %img(src="#{@pic}")
+%br/
+%br/
+%hr/

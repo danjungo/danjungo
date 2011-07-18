@@ -1,0 +1,21 @@
+= render(:partial => "shared/page_top", :locals => {:ffname => __FILE__})
+
+The links below bring up dialogs which ask you to grant some permissions.
+%br/
+%style(type="text/css")
+  div.bold_green_text {font-size:1.2em; font-weight:bold; color: green;}
+.bold_green_text
+  If you are worried about your privacy do not click the links.
+%br/
+Instead, create a test account and click the links from that account.
+%hr/
+  
+%fb:prompt-permission(perms="offline_access")
+  Grant Offline Access
+
+%hr/
+      
+%fb:prompt-permission(perms="read_stream,publish_stream")
+  Grant permission for read_stream and publish_stream
+
+%hr/

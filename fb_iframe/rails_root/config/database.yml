@@ -1,0 +1,9 @@
+
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: iifdev
+  pool: 5
+  username: bikle
+  password: b

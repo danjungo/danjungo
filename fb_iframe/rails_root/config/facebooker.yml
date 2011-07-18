@@ -1,0 +1,15 @@
+production:
+  api_key: 3756b8c191faac9ac44082fd2cac997b
+  secret_key: 8f4de704ad0888f44ef970f5d9fc35ec
+  canvas_page_name: ffbiframe
+  callback_url: http://ffbiframe.heroku.com/
+  pretty_errors: true
+  set_asset_host_to_callback_url: true
+
+development:
+  api_key: 3756b8c191faac9ac44082fd2cac997b
+  secret_key: 8f4de704ad0888f44ef970f5d9fc35ec
+  canvas_page_name: ffbiframe
+  callback_url: http://ffbiframe.heroku.com/
+  pretty_errors: true
+  set_asset_host_to_callback_url: true

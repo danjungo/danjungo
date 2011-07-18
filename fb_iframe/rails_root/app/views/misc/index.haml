@@ -1,0 +1,22 @@
+= render(:partial => "shared/page_top", :locals => {:ffname => __FILE__})
+Miscellaneous Demonstrations
+%hr/
+// jQuery toggle of: debug @facebook_session
+=render :partial => "jq_toggle_fbssn"
+%br/
+%br/
+// jQuery toggle of: debug @facebook_session.user
+=render :partial => "jq_toggle_fbssnu"
+%br/
+%br/
+
+jQuery Accordion:
+%br/
+%a(href="#{@application_base_url}/misc/jquery_accordion" target="_top")="#{@application_base_url}/misc/jquery_accordion"
+%br/
+%br/
+
+Scrape images using jQuery and OpenURI:
+%br/
+%a(href="#{@application_base_url}/misc/jq_scrape_form" target="_top")="#{@application_base_url}/misc/jq_scrape_form"
+%hr/
