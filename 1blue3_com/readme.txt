@@ -1,4 +1,4 @@
-1blue3.com is a site which demonstrates how to copy data from Oracle Enterprise Manager to an HTML5 web app destined for an iPhone.
+http://1blue3.com is a site which demonstrates how to copy data from Oracle Enterprise Manager to an HTML5 web app destined for an iPhone.
 
 I have not looked at this site for 18 months but,
 it appears the site is still up.
