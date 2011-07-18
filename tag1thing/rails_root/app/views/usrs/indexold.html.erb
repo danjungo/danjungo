@@ -1,0 +1,24 @@
+<h1>Listing usrs</h1>
+
+<table>
+  <tr>
+    <th>Opndd</th>
+    <th>Usrnm</th>
+    <th>Admn</th>
+  </tr>
+
+<% @usrs.each do |usr| %>
+  <tr>
+    <td><%=h usr.opndd %></td>
+    <td><%=h usr.usrnm %></td>
+    <td><%=h usr.admn %></td>
+    <td><%= link_to 'Show', usr %></td>
+    <td><%= link_to 'Edit', edit_usr_path(usr) %></td>
+    <td><%= link_to 'Destroy', usr, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New usr', new_usr_path %>

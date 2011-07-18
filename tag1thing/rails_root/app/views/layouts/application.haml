@@ -1,0 +1,153 @@
+!!!
+
+%html{html_attrs('en-US'), 'xmlns:fb' => "http://www.facebook.com/2008/fbml"}
+  %head
+    %link{:rel => "shortcut icon", :href => "/favicon.ico",  :type => "image/x-icon"}/
+    %meta{ 'http-equiv' => 'content-type', :content => 'text/html;charset=UTF-8'}
+    %title Tag1Thing.com
+    %link{:id => "jqtheme", :type => "text/css" , :href => "/jquery_ui172/css/#{session[:ccolor_theme]}/jquery-ui-1.7.2.custom.css" , :rel => "stylesheet"}/
+    = javascript_include_tag "jquery-1.3.2.min.js"
+    = javascript_include_tag "jquery-ui-1.7.2.custom.min.js"
+    = javascript_include_tag "thng2.js"
+    = stylesheet_link_tag "t1t.css"
+  %body
+    %table#main_table{:width => '98%', :border => '1', :class => "welcome_text ui-widget-content"}
+      %tr.top_tr
+        %td
+          =link_to("Tag1Thing.com", "http://tag1thing.com")
+          |
+          =link_to("t1t.us", "http://t1t.us")
+        %td=link_to("Publicize",:controller => "thngs",:action =>    "publicize")
+        %td=link_to("Memorize", :controller => "thngs",:action =>    "memorize")
+        %td=link_to("Register", "/Register")
+        %td=link_to("Login", :login)
+        %td=link_to("Logout", :logout)
+        %td=link_to("Browse",   :controller => "usrs",:action =>   "index")
+        %td=link_to("Search",   :controller => "search",:action =>   "index")
+        %td=link_to("Upload",   :controller => "upload",:action =>   "index")
+        // %td=link_to("Download", :controller => "download",:action => "index")
+        %td=link_to("Download", :controller => "ssud",:action => "ddownload")
+        %td=link_to("About", "/About")
+      %tr.main_tr
+        %td#td_lhs{:valign => 'top'}
+          %br/
+          =link_to("Tour","/Tour")
+          %br/
+          %br/
+          =link_to("Use Cases","/UseCases")
+          %br/
+          %br/
+          =link_to("Help","/Help")
+          %br/
+          - if 1== 1
+            // request.host== "tag1thing.com"
+            %hr/
+            %fb:login-button
+            - begin
+              - if facebook_session
+                %br/
+                %span.facebook_blue
+                  You are connected to Facebook as:
+                = facebook_session.user.name
+                %br/
+                %img{:src => facebook_session.user.pic}/
+            - rescue
+              %br/
+            %br/
+          %hr/
+
+          =link_to("Your Name?",:controller => "usrs",:action => "profile")
+          %br/
+          %br/
+          Your name is
+          %span.bold_green
+            =(session[:usrnm] || "Unknown")
+          %br/
+          %hr/
+          Select Color Theme:
+          %br/
+          - @jquithemes= ["black-tie", "cupertino", "dot-luv", "flick", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "start", "sunny", "swanky-purse", "ui-darkness", "ui-lightness"]
+          %form{:action => "/welcome/new_theme"}
+            =select_tag(:select_theme, (@jquithemes.map{|t| "<option>#{t}</option>"}))
+            %input.theme_button{:type => "submit",:value => "Submit"}
+          %hr/
+          %img#flickrimg{:src => "http://farm1.static.flickr.com/22/31431081_a857911888_s.jpg"}/
+          %img#flickrimg{:src => "http://farm1.static.flickr.com/42/91957795_5a27611762_t.jpg"}/
+          %br/
+          %img#flickrimg{:src => "http://farm1.static.flickr.com/77/224762633_2ddd658631_t.jpg"}/
+          %a{:href => "http://kepler.nasa.gov/multimedia/Images/graphics/?ImageID=29", :target => "n", :title => "Comparative Life Zones of Stars"}
+            %img{:src => "http://kepler.nasa.gov/images/CompLifeZoneRGBwTxt-glrythm.jpeg", :alt => "Comparative Life Zones of Stars"}
+          %br/
+          %img#flickrimg{:src => "http://farm4.static.flickr.com/3544/3530581332_b1770ea88d_t.jpg"}/
+          %img#flickrimg{:src => "http://farm3.static.flickr.com/2711/4282901678_ba824c6340_t.jpg"}/
+          %br/
+          ='<object><param name="movie" value="http://www.youtube.com/v/dMH0bHeiRNg&rel=0&color1=0xb1b1b1&color2=0xcfcfcf&hl=en_US&feature=player_embedded&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowScriptAccess" value="always"></param><embed src="http://www.youtube.com/v/dMH0bHeiRNg&rel=0&color1=0xb1b1b1&color2=0xcfcfcf&hl=en_US&feature=player_embedded&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always"  width="256" height="161"></embed></object>'
+          %br/
+          ='<object><param name="movie" value="http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf?ver=2.2.46" /><param name="allowFullScreen" value="true" /><param name="AllowScriptAccess" VALUE="always" /><param name="bgcolor" value="#000000" /><param name="flashVars" value="id=17674007&vid=6799499&lang=en-us&intl=us&thumbUrl=http%3A//l.yimg.com/a/p/i/bcst/videosearch/10248/100619485.jpeg&embed=1" /><embed src="http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf?ver=2.2.46" type="application/x-shockwave-flash" allowFullScreen="true" AllowScriptAccess="always" bgcolor="#000000" flashVars="id=17674007&vid=6799499&lang=en-us&intl=us&thumbUrl=http%3A//l.yimg.com/a/p/i/bcst/videosearch/10248/100619485.jpeg&embed=1" width="256" height="161" ></embed></object>'
+          %br/
+          %a{:href => "http://video.yahoo.com/watch/6799499/17674007", :target => "v"}Water Cat Video
+          %br/
+
+          %hr/
+          Useful Services For Tag1Thing:
+          %hr/
+          File/Document Storage:
+          %br/
+          %br/
+          %a{:href => "http://notepad.yahoo.com", :target => "s"}notepad.yahoo.com
+          %br/
+          %a{:href => "http://flickr.com", :target => "s"}flickr.com
+          %br/
+          %a{:href => "http://scribd.com", :target => "s"}Scribd.com
+          %br/
+          %a{:href => "http://drop.io", :target => "s"}http://drop.io
+          %br/
+          %br/
+          %hr/
+          Video Storage:
+          %br/
+          %br/
+          %a{:href => "http://video.yahoo.com", :target => "s"}video.yahoo.com
+          %br/
+          %a{:href => "http://YouTube.com", :target => "s"}YouTube.com
+          %br/
+          %br/
+          %hr/
+          Storage of Events:
+          %br/
+          %br/
+          %a{:href => "http://calendar.yahoo.com", :target => "s"}calendar.yahoo.com
+          %br/
+          %br/
+          %hr/
+          HTML Storage:
+          %br/
+          %br/
+          %a{:href => "http://jsbin.com", :target => "s"}http://jsbin.com
+          %br/
+          %a{:href => "/html_storage"}Tag1Thing.com
+          %br/
+          %hr/
+          Syntax Storage:
+          %br/
+          %br/
+          %a{:href => "http://pastie.org", :target => "s"}http://pastie.org
+          %br/
+          %hr/
+
+        %td.middle{:valign => 'top',:colspan => "10"}
+          -if flash[:alert]
+            %p{:style => "color:yellow"}= flash[:alert]
+          -if flash[:success]
+            %p{:style => "color:green"}= flash[:success]
+          -if flash[:notice]
+            %p{:style => "color:green"}= flash[:notice]
+          -if flash[:error]
+            %p{:style => "color:red"}= flash[:error]
+          =yield
+      %tr.tr_footer
+        %td{:colspan => "11"}
+          You are logged in as
+          %a{:href => "#{session[:opndd].sub(/Guest/,'/Guest')}", :target => "o"}
+            %span.bold_green=session[:opndd]
+    = render :partial => "layouts/some_fb_js"

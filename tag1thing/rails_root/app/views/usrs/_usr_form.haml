@@ -1,0 +1,46 @@
+%h1 Who Are You?
+.welcome_text
+  - if session[:opndd]== "Guest"
+    You are logged in as 
+    %span.bold_green "Guest."
+    %br/
+    As Guest, you may create Things but other Guests may edit them.
+    %br/
+    If you want your own Things, you should 
+    =link_to("Register.", "/Register")
+    %br/
+    %br/
+    After you register, you may keep your name as
+    %span.bold_green "Guest." 
+    This will give you some anonymity, if you want that.
+    %br/
+    %br/
+    After you register (and login) your Things will be protected from the other Guests even if your name is 
+    %span.bold_green "Guest."
+    %br/
+    %br/
+    If all this discussion about
+    %span.bold_green "Guest"
+    gives you a headache, forget this page and change your name to
+    %span.bold_green "Bob."
+
+  - else
+    - form_for(@usr) do |f| 
+      = f.error_messages 
+      %br/
+      If you want anonymity use a name like "Bob" or "Guest".
+      %br/
+      %br/
+      If you want publicity, use something unique and memorable.
+      %br/
+      %br/
+      Your twitter name might be a good choice.
+      %br/
+      %br/
+      = f.label "My first name is: " 
+      %br/
+      %br/
+      = f.text_field :usrnm , {:class => "thng_field"}
+      %br/
+      %br/
+      = f.submit 'It Is Now' , {:class => "submit_button"}

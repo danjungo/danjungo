@@ -1,0 +1,25 @@
+%h1 Describe the Thing You Want to Publicize
+After you create this thing, a tweet will go out to the planet which publicizes this thing.
+Perhaps then, you should run to your twitter account and retweet.
+%br/
+- form_for(@thng, :url => { :action => "createm4publicize" }) do |f|
+  = f.error_messages
+  %h2 Name it:
+  = f.text_field :thngnm, {:class => "thng_field",:value => "MyBlog"}
+  %br/
+  %br/
+  %br/
+  %br/
+  %h2 Everything else, is optional:
+  #accordion
+    %h3
+      %a{:href => "#"}Give it Short URL:
+    #shrturl
+      = f.text_field :shrturl,{:class => "short_url", :value => params["shrturl"]}
+    = render :partial => "new_tags_form", :locals => { :f => f }
+    = render :partial => "thng_form",     :locals => { :f => f }
+  %br/
+  = f.submit " Publicize Now ! ",{:class => "submit_button"}
+  %br/
+  %br/
+

@@ -1,0 +1,24 @@
+<h1>Editing thng</h1>
+
+<% form_for(@thng) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :thngnm %><br />
+    <%= f.text_field :thngnm %>
+  </p>
+  <p>
+    <%= f.label :thngdsc %><br />
+    <%= f.text_area :thngdsc %>
+  </p>
+  <p>
+    <%= f.label :usr_id %><br />
+    <%= f.text_field :usr_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @thng %> |
+<%= link_to 'Back', thngs_path %>

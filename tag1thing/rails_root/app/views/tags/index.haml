@@ -1,0 +1,15 @@
+=link_to "Owners", :controller => "usrs", :action => "index"
+\->
+=link_to "Things", :controller => "thngs", :action => "index"
+<- Tags
+%h1 Browse Tags
+
+%table{:border => "1"}
+  %tr
+    %th Tag Name
+  - @tags.each do |tag|
+    %tr
+      %td="#{tag.count_tag} Things are tagged by: "
+      %td{:valign => 'top'}=link_to tag.tagnm, :action => "tag_thngs", :tagnm => tag.tagnm
+%br/
+= will_paginate(@tags)

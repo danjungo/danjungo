@@ -1,0 +1,29 @@
+%h1 Advanced Search Results
+A list of Things WHERE
+%br/
+Tag is
+%span.tagnm= params[:bytag]
+%br/
+Username is 
+%span.tagnm= params[:byusr]
+%br/
+URL contains
+%span.tagnm= params[:byurl]
+%br/
+Description contains
+%span.tagnm= params[:bydesc]
+
+%br/
+%br/
+- if (@thngs.nil? or @thngs.size== 0)
+  %br/
+  %br/
+  Oops! 
+  %br/
+  No Things found.
+- else
+  %ul
+    - @thngs.flatten.uniq.each do |thng|
+      %li=link_to thng.thngnm, :controller => "thngs", :action => "show", :id => thng.id
+
+

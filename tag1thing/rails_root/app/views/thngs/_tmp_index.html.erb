@@ -1,0 +1,21 @@
+
+<h1>Browse Things</h1>
+
+<table>
+  <tr>
+    <th>Thngnm</th>
+    <th>Thngdsc</th>
+    <th>Usr</th>
+  </tr>
+
+<% @thngs.each do |thng| %>
+  <tr>
+    <td><%=h thng.thngnm %></td>
+    <td><%=h thng.thngdsc %></td>
+    <td><%=h thng.usr_id %></td>
+    <td><%= link_to 'Show', thng %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

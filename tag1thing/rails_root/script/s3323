@@ -1,0 +1,2 @@
+
+script/server -p 3323 --debugger

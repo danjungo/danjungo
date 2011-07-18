@@ -1,0 +1,148 @@
+%h1 Tag 1 Thing Here! ->
+- form_for(@thng, :url => { :action => "createm" }) do |f|
+
+  = f.error_messages
+
+  %h2 Name it:
+  = f.text_field :thngnm, {:class => "thng_field",:value => "It"}
+  %br/
+  %br/
+  %br/
+  %br/
+  %h2 Everything else, is optional:
+  #accordion
+    %h3
+      %a{:href => "#"}Tag it
+    #tagit
+      Tag it once:
+      %br/
+      =select_tag :thng_tag1, @frqtags1
+      %br/
+      %br/
+      Tag it twice:
+      %br/
+      =select_tag :thng_tag2, @frqtags2
+      %br/
+      %br/
+      3rd tag:
+      %br/
+      =text_field_tag :thng_tag3, nil, {:id => "thng_tag3"}
+      %br/
+      %br/
+      4th tag:
+      %br/
+      =text_field_tag :thng_tag4, nil, {:id => "thng_tag4"}
+
+    %h3
+      %a{:href => "#"}Add Photos
+    #photos4it
+      On the photo, of Your Thing, right click, Copy-Image-Location, Paste Below.
+      %br/
+      (You can practice on the Flickr photos on the left)
+      %br/
+      Photo1:
+      %br/
+      =text_field_tag :thng_img1, nil, {:id => "thng_img1", :class => "url_field"}
+      %br/
+      Photo2:
+      %br/
+      =text_field_tag :thng_img2, nil, {:id => "thng_img2", :class => "url_field"}
+      %br/
+      Photo3:
+      %br/
+      =text_field_tag :thng_img3, nil, {:id => "thng_img3", :class => "url_field"}
+      %br/
+      Photo4:
+      %br/
+      =text_field_tag :thng_img4, nil, {:id => "thng_img4", :class => "url_field"}
+      %br/
+      %a{:href => "#thng_img", :id => "chkphotos"}Check URLs of Photos
+      // The photos should get loaded into the div below this comment.
+      %div#thng_img_out
+      %br/
+      %br/
+      If you have the actual photos, in your computer, Store your photos on flickr.com:
+      %br/
+      %a{:href => "http://www.flickr.com/photos/upload/basic/", :target => "f"}http://www.flickr.com/photos/upload/basic/
+
+    %h3
+      %a{:href => "#"}Add Videos
+    %div
+      Video 1 HTML:
+      %br/
+      =text_field_tag :thng_video1, nil, {:id => "thng_video1", :class => "url_field"}
+      %br/
+      %br/
+      Video 2 HTML:
+      %br/
+      =text_field_tag :thng_video2, nil, {:id => "thng_video2", :class => "url_field"}
+      %br/
+      %br/
+      Video 3 HTML:
+      %br/
+      =text_field_tag :thng_video3, nil, {:id => "thng_video3", :class => "url_field"}
+      %br/
+      %br/
+      Video 4 HTML:
+      %br/
+      =text_field_tag :thng_video4, nil, {:id => "thng_video4", :class => "url_field"}
+      %br/
+      %br/
+      %a{:href => "#thng_video", :id => "chkvideo"}Check Video HTML
+      %br/
+      %br/
+      %div#thng_video_out
+      %br/
+      %br/
+
+    %h3
+      %a{:href => "#"}Add URLs
+    %div
+      %h2 Your Thing, it have a URL?
+      URL 1:
+      %br/
+      =text_field_tag :thng_url1, nil, {:id => "thng_url1", :class => "url_field"}
+      %br/
+      URL 2:
+      %br/
+      =text_field_tag :thng_url2, nil, {:id => "thng_url2", :class => "url_field"}
+      %br/
+      URL 3:
+      %br/
+      =text_field_tag :thng_url3, nil, {:id => "thng_url3", :class => "url_field"}
+      %br/
+      URL 4:
+      %br/
+      =text_field_tag :thng_url4, nil, {:id => "thng_url4", :class => "url_field"}
+      %br/
+      %a{:href => "#thng_url", :id => "chkurls"}Check URL syntax
+      %div#thng_url_out
+      %br/
+    %h3
+      %a{:href => "#"}Add  Description
+    %div
+      %h2 Description
+      %br/
+      = f.label "Why is Your Thing Important?:"
+      %br/
+      = f.text_field :thngwhy, {:class => "thng_field resizable"}
+      %br/
+      %br/
+      = f.label "When was/is Your Thing Important?:"
+      %br/
+      %br/
+      = f.date_select :thngwhen
+      %br/
+      %br/
+      = f.label "Tag(s), Photo(s), not good enough? Describe Your Thing:"
+      %br/
+      = f.text_area :thngdsc, { :class => "jquery_ckeditor", :cols => "80", :rows => "10" }
+      %br/
+  
+  %br/
+  = f.submit " Tag 1 Thing ! ",{:class => "submit_button"}
+  %br/
+  %br/
+  %br/
+
+

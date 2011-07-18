@@ -1,0 +1,18 @@
+%h2 Tags of this Thing
+%ul
+  - @tagnms.each do |tagnm|
+    %li=tagnm
+%h2 Photos related to this Thing
+%ul
+  - @imgsrcs.each do |imgsrc|
+    %li
+      %img{:src => imgsrc}/
+%h2 Videos related to this Thing
+%ul
+  - @vhtmls.each do |videohtml|
+    %li=videohtml
+%h2 URLs related to this Thing
+%ul
+  - @hhrefs.each do |hhref|
+    %li
+      %a{:href => hhref}=hhref

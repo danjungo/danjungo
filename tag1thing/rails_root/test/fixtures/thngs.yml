@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  thngnm: MyString
+  thngdsc: MyText
+  usr_id: 1
+
+two:
+  thngnm: MyString
+  thngdsc: MyText
+  usr_id: 1

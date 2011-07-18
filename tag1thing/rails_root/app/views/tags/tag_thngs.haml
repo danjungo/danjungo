@@ -1,0 +1,11 @@
+=link_to "Owners", :controller => "usrs", :action => "index"
+\-> Things <- 
+=link_to "Tags", :controller => "tags", :action => "index"
+%h1 Browse Things of Tag
+The Tag,
+%span.bold_green
+  ="#{params[:tagnm]},"
+tags these Things:
+%br/
+%br/
+=render :partial => "layouts/thngs"

@@ -1,0 +1,21 @@
+%h3
+  %a{:href => "#"}Tag it
+#tagit
+  Tag it once:
+  %br/
+  =select_tag :thng_tag1, @frqtags1
+  %br/
+  %br/
+  Tag it twice:
+  %br/
+  =select_tag :thng_tag2, @frqtags2
+  %br/
+  %br/
+  3rd tag:
+  %br/
+  =text_field_tag :thng_tag3, nil, {:id => "thng_tag3"}
+  %br/
+  %br/
+  4th tag:
+  %br/
+  =text_field_tag :thng_tag4, nil, {:id => "thng_tag4"}

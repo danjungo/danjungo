@@ -1,0 +1,73 @@
+/* t1t.css */
+
+/* body text */
+body {font-weight: bold; font-size: 15px;}
+
+/* Welcome text */
+.welcome_text {font-weight: bold; font-size: 25px;}
+
+/* your name in layout */
+.bold_green {font-weight: bold; color: green;}
+
+/* width of fields in thng */
+input#thngtag1, input#thngtag2, input#thngtag3, input#thngtag4 {width: 300px;}
+
+/* I want #tagit shorter */
+div#tagit {padding: 22px; font-size: 20px; height: 400px; }
+
+/* I want larger options in the selects */
+div#tagit select {height: 33px; width: 244px;}
+div#tagit select option{font-weight: bold; font-size: 15px;}
+
+div#photos4it {height: 900px;}
+
+/* width, height of textarea in thng */
+textarea.thng_dsc_text_area { width: 666px; height: 222px;}
+
+/* width of URL fields in thng */
+form .url_field {font-size: 20px; width: 600px;}
+
+/* width of URL fields in thng fast */
+form#new_thng .url_field_fast {width: 300px;}
+
+/* size of google img */
+img#flickrimg {width: 100px;}
+
+
+/* size of thng submit button */
+form #thng_submit {width: 300px;}
+
+/* width of LHS-Column */
+table#main_table tr.main_tr td#td_lhs {width: 250px;}
+
+/* Make font in submit button bigger */
+input.submit_button {font-size: 33px; width: 200px;}
+input.theme_button {font-size: 15px; width: 100px;}
+
+
+/* it field */
+input.thng_field {font-weight: bold; font-size: 22px;}
+
+span.tagnm {font-weight: bold; color: #0B0;}
+
+/* Enhance this: comment text area */
+
+
+/* I want larger options in the selects */
+select#select_theme{height: 33px; width: 244px; font-size: 19px;}
+select#select_theme option{font-weight: bold; font-size: 19px;}
+button#new_theme_button{font-size: 17px; width: 200px;}
+
+/* For short URL fields */
+input.short_url{width: 200px;}
+
+/* I want layouttf check box bigger */
+input#thng_layouttf{height: 22px; width: 22px;}
+
+
+/* width of RHS-Column inside view Thng */
+table#table_show2col td#td_show2col_rhs {width: 200px; font-size: 15px; background-color: #AAA;}
+
+/* facebook_blue */
+.facebook_blue {color: #3B5998;}
+

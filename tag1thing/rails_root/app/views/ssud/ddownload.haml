@@ -1,0 +1,56 @@
+%style=".ddl_media {width: 122px; height: 122px; overflow: auto;}"
+%style=".ddl_url {width: 144px; height: 122px; overflow: auto;}"
+
+%table{:border => "1"}
+  %tr
+    %th Thing_name
+    %th Short_URL
+    %th Why?
+    %th When?
+    %th Description
+    %th Tag_name
+    %th Tag_name
+    %th Tag_name
+    %th Tag_name
+    %th Photo
+    %th Photo
+    %th Photo
+    %th Photo
+    %th Video
+    %th Video
+    %th Video
+    %th Video
+    %th URL
+    %th URL
+    %th URL
+    %th URL
+  - @thngs.each do |@thng|
+    - @tags= []; @thng.tags.each{|tag| @tags<< tag}; [0,1,2,3].each{|nt| @tags<< Tag.new}
+    - @iimgs= []; @thng.iimgs.each{|iimg| @iimgs<< iimg}; [0,1,2,3].each{|nt| @iimgs<< Iimg.new}
+    - @videos= []; @thng.videos.each{|video| @videos<< video}; [0,1,2,3].each{|nt| @videos<< Video.new}
+    - @uurls= []; @thng.uurls.each{|uurl| @uurls<< uurl}; [0,1,2,3].each{|nt| @uurls<< Uurl.new}
+    %tr
+      %td=@thng.thngnm
+      %td
+        %a{:href => "http://t1t.us/#{@thng.shrturl}"}="http://t1t.us/#{@thng.shrturl}"
+      %td=@thng.thngwhy
+      %td=@thng.thngwhen
+      %td
+        .ddl_url=@thng.thngdsc
+      - [0,1,2,3].each do |idx|
+        %td=@tags[idx].tagnm
+      - [0,1,2,3].each do |idx|
+        %td
+          .ddl_media
+            %img{:src => @iimgs[idx].imgsrc }/
+      - [0,1,2,3].each do |idx|
+        %td
+          .ddl_media=@videos[idx].videohtml
+      - [0,1,2,3].each do |idx|
+        %td
+          .ddl_url
+            %a{:href => @uurls[idx].hhref}=@uurls[idx].hhref
+
+  
+%br/
+= will_paginate(@thngs)

@@ -1,0 +1,9 @@
+<h1>Search By Tag</h1>
+<% form_tag('/ssearch/bytag', :method => :get) do -%>
+  Search by Tag:
+  <br />
+  <%= text_field_tag :bytag %>
+  <br />
+  <br />
+  <%= submit_tag 'Search By Tag' %>
+<% end -%>

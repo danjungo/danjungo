@@ -1,0 +1,2 @@
+module ThngsHelper
+end

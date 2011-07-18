@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uurlnm: MyString
+  usr_id: 1
+
+two:
+  uurlnm: MyString
+  usr_id: 1

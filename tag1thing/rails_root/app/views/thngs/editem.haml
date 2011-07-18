@@ -1,0 +1,51 @@
+%h1 You are editing a Thing
+
+- form_for(@thng, :url => { :action => "updatem" , :id => @thng }) do |f|
+
+  = f.error_messages
+
+  %h2 Current Name of Thing:
+  = f.text_field :thngnm, {:class => "thng_field"}
+  %br/
+  #accordion
+    %h3
+      %a{:href => "#"}Give it Short URL:
+    #shrturl
+      = f.text_field :shrturl,{:class => "short_url"}
+    %h3
+      %a{:href => "#"}Tag it
+    #tagit
+      1st Tag:
+      %br/
+      =text_field_tag :thng_tag1, nil, {:id => "thng_tag1",:value => @tagnms[1]}
+      %br/
+      %br/
+      2nd Tag:
+      %br/
+      =text_field_tag :thng_tag2, nil, {:id => "thng_tag2",:value => @tagnms[2]}
+      %br/
+      %br/
+      3rd Tag:
+      %br/
+      =text_field_tag :thng_tag3, nil, {:id => "thng_tag3",:value => @tagnms[3]}
+      %br/
+      %br/
+      4th Tag:
+      %br/
+      %br/
+      =text_field_tag :thng_tag4, nil, {:id => "thng_tag4",:value => @tagnms[4]}
+      %br/
+
+    = render :partial => "thng_form", :locals => { :f => f }
+  
+    %h3
+      %a{:href => "#"}Comment on This Thing
+    %div
+      Write your comments here:
+      %br/
+      =text_area_tag :thng_cmmntxt, nil, {:id => "thng_cmmntxt", :class => "resizable thng_dsc_text_area"}
+  %br/
+  = f.submit "Submit Edits",{:class => "submit_button"}
+  %br/
+  %br/
+  %br/

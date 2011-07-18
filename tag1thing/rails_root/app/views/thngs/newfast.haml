@@ -1,0 +1,81 @@
+%h1 Tag 1 Thing Here (Faster)! ->
+You want the fast URL?
+%br/
+%br/
+Click HERE ->
+%a{:href => "http://t1t.us"}t1t.us
+%br/
+%br/
+You want the fast form?
+%br/
+You're looking at it.
+%br/
+%br/
+Quick, create some Thing ->
+
+- form_for(@thng, :url => { :action => "createm" }) do |f|
+
+  = f.error_messages
+
+  %h2 Name it:
+  = f.text_field :thngnm, {:class => "thng_field",:value => "It"}
+  %br/
+  %br/
+  Our tag:
+  %br/
+  =select_tag :thng_tag1, @frqtags1
+  %br/
+  %br/
+  Your tag:
+  %br/
+  =text_field_tag :thng_tag3, nil, {:id => "thng_tag3"}
+  %br/
+  %br/
+  %br/
+  Photos:
+  %br/
+  =text_field_tag :thng_img1, nil, {:id => "thng_img1", :class => "url_field_fast"}
+  =text_field_tag :thng_img2, nil, {:id => "thng_img2", :class => "url_field_fast"}
+  %a{:href => "#thng_img", :id => "chkphotos"}Check URLs of Photos
+  // The photos should get loaded into the div below this comment.
+  %br/
+  %div#thng_img_out
+  %br/
+
+  %br/
+  Videos:
+  %br/
+  =text_field_tag :thng_video1, nil, {:id => "thng_video1", :class => "url_field_fast"}
+  =text_field_tag :thng_video2, nil, {:id => "thng_video2", :class => "url_field_fast"}
+  %a{:href => "#thng_video", :id => "chkvideo"}Check Video HTML
+  %br/
+  %div#thng_video_out
+  %br/
+
+  %h2 Your Thing, it have a URL?
+  URLs:
+  %br/
+  =text_field_tag :thng_url1, nil, {:id => "thng_url1", :class => "url_field_fast"}
+  =text_field_tag :thng_url2, nil, {:id => "thng_url2", :class => "url_field_fast"}
+  %a{:href => "#thng_url", :id => "chkurls"}Check URL syntax
+  %br/
+  %div#thng_url_out
+  %br/
+  %h2 Description
+  = f.label "Why is Your Thing Important?:"
+  %br/
+  = f.text_field :thngwhy, {:class => "thng_field resizable"}
+  %br/
+  = f.label "When was/is Your Thing Important?:"
+  %br/
+  = f.date_select :thngwhen
+  %br/
+  = f.label "Tag(s), Photo(s), not good enough? Describe Your Thing:"
+  %br/
+  = f.text_area :thngdsc, {:id => "thng_dsc_text_area", :class => "jquery_ckeditor", :cols => "80", :rows => "10" }
+  %br/
+  %br/
+  = f.submit " Tag 1 Thing ! "
+  %br/
+  %br/
+  %br/

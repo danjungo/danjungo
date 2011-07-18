@@ -1,0 +1,14 @@
+Owners -> 
+=link_to "Things", :controller => "thngs", :action => "index"
+<-
+=link_to "Tags", :controller => "tags", :action => "index"
+
+%h1 Browse Owners
+%table
+  - @usrs.each do |usr|
+    %tr
+      %td=usr.usrnm
+      %td
+        ="Owns #{usr.thngs.size} Things Here -> "
+        =link_to "Things", :action => "usr_thngs", :usr_id => usr.id
+

@@ -1,0 +1,18 @@
+
+
+// see http://developers.facebook.com/tools.php?connect_wizard
+%script(src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php/en_US" type="text/javascript")
+%script(type="text/javascript")
+  window.onload = function () {
+  FB_RequireFeatures(
+  ["XFBML"], 
+  function(){ 
+  FB.Facebook.init("#{FACEBOOKER['api_key']}", "/xd_receiver.htm");
+  });
+  FB_RequireFeatures(
+  ["CanvasUtil"],
+  function(){
+  FB.XdComm.Server.init("/xd_receiver.htm");
+  FB.CanvasClient.startTimerToSizeToContent();
+  });
+  }

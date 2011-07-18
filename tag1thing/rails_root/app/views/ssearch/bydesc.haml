@@ -1,0 +1,21 @@
+%h1 Search Results
+For the Search-Term,
+%br/
+%span.tagnm= params[:bydesc]
+%br/
+here is a list of Things:
+%br/
+- if (@thngs.nil? or @thngs.size== 0)
+  %br/
+  %br/
+  Oops! 
+  %br/
+  %br/
+  No Things have the Tag: 
+  %span.tagnm=params[:bydesc]
+- else
+  %ul
+    - @thngs.flatten.uniq.each do |thng|
+      %li=link_to thng.thngnm, thng
+
+

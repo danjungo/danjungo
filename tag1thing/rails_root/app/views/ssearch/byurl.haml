@@ -1,0 +1,37 @@
+%h1 Search Results
+For the URL,
+%br/
+%span.tagnm= params[:byurl]
+%br/
+here is a list of Things:
+%br/
+- if @thngs.nil?
+  %br/
+  %br/
+  Oops! 
+  %br/
+  %br/
+  No Things connected to URL:
+  %span.tagnm= params[:byurl]
+- else
+  %ul
+    - @thngs.flatten.uniq.each do |thng|
+      %li=link_to thng.thngnm, thng
+
+
+Here is a list of matching URLs from the above Things:
+%br/
+- if @thngs.nil?
+  %br/
+  %br/
+  Oops! 
+  %br/
+  %br/
+  No Things (or matching URLs) connected to URL:
+  %span.tagnm= params[:byurl]
+- else
+  %ul
+    - @hhrefs.flatten.uniq.each do |hhref|
+      %li=link_to hhref, hhref, {:target => "u"}
+
+

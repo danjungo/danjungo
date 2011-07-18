@@ -1,0 +1,49 @@
+%table#table_show2col
+  %tr
+    %td{:valign => 'top'}
+      .welcome_text
+        - if @thng.usr.opndd== session[:opndd]
+          = link_to("Edit This Thing", :action => "editem", :id => @thng)
+        %h1=@thng.thngnm
+        =@thng.thngdsc 
+    %td#td_show2col_rhs{:valign => 'top'}
+      - if @tagnms.size > 0
+        Tags:
+        %br/
+        %ul
+          - @tagnms.each do |tagnm|
+            %li=link_to tagnm, :controller => "tags", :action => "tag_thngs", :tagnm => tagnm
+      - if @imgsrcs.size > 0
+        Photos:
+        %br/
+        %ul
+          - @imgsrcs.each do |imgsrc|
+            %li
+              %img{:src => imgsrc}/
+      - if @vhtmls.size > 0
+        Videos:
+        %br/
+        %ul
+          - @vhtmls.each do |vhtml|
+            - if vhtml=~ /^http:\/\//
+              %li=link_to vhtml,vhtml
+            - else
+              %li=vhtml
+      - if @hhrefs.size > 0
+        URLs:
+        %br/
+        %ul
+          - @hhrefs.each do |hhref|
+            %li
+              %a{:href => hhref}=hhref
+
+  %tr
+    %td
+      %hr/      
+  - if @cmmntxts.size > 0
+    %tr
+      %td Comments:
+    - @cmmntxts.each do |cmmntxt|
+      %tr
+        %td= h cmmntxt
+

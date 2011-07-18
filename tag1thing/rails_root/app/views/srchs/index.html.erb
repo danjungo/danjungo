@@ -1,0 +1,26 @@
+<h1>Listing srchs</h1>
+
+<table>
+  <tr>
+    <th>Srchtype</th>
+    <th>Srchphrase</th>
+    <th>Usr scoped</th>
+    <th>Usr</th>
+  </tr>
+
+<% @srchs.each do |srch| %>
+  <tr>
+    <td><%=h srch.srchtype %></td>
+    <td><%=h srch.srchphrase %></td>
+    <td><%=h srch.usr_scoped %></td>
+    <td><%=h srch.usr_id %></td>
+    <td><%= link_to 'Show', srch %></td>
+    <td><%= link_to 'Edit', edit_srch_path(srch) %></td>
+    <td><%= link_to 'Destroy', srch, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New srch', new_srch_path %>

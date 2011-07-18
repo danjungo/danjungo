@@ -1,0 +1,11 @@
+<h1>Search By Partial URL</h1>
+<% form_tag('/ssearch/byurl', :method => :get) do -%>
+  Partial URL 
+  <br />
+  (eg: cisco.com, caltech.edu, rubyonrails.org):
+  <br />
+  <%= text_field_tag :byurl %>
+  <br />
+  <br />
+  <%= submit_tag 'Search' %>
+<% end -%>

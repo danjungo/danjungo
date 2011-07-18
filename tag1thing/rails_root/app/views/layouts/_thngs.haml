@@ -1,0 +1,30 @@
+
+%table{:border => "1"}
+  %tr
+    %th Owner of this Thing
+    %th Thing
+    %th Tags of that Thing
+    %th URLs of that Thing
+  - @thngs.each do |thng|
+    %tr
+      %td{:valign => 'top'}
+        =link_to thng.usr.usrnm, :controller => "usrs", :action => "usr_thngs", :usr_id => thng.usr_id
+      %td{:valign => 'top'}
+        =link_to thng.thngnm, thng
+        %br/
+        %br/
+        - if (!thng.nil? and !thng.shrturl.nil? and thng.shrturl.size> 0)
+          =link_to "http://t1t.us/#{thng.shrturl}", "http://t1t.us/#{thng.shrturl}"
+      %td
+        %ul
+          - thng.tags.each do |tag|
+            - unless (tag.nil? or tag.tagnm== "" or tag.tagnm.nil?)
+              %li=link_to tag.tagnm, :controller => "tags", :action => "tag_thngs", :tagnm => tag.tagnm
+      %td
+        %ul
+          - thng.uurls.each do |uurl|
+            - unless (uurl.nil? or uurl.hhref== "" or uurl.hhref.nil?)
+              %li=link_to uurl.hhref, uurl.hhref
+%br/
+= will_paginate(@thngs)
+

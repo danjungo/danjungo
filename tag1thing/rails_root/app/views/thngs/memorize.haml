@@ -1,0 +1,21 @@
+%h1 Describe the Thing You Want to Memorize
+- form_for(@thng, :url => { :action => "createm4memorize" }) do |f|
+  = f.error_messages
+  %h2 Name it:
+  = f.text_field :thngnm, {:class => "thng_field",:value => "My Mothers Birthday"}
+  %br/
+  %br/
+  %br/
+  %br/
+  %h2 Everything else, is optional:
+  #accordion
+    %h3
+      %a{:href => "#"}Give it Short URL:
+    #shrturl
+      = f.text_field :shrturl,{:class => "short_url", :value => params["shrturl"]}
+    = render :partial => "new_tags_form", :locals => { :f => f }
+    = render :partial => "thng_form",     :locals => { :f => f }
+  %br/
+  = f.submit " Memorize This ! ",{:class => "submit_button"}
+  %br/
+  %br/

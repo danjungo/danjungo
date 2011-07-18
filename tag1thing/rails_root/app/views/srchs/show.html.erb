@@ -1,0 +1,23 @@
+<p>
+  <b>Srchtype:</b>
+  <%=h @srch.srchtype %>
+</p>
+
+<p>
+  <b>Srchphrase:</b>
+  <%=h @srch.srchphrase %>
+</p>
+
+<p>
+  <b>Usr scoped:</b>
+  <%=h @srch.usr_scoped %>
+</p>
+
+<p>
+  <b>Usr:</b>
+  <%=h @srch.usr_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_srch_path(@srch) %> |
+<%= link_to 'Back', srchs_path %>

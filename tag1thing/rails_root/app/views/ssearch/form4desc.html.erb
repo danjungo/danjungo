@@ -1,0 +1,9 @@
+<h1>Search Descriptions of Things</h1>
+<% form_tag('/ssearch/bydesc', :method => :get) do -%>
+  Search-Term:
+  <br />
+  <%= text_field_tag :bydesc %>
+  <br />
+  <br />
+  <%= submit_tag 'Search' %>
+<% end -%>

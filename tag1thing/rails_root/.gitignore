@@ -1,0 +1,11 @@
+*~
+\#*#
+*.cache
+*.log
+*.pid
+*.db
+tmp/**/*
+tmp/*
+.DS_Store
+db/cstore/*
+log/development.log

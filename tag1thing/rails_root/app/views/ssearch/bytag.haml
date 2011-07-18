@@ -1,0 +1,21 @@
+%h1 Search Results
+For the tag,
+%br/
+%span.tagnm= params[:bytag]
+%br/
+here is a list of Things:
+%br/
+- if @thngs.nil?
+  %br/
+  %br/
+  Oops! 
+  %br/
+  %br/
+  No Things have the Tag: 
+  %span.tagnm=params[:bytag]
+- else
+  %ul
+    - @thngs.flatten.uniq.each do |thng|
+      %li=link_to thng.thngnm, thng
+
+

@@ -1,0 +1,21 @@
+%h1 Search Results
+For the Username,
+%br/
+%span.tagnm= params[:byusr]
+%br/
+here is a list of Things:
+%br/
+- if @thngs.nil?
+  %br/
+  %br/
+  Oops! 
+  %br/
+  %br/
+  No Things belong to a User with Username:
+  %span.tagnm=params[:byusr]
+- else
+  %ul
+    - @thngs.flatten.uniq.each do |thng|
+      %li=link_to thng.thngnm, thng
+
+

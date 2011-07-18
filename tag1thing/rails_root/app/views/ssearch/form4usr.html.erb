@@ -1,0 +1,9 @@
+<h1>Search By Username</h1>
+<% form_tag('/ssearch/byusr', :method => :get) do -%>
+  Search by Username:
+  <br />
+  <%= text_field_tag :byusr %>
+  <br />
+  <br />
+  <%= submit_tag 'Search By Username' %>
+<% end -%>

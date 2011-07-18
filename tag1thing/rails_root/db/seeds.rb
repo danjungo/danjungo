@@ -1,0 +1,67 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#   
+#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
+#   Major.create(:name => 'Daley', :city => cities.first)
+theguest= Usr.create({ :opndd => "Guest", :usrnm => "Guest"})
+thng1= Thng.create({ :thngnm => "The Universe", :thngwhy => "Just because", :thngdsc => "The Universe holds all Things", :usr => theguest, :shrturl => "thing1"})
+
+frqtags= Frqtag.create([ 
+  { :tgnm => "Idea"},
+  { :tgnm => "Memory"},
+  { :tgnm => "List"},
+  { :tgnm => "Task"},
+  { :tgnm => "Technique/Recipe"},
+  { :tgnm => "Web Page"},
+  { :tgnm => "Bookmark"},
+  { :tgnm => "Map"},
+  { :tgnm => "Directions"},
+  { :tgnm => "Dialog/Conversation"},
+  { :tgnm => "Group"},
+  { :tgnm => "Comment"},
+  { :tgnm => "Opinion"},
+  { :tgnm => "Humorous"},
+  { :tgnm => "Person"},
+  { :tgnm => "Place"},
+  { :tgnm => "Appointment"},
+  { :tgnm => "Event"},
+  { :tgnm => "Blog"},
+  { :tgnm => "Book"},
+  { :tgnm => "Art"},
+  { :tgnm => "Music"},
+  { :tgnm => "Software"},
+  { :tgnm => "Food"},
+  { :tgnm => "Travel"},
+  { :tgnm => "News"},
+  { :tgnm => "Tech"},
+  { :tgnm => "Business"},
+  { :tgnm => "Education"},
+  { :tgnm => "Cheap"},
+  { :tgnm => "Expensive"},
+  { :tgnm => "Gay"},
+  { :tgnm => "Good"},
+  { :tgnm => "Bad"},
+  { :tgnm => "Complement"},
+  { :tgnm => "Complaint"},
+  { :tgnm => "Government"},
+  { :tgnm => "Politics"},
+  { :tgnm => "Sports"},
+  { :tgnm => "Strange"},
+  { :tgnm => "Poem"},
+#  { :tgnm => "Porn"},
+  { :tgnm => "Erotic"},
+  { :tgnm => "Offensive"},
+  { :tgnm => "Problem"},
+  { :tgnm => "Beautiful"},
+  { :tgnm => "Ugly"},
+  { :tgnm => "Work"},
+  { :tgnm => "Game"},
+  { :tgnm => "Shopping"},
+  { :tgnm => "Hobby"},
+  { :tgnm => "Animal"},
+  { :tgnm => "Plant"},
+  { :tgnm => "Dream"},
+  { :tgnm => "Spam"},
+ ])

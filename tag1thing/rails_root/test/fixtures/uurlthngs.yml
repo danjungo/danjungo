@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uurl_id: 1
+  thng_id: 1
+  usr_id: 1
+
+two:
+  uurl_id: 1
+  thng_id: 1
+  usr_id: 1

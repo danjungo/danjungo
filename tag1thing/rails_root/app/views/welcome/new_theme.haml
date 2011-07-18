@@ -1,0 +1,9 @@
+%h1 Color Theme
+- @jquithemes= ["black-tie", "cupertino", "dot-luv", "flick", "le-frog", "mint-choc", "overcast", "pepper-grinder", "redmond", "smoothness", "start", "sunny", "swanky-purse", "ui-darkness", "ui-lightness"]
+
+#accordion
+  - for theme in @jquithemes
+    %h3
+      =link_to(theme, :action => "new_theme", :select_theme => theme)
+    %div
+      =link_to(theme, :action => "new_theme", :select_theme => theme)

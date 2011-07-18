@@ -1,0 +1,112 @@
+%h3
+  %a{:href => "#"}Add Photos
+#photos4it
+  On the photo, of Your Thing, right click, Copy-Image-Location, Paste Below.
+  %br/
+  (You can practice on the Flickr photos on the left)
+  %br/
+  Photo1:
+  %br/
+  =text_field_tag :thng_img1, nil, {:id => "thng_img1", :class => "url_field",:value => @imgsrcs[1]}
+  %br/
+  Photo2:
+  %br/
+  =text_field_tag :thng_img2, nil, {:id => "thng_img2", :class => "url_field",:value => @imgsrcs[2]}
+  %br/
+  Photo3:
+  %br/
+  =text_field_tag :thng_img3, nil, {:id => "thng_img3", :class => "url_field",:value => @imgsrcs[3]}
+  %br/
+  Photo4:
+  %br/
+  =text_field_tag :thng_img4, nil, {:id => "thng_img4", :class => "url_field",:value => @imgsrcs[4]}
+  %br/
+  %a{:href => "#thng_img", :id => "chkphotos"}Check URLs of Photos
+  // The photos should get loaded into the div below this comment.
+  %div#thng_img_out
+  %br/
+  %br/
+  If you have the actual photos, in your computer, Store your photos on flickr.com:
+  %br/
+  %a{:href => "http://www.flickr.com/photos/upload/basic/", :target => "f"}http://www.flickr.com/photos/upload/basic/
+
+%h3
+  %a{:href => "#"}Add Videos
+%div
+  Video 1 HTML:
+  %br/
+  =text_field_tag :thng_video1, nil, {:id => "thng_video1", :class => "url_field",:value => @videohtmls[1]}
+  %br/
+  %br/
+  Video 2 HTML:
+  %br/
+  =text_field_tag :thng_video2, nil, {:id => "thng_video2", :class => "url_field",:value => @videohtmls[2]}
+  %br/
+  %br/
+  Video 3 HTML:
+  %br/
+  =text_field_tag :thng_video3, nil, {:id => "thng_video3", :class => "url_field",:value => @videohtmls[3]}
+  %br/
+  %br/
+  Video 4 HTML:
+  %br/
+  =text_field_tag :thng_video4, nil, {:id => "thng_video4", :class => "url_field",:value => @videohtmls[4]}
+  %br/
+  %br/
+  %a{:href => "#thng_video", :id => "chkvideo"}Check Video HTML
+  %br/
+  %br/
+  %div#thng_video_out
+  %br/
+  %br/
+
+%h3
+  %a{:href => "#"}Add URLs
+%div
+  %h2 Your Thing, it have a URL?
+  URL 1:
+  %br/
+  =text_field_tag :thng_url1, nil, {:id => "thng_url1", :class => "url_field",:value => @hhrefs[1]}
+  %br/
+  URL 2:
+  %br/
+  =text_field_tag :thng_url2, nil, {:id => "thng_url2", :class => "url_field",:value => @hhrefs[2]}
+  %br/
+  URL 3:
+  %br/
+  =text_field_tag :thng_url3, nil, {:id => "thng_url3", :class => "url_field",:value => @hhrefs[3]}
+  %br/
+  URL 4:
+  %br/
+  =text_field_tag :thng_url4, nil, {:id => "thng_url4", :class => "url_field",:value => @hhrefs[4]}
+  %br/
+  %a{:href => "#thng_url", :id => "chkurls"}Check URL syntax
+  %div#thng_url_out
+  %br/
+%h3
+  %a{:href => "#"}Add  Description
+%div
+  %h2 Description
+  %br/
+  = f.label "Why is Your Thing Important?:"
+  %br/
+  = f.text_field :thngwhy, {:class => "thng_field resizable"}
+  %br/
+  %br/
+  = f.label "When was/is Your Thing Important?:"
+  %br/
+  %br/
+  = f.date_select :thngwhen
+  %br/
+  %br/
+  = f.label "Tag(s), Photo(s), not good enough? Describe Your Thing (text or HTML/CSS):"
+  %br/
+  = f.text_area :thngdsc, { :class => "resizable thng_dsc_text_area"}
+  %br/
+  You have the opportunity to render the HTML in the above text-area as a "short-url" page.
+  This short-url page is usually rendered within the Tag1Thing layout.
+  But, if you want your description to render as a plain HTML page, check this box:
+  = f.check_box :layouttf
+  %br/
+  %br/
+  %a{:href => "/html_storage", :target => "m"}More Info About "Describe Your Thing"

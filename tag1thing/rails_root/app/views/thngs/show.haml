@@ -1,0 +1,50 @@
+.welcome_text
+  - if @thng.usr.opndd== session[:opndd]
+    = link_to("Edit This Thing", :action => "editem", :id => @thng)
+  %h1
+    Name of this Thing:
+  %h1
+    =link_to @thng.thngnm , :action => "show" , :id => @thng
+
+  = render :partial => "thng_partial" 
+
+  %br/
+  Description of this Thing:
+  %br/
+  %br/
+  =@thng.thngdsc 
+  %br/
+  %br/
+  %br/
+  %br/
+  Why this Thing is important:
+  %br/
+  %br/
+  =h @thng.thngwhy 
+  %br/
+  %br/
+  %br/
+  When this Thing is/was important:
+  %br/
+  %br/
+  =h @thng.thngwhen 
+  %br/
+  %br/
+  %br/
+  Owner of this Thing:
+  %br/
+  %br/
+  =h @thng.usr.usrnm 
+  %br/
+  %br/
+  %br/
+  %h2 Comments about this Thing
+  %ul
+    - @cmmntxts.each do |cmmntxt|
+      %li=cmmntxt
+  %br/
+  %br/
+  = link_to("Edit This Thing", :action => "editem", :id => @thng)
+  %br/
+  %br/
+  %br/
