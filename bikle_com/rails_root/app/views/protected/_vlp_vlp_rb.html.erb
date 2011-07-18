@@ -1,0 +1,83 @@
+<pre><code class="ruby">
+#!/usr/bin/env ruby
+
+# vlp.rb
+
+# Demo: ruby -r vlp.rb -e 'Vl.new.write_score_sql_script'
+
+# Ruby script which uses nested loops to generate much SQL.
+# The SQL drives the SVM algorithm resident within Oracle Data Miner.
+
+class Vlp
+  require 'rubygems'
+  require 'oci8'
+  def write_score_sql_script
+    some_dates_a = []
+    date_sql = "SELECT DISTINCT TO_CHAR(pdate,'YYYY-MM-DD') FROM vlpatt"
+    date_sql &lt;&lt; " WHERE pdate BETWEEN TO_DATE('2003-04-01','YYYY-MM-DD') AND TO_DATE('2009-06-05','YYYY-MM-DD')"
+    OCI8.new('u2','u').exec(date_sql){ |r| some_dates_a &lt;&lt; r.to_s }
+    p("Found #{some_dates_a.size.to_s} dates in vlpatt.  Check your directory for a new file.")
+    some_dates_a.sort.each do |pdate|
+
+sqlplus_syntax = &lt;&lt;ENDsqlplus_syntax1
+--
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlpatt
+WHERE pdate='#{pdate}'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlpatt
+WHERE 35+pdate&lt;'#{pdate}'
+/
+@cr_bme.sql
+PURGE RECYCLEBIN;
+--
+
+ENDsqlplus_syntax1
+      (fha = File.open("vlp_scorer.sql","a")).write(sqlplus_syntax); fha.close
+    end # some_dates_a.each do
+  end # def write_score_sql_script
+end # class
+
+Vlp.new.write_score_sql_script
+
+
+</code></pre>

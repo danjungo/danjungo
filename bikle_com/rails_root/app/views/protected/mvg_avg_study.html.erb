@@ -1,0 +1,1063 @@
+<h5>Simple Study of Stock Market Data With Oracle Analytic Functions</h5>
+<p />
+<span class="date">2008-09-06 Dan Bikle</span>
+<p />
+<p />
+
+<b>Our Motivation</b>
+<p />
+<p />
+We start with a simple question:
+<p />
+
+<ul>
+ <li>Given:  A random stock in the Oil Services/Equipment industry              </li>
+ <li>Today this random stock has a 20-day moving avg price slope of -1.0% / day </li>
+ <li>What is the probability distribution for its price 10 days from today?     </li>
+ <li>Is it highly probable the stock will be 10% lower or more?                 </li>
+</ul>
+
+<p />
+<p />
+<b>Obtaining Stock Price Data</b>
+<p />
+
+A small amount of stock Price Data may be found here:
+<p />
+<a target='a' href='http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450'>http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450</a>
+
+<p />
+Using the above URL as a pattern, we may collect data for most of the significant stocks in the US.
+
+<p />
+One problem embedded in the data is survivorship bias.  A failed or acquired company will not appear in the dataset:
+
+<p />
+<a target='a' href='http://en.wikipedia.org/wiki/Survivorship_bias'>http://en.wikipedia.org/wiki/Survivorship_bias</a>
+
+<p />
+I use the Ruby language to obtain data.  Ruby offers two modules named "OpenURI" and "hpricot" which I use to collect data:
+
+<ul>
+  <li><a target='a' href='http://www.ruby-doc.org/core/classes/OpenURI.html'>http://www.ruby-doc.org/core/classes/OpenURI.html</a></li>
+  <li><a target='a' href='http://code.whytheluckystiff.net/hpricot/'>http://code.whytheluckystiff.net/hpricot/</a></li>
+  <li><a target='a' href='http://code.whytheluckystiff.net/doc/hpricot/'>http://code.whytheluckystiff.net/doc/hpricot/</a></li>
+</ul>
+
+<p />
+I created a site to help me craft hpricot expressions:
+<p />
+<a target='a' href='http://hpricot.com'>http://hpricot.com</a>
+
+<p />
+Generally when I build an hpricot expression I start with the "body" Hpricot Search Expression:
+
+<form target="h" action="http://hpricot.com/demos/aboutout">
+  <fieldset>
+    <span>Hpricot Search Expression:</span>
+    <input name="hpexpr" size="11" value="body" />
+    <p>URL:</p>
+    <input  name="uurl" size="88" value="http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450" />
+    <p />
+    <input size="22" value="Try Hpricot" type="submit" />
+  </fieldset>
+</form>
+<p />
+<p />
+If you know CSS, then hpricot will come naturally to you.  Hpricot responds to CSS selectors when they are passed in the search expression.
+A good site for learning CSS is displayed below:
+<p />
+<a target='a' href='http://w3schools.com/css/default.asp'>http://w3schools.com/css/default.asp</a>
+<p />
+<p />
+Using view-page-source in our Firefox browser,
+if we inspect the CSS connected to the pricing data we want, we see this CSS selector:
+<p />
+<pre>td.yfnc_tabledata1</pre>
+
+<p />
+
+We can try the above CSS selector as an Hpricot search expression:
+<p />
+
+<form action="http://hpricot.com/demos/search_map" target="demoout">
+  <fieldset>
+    <span>Hpricot Search Expression:</span>
+    <input name="searchexpr" size="17" value="td.yfnc_tabledata1" />
+    <p>URL:</p>
+    <p />
+    <input name="uurl" size="88" value="http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450" />
+    <p />
+    <input value="hpricot_object.search().map {|e| &quot;&lt;hr /&gt;#{e.to_html}&quot; }.sort.to_s" type="submit" />
+  </fieldset>
+</form>
+
+<p />
+<p />
+In addition to CSS, hpricot will respond to XPath syntax.
+
+A good site for learning CSS is displayed below:
+<p />
+<a target='a' href='http://w3schools.com/xpath/default.asp'>http://w3schools.com/xpath/default.asp</a>
+<p />
+In the HTML language, the parent of a td-element is a tr-element.  We can use the XPath expression, "/..", to see the tr-element of any td-element:
+<p />
+
+<form action="http://hpricot.com/demos/search_map" target="demoout">
+  <fieldset>
+    <span>Hpricot Search Expression:</span>
+    <input name="searchexpr" size="17" value="td.yfnc_tabledata1/.." />
+    <p>URL:</p>
+    <p />
+    <input name="uurl" size="88" value="http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450" />
+    <p />
+    <input value="hpricot_object.search().map {|e| &quot;&lt;hr /&gt;#{e.to_html}&quot; }.sort.to_s" type="submit" />
+  </fieldset>
+</form>
+
+<p />
+<p />
+
+With the URL pattern of:
+<p />
+<a target='a' href='http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450'>http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450</a>
+<p />
+And the Hpricot search expression:
+<p />
+"td.yfnc_tabledata1/.."
+<p />
+I built a script which demonstrates how to extract pricing data:
+<p />
+
+<pre><code class="ruby">
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$ cat hpricot_finance_yahoo.rb
+#! /usr/bin/env ruby
+
+# hpricot_finance_yahoo.rb
+
+require 'rubygems'
+require 'open-uri'
+require 'hpricot'
+
+# I help Hpricot
+Hpricot.buffer_size = 1234567
+
+# Gets mkt data for a tkr from finance.yahoo.com.
+# Build something like this:
+# http://finance.yahoo.com/q/hp?s=PDE&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y=2450
+sa_url = "http://finance.yahoo.com/q/hp?s="
+atkr = "PDE"
+sa_url_suffix = "&amp;a=0&amp;b=2&amp;c=1962&amp;d=7&amp;e=16&amp;f=2008&amp;g=d&amp;z=66&amp;y="
+n = 2450
+sa11_url = "#{sa_url}#{atkr}#{sa_url_suffix}#{n}"
+
+p "sa11_url is"
+p sa11_url
+begin
+  my_doc = Hpricot(open(sa11_url)).search("td.yfnc_tabledata1").search("..") # gets me array of tr-elements
+  # From each tr-element, get the 0th, 6th, and 5th td-element. Load the td-element-pairs into an array.
+  my_06_tr_slice = my_doc.map{ |e| [e.children[0], e.children[6],  e.children[5]] unless (e.children.size &lt; 6) }
+  my_06_tr_slice.each do |e|
+    (
+     tkr_day_line = "#{atkr},"
+     tkr_day_line &lt;&lt; "#{e[0].children.first.to_s},"
+     tkr_day_line &lt;&lt; "#{e[1].children.first.to_s.gsub(/,/,'')},"
+     tkr_day_line &lt;&lt; "#{e[2].children.first.to_s.gsub(/,/,'')}\n" # dont want the commas, just numbers
+     p(tkr_day_line)
+    ) unless e.nil?
+  end # do
+rescue
+  p "In rescue section."
+  p "Hpricot or Open-URI had a problem with this URL: #{sa11_url}"
+end # begin
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$ ruby hpricot_finance_yahoo.rb
+"sa11_url is"
+"http://finance.yahoo.com/q/hp?s=PDE&a=0&b=2&c=1962&d=7&e=16&f=2008&g=d&z=66&y=2450"
+"PDE,9-Nov-98,12.00,422300\n"
+"PDE,6-Nov-98,12.00,436900\n"
+"PDE,5-Nov-98,11.69,332000\n"
+"PDE,4-Nov-98,12.00,285800\n"
+"PDE,3-Nov-98,12.31,352200\n"
+"PDE,2-Nov-98,12.50,816000\n"
+"PDE,30-Oct-98,11.62,576300\n"
+"PDE,29-Oct-98,11.25,433300\n"
+"PDE,28-Oct-98,11.25,839300\n"
+"PDE,27-Oct-98,11.50,1123900\n"
+"PDE,26-Oct-98,11.25,601100\n"
+"PDE,23-Oct-98,10.44,756000\n"
+"PDE,22-Oct-98,10.50,689500\n"
+"PDE,21-Oct-98,9.81,1028500\n"
+"PDE,20-Oct-98,8.56,849100\n"
+"PDE,19-Oct-98,8.38,857900\n"
+"PDE,16-Oct-98,7.88,1016900\n"
+"PDE,15-Oct-98,7.00,799500\n"
+"PDE,14-Oct-98,6.38,439800\n"
+"PDE,13-Oct-98,6.56,158300\n"
+"PDE,12-Oct-98,6.81,477100\n"
+"PDE,9-Oct-98,6.56,242700\n"
+"PDE,8-Oct-98,6.56,436300\n"
+"PDE,7-Oct-98,6.94,279300\n"
+"PDE,6-Oct-98,7.19,318600\n"
+"PDE,5-Oct-98,7.44,453300\n"
+"PDE,2-Oct-98,7.75,574800\n"
+"PDE,1-Oct-98,7.69,327500\n"
+"PDE,30-Sep-98,8.00,323900\n"
+"PDE,29-Sep-98,8.38,366200\n"
+"PDE,28-Sep-98,8.62,418400\n"
+"PDE,25-Sep-98,8.75,261800\n"
+"PDE,24-Sep-98,8.87,379400\n"
+"PDE,23-Sep-98,9.38,558900\n"
+"PDE,22-Sep-98,8.69,228000\n"
+"PDE,21-Sep-98,9.00,149500\n"
+"PDE,18-Sep-98,9.06,243500\n"
+"PDE,17-Sep-98,9.19,327400\n"
+"PDE,16-Sep-98,9.62,436700\n"
+"PDE,15-Sep-98,9.19,747800\n"
+"PDE,14-Sep-98,9.75,920200\n"
+"PDE,11-Sep-98,9.13,935200\n"
+"PDE,10-Sep-98,8.44,947500\n"
+"PDE,9-Sep-98,8.00,679000\n"
+"PDE,8-Sep-98,8.12,645400\n"
+"PDE,4-Sep-98,8.56,842500\n"
+"PDE,3-Sep-98,8.12,674700\n"
+"PDE,2-Sep-98,8.25,481700\n"
+"PDE,1-Sep-98,8.00,571800\n"
+"PDE,31-Aug-98,7.94,569000\n"
+"PDE,28-Aug-98,9.00,462600\n"
+"PDE,27-Aug-98,8.94,426600\n"
+"PDE,26-Aug-98,9.31,628600\n"
+"PDE,25-Aug-98,10.19,344600\n"
+"PDE,24-Aug-98,10.31,256400\n"
+"PDE,21-Aug-98,10.81,337900\n"
+"PDE,20-Aug-98,11.06,300400\n"
+"PDE,19-Aug-98,11.12,615000\n"
+"PDE,18-Aug-98,10.12,756800\n"
+"PDE,17-Aug-98,9.81,259000\n"
+"PDE,14-Aug-98,10.12,764200\n"
+"PDE,13-Aug-98,10.75,488300\n"
+"PDE,12-Aug-98,11.06,778000\n"
+"PDE,11-Aug-98,11.00,277400\n"
+"PDE,10-Aug-98,11.75,489300\n"
+"PDE,7-Aug-98,12.56,797700\n"
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+mac2:/pt/rubydemos maco$
+</code></pre>
+
+It's easy to see that the format of the above output is this:
+<p />
+Ticker-symbol, price-date, Ticker-price, Ticker-volume
+<p />
+Ruby code similar to that displayed above was run 208,800 times against 2,623 Tickers to obtain pricing data going as far back as 1984.
+<p />
+
+
+
+<p />
+<b>Loading Stock Price Data Into Oracle</b>
+<p />
+
+Oracle provides a utility named SQL*Loader which is well suited for loading a four-column, CSV file into an Oracle table.
+<p />
+It is easy to find demonstrations of SQL*Loader on the web:
+<p />
+<a target='a' href='http://www.google.com/search?q=sql+loader+demonstrations'>http://www.google.com/search?q=sql+loader+demonstrations</a>
+<p />
+To load my stock price data, I authored 3 files: a shell script, a par file, and a ctl file.
+<p />
+The files are displayed below:
+
+<p />
+<p />
+<pre><code>
+#! /bin/sh
+
+# /h/oracle/dan/trading/mkt_data/csv/yahoo/ytpv_cronjob.sh
+
+. /h/oracle/.orcl
+
+set -x
+
+# cd to the right place
+cd /h/oracle/dan/trading/mkt_data/csv/yahoo/
+
+# filter out any duplicate lines
+sort -u yahoo_load_ytpv_stage.csv > sorted_u_ylys.csv
+mv sorted_u_ylys.csv      yahoo_load_ytpv_stage.csv
+
+# load flat file into oracle ytpv_staging_table
+sqlldr parfile=yahoo_load_ytpv_stage.par
+</code></pre>
+<p />
+The above shell script refers to the par file listed below:
+<p />
+<p />
+<pre><code>
+userid=scott/tiger
+control=yahoo_load_ytpv_stage.ctl
+errors=123
+log=yahoo_load_ytpv_stage.log
+bindsize=20971520
+readsize=20971520
+rows=123456
+bad=yahoo_load_ytpv_stage.bad
+</code></pre>
+
+<p />
+The above par file refers to the ctl file listed below:
+<p />
+<pre><code>
+LOAD DATA
+INFILE 'yahoo_load_ytpv_stage.csv'
+replace INTO TABLE ytpv
+FIELDS TERMINATED BY ','
+TRAILING NULLCOLS
+(
+  TKR          CHAR NULLIF (TKR=BLANKS)
+ , YDATE       DATE "DD-Mon-RR" NULLIF (YDATE=BLANKS)
+ , YPRICE      DECIMAL EXTERNAL NULLIF (YPRICE=BLANKS)
+ , YVOL        DECIMAL EXTERNAL NULLIF (YVOL=BLANKS)
+)
+</code></pre>
+
+
+<p />
+<b>Study the Data With Oracle Analytic Functions</b>
+<p />
+After I ran the above shell script to load the data, I ran some simple queries to see how the data was distributed.
+<p />
+How many distinct stock tickers do I have?
+<p />
+<pre><code class="sql">
+09:59:46 SQL&gt; SELECT COUNT(DISTINCT tkr) FROM ytpv;
+
+COUNT(DISTINCTTKR)
+------------------
+           2623
+
+Elapsed: 00:00:13.57
+10:00:07 SQL&gt;
+</code></pre>
+<p />
+I checked for duplicate rows:
+<p />
+<pre><code class="sql">
+10:00:07 SQL&gt; SELECT COUNT(*) FROM (SELECT tkr||ydate,COUNT(tkr||ydate) FROM ytpv GROUP BY tkr||ydate HAVING COUNT(tkr||ydate)&gt;1);
+
+  COUNT(*)
+----------
+         0
+
+Elapsed: 00:01:05.56
+10:02:10 SQL&gt;
+</code></pre>
+<p />
+How many rows do I have and what are the date ranges?
+<p />
+<pre><code class="sql">
+
+10:02:10 SQL&gt; SELECT COUNT(tkr),MIN(ydate),MAX(ydate) FROM ytpv;
+
+COUNT(TKR) MIN(YDATE) MAX(YDATE)
+---------- ---------- ----------
+   7476396 1984-09-07 2008-09-05
+
+Elapsed: 00:00:12.94
+10:05:54 SQL&gt;
+</code></pre>
+<p />
+<p />
+
+Today, we cannot predict the future, but we do have access to any moving average of data leading up to today.
+
+<p />
+With this stock data, however, we can transport back in time to an arbitrary day.
+
+<p />
+Once at that arbitrary day in the past, we calculate several moving averages leading up to that day but not past it.
+
+<p />
+Also we have access to prices in the future of that arbitrary day.  So we will collect 3 of those prices:
+5 days ahead, 10 days ahead, and 15 days ahead.
+
+<p />
+A little thought reveals, however, that we actually want the percentage gain rather than the prices.
+
+<p />
+If we know percentage gain for each of several stocks, we can put them in a group and then know the percentage gain for the group.
+
+<p />
+With those thoughts in my mind, I wrote the following SQL:
+
+<p />
+<pre><code class="sql">
+10:11:32 SQL&gt;
+10:11:32 SQL&gt; l
+  1  CREATE TABLE mas11 AS SELECT tkr,ydate,yprice,
+  2  AVG(yprice) OVER(PARTITION BY tkr ORDER BY tkr,ydate ROWS BETWEEN       9 PRECEDING AND CURRENT ROW )mvg_avg10day,
+  3  AVG(yprice) OVER(PARTITION BY tkr ORDER BY tkr,ydate ROWS BETWEEN 19 PRECEDING AND CURRENT ROW )mvg_avg20day,
+  4  AVG(yprice) OVER(PARTITION BY tkr ORDER BY tkr,ydate ROWS BETWEEN 29 PRECEDING AND CURRENT ROW )mvg_avg30day,
+  5  AVG(yprice) OVER(PARTITION BY tkr ORDER BY tkr,ydate ROWS BETWEEN 39 PRECEDING AND CURRENT ROW )mvg_avg40day,
+  6  ROUND(100*( LEAD(yprice,5) OVER(PARTITION BY tkr ORDER BY tkr,ydate ) - yprice )/DECODE(yprice,0,0.01,yprice),2)pct_gain5day,
+  7  ROUND(100*( LEAD(yprice,10)OVER(PARTITION BY tkr ORDER BY tkr,ydate ) - yprice )/DECODE(yprice,0,0.01,yprice),2)pct_gain10day,
+  8  ROUND(100*( LEAD(yprice,15)OVER(PARTITION BY tkr ORDER BY tkr,ydate ) - yprice )/DECODE(yprice,0,0.01,yprice),2)pct_gain15day
+  9* FROM ytpv ORDER BY tkr,ydate
+10:11:34 SQL&gt;
+10:11:36 SQL&gt;
+10:11:36 SQL&gt; /
+
+Table created.
+
+Elapsed: 00:04:14.37
+10:15:58 SQL&gt;
+</code></pre>
+
+<p />
+The above syntax would be daunting for anyone unfamiliar with Oracle Analytic Functions.
+<p />
+Some of the <em>IDEAS</em> behind Oracle Analytic Functions, however, are simple to anyone who has authored a spreadsheet:
+<p />
+<ul>
+  <li>In the table, order all of the rows first by tkr and then by ydate.</li>
+  <li>Pick the last row.</li>
+  <li>Pick a row which is 9 rows behind the last row.</li>
+  <li>I now have a <em>window</em> full of 10 rows.</li>
+  <li>Calculate the Average value of yprice for that window of 10 rows.</li>
+  <li>I now have a 10 day moving average for that last row.</li>
+  <li>Repeat the above procedure for all the rows in the table.</li>
+</ul>
+<p />
+<p />
+
+If we inspect the SQL code above we see calls to a function named LEAD().
+<p />
+From a spreadsheet perspective, LEAD() might be described like this:
+<p />
+<ul>
+  <li>Order all of the rows first by tkr and then by ydate.</li>
+  <li>Pick the first row.</li>
+  <li>Pick a row which is 5 rows ahead of the first row.</li>
+  <li>Copy some data from this lead row into the first row.</li>
+  <li>Use this copied data to calculate percentage gain in yprice:</li>
+  <li>pct_gain5day = 100 * (lead_yprice - yprice) / yprice</li>
+  <li>Repeat the above procedure for all the rows in the table.</li>
+</ul>
+
+<p />
+<p />
+Information about Oracle Analytic Functions:
+<p />
+<a target='a' href='http://www.google.com/search?q=sql+analytic+functions+site%3Aoracle.com'>http://www.google.com/search?q=sql+analytic+functions+site%3Aoracle.com</a>
+<p />
+The above syntax creates a table named "mas11" with this description:
+<p />
+<pre>
+01:41:02 SQL&gt; set lines 22
+01:41:21 SQL&gt; desc mas11
+ Name              Null?    Type
+ ----------------- -------- ------------
+ TKR                        VARCHAR2(7)
+ YDATE                      DATE
+ YPRICE                     NUMBER
+ MVG_AVG10DAY               NUMBER
+ MVG_AVG20DAY               NUMBER
+ MVG_AVG30DAY               NUMBER
+ MVG_AVG40DAY               NUMBER
+ PCT_GAIN5DAY               NUMBER
+ PCT_GAIN10DAY              NUMBER
+ PCT_GAIN15DAY              NUMBER
+
+01:41:27 SQL&gt;
+</pre>
+
+<p />
+I named the columns so their content is obvious:
+<p />
+
+<pre><code>
+mas11 columns:
+  TKR:           Stock Ticker
+  YDATE:         The date of the price
+  YPRICE:        Closing price of TKR on YDATE
+  MVG_AVG10DAY:  10 Day Moving Avg of YPRICE of TKR on YDATE
+  MVG_AVG20DAY:  20 Day Moving Avg of YPRICE of TKR on YDATE
+  MVG_AVG30DAY:  30 Day Moving Avg of YPRICE of TKR on YDATE
+  MVG_AVG40DAY:  40 Day Moving Avg of YPRICE of TKR on YDATE
+  PCT_GAIN5DAY:  Percent Gain of Ticker 5 Days after YDATE
+  PCT_GAIN10DAY: Percent Gain of Ticker 10 Days after YDATE
+  PCT_GAIN15DAY: Percent Gain of Ticker 15 Days after YDATE
+</code></pre>
+
+<p />
+<p />
+The moving averages in the above table are mildly interesting.
+<p />
+<p />
+I would prefer, however, to see the slopes of the moving averages.
+<p />
+The slope of a moving average might have the unit of measure: dollars/day.
+<p />
+For our purposes, though, we want the slope to be in terms of percentage-gain/day.
+<p />
+<p />
+An SQL script containing Oracle Analytic Functions to calculate the slopes of the moving averages is displayed below:
+<p />
+<p />
+<pre><code class="sql">
+
+10:22:16 SQL>
+10:22:16 SQL> l
+  1  CREATE TABLE mas12 AS SELECT tkr,ydate,yprice,
+  2  mvg_avg10day,
+  3  mvg_avg20day,
+  4  mvg_avg30day,
+  5  mvg_avg40day,
+  6  pct_gain5day,
+  7  pct_gain10day,
+  8  pct_gain15day
+  9  ,ROUND(100*(mvg_avg10day - LAG(mvg_avg10day,1,mvg_avg10day)OVER(PARTITION BY tkr ORDER BY tkr,ydate ))/DECODE(mvg_avg10day,0,0.01,mvg_avg10day),2)mvg_avg10slope
+ 10  ,ROUND(100*(mvg_avg20day - LAG(mvg_avg20day,1,mvg_avg20day)OVER(PARTITION BY tkr ORDER BY tkr,ydate ))/DECODE(mvg_avg20day,0,0.01,mvg_avg20day),2)mvg_avg20slope
+ 11  ,ROUND(100*(mvg_avg30day - LAG(mvg_avg30day,1,mvg_avg30day)OVER(PARTITION BY tkr ORDER BY tkr,ydate ))/DECODE(mvg_avg30day,0,0.01,mvg_avg30day),2)mvg_avg30slope
+ 12  ,ROUND(100*(mvg_avg40day - LAG(mvg_avg40day,1,mvg_avg40day)OVER(PARTITION BY tkr ORDER BY tkr,ydate ))/DECODE(mvg_avg40day,0,0.01,mvg_avg40day),2)mvg_avg40slope
+ 13* FROM mas11 ORDER BY tkr,ydate
+10:22:17 SQL>
+10:22:19 SQL> /
+
+Table created.
+
+Elapsed: 00:03:33.01
+10:25:53 SQL>
+</code></pre>
+<p />
+<p />
+
+The above syntax creates a table named "mas12" with this description:
+<p />
+<pre>
+12:51:28 SQL&gt; SET LINES 22
+12:51:34 SQL&gt; DESC mas12
+ Name              Null?    Type
+ ----------------- -------- ------------
+ TKR                        VARCHAR2(7)
+ YDATE                      DATE
+ YPRICE                     NUMBER
+ MVG_AVG10DAY               NUMBER
+ MVG_AVG20DAY               NUMBER
+ MVG_AVG30DAY               NUMBER
+ MVG_AVG40DAY               NUMBER
+ PCT_GAIN5DAY               NUMBER
+ PCT_GAIN10DAY              NUMBER
+ PCT_GAIN15DAY              NUMBER
+ MVG_AVG10SLOPE             NUMBER
+ MVG_AVG20SLOPE             NUMBER
+ MVG_AVG30SLOPE             NUMBER
+ MVG_AVG40SLOPE             NUMBER
+
+12:51:42 SQL&gt;
+12:51:48 SQL&gt;
+</pre>
+<p />
+<p />
+We now have data suitable for backtesting a simple strategy which was described in the opening question:
+<p />
+<p />
+
+<ul>
+ <li>Given:  A random stock in the Oil Services/Equipment industry              </li>
+ <li>Today this random stock has a 20-day moving avg price slope of -1.0% / day </li>
+ <li>What is the probability distribution for its price 10 days from today?     </li>
+ <li>Is it highly probable the stock will be 10% lower or more?                 </li>
+</ul>
+
+<p />
+<p />
+Building a query to answer the first question is easy:
+
+<p />
+
+<p />
+
+<pre><code class='sql'>
+10:37:13 SQL&gt; l
+  1  SELECT ROUND(pct_gain10day)||','|| COUNT(ROUND(pct_gain10day))
+  2  FROM mas12,tkr_industry
+  3  WHERE mvg_avg20slope BETWEEN -1.1 AND -0.9
+  4  AND mas12.tkr = tkr_industry.tkr
+  5  AND tkr_industry.indust = 'Oilfield Svcs/Equip.'
+  6  GROUP BY  ROUND(pct_gain10day)
+  7  HAVING COUNT(ROUND(pct_gain10day))&gt;2
+  8* ORDER BY  ROUND(pct_gain10day)
+10:37:14 SQL&gt; /
+
+ROUND(PCT_GAIN10DAY)||','||COUNT(ROUND(PCT_GAIN10DAY))
+---------------------------------------------------------------------------------
+-40,3
+-37,5
+-34,6
+-33,7
+-32,3
+-31,3
+-30,5
+-29,4
+-28,6
+-27,10
+-26,10
+-25,3
+-24,16
+-23,15
+-22,20
+-21,17
+-20,22
+-19,28
+-18,32
+-17,45
+-16,45
+-15,66
+-14,59
+-13,75
+-12,81
+-11,95
+-10,97
+-9,101
+-8,115
+-7,142
+-6,133
+-5,140
+-4,153
+-3,178
+-2,157
+-1,173
+0,263
+1,161
+2,188
+3,182
+4,181
+5,159
+6,135
+7,148
+8,135
+9,132
+10,118
+11,101
+12,87
+13,71
+14,66
+15,62
+16,58
+17,52
+18,38
+19,36
+20,45
+21,26
+22,15
+23,25
+24,26
+25,14
+26,18
+27,14
+28,12
+29,5
+30,9
+31,13
+32,13
+33,6
+34,8
+35,9
+36,6
+38,4
+39,5
+40,6
+42,3
+48,4
+49,5
+50,7
+
+80 rows selected.
+
+Elapsed: 00:00:15.49
+10:37:31 SQL&gt;
+</code></pre>
+
+<p />
+<p />
+
+When we plot the results of the above query, we obtain a shape which resembles a Gaussian Distribution:
+<p />
+<img src="/images/mas12distribution.png" alt="10-Day Pct.Gain vs. COUNT(10-Day Pct.Gain)" />
+<p />
+<p />
+Obviously the most frequent outcome is a 10-Day Pct. Gain of 0%.
+<p />
+<p />
+Notice in the above query, that we join with the table tkr_indust.  Some information about tkr_indust is displayed below:
+<p />
+<p />
+<pre><code class='sql'>
+15:55:19 SQL&gt;
+16:00:42 SQL&gt;
+16:00:43 SQL&gt; SELECT COUNT(tkr), indust FROM tkr_industry GROUP BY indust ORDER BY indust ;
+
+COUNT(TKR) INDUST
+---------- -------------------------------------------------------
+        12 Advertising
+        28 Aerospace/Defense
+        22 Air Transport
+        16 Apparel
+        13 Auto & Truck
+        26 Auto Parts
+        58 Bank
+        15 Bank (Midwest)
+        14 Beverage
+        37 Biotechnology
+        23 Building Materials
+        10 Cable TV
+         5 Canadian Energy
+        13 Chemical (Basic)
+        22 Chemical (Diversified)
+        32 Chemical (Specialty)
+        15 Coal
+        87 Computer Software/Svcs
+        48 Computers/Peripherals
+        38 Diversified Co.
+       131 Drug
+        28 E-Commerce
+        42 ETF
+        11 Educational Services
+        19 Electric Util. (Central)
+        18 Electric Utility (East)
+        14 Electric Utility (West)
+        35 Electrical Equipment
+        49 Electronics
+        25 Entertainment
+        17 Entertainment Tech
+        17 Environmental
+        91 Financial Svcs. (Div.)
+        39 Food Processing
+         6 Food Wholesalers
+         5 Foreign Electronics
+         2 Funeral Services
+        13 Furn/Home Furnishings
+         6 Grocery
+         8 Healthcare Information
+         8 Heavy Construction
+        14 Homebuilding
+        28 Hotel/Gaming
+        16 Household Products
+        19 Human Resources
+         5 INDEX
+        44 Industrial Services
+        13 Information Services
+        18 Insurance (Life)
+        34 Insurance (Prop/Cas.)
+        54 Internet
+        53 Machinery
+         6 Manuf. Housing/RV
+        33 Maritime
+        52 Medical Services
+       101 Medical Supplies
+        12 Metal Fabricating
+        24 Metals & Mining (Div.)
+        25 Natural Gas (Div.)
+        11 Natural Gas Utility
+         8 Newspaper
+        14 Office Equip/Supplies
+        13 Oil/Gas Distribution
+        72 Oilfield Svcs/Equip.
+        15 Packaging & Container
+        15 Paper/Forest Products
+        20 Petroleum (Integrated)
+        72 Petroleum (Producing)
+        10 Pharmacy Services
+        30 Power
+        28 Precious Metals
+        36 Precision Instrument
+         3 Property Management
+         7 Public/Private Equity
+        10 Publishing
+        68 R.E.I.T.
+        11 Railroad
+        22 Recreation
+         7 Reinsurance
+        34 Restaurant
+        77 Retail (Special Lines)
+         9 Retail Automotive
+         6 Retail Building Supply
+        20 Retail Store
+        19 Securities Brokerage
+        73 Semiconductor
+        14 Semiconductor Equip
+        12 Shoe
+        11 Steel (General)
+         6 Steel (Integrated)
+        45 Telecom. Equipment
+        51 Telecom. Services
+        22 Thrift
+         6 Tobacco
+        11 Toiletries/Cosmetics
+        19 Trucking
+         2 Utility (Foreign)
+         2 Water Utility
+        31 Wireless Networking
+
+99 rows selected.
+
+Elapsed: 00:00:00.09
+16:02:06 SQL&gt;
+
+16:04:48 SQL&gt; SELECT tkr FROM tkr_industry WHERE indust = 'Oilfield Svcs/Equip.' ORDER BY tkr;
+
+TKR
+-------------------------------------------------------
+ACGY
+ALY
+APL
+ATW
+BAS
+BHI
+BJS
+CAM
+CKH
+CLB
+CPNO
+CPX
+CQP
+CRR
+DO
+DPM
+DRQ
+DVR
+DWSN
+EEQ
+EPE
+ESV
+ETE
+FTI
+FTK
+FXEN
+GEL
+GIFI
+GLBL
+GW
+HAL
+HERO
+HLX
+HOS
+HP
+IO
+KEG
+LNG
+LUFK
+MGG
+NBR
+NE
+NGAS
+NGLS
+NGS
+NOV
+NR
+NS
+NSH
+NTG
+OII
+OIS
+OMNI
+PDC
+PDE
+PKD
+PTEN
+RDC
+RES
+RGNC
+RIG
+SII
+SLB
+SPN
+TCLP
+TDW
+TRMA
+TTES
+TTI
+WFT
+WG
+WPZ
+
+72 rows selected.
+
+Elapsed: 00:00:00.03
+16:05:05 SQL&gt;
+16:05:13 SQL&gt;
+
+</code></pre>
+<p />
+<p />
+Graphs for the above tkr values are listed below:
+
+<p />
+<p />
+
+
+<ul>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=ACGY&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=ACGY&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=ALY&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=ALY&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=APL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=APL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=ATW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=ATW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=BAS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=BAS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=BHI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=BHI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=BJS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=BJS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CAM&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CAM&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CKH&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CKH&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CLB&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CLB&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CPNO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CPNO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CPX&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CPX&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CQP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CQP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=CRR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=CRR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=DO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=DO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=DPM&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=DPM&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=DRQ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=DRQ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=DVR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=DVR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=DWSN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=DWSN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=EEQ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=EEQ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=EPE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=EPE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=ESV&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=ESV&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=ETE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=ETE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=FTI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=FTI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=FTK&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=FTK&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=FXEN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=FXEN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=GEL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=GEL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=GIFI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=GIFI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=GLBL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=GLBL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=GW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=GW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=HAL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=HAL&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=HERO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=HERO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=HLX&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=HLX&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=HOS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=HOS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=HP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=HP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=IO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=IO&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=KEG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=KEG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=LNG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=LNG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=LUFK&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=LUFK&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=MGG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=MGG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NBR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NBR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NGAS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NGAS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NGLS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NGLS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NGS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NGS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NOV&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NOV&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NR&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NSH&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NSH&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=NTG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=NTG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=OII&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=OII&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=OIS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=OIS&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=OMNI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=OMNI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=PDC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=PDC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=PDE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=PDE&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=PKD&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=PKD&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=PTEN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=PTEN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=RDC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=RDC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=RES&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=RES&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=RGNC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=RGNC&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=RIG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=RIG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=SII&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=SII&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=SLB&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=SLB&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=SPN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=SPN&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=TCLP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=TCLP&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=TDW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=TDW&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=TRMA&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=TRMA&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=TTES&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=TTES&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=TTI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=TTI&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=WFT&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=WFT&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=WG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=WG&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+<li><a target='a' href='http://finance.yahoo.com/q/ta?s=WPZ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c='>http://finance.yahoo.com/q/ta?s=WPZ&amp;t=5y&amp;l=off&amp;z=l&amp;q=c&amp;p=m20&amp;a=f14,r14&amp;c=</a></li>
+</ul>
+
+
+
+<p />
+<p />
+Now we return our attention back to the original question:
+
+<ul>
+ <li>Given:  A random stock in the Oil Services/Equipment industry              </li>
+ <li>Today this random stock has a 20-day moving avg price slope of -1.0% / day </li>
+ <li>What is the probability distribution for its price 10 days from today?     </li>
+ <li>Is it highly probable the stock will be 10% lower or more?                 </li>
+</ul>
+
+<p />
+<p />
+Question: What is the probability distribution for its price 10 days from today?
+<p />
+<p />
+Answer: See the bell-shaped curve above.
+<p />
+<p />
+Question: Is it highly probable the stock will be 10% lower or more?
+<p />
+<p />
+
+Answer: Based on a subjective assessment of the above bell-shaped
+curve, I would say "No."  Obviously the most frequent outcome is a
+gain of 0%.  But it appears that the curve has a slight bias towards
+the right which would suggest a positive percentage gain instead of a
+negative percentage gain.
+
+<p />
+<p />
+
+To answer the above question quantitatively, we first obtain the value of the area
+under the distribution where pct_gain10day &lt; -10.0.
+<p />
+<p />
+Then, we divide that value by the total area under the distribution.
+<p />
+<p />
+The query listed below calculates this value for us:
+<p />
+<p />
+
+<pre><code class='sql'>
+11:26:40 SQL&gt;
+11:26:41 SQL&gt; l
+  1  SELECT 100 * count1 / count2
+  2  FROM
+  3  (
+  4    SELECT COUNT(mas12.rowid) count1 FROM mas12,tkr_industry
+  5    WHERE mvg_avg20slope BETWEEN -1.1 AND -0.9
+  6    AND mas12.tkr = tkr_industry.tkr
+  7    AND tkr_industry.indust = 'Oilfield Svcs/Equip.'
+  8    AND pct_gain10day &lt; -10.0
+  9  ),
+ 10  (
+ 11    SELECT COUNT(mas12.rowid) count2 FROM mas12,tkr_industry
+ 12    WHERE mvg_avg20slope BETWEEN -1.1 AND -0.9
+ 13    AND mas12.tkr = tkr_industry.tkr
+ 14    AND tkr_industry.indust = 'Oilfield Svcs/Equip.'
+ 15* )
+11:26:42 SQL&gt;
+11:26:44 SQL&gt; /
+
+100*COUNT1/COUNT2
+-----------------
+       15.3638254
+
+Elapsed: 00:00:35.63
+11:27:21 SQL&gt;
+</code></pre>
+
+<p />
+<p />
+So, the probability that a random stock in the Oil Services/Equipment industry,
+<br />
+which has a 20-day moving avg price slope of -1.0% / day,
+<br />
+and will then continue that price slide to a loss of 10% or more in 10 days is ...
+<br />
+15.4%
+

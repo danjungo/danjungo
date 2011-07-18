@@ -1,0 +1,139 @@
+
+%style{:type=>"text/css"}
+  <!-- .txt{font-weight:bold; font-size:13pt} -->
+
+%h5 Setting up https on lighttpd
+%span.date Dan Bikle -- http://bikle.com -- 2009-07-29
+
+%p
+
+%span.txt I just finished setting up https on lighttpd.
+
+%p
+
+%span.txt I wrote some notes and captured some screenshots along the way.
+
+%p
+
+%span.txt I started with a google of "lighttpd https" and found this page:
+
+%p
+%a{:href=>"http://redmine.lighttpd.net/wiki/lighttpd/Docs:SSL"}
+  %span.txt http://redmine.lighttpd.net/wiki/lighttpd/Docs:SSL
+%p
+
+%span.txt I read the page and then took the next obvious step to see if my copy of lighttpd had ssl linked in:
+
+%pre
+  %code
+    [bikle@ion ~]$ 
+    [bikle@ion ~]$ 
+    [bikle@ion ~]$ /l/sbin/lighttpd -v
+    lighttpd-1.4.20 - a light and fast webserver
+    Build-Date: Dec 20 2008 00:26:02
+    [bikle@ion ~]$ 
+    [bikle@ion ~]$ 
+    [bikle@ion ~]$ 
+    [bikle@ion ~]$ 
+
+%span.txt Darn.  I see that ssl is not linked in.
+
+%span.txt I looked to see if I had ssl on my Linux box:
+
+%pre
+  %code
+    =render :partial => "lssl_sd10"
+
+%span.txt That looked good.
+
+%p
+
+%span.txt Then I decided to install my ssl-enabled-lighttpd in an easy to find place:
+
+%pre
+  %code
+    [root@ion w]# 
+    [root@ion w]# 
+    [root@ion w]# mkdir /home/lssl/
+    [root@ion w]# chown bikle /home/lssl/
+    [root@ion w]# cd /
+    [root@ion /]# ln -s /home/lssl .
+    [root@ion /]# 
+    [root@ion /]# 
+
+%p
+
+%span.txt Next, I found my lighttpd source code and linked it with ssl:
+%pre
+  %code
+    =render :partial => "lssl_sd11"
+
+%span.txt That looks good!
+
+%p
+
+%span.txt Next, I created a "pem" file:
+%pre
+  %code
+    =render :partial => "lssl_sd12"
+
+%span.txt Next, I created a lighttpd.conf file:
+%pre
+  %code
+    =render :partial => "lssl_sd13"
+
+%span.txt Then, I started lighttpd:
+%pre
+  %code
+    [root@ion /]#
+    [root@ion /]#
+    [root@ion /]# /lssl/sbin/lighttpd -f /pt/w/lighttpd_ion_fg12_ssl.conf
+    [root@ion /]# Starting Lighttpd
+    [root@ion /]#
+
+%span.txt I have openssl install on my Mac so I tried a shell command there:
+%pre
+  %code
+    =render :partial => "lssl_sd14"
+
+%span.txt That looked good.
+
+%p
+
+%span.txt Next, I tried this URL via Firefox:
+
+%p
+%a{:href=>"https://forumgrouper.com"}
+  %span.txt https://forumgrouper.com
+%p
+
+%div.txt
+  Firefox complained about the self-signed certificate but did allow me to connect after I signalled that I trusted
+  %a{:href=>"https://forumgrouper.com"}
+    https://forumgrouper.com
+
+%p
+
+%span.txt Here are some screenshots of how opera reacted to the site:
+
+%p
+
+%img{:src=>"http://sites.google.com/site/bikle611/Home/lssl2.png"}/
+%hr/
+
+%img{:src=>"http://sites.google.com/site/bikle611/Home/lssl3.png"}/
+%hr/
+
+%img{:src=>"http://sites.google.com/site/bikle611/Home/lssl4.png"}/
+%hr/
+
+%p
+
+%span.txt After I press the approve button, Opera allows me to connect:
+%p
+
+%img{:src=>"http://sites.google.com/site/bikle611/Home/lssl5.png"}/
+%hr/
+
+
+

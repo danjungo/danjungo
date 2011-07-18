@@ -1,0 +1,104 @@
+<pre><code class="sql">
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlpatt
+WHERE pdate='2003-04-01'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlpatt
+WHERE 35+pdate<'2003-04-01'
+/
+@cr_bme.sql
+PURGE RECYCLEBIN;
+
+
+-- snip snip --
+
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlpatt
+WHERE pdate='2009-06-05'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlpatt
+WHERE 35+pdate<'2009-06-05'
+/
+@cr_bme.sql
+PURGE RECYCLEBIN;
+
+</code></pre>
+

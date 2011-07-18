@@ -1,0 +1,498 @@
+<h1>Rhodes Helloworld Deployed To App Store</h1>
+<pre style="color: black; background: white; ">
+<b>
+Dan Bikle
+2009-05-25
+
+This page describes the steps we follow to submit a simple iPhone App
+to the App Store.
+
+We start by making note of our current environment on the mac:
+
+Sun May 24 20:28 /pt/rho/hw2 maco$ 
+Sun May 24 20:28 /pt/rho/hw2 maco$ gem update rhodes
+Updating installed gems
+Nothing to update
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ which ruby
+/pt/r1/bin/ruby
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ which gem
+/pt/r1/bin/gem
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ gem list rhodes
+
+*** LOCAL GEMS ***
+
+rhodes (1.0.10, 1.0.9, 1.0.8, 1.0.2)
+rhodes-build (1.0.10, 1.0.9, 1.0.8, 1.0.2)
+rhodes-framework (1.0.10, 1.0.9, 1.0.8, 1.0.2)
+rhodes-generator (1.0.10, 1.0.9, 1.0.8, 1.0.2)
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ which rhogen
+/pt/r1/bin/rhogen
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+
+
+
+
+Next we use rhodes to create a helloworld app:
+
+
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:29 /pt/rho/hw2 maco$ 
+Sun May 24 20:30 /pt/rho/hw2 maco$ rhogen app helloworld
+Generating with app generator:
+     [ADDED]  helloworld/config.rb
+     [ADDED]  helloworld/build.yml
+     [ADDED]  helloworld/app/application.rb
+     [ADDED]  helloworld/app/index.erb
+     [ADDED]  helloworld/app/layout.erb
+     [ADDED]  helloworld/app/loading.html
+     [ADDED]  helloworld/Rakefile
+     [ADDED]  helloworld/app/helpers
+     [ADDED]  helloworld/app/Settings
+     [ADDED]  helloworld/public
+Sun May 24 20:30 /pt/rho/hw2 maco$ 
+Sun May 24 20:30 /pt/rho/hw2 maco$ 
+
+
+
+We verify that it will run in the Simulator:
+
+Sun May 24 20:32 /pt/rho/hw2/helloworld maco$ 
+Sun May 24 20:32 /pt/rho/hw2/helloworld maco$ 
+Sun May 24 20:32 /pt/rho/hw2/helloworld maco$ rake run:iphone:app
+(in /Users/maco/pt/customers3/rho/p10/hw2/helloworld)
+/pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib
+/pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib
+/pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib
+/pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib
+/pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib
+mkdir -p /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin
+mkdir -p /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/tmp
+mkdir -p /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/target
+rm -rf /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+mkdir -p /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+mkdir -p /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/apps
+cp -r /pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+cp -r /pt/r1/lib/ruby/gems/1.8/gems/rhodes-framework-1.0.10/lib/../res/sqlite3 /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/lib
+cd /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+rm lib/rhodes-framework.rb
+rm lib/erb.rb
+rm lib/find.rb
+rm lib/builtinME.rb
+rm lib/ServeME.rb
+rm lib/TestServe.rb
+cd /Users/maco/pt/customers3/rho/p10/hw2/helloworld
+cp -r app /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/apps
+cp -r public /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/apps
+cp config.rb /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/apps
+cp /pt/r1/lib/ruby/gems/1.8/gems/rhodes-build-1.0.10/lib/tasks/../manifest/createAppManifest.rb /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+
+rm /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/createAppManifest.rb
+cp /pt/r1/lib/ruby/gems/1.8/gems/rhodes-build-1.0.10/lib/tasks/../compileERB/default.rb /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+
+rm /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle/default.rb
+cp /pt/r1/lib/ruby/gems/1.8/gems/rhodes-build-1.0.10/lib/tasks/../compileRB/compileRB.rb /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+
+cd /Users/maco/pt/customers3/rho/p10/hw2/helloworld/bin/RhoBundle
+rm apps/app/application.rb
+rm apps/app/helpers/application_helper.rb
+rm apps/app/Settings/controller.rb
+rm apps/config.rb
+rm compileRB.rb
+rm lib/bsearch.rb
+rm lib/date/format.rb
+rm lib/date.rb
+rm lib/dateME.rb
+rm lib/rational.rb
+rm lib/rationalME.rb
+rm lib/rho/render.rb
+rm lib/rho/rho.rb
+rm lib/rho/rhoapplication.rb
+rm lib/rho/rhocontact.rb
+rm lib/rho/rhocontroller.rb
+rm lib/rho/rhofsconnector.rb
+rm lib/rho/rhosupport.rb
+rm lib/rho/rhoviewhelpers.rb
+rm lib/rho.rb
+rm lib/rhodes.rb
+rm lib/rhoframework.rb
+rm lib/rhofsconnector.rb
+rm lib/rhom/rhom.rb
+rm lib/rhom/rhom_db_adapter.rb
+rm lib/rhom/rhom_db_adapterME.rb
+rm lib/rhom/rhom_object.rb
+rm lib/rhom/rhom_object_factory.rb
+rm lib/rhom/rhom_source.rb
+rm lib/rhom.rb
+rm lib/singleton.rb
+rm lib/sqlite3/constants.rb
+rm lib/sqlite3/database.rb
+rm lib/sqlite3/driver/dl/api.rb
+rm lib/sqlite3/driver/dl/driver.rb
+rm lib/sqlite3/driver/native/driver.rb
+rm lib/sqlite3/errors.rb
+rm lib/sqlite3/pragmas.rb
+rm lib/sqlite3/resultset.rb
+rm lib/sqlite3/sqlite3_api.rb
+rm lib/sqlite3/statement.rb
+rm lib/sqlite3/translator.rb
+rm lib/sqlite3/value.rb
+rm lib/sqlite3/version.rb
+rm lib/time.rb
+rm lib/version.rb
+rm apps/app/index.erb
+rm apps/app/layout.erb
+rm apps/app/Settings/index.erb
+rm apps/app/Settings/login.erb
+rm apps/app/Settings/reset.erb
+cd /Users/maco/pt/customers3/rho/p10/hw2/helloworld
+rm -rf /Users/maco/Library/Application Support/iPhone Simulator/User/Applications/364FFCAF-C71D-4543-B293-9058E31CFFEE
+mkdir -p /Users/maco/Library/Application Support/iPhone Simulator/User/Applications/364FFCAF-C71D-4543-B293-9058E31CFFEE/Documents
+mkdir -p /Users/maco/Library/Application Support/iPhone Simulator/User/Applications/364FFCAF-C71D-4543-B293-9058E31CFFEE/Library/Preferences
+
+
+
+
+
+
+Sun May 24 20:32 /pt/rho/hw2/helloworld maco$ 
+Sun May 24 20:35 /pt/rho/hw2/helloworld maco$ 
+Sun May 24 20:35 /pt/rho/hw2/helloworld maco$ 
+
+
+
+Simulator:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/rake.png" alt="">
+
+Next, we obtain a copy of Rhodes from git.
+
+Shell command:
+  - git clone git://github.com/rhomobile/rhodes.git rfg
+
+It takes about 20 minutes on a DSL connection.
+
+More shell commands:
+
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ git branch -a
+* master
+  origin/0-3-stable
+  origin/1-0-stable
+  origin/1-1-unstable
+  origin/HEAD
+  origin/master
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:13 /pt/rho/hw2/rfg maco$ git checkout -b 1-1-unstable --track origin/1-1-unstable
+Branch 1-1-unstable set up to track remote branch refs/remotes/origin/1-1-unstable.
+Switched to a new branch "1-1-unstable"
+Sun May 24 22:14 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:14 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:14 /pt/rho/hw2/rfg maco$ git pull origin 1-1-unstable
+
+remote: Counting objects: 1237, done.        
+processing objects: 100% (621/621), done.        
+remote: Total 1202 (delta 611), reused 1144 (delta 570)        
+Receiving objects: 100% (1202/1202), 8.67 MiB | 309 KiB/s, done.
+Resolving deltas: 100% (611/611), completed with 24 local objects.
+From git://github.com/rhomobile/rhodes
+ * branch            1-1-unstable -> FETCH_HEAD
+Updating 6c5b6a0..e0e6b51
+Fast forward
+ Rakefile                                           |    6 +
+ platform/android/RhoBundle/bin/RhoBundle.jar       |  Bin 1547632 -> 0 bytes
+ platform/android/RhoBundle/build.xml               |    2 +-
+ platform/iphone/Classes/rho/net/NetRequest.cpp     |   37 +-
+ platform/iphone/Classes/rho/net/NetRequestImpl.m   |   61 +-
+ platform/shared/sync/SyncSource.cpp                |   15 +-
+ platform/shared/tcmalloc/rhomem.h                  |    4 +-
+ rhodes/rhodes-build/Manifest.txt                   | 1109 +++++++++++++++++++-
+ rhodes/rhodes-build/lib/tasks/android.rake         |   14 +-
+
+... SNIP ...
+
+ rename rhodes/rhodes-build/res/prebuilt/iphone/sim/{ => rhorunner.app}/home_btn.png (100%)
+ rename rhodes/rhodes-build/res/prebuilt/iphone/sim/{ => rhorunner.app}/icon.png (100%)
+ rename rhodes/rhodes-build/res/prebuilt/iphone/sim/{ => rhorunner.app}/rhorunner (52%)
+Sun May 24 22:15 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:15 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:17 /pt/rho/hw2/rfg maco$ 
+
+
+We make a note of where we are at in the commit time-line:
+
+
+Sun May 24 22:19 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:21 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:21 /pt/rho/hw2/rfg maco$ git log -1
+
+WARNING: terminal is not fully functional
+commit e0e6b51a49d7ab75ee17fe57d723b8e380919375[m
+Author: lars &lt;larsburgess@gmail.com>[m
+Date:   Sun May 24 16:40:19 2009 -0700[m
+[m
+    fixing directory structure for iphone prebuilt.[m
+Sun May 24 22:21 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:21 /pt/rho/hw2/rfg maco$ 
+Sun May 24 22:22 /pt/rho/hw2/rfg maco$ 
+
+
+Next we edit this file:
+~/rho_build.conf
+
+We add the location of the helloworld app:
+
+apps.dir=/pt/rho/hw2/helloworld
+
+We add another file named rhoconfig.txt to here:
+/pt/rho/hw2/helloworld/rhoconfig.txt
+
+It looks like this:
+
+# start rhoconfig.txt
+# Startup page for your application
+start_path = '/app'
+
+# Path to the options page (in this case handled by javascript)
+options_path = '/app/Settings'
+
+# Location of bundle url (i.e. from rhohub.com)
+rhobundle_zip_url = nil
+
+# Optional password to access bundle (usually not required)
+rhobundle_zip_pwd = nil
+
+# Rhodes runtime properties
+MinSeverity  = 0
+LogToOutput = 1
+LogCategories = *
+ExcludeLogCategories =
+KeepTrackOfLastVisitedPage = 0
+LastVisitedPage = 'http://localhost:8080/app' 
+# end rhoconfig.txt
+
+
+
+Next we use the finder to click on this file:
+  - /pt/rho/hw2/rfg/platform/iphone/rhorunner.xcodeproj
+
+
+
+We see this:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/rhorunner10.png" alt="">
+
+
+We press the green-hammer-button to run the simulator:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/sim10.png" alt="">
+
+
+Next, we focus our attention on submitting this Rhodes-Helloworld-App
+to the App Store.
+
+We start at this URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/overview/index.action'>http://developer.apple.com/iphone/manage/overview/index.action</a>
+
+We see that Apple provides this workflow to submit an app to the App Store:
+  -Specify a Team
+  -Create Certificates
+  -Create App IDs
+  -Do Provisioning
+  -Do Distribution
+
+Specify a Team corresponds to this URL:
+  - http://developer.apple.com/iphone/manage/team/index.action
+It is easy to create a Team so it is not discussed here.
+
+Create Certificates corresponds to this URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/certificates/team/index.action'>http://developer.apple.com/iphone/manage/certificates/team/index.action</a>
+
+The first certificate we need is 'WWDR intermediate certificate'.
+
+We see a download link for it and do the download which gives us a
+AppleWWDRCA.cer file.
+
+We click the file and it leads us to a wizard to install the
+certificate into our login keychain.
+
+We then can see this:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/cert10.png" alt="">
+
+Next, we need a Distribution Certificate.
+We start this task at this URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/certificates/team/distribute.action'>http://developer.apple.com/iphone/manage/certificates/team/distribute.action</a>
+We press the 'Request Certificate' button.
+
+Apple gives us a recipe to create a Distribution certificate.
+
+We follow the recipe.
+
+Things to note:
+  - The recipe resides on the SAME PAGE we use to upload the request.
+
+  - Once Apple gets the request it wants us to "Approve" it via a
+    button in the next screen.
+
+  - We then need to navigate off and then on the Distribution tab to
+    see the download link.
+
+  - We get distribution_identity.cer, the hard part is over; we just
+    click on it and follow the wizard.
+
+We then see this:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/cert11.png" alt="">
+
+
+Next we move to step 3 of the Apple workflow: Create App IDs
+
+Here is the URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/bundles/index.action'>http://developer.apple.com/iphone/manage/bundles/index.action</a>
+
+This is an easy step.  First, click on the button which says, 'Add ID'.
+It gives two fields we need to fill out.
+
+We give:
+  - field 1: helloworld2009_0525
+  - field 2: *
+
+
+
+Next we move to step 4 of the Apple workflow: Do Provisioning
+Here is the URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/provisioningprofiles/index.action'>http://developer.apple.com/iphone/manage/provisioningprofiles/index.action</a>
+
+Click the distribution tab.
+
+Click Add Profile.
+
+Then...
+
+Radio button: App Store
+Profile Name: helloworld2009_0525
+App ID: helloworld2009_0525
+
+Click submit.
+
+See that it is in 'Pending' state.
+
+Reload page after 2 minutes.
+
+Download link appears.
+
+Download the profile.
+
+We see this file name: helloworld2009_0525.mobileprovision
+
+We drag-drop it into the XCode-dock-icon.
+
+We can then see it inside the XCode-Organizer window:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/profile10.png" alt="">
+
+
+Next, we move on to the last and most difficult part of the work flow.
+
+Step 5: Do Distribution
+
+We start by creating a 'Distribution Configuration' for the project
+inside of XCode.
+
+We show some screen shots below which give us a clue about how this is done.
+
+These screen shots were taken right after we pressed XCode-command-i:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/dist10.png" alt="">
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/dist11.png" alt="">
+
+
+
+Next, we wrestle with items inside the 'Build' tab of XCode-command-i.
+
+We show a screen shot at the final stage of this process:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/build10.png" alt="">
+
+
+
+Then, we work with the build configuration of the target:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/targ10.png" alt="">
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/targ11.png" alt="">
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/targ12.png" alt="">
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/targ13.png" alt="">
+
+Next, we create build configurations for each of the four sub-projects:
+  - RhoLib
+  - rhosynclib
+  - rhorubylib
+  - tcmalloc
+
+We need XCode to recognize these sub-projects as stand-alone projects
+in order to expoose the build configuration.
+
+We do this by exposing each sub-project in the OS/X-Finder and
+clicking on each sub-project:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/finder10.png" alt="">
+
+
+We show the screen-shots for the first sub-project.  The other three
+are nearly identical:
+
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/rholib10.png" alt="">
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/rholib11.png" alt="">
+
+
+
+Next, in the parent project (rhorunner-project) we pull down the
+XCode-Build menu and do these actions:
+
+  - Clean All Targets
+  - Build
+
+
+
+We see the following:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/build20.png" alt="">
+
+
+Next, we navigate to this URL:
+  - <a target='a' href='http://developer.apple.com/iphone/manage/distribution/appstore.action'>http://developer.apple.com/iphone/manage/distribution/appstore.action</a>
+There we find a link to this URL:
+  - <a target='a' href='https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa'>https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa</a>
+There we find a link to a page with title: "Manage Your Applications"
+
+We click link: "Add New Application"
+
+A wizard guides through a series of screens asking for info about our
+application.
+
+Eventually it asks us to upload the binary file of my application.
+
+We use 'compress' available via Finder-right-click to create a .zip
+file of the .app directory:
+
+  - /pt/rho/hw2/rfg/platform/iphone/build/Distribution-iphoneos/rhorunner.app
+
+We send the .zip file to the site
+
+The site responds with good news:
+<img src="http://sites.google.com/a/bikle.com/rhodes_helloworld/Home/done.png" alt="">
+
+
+We then self-reject the binary since we do not really want it on the App Store.
+
+</b>
+</pre>
+
+
+
+

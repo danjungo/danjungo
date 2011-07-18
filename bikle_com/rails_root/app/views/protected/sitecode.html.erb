@@ -1,0 +1,1187 @@
+<h5>The Code Behind This Site</h5>
+
+<p id="Hosting" /><b>Hosting</b><p />
+Every site needs hosting.
+<p />
+
+I picked:
+<p />
+
+<a target='a' href='http://www.joyent.com/'>http://www.joyent.com/</a>
+
+<p id="os11" /><b>FreeBSD 5.4</b><p />
+
+The shared hosting account I use runs on FreeBSD.
+<p />
+
+Here is some information about the specific version:
+<p />
+<pre><code>
+[bikle@bsdbox ~]$
+[bikle@bsdbox ~]$
+[bikle@bsdbox ~]$ uname -a
+FreeBSD bsdbox 5.4-STABLE FreeBSD 5.4-STABLE #0: Sun Oct 23 20:24:16 GMT 2005     root@mother:/usr/obj/usr/src/sys/TEXTOVERDRIVE  i386
+[bikle@bsdbox ~]$
+[bikle@bsdbox ~]$
+[bikle@bsdbox ~]$
+</code></pre>
+
+<p id="Database"/><b>MySQL</b><p />
+
+Most Rails sites need a database.
+<p />
+
+The database available to me on this shared hosting account is MySQL.
+<p />
+
+Here is some information about the specific version:
+<p />
+<pre><code>
+[bikle@bsdbox ~]$ mysql --version
+mysql  Ver 14.7 Distrib 4.1.18, for portbld-freebsd5.4 (i386) using  4.3
+[bikle@bsdbox ~]$
+</code></pre>
+
+<p id="InstallRuby" /><b>Install Ruby </b><p />
+
+I installed ruby in my home directory.
+<p />
+
+The source code looks like this:
+<p />
+<pre><code>
+-rw-r--r--  1 bikle  bikle  3956902 Aug 28 21:04 ruby-1.8.6-p287.tar.bz2
+</code></pre>
+<p />
+
+I obtained it from here:
+<p />
+
+<a target='a' href='ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6-p287.tar.bz2'>ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6-p287.tar.bz2</a>
+<p />
+
+While looking for it, I found these pages to be useful:
+<p />
+<ul>
+<li><a target='a' href='ftp://ftp.ruby-lang.org/pub/ruby/1.8/'>ftp://ftp.ruby-lang.org/pub/ruby/1.8/</a></li>
+<li><a target='a' href='http://www.google.com/search?q=ruby+1.8.6+download'>http://www.google.com/search?q=ruby+1.8.6+download</a></li>
+</ul>
+
+
+
+<p />
+
+To install Ruby 1.8.6 under my home directory, I ran these shell commands:
+<p />
+<pre><code>
+mkdir ~/r/
+mkdir ~/tmp/
+cd    ~/tmp/
+wget ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6-p287.tar.bz2
+tar jxf ruby-1.8.6-p287.tar.bz2
+cd ruby-1.8.6-p287
+./configure --prefix=/home/bikle/r
+make
+make install
+</code></pre>
+<p />
+
+Next, I prepended ~/r/bin to the beginning of my PATH-env-variable in my .bashrc file.
+<p />
+
+Then I typed in bash and then checked the version:
+<p />
+
+<pre><code>
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$ which ruby
+/home/bikle/r/bin/ruby
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$ ruby --version
+ruby 1.8.6 (2008-08-11 patchlevel 287) [i386-freebsd5.4]
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$
+[bikle@bsdbox ~/software/tmp/ruby-1.8.6-p287]$
+</code></pre>
+
+
+<p id="InstallRubyGems" /><b>Install RubyGems  </b><p />
+RubyGems is a utility to help us carry around modular sections of software called gems.
+<p />
+
+Once you install RubyGems, you access its functionality via the "gem" shell command.
+<p />
+
+I obtained RubyGems from here:
+<p />
+
+<a target='a' href='http://rubyforge.org/frs/?group_id=126'>http://rubyforge.org/frs/?group_id=126</a>
+<p />
+
+The source code looks like this:
+<p />
+<pre><code>
+-rw-r--r--   1 bikle  bikle   246920 Aug 28 21:43 rubygems-1.2.0.tgz
+</code></pre>
+<p />
+
+To install RubyGems I ran these shell commands:
+<p />
+<pre><code>
+cd    ~/tmp/
+wget http://rubyforge.org/frs/download.php/38646/rubygems-1.2.0.tgz
+tar zxf rubygems-1.2.0.tgz
+cd rubygems-1.2.0
+ruby setup.rb
+</code></pre>
+
+<p id="UseRubyGems" /><b>Install Gems Needed By My Site And By Rails 2.1</b><p />
+
+I have two ways to access gems I need:
+<p />
+<ul>
+  <li>Use the gem command to download the gems I need</li>
+<li>Copy the gems from an existing ruby install</li>
+</ul>
+
+I studied which gems I would need to run this site.
+<p />
+
+I decided that I needed these gems:
+<p />
+<pre><code>
+-rw-r--r--  1 bikle  bikle  107520 Aug 28 23:10 actionmailer-2.1.0.gem
+-rw-r--r--  1 bikle  bikle  740864 Aug 28 23:10 actionpack-2.1.0.gem
+-rw-r--r--  1 bikle  bikle  452096 Aug 28 23:10 activerecord-2.1.0.gem
+-rw-r--r--  1 bikle  bikle   39424 Aug 28 23:10 activeresource-2.1.0.gem
+-rw-r--r--  1 bikle  bikle  358912 Aug 28 23:10 activesupport-2.1.0.gem
+-rw-r--r--  1 bikle  bikle   11776 Aug 28 23:10 cgi_multipart_eof_fix-2.5.0.gem
+-rw-r--r--  1 bikle  bikle   47616 Aug 28 23:10 coderay-0.7.4.215.gem
+-rw-r--r--  1 bikle  bikle   31232 Aug 28 23:10 daemons-1.0.10.gem
+-rw-r--r--  1 bikle  bikle   24064 Aug 28 23:10 fastthread-1.0.1.gem
+-rw-r--r--  1 bikle  bikle   13312 Aug 30 09:46 fcgi-0.8.7.gem
+-rw-r--r--  1 bikle  bikle   33280 Aug 28 23:10 gem_plugin-0.2.3.gem
+-rw-r--r--  1 bikle  bikle  217088 Aug 28 23:10 hpricot-0.6.gem
+-rw-r--r--  1 bikle  bikle   29184 Aug 28 23:10 linecache-0.43.gem
+-rw-r--r--  1 bikle  bikle  105472 Aug 28 23:04 mongrel-1.1.5.gem
+-rw-r--r--  1 bikle  bikle   24064 Aug 28 23:10 mongrel_cluster-1.0.5.gem
+-rw-r--r--  1 bikle  bikle   33280 Aug 28 23:10 mysql-2.7.gem
+-rw-r--r--  1 bikle  bikle  204288 Aug 28 23:10 rails-2.1.0.gem
+-rw-r--r--  1 bikle  bikle   90112 Aug 28 23:10 rake-0.8.1.gem
+-rw-r--r--  1 bikle  bikle   31744 Aug 28 23:10 ruby-debug-base-0.10.1.gem
+-rw-r--r--  1 bikle  bikle   15360 Aug 28 23:10 syntax-1.0.0.gem
+-rw-r--r--  1 bikle  bikle   34816 Aug 28 23:10 will_paginate-2.2.2.gem
+</code></pre>
+<p />
+
+I found the gems I needed on another host.
+<p />
+On that host I found them in this directory:
+<p />
+/usr/local/lib/ruby/gems/1.8/cache/
+<p />
+I copied them to ~/tmp/ of bsdbox.
+<p />
+
+I ran these shell commands:
+<p />
+<pre><code>
+cd ~/tmp/
+
+gem install actionmailer             --no-ri --no-rdoc
+gem install actionpack               --no-ri --no-rdoc
+gem install activerecord             --no-ri --no-rdoc
+gem install activeresource           --no-ri --no-rdoc
+gem install activesupport            --no-ri --no-rdoc
+gem install cgi_multipart_eof_fix    --no-ri --no-rdoc
+gem install coderay                  --no-ri --no-rdoc
+gem install daemons                  --no-ri --no-rdoc
+gem install fastthread               --no-ri --no-rdoc
+gem install fcgi                     --no-ri --no-rdoc
+gem install gem_plugin               --no-ri --no-rdoc
+gem install hpricot                  --no-ri --no-rdoc
+gem install linecache                --no-ri --no-rdoc
+gem install mongrel                  --no-ri --no-rdoc
+gem install mongrel_cluster          --no-ri --no-rdoc
+gem install mysql                    --no-ri --no-rdoc
+gem install rails                    --no-ri --no-rdoc
+gem install rake                     --no-ri --no-rdoc
+gem install ruby-debug-base          --no-ri --no-rdoc
+gem install syntax                   --no-ri --no-rdoc
+gem install will_paginate            --no-ri --no-rdoc
+</code></pre>
+
+<p id="RunRails" /><b>Run The "rails" Command  </b><p />
+
+<p />
+I then verified that I had Rails 2.1 installed in my home directory:
+<p />
+
+<pre><code>
+[bikle@bsdbox ~/tmp]$
+[bikle@bsdbox ~/tmp]$ which rails
+/home/bikle/r/bin/rails
+[bikle@bsdbox ~/tmp]$
+[bikle@bsdbox ~/tmp]$ rails --version
+Rails 2.1.0
+[bikle@bsdbox ~/tmp]$
+</code></pre>
+
+I decided to run my site from this location in the file system:
+<p />
+
+~/pt/w/b/b16/
+<p />
+
+I used the "rails" command to create it:
+<p />
+<pre><code>
+cd ~/pt/w/b/
+rails b16
+</code></pre>
+<p id="databaseyml" /><b>Edit config/database.yml </b><p />
+
+The database.yml helps a Rails site connect to a database.
+<p />
+
+For this site I created a MySQL database with these commands:
+<p />
+
+Shell command:
+<p />
+  mysql -u root -p
+<p />
+
+Then, mysql command:
+<p />
+  create database b16;
+<p />
+
+
+Next, I edited this file:
+<p />
+
+~/pt/w/b/b16/config/database.yml
+<p />
+
+It looks like this:
+<p />
+<pre><code>
+production:
+  adapter: mysql
+  database: b16
+  username: root
+  password: pass1234xyz
+  host: localhost
+  # useful syntax to remember but not used here:
+  # socket: /bn/mysql/tmp/mysql.sock
+</code></pre>
+
+<p id="constructlayout" /><b>Design/Write Layout</b><p />
+
+I searched around for pages I like.
+<p />
+
+I like this page:
+<p />
+
+<a target='a' href='http://quotedprintable.com/archives/2007/11'>http://quotedprintable.com/archives/2007/11</a>
+<p />
+
+I copied it to this location:
+<p />
+
+~/pt/w/b/b16/app/views/layouts/application.html.erb
+<p />
+
+I worked with it until I ended up with this:
+
+<pre><code class="html">
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
+
+&lt;head&gt;
+    &lt;title&gt;http://bikle.com&lt;/title&gt;
+    &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8" /&gt;
+    &lt;link href="/stylesheets/layout.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;link href="/stylesheets/content.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;link href="/stylesheets/syntax.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;link href="/stylesheets/local.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;link href="/stylesheets/application.css" rel="stylesheet" type="text/css" /&gt;
+    &lt;!-- Used to highlight code --&gt;
+    &lt;script src="/javascripts/code_highlighter.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/javascripts/ruby.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/javascripts/sql.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/javascripts/html.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/javascripts/css.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="/javascripts/javascript.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;!-- Used to highlight code --&gt;
+    &lt;!-- Used by Active Scaffold --&gt;
+    &lt;%= javascript_include_tag :defaults %&gt;
+    &lt;%= active_scaffold_includes %&gt;
+    &lt;%= stylesheet_link_tag 'active_scaffold_overrides' %&gt;
+    &lt;!-- Used by Active Scaffold --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="container"&gt;
+      &lt;div id="header"&gt;
+        &lt;h1&gt;&lt;span&gt;&lt;a href="http://bikle.com/"&gt;http://bikle.com&lt;/a&gt;&lt;/span&gt;&lt;/h1&gt;
+        &lt;h2&gt;contact: bikle@bikle.com&lt;/h2&gt;
+      &lt;/div&gt; &lt;!-- id header --&gt;
+      &lt;div id="page"&gt;
+        &lt;div id="content" &gt;
+          &lt;div style="width:100%; height:90%; overflow:auto;"&gt;
+            &lt;%= yield %&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;  &lt;!-- id content --&gt;
+        &lt;div id="sidebar"&gt;
+
+          &lt;div class="sidebar-node"&gt;
+            &lt;!-- SiteSearch Google --&gt;
+            &lt;form method="get" action="http://www.google.com/custom" target="google_window"&gt;
+            &lt;table border="0" &gt;
+            &lt;!--
+            &lt;tr&gt;&lt;td nowrap="nowrap" valign="top" align="left" height="32"&gt;
+            &lt;a href="http://www.google.com/"&gt;
+            &lt;img id="googlelogo" src="http://www.google.com/logos/Logo_25wht.gif" border="0" alt="Google" align="middle"&gt;&lt;/img&gt;&lt;/a&gt;
+            &lt;/td&gt;&lt;/tr&gt;
+            --&gt;
+            &lt;tr&gt;&lt;td nowrap="nowrap"&gt;
+            &lt;input type="hidden" name="domains" value="bikle.com"&gt;&lt;/input&gt;
+
+            &lt;input type="text" name="q" size="22" maxlength="155" value="oracle"&gt;&lt;/input&gt;
+            &lt;/td&gt;&lt;/tr&gt;
+
+            &lt;tr&gt;&lt;td&gt;
+            &lt;input type="radio" name="sitesearch" value=""  checked="checked"&gt;&lt;/input&gt;
+            &lt;font size="-1" color="#000000"&gt;the universe&lt;/font&gt;
+
+            &lt;input type="radio" name="sitesearch" value="bikle.com"&gt;&lt;/input&gt;
+            &lt;font size="-1" color="#000000"&gt;bikle.com&lt;/font&gt;
+            &lt;br /&gt;
+            &lt;input type="submit" name="sa" value="Google Generic Search"&gt;&lt;/input&gt;
+            &lt;input type="hidden" name="client" value="pub-8965802770706416"&gt;&lt;/input&gt;
+            &lt;input type="hidden" name="forid" value="1"&gt;&lt;/input&gt;
+            &lt;input type="hidden" name="ie" value="UTF-8"&gt;&lt;/input&gt;
+            &lt;input type="hidden" name="oe" value="UTF-8"&gt;&lt;/input&gt;
+
+            &lt;input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1"&gt;&lt;/input&gt;
+            &lt;input type="hidden" name="hl" value="en"&gt;&lt;/input&gt;
+            &lt;/td&gt;&lt;/tr&gt;
+
+            &lt;/table&gt;
+            &lt;/form&gt;
+            &lt;hr /&gt;
+            &lt;!-- SiteSearch Google --&gt;
+          &lt;/div&gt; &lt;!-- class sidebar-node --&gt;
+
+          &lt;div class="sidebar-node"&gt;
+            &lt;h3&gt;Dan&lt;/h3&gt;
+            Dan Bikle is an Oracle DBA and Rails Developer.
+          &lt;/div&gt;  &lt;!-- class sidebar-node --&gt;
+          &lt;br /&gt;
+
+          &lt;div class="sidebar-node"&gt;
+            &lt;h3&gt;Links&lt;/h3&gt;
+              &lt;a href="/protected/about/"&gt;About&lt;/a&gt;
+              &lt;br /&gt;&lt;a href="/protected/services/"&gt;Services&lt;/a&gt;
+              &lt;br /&gt;&lt;a href="/protected/contact/"&gt;Contact&lt;/a&gt;
+              &lt;br /&gt;&lt;a href="/protected/tech_tips/"&gt;Tech Tips&lt;/a&gt;
+              &lt;br /&gt;&lt;a href="/protected/sitecode/"&gt;The Code Behind This Site&lt;/a&gt;
+              &lt;br /&gt;&lt;a href="/old_site.html" target="j"&gt;Old Bikle.com Site&lt;/a&gt;
+              &lt;br /&gt;
+              &lt;br /&gt;
+            &lt;h3&gt;Many2Many&lt;/h3&gt;
+            &lt;a href="/asls/categs/"&gt;A Category&lt;br /&gt;has-and-belongs-to-many&lt;br /&gt;URLs&lt;/a&gt;
+            &lt;p /&gt;
+            &lt;a href="/asls/urlls/"&gt;A URL&lt;br /&gt;has-and-belongs-to-many&lt;br /&gt;Categories&lt;/a&gt;
+          &lt;/div&gt;  &lt;!-- class sidebar-node --&gt;
+          &lt;br /&gt;
+
+          &lt;div class="sidebar-node"&gt;
+            &lt;h3&gt;Translate&lt;/h3&gt;
+            &lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Ces&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;Español&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Czh-CN&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;中国版&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cru&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;Россия&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cpt&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;Português&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cde&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;Deutsche&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cfr&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;Française&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cko&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;한국말&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Cja&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;日本人&lt;/a&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate?u=http%3A%2F%2Fbikle.com&amp;langpair=en%7Car&amp;hl=en&amp;ie=UTF-8&amp;oe=UTF-8"&gt;اللغة العربية&lt;/a&gt;
+            &lt;br /&gt;
+            &lt;br /&gt;&lt;a target="x" href="http://translate.google.com/translate_s?hl=en&amp;clss=&amp;q=oracle+database+administrator&amp;tq=&amp;sl=en&amp;tl=pt"&gt;1. Translate Your Search &lt;br /&gt;2. Translate Results Back&lt;/a&gt;
+
+          &lt;/div&gt;  &lt;!-- class sidebar-node --&gt;
+
+          &lt;hr /&gt;
+          &lt;div class="sidebar-node"&gt;
+            &lt;a target="colorw" href="http://www.ficml.org/jemimap/style/color/wheel.html"&gt;
+              &lt;img src="/images/hsvwheel.png" alt="4096 color wheel" border="1" height="63" width="142" /&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;  &lt;!-- class sidebar-node --&gt;
+
+          &lt;hr /&gt;
+          &lt;hr /&gt;
+          &lt;div class="sidebar-node"&gt;
+
+&lt;!-- google 160 wide sky scraper 2008_08_30 channel bikle.com --&gt;
+&lt;script type="text/javascript"&gt;&lt;!--
+google_ad_client = "pub-8965802770706416";
+/* 160x600 skyscraper 2008-08-30 */
+google_ad_slot = "2209738515";
+google_ad_width = 160;
+google_ad_height = 600;
+//--&gt;
+&lt;/script&gt;
+&lt;script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"&gt;
+&lt;/script&gt;
+&lt;!-- google 160 wide sky scraper 2008_08_30 channel bikle.com --&gt;
+
+          &lt;/div&gt;  &lt;!-- class sidebar-node --&gt;
+
+
+        &lt;/div&gt; &lt;!-- class sidebar --&gt;
+      &lt;/div&gt; &lt;!-- id page --&gt;
+
+      &lt;div id="footer"&gt;
+        &lt;a href="http://bikle.com/"&gt;http://bikle.com&lt;/a&gt;
+        is powered by &lt;a href="http://api.rubyonrails.com/"&gt;Rails&lt;/a&gt;,
+        &lt;a target='a' href='http://activescaffold.com/'&gt;http://activescaffold.com/&lt;/a&gt;
+        and styled with &lt;a href="http://quotedprintable.com/pages/scribbish"&gt;scribbish&lt;/a&gt;.
+
+        &lt;a href="http://validator.w3.org/check?uri=referer" target="v"&gt;
+          &lt;img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="15" width="44" /&gt;
+        &lt;/a&gt;
+
+        &lt;a href="http://jigsaw.w3.org/css-validator/" target="v2"&gt;
+          &lt;img style="border:0;width:44px;height:15px" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" /&gt;
+        &lt;/a&gt;
+
+      &lt;/div&gt; &lt;!-- id footer --&gt;
+    &lt;/div&gt; &lt;!-- id container --&gt;
+
+&lt;!-- google analytics --&gt;
+&lt;script src="http://www.google-analytics.com/urchin.js" type="text/javascript"&gt;
+&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+_uacct = "UA-1163628-1";
+urchinTracker();
+&lt;/script&gt;
+&lt;!-- google analytics --&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+<p id="firstcontroller" /><b>script/generate controller protected</b><p />
+
+Next I added a controller to the site.  I named the controller "protected".
+<p />
+
+I did this via the Rails shell command listed below:
+<p />
+
+<pre><code>
+cd ~/pt/w/b/b16/
+script/generate controller protected
+</code></pre>
+
+<p />
+This controller allows access to these links:
+<p />
+
+<ul>
+  <li><a target='a' href='/protected/about'>about</a></li>
+<li><a target='a' href='/protected/services'>services</a></li>
+<li><a target='a' href='/protected/contact'>contact</a></li>
+<li><a target='a' href='/protected/tech_tips'>tech_tips</a></li>
+<li><a target='a' href='/protected/sitecode'>sitecode</a> ( The page you are currently looking at )</li>
+<li><a target='a' href='/protected/o10gR2_solaris10x86'>o10gR2_solaris10x86</a></li>
+<li><a target='a' href='/protected/roracle_session'>roracle_session</a></li>
+</ul>
+<p />
+
+I used emacs to add a small amount of syntax to the controller:
+<p />
+
+<pre><code class="ruby">
+class ProtectedController &lt; ApplicationController
+
+  caches_page :index
+  caches_page :about
+  caches_page :services
+  caches_page :contact
+  caches_page :tech_tips
+  caches_page :o10gR2_solaris10x86
+  caches_page :roracle_session
+  caches_page :sitecode
+
+  def index
+  end
+
+  def about
+  end
+
+  def services
+  end
+
+  def contact
+  end
+
+  def tech_tips
+  end
+
+  def  o10gR2_solaris10x86
+  end
+
+  def  roracle_session
+  end
+
+  def  sitecode
+  end
+
+end
+</code></pre>
+<p />
+
+<p id="authorit" /><b>Author Content</b><p />
+
+After I finished the controller, I authored the documents which correspond to the controller actions.
+<p />
+
+The file system view of the documents is listed below:
+<p />
+
+<pre><code class="html">
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$ pwd
+/home/bikle/pt/w/b/b16/app/views/protected
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$ ls -la
+total 80
+drwxr-xr-x  2 bikle  bikle    512 Aug 29 23:08 .
+drwxr-xr-x  7 bikle  bikle    512 Aug 25 09:27 ..
+-rw-r--r--  1 bikle  bikle   4606 Aug 24 06:57 about.html.erb
+-rw-r--r--  1 bikle  bikle   1725 Aug 26 22:29 contact.html.erb
+-rw-r--r--  1 bikle  bikle     78 Aug 24 02:16 index.html.erb
+-rw-r--r--  1 bikle  bikle  31226 Aug 30 20:04 o10gR2_solaris10x86.html.erb
+-rw-r--r--  1 bikle  bikle  27606 Aug 31 14:30 roracle_session.html.erb
+-rw-r--r--  1 bikle  bikle   1155 Aug 26 22:20 services.html.erb
+-rw-r--r--  1 bikle  bikle    714 Aug 26 22:37 tech_tips.html.erb
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$ cat tech_tips.html.erb
+&lt;h5&gt;Tech Tips&lt;/h5&gt;
+&lt;p /&gt;
+&lt;%= link_to 'Oracle 10g R2 [10.2.0.2] Install on Solaris 10 x86', :action =&gt; "o10gR2_solaris10x86" %&gt; &lt;br /&gt; &lt;p /&gt;
+&lt;p /&gt;
+&lt;%= link_to 'Copying Data From A Ruby On Rails Session Into An Oracle Session', :action =&gt; "roracle_session" %&gt; &lt;br /&gt; &lt;p /&gt;
+&lt;p /&gt;
+&lt;a href="http://www.google.com/custom?domains=bikle.com&amp;q=burrito+recipes&amp;sitesearch=&amp;sa=Google+Generic+Search&amp;client=pub-8965802770706416&amp;forid=1&amp;ie=UTF-8&amp;oe=UTF-8&amp;cof=GALT%3A%23008000%3BGL%3A1%3BDIV%3A%23336699%3BVLC%3A663399%3BAH%3Acenter%3BBGC%3AFFFFFF%3BLBGC%3A336699%3BALC%3A0000FF%3BLC%3A0000FF%3BT%3A000000%3BGFNT%3A0000FF%3BGIMP%3A0000FF%3BFORID%3A1&amp;hl=en" target="b"&gt;&lt;img alt="tech_tips" src="/images/tech_tips.jpg" /&gt; &lt;/a&gt;
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+[bikle@bsdbox ~/pt/w/b/b16/app/views/protected]$
+</code></pre>
+<p />
+Color highlighting of syntax is done with the help of JavaScript software written by Dan Webb:
+<p />
+
+<a target='a' href='http://svn.danwebb.net/external/CodeHighlighter/trunk/'>http://svn.danwebb.net/external/CodeHighlighter/trunk/</a>
+<p />
+
+The above software depends on this CSS syntax:
+<p />
+
+<pre><code class="css">
+/*--------------------------------------------------------------
+ For Dan Webb's unobtrusive code highlighter
+ --------------------------------------------------------------*/
+
+#content pre  code { color: white; }
+#content code span.comment  { color: #555;     }
+#content code span.string   { color: #66cc33;  }
+#content code span.brackets { color: #fff;     }
+#content code span.keywords { color: #cc7833;  }
+#content code span.symbol   { color: #3387cc;  }
+#content code span.defname  { color: #9966ff;     }
+#content code span.erb      { background: #66ffff;}
+#content code span.tag      { color: #ff3333;     }
+#content code span.selectors  { color: #cc9900;   }
+#content code span.properties { color: #006699; }
+#content code span.units    { color: #ffff99;     }
+#content code span.urls     { color: #3300ff;    }
+#content code span.doctype  { color: #99ffff;    }
+#content code span.global  { color: #ff33cc;    }
+
+</code></pre>
+<p />
+
+The above CSS syntax is served to you from this file:
+<p />
+<a target='a' href='/stylesheets/syntax.css'>/stylesheets/syntax.css</a>
+<p />
+Which you will see listed in the head-tag of the <a href='#constructlayout'>layout</a>.
+<p />
+The above syntax depends on me, the author, to make use of pre-tags, code-tags, and a class inside the code tag.
+<p />
+
+On this site I make use of the classes: html, ruby, sql, javascript, and css.
+<p />
+
+I display an example of syntax highlighting some ruby code below:
+<p />
+
+<pre>
+&lt;pre&gt;&lt;code class="ruby"&gt;
+class Categ &amp;lt; ActiveRecord::Base
+  has_and_belongs_to_many :urlls
+end
+&lt;/code&gt;&lt;/pre&gt;
+</pre>
+<p />
+The result:
+<p />
+<pre><code class="ruby">
+class Categ &lt; ActiveRecord::Base
+  has_and_belongs_to_many :urlls
+end
+</code></pre>
+<p />
+The key idea that Dan Webb worked with is that he could write
+JavaScript to scan HTML in every response.  The JavaScript looks for
+elements which contain the tags "pre" and then "code".  If his
+JavaScript finds such an element it will add span tags at appropriate
+places.  Eventually the HTML will load in the reader's browser.  The
+browser detects the added span tags and applies CSS from
+<a target='a' href='/stylesheets/syntax.css'>/stylesheets/syntax.css</a>.
+<p />
+This site serves Dan Webb's software to you via these links which reside in the head-element of the <a href='#constructlayout'>layout</a>:
+<ul>
+  <li><a target='a' href='/javascripts/code_highlighter.js'>/javascripts/code_highlighter.js</a></li>
+<li><a target='a' href='/javascripts/html.js'>/javascripts/html.js</a></li>
+<li><a target='a' href='/javascripts/css.js'>/javascripts/css.js</a></li>
+<li><a target='a' href='/javascripts/ruby.js'>/javascripts/ruby.js</a></li>
+<li><a target='a' href='/javascripts/javascript.js'>/javascripts/javascript.js</a></li>
+</ul>
+
+I wrote this JavaScript to highlight SQL:
+<p />
+
+<a target='a' href='/javascripts/sql.js'>/javascripts/sql.js</a>
+
+<p />
+
+sql.js is displayed below:
+<p />
+<pre><code class="javascript">
+CodeHighlighter.addStyle("sql",{
+        comment : {
+                exp  : /(--[^\n]+)|(\/\*[^*]*\*+([^\/][^*]*\*+)*\/)/
+        },
+        brackets : {
+                exp  : /\(|\)/
+        },
+        string : {
+                exp  : /'[^']*'|"[^"]*"/
+        },
+        symbol : {
+                exp  : /\b(SELECT|INSERT|UPDATE|DELETE|MERGE|WHERE|AND|OR|FROM|CREATE|TABLE|NUMBER|VARCHAR2|RAW|DATE|TABLESPACE|INDEX|VIEW|AS|GROUP|ORDER|BY|MAX|MIN|AVG|COUNT|ABS|UNION|COLUMN|FORMAT|SET|RULES)\b/
+        }
+});
+</code></pre>
+<p />
+
+<p id="Many2Many" /><b>Many2Many</b><p />
+
+Next, I started work on the site to expose a data-store of URLs.
+<p />
+
+A URL can belong to several categories.
+<p />
+
+The database jargon I use to describe the relationship between URLs and Categories is this:
+<p />
+
+"Many to Many"
+<p />
+
+The Rails jargon is more verbose:
+<p />
+
+"A URL has and belongs to many Categories."
+<p />
+
+"A Categroy has and belongs to many URLs."
+<p />
+
+<p id="gitActiveScaffold" /><b>git ActiveScaffold</b><p />
+
+I depend on a Rails-plugin named ActiveScaffold to implement this functionality.
+<p />
+
+I used a utility named "git" to get the ActiveScaffold software to my Mac.
+<p />
+
+
+Screen dump of git:
+<p />
+
+<pre><code>
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$ git clone git://github.com/activescaffold/active_scaffold.git
+Initialize active_scaffold/.git
+Initialized empty Git repository in /software/tmp/active_scaffold/.git/
+remote: Counting objects: 4397, done.
+remote: Compressing objects: 100% (969/969), done.
+remote: Total 4397 (delta 3215), reused 4393 (delta 3211)
+Receiving objects: 100% (4397/4397), 586.36 KiB | 302 KiB/s, done.
+Resolving deltas: 100% (3215/3215), done.
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$ ls -la active_scaffold/
+total 88
+drwxr-xr-x   16 maco  admin   544 Aug 30 15:31 ./
+drwxr-xr-x    8 maco  admin   272 Aug 30 15:31 ../
+drwxr-xr-x   12 maco  admin   408 Aug 30 15:31 .git/
+-rw-r--r--    1 maco  admin  9675 Aug 30 15:31 CHANGELOG
+-rw-r--r--    1 maco  admin  1057 Aug 30 15:31 MIT-LICENSE
+-rw-r--r--    1 maco  admin   757 Aug 30 15:31 README
+-rw-r--r--    1 maco  admin   582 Aug 30 15:31 Rakefile
+-rw-r--r--    1 maco  admin  2416 Aug 30 15:31 environment.rb
+drwxr-xr-x    3 maco  admin   102 Aug 30 15:31 frontends/
+-rw-r--r--    1 maco  admin   476 Aug 30 15:31 init.rb
+-rw-r--r--    1 maco  admin  1012 Aug 30 15:31 install.rb
+-rw-r--r--    1 maco  admin  1325 Aug 30 15:31 install_assets.rb
+drwxr-xr-x   18 maco  admin   612 Aug 30 15:31 lib/
+drwxr-xr-x    3 maco  admin   102 Aug 30 15:31 public/
+drwxr-xr-x   11 maco  admin   374 Aug 30 15:31 test/
+-rw-r--r--    1 maco  admin   258 Aug 30 15:31 uninstall.rb
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$
+mac2:/software/tmp maco$
+</code></pre>
+<p />
+
+Then I copied the ActiveScaffold software to this location on the FreeBSD box:
+<p />
+
+/home/bikle/pt/w/b/b16/vendor/plugins/active_scaffold
+
+
+<p id="genmod4as"/><b>Generate Models For ActiveScaffold</b><p />
+
+I used two shell commands to generate models for ActiveScaffold:
+<p />
+<pre><code>
+cd ~/pt/w/b/b16/
+script/generate model categ
+script/generate model urll
+</code></pre>
+<p />
+
+The file system view of the resulting models:
+<p />
+<pre><code>
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$ pwd
+/home/bikle/pt/w/b/b16/app/models
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$ ls -la
+total 8
+drwxr-xr-x  2 bikle  bikle  512 Aug 25 03:09 .
+drwxr-xr-x  6 bikle  bikle  512 Aug 24 02:04 ..
+-rw-r--r--  1 bikle  bikle   70 Aug 25 03:09 categ.rb
+-rw-r--r--  1 bikle  bikle   70 Aug 25 03:08 urll.rb
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$
+[bikle@bsdbox ~/pt/w/b/b16/app/models]$
+</code></pre>
+<p />
+
+I used emacs to enhance the model files:
+<p />
+<pre><code class="ruby">
+class Categ &lt; ActiveRecord::Base
+  has_and_belongs_to_many :urlls
+end
+</code></pre>
+<p />
+<pre><code class="ruby">
+class Urll &lt; ActiveRecord::Base
+  has_and_belongs_to_many :categs
+end
+</code></pre>
+
+<p id="rakedbmigrate" /><b>rake db:migrate</b><p />
+
+Rails provides a utility to help me manage tables in my database.
+<p />
+
+Here is the flow:
+<p />
+<ul>
+  <li>Generate models  (which I just did)</li>
+<li>Edit corresponding "migration" files</li>
+<li>Run the utility via shell command: "rake db:migrate"</li>
+</ul>
+<p />
+
+So, I edited my migration files and then ran shell command: "rake db:migrate".
+<p />
+
+The migration files are listed below:
+<p />
+
+<pre><code class="ruby">
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$ pwd
+/home/bikle/pt/w/b/b16/db/migrate
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$ ls -la
+total 10
+drwxr-xr-x  2 bikle  bikle  512 Aug 25 06: 59 .
+drwxr-xr-x  3 bikle  bikle  512 Aug 30 08: 31 ..
+-rw-r--r--  1 bikle  bikle  204 Aug 25 03: 10 20080825030744_create_categs.rb
+-rw-r--r--  1 bikle  bikle  262 Aug 25 03: 11 20080825030802_create_urlls.rb
+-rw-r--r--  1 bikle  bikle  274 Aug 25 03: 13 20080825030804_create_categs_urlls.rb
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$ cat 20080825030744_create_categs.rb
+class CreateCategs &lt; ActiveRecord::Migration
+  def self.up
+    create_table :categs do |t|
+      t.column :name, :string
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :categs
+  end
+end
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$ cat 20080825030802_create_urlls.rb
+class CreateUrlls &lt; ActiveRecord::Migration
+  def self.up
+    create_table :urlls do |t|
+      t.column :name, :string
+      t.column :uurl, :string
+      t.column :ddesc, :string
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :urlls
+  end
+end
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$ cat 20080825030804_create_categs_urlls.rb
+class CreateCategsUrlls &lt; ActiveRecord::Migration
+  def self.up
+    create_table :categs_urlls, :id =&gt; false do |t|
+      t.column :categ_id, :integer
+      t.column :urll_id, :integer
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :categs_urlls
+  end
+end
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+[bikle@bsdbox ~/pt/w/b/b16/db/migrate]$
+</code></pre>
+<p />
+
+
+Next, I used a series of SQL commands to fill the tables with data.
+
+You may see the data here:
+<ul>
+  <li><a target='a' href='/asls/categs/'>/asls/categs/</a></li>
+<li><a target='a' href='/asls/urlls/'>/asls/urlls/</a></li>
+</ul>
+
+<p id="gencon4as" /><b>Generate Controllers For ActiveScaffold</b><p />
+
+One of the main ideas behind ActiveScaffold is that each model needs its own controller.
+<p />
+
+I used these shell commands to create two controllers for my two ActiveScaffold models:
+<p />
+<pre><code>
+cd ~/pt/w/b/b16/
+script/generate controller asls/categs
+script/generate controller asls/urlls
+</code></pre>
+<p />
+
+A file system view of the controllers is displayed below:
+<p />
+
+<pre><code class="ruby">
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$ pwd
+/home/bikle/pt/w/b/b16/app/controllers/asls
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$ cat categs_controller.rb
+class Asls::CategsController &lt; ApplicationController
+  # active_scaffold creates powerful JS based forms.  See http://activescaffold.com
+  active_scaffold do |config|
+    config.label = "A Category has-and-belongs-to-many URLs"
+    config.actions = [:list, :show, :search]
+    config.columns[:name].label = "This Category"
+    config.columns[:urlls].label = "Has These URLs"
+    config.list.columns = [:name, :urlls]
+    config.list.per_page = 99
+    # config.list.sorting = [{ :name => :asc}]
+  end
+end
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$ cat urlls_controller.rb
+class Asls::UrllsController &lt; ApplicationController
+  # active_scaffold creates powerful JS based forms.  See http://activescaffold.com
+  active_scaffold do |config|
+    config.label = "A URL has-and-belongs-to-many Categories"
+    config.columns[:uurl].label = "This URL"
+    config.columns[:name].label = "Has This Name"
+    config.columns[:ddesc].label = "And This Description"
+    config.columns[:categs].label = "And These Categories"
+    config.list.columns = [:uurl, :name, :ddesc, :categs]
+    config.actions = [:list, :show, :search]
+    config.list.per_page = 99
+    # config.list.sorting = [{ :categs => :desc}, {:uurl => :desc}]
+  end
+end
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+[bikle@bsdbox ~/pt/w/b/b16/app/controllers/asls]$
+</code></pre>
+
+<p id="enhanceas"/><b>Enhance ActiveScaffold Deployment</b><p />
+
+After I confirmed that ActiveScaffold was functional, I enhanced the display of various data values inside ActiveScaffold.
+I did this by editing a file named application_helper.rb
+A file system view of application_helper.rb is displayed below:
+<p />
+
+<pre><code class="ruby">
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$ pwd
+/home/bikle/pt/w/b/b16/app/helpers
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$ cat application_helper.rb
+# Methods added to this helper will be available to all templates in the application.
+module ApplicationHelper
+
+  # Builds a Google CSE URL from a string
+  def googlethis(s)
+    # Use url_for() to help prep params for the google &lt;a&gt; tag
+    p1 = url_for( {'q' =&gt; s, 'cx' =&gt; '010334745099783175565:49dkyo8ytbk', 'cof' =&gt; 'FORID:1', :controller =&gt; "jjnnkk", :trailing_slash =&gt; false} )
+    # But wait, url_for() puts tokens in there I dont want.
+    # So, I use a jjnnkk controller to help me corral them.  I will then clobber them with a .sub()
+    p2 = p1.sub(/^.*jjnnkk/,'')
+    s3 = "&lt;a class='googlethis' target='git' href='http://google.com/cse#{p2}'&gt;"
+    s5 = "Google-This: &lt;/a&gt;"
+    return "#{s3}#{s5}"
+  end
+
+#  # Builds a simple a-tag from a string.  String assumed to be like http://ibm.com
+#  def uurl_column(record)
+#    "&lt;a target='uurl'  href='#{record.uurl}'&gt;#{record.uurl}&lt;/a&gt;"
+#  end
+
+  # Builds a simple a-tag from a string.  String assumed to be like http://ibm.com
+  def uurl_column(record)
+    s1 = "&lt;a target='uurl'  href='#{record.uurl}'&gt;#{record.uurl}&lt;/a&gt;"
+    return "#{googlethis(record.uurl)} #{s1}"
+  end
+
+  # Prepends a googlethis to values in name column.
+  def name_column(record)
+    n = record.name
+    return "#{googlethis(n)} #{n}"
+  end
+
+  # Builds a ul-element from a collection of record.categs
+  def categs_column(record)
+    strng = ""
+    record.categs.each {|e| strng &lt;&lt; "&lt;li /&gt; #{link_to(h(e.name), :action =&gt; :show, :controller =&gt; 'categs', :id =&gt; e)}" }
+    return "&lt;ul&gt; #{strng} &lt;/ul&gt;"
+  end
+
+  # Builds a ul-element from a collection of record.names and record.urlls
+  def urlls_column(record)
+    # Start with empty array which I will use to ease sorting
+    sa = []
+    # Fill the array
+    record.urlls.each {|e| sa &lt;&lt; [e.name, e.uurl, e.id] }
+    # Sort the array and use it.
+    strng = ""
+    sa.sort.each do |e|
+#    record.urlls.each do |e|
+      e_name = e[0]
+      e_uurl = e[1]
+      e_id   = e[2]
+      strng &lt;&lt; "&lt;p /&gt; &nbsp;  &lt;li /&gt;name: #{link_to(h(e_name), :action =&gt; :show, :controller =&gt; 'urlls', :id =&gt; e_id)}"
+      strng &lt;&lt; "&lt;br /&gt;#{h('URL -&gt;')}&lt;a target='uurl' href='#{e_uurl}'&gt;#{e_uurl}&lt;/a&gt;"
+    end
+    return "&lt;ul&gt; #{strng} &lt;/ul&gt;"
+  end
+
+end
+
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$
+[bikle@bsdbox ~/pt/w/b/b16/app/helpers]$
+</code></pre>
+
+<p />
+
+The main idea behind the above file is that ActiveScaffold allows me to overwrite some methods.
+<p />
+
+Each column in the database has a method which I can overwrite.
+<p />
+
+For example, if I have a table named cats which has a column named cat_name then,
+ActiveScaffold will allow me to overwrite a method called "cat_name_column()".
+<p />
+
+
+Example1 is displayed below:
+<p />
+<pre><code class="ruby">
+# Methods added to this helper will be available to all templates in the application.
+module ApplicationHelper
+  def cat_name_column(record)
+    # Every cat is now named "Rascal!"
+    return "Rascal!"
+  end
+end
+</code></pre>
+
+
+<p />
+Example2 is displayed below:
+<p />
+<pre><code class="ruby">
+# Methods added to this helper will be available to all templates in the application.
+module ApplicationHelper
+  def cat_name_column(record)
+    # Append "Kitty" to the end of every cat name
+    return record + " Kitty"
+  end
+end
+</code></pre>
+
+
+
+<p />
+Example3 is displayed below:
+<p />
+<pre><code class="ruby">
+# Methods added to this helper will be available to all templates in the application.
+module ApplicationHelper
+  def cat_owners_column(record)
+    # A cat may have several owners. So, display them in html-ul-element
+    strng = ""
+    record.cat_owners.each {|e| strng &lt;&lt; "&lt;li /&gt; #{e.cat_owner}"}
+    return "&lt;ul&gt; #{strng} &lt;/ul&gt;"
+  end
+end
+</code></pre>
+
+<p />
+You will find more examples of enhancing ActiveScaffold deployment near the bottom of this page:
+<p />
+<a target='a' href='http://hpricot.com/demos'>http://hpricot.com/demos</a>
+<p />
+(Inside the page, search for: application_helper.rb )
+<p />
+
+ActiveScaffold is dependent on both CSS and JavaScript.  I added this software by adding these lines to the head-element of the <a href='#constructlayout'>layout</a>:
+<p />
+<pre><code class="html">
+    &lt;!-- Used by Active Scaffold --&gt;
+    &lt;%= javascript_include_tag :defaults %&gt;
+    &lt;%= active_scaffold_includes %&gt;
+    &lt;%= stylesheet_link_tag 'active_scaffold_overrides' %&gt;
+    &lt;!-- Used by Active Scaffold --&gt;
+</code></pre>
+
+<p />
+It seems magical that ActiveScaffold JavaScript appeared in /javascripts/; I did not put it there.
+Perhaps it is copied to there from ~pt/w/b/b16/vendor/plugins/active_scaffold/frontends/default/javascripts/
+by ActiveScaffold when Rails starts up.
+<p />
+
+
+<p />
+<h5>Summary</h5>
+
+<p />
+<a href='#Hosting'>Hosting</a>
+
+<p />
+<a href='#os11'>Operating System</a>
+
+<p />
+<a href='#Database'>Database</a>
+
+<p />
+<a href='#InstallRuby'>Install Ruby</a>
+
+<p />
+<a href='#InstallRubyGems'>Install RubyGems</a>
+
+<p />
+<a href='#UseRubyGems'>Use RubyGems to install Gems I need</a>
+
+<p />
+<a href='#RunRails'>Run Rails command</a>
+
+<p />
+<a href='#databaseyml'>Edit database.yml</a>
+
+<p />
+<a href='#constructlayout'>Construct the layout</a>
+
+<p />
+<a href='#firstcontroller'>Generate the first controller</a>
+
+<p />
+<a href='#authorit'>Author content</a>
+
+<p />
+<a href='#Many2Many'>Conceptualize URL datastore as Many-to-Many</a>
+
+<p />
+<a href='#gitActiveScaffold'>git ActiveScaffold</a>
+
+<p />
+<a href='#genmod4as'>Generate Models For ActiveScaffold</a>
+
+<p />
+<a href='#rakedbmigrate'>rake db:migrate</a>
+
+<p />
+<a href='#gencon4as'>Generate Controllers For ActiveScaffold</a>
+
+<p />
+<a href='#enhanceas'>Enhance ActiveScaffold Deployment</a>
+
+
+

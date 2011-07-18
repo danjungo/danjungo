@@ -1,0 +1,59 @@
+Wed Jul 29 12:46 ~/pt/webprops maco$ 
+Wed Jul 29 12:46 ~/pt/webprops maco$ 
+Wed Jul 29 12:46 ~/pt/webprops maco$ 
+Wed Jul 29 12:47 ~/pt/webprops maco$ openssl s_client -connect forumgrouper.com:443
+CONNECTED(00000006)
+depth=0 /C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+verify error:num=18:self signed certificate
+verify return:1
+depth=0 /C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+verify return:1
+---
+Certificate chain
+ 0 s:/C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+   i:/C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIDsjCCAxugAwIBAgIJAJvYoJv4SRGrMA0GCSqGSIb3DQEBBQUAMIGYMQswCQYD
+VQQGEwJVUzELMAkGA1UECBMCTlYxETAPBgNVBAcTCExBU1ZFR0FTMRIwEAYDVQQK
+EwlCSUtMRS5DT00xETAPBgNVBAsTCERhbkJpa2xlMRkwFwYDVQQDExBmb3J1bWdy
+b3VwZXIuY29tMScwJQYJKoZIhvcNAQkBFhhzdXBwb3J0QGZvcnVtZ3JvdXBlci5j
+b20wHhcNMDkwNzI5MTA1MjAxWhcNMTAwNzI5MTA1MjAxWjCBmDELMAkGA1UEBhMC
+VVMxCzAJBgNVBAgTAk5WMREwDwYDVQQHEwhMQVNWRUdBUzESMBAGA1UEChMJQklL
+TEUuQ09NMREwDwYDVQQLEwhEYW5CaWtsZTEZMBcGA1UEAxMQZm9ydW1ncm91cGVy
+LmNvbTEnMCUGCSqGSIb3DQEJARYYc3VwcG9ydEBmb3J1bWdyb3VwZXIuY29tMIGf
+MA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCXf9nZmr/4oCAbBxiInmEwzk+GpbMB
+XumbcU4jfeAD5yOpE4AGtbEw9X0jg6/4e9640vtu5oj3vykxN+0gEdBUYBkEjkFv
+6bCkIpTJCjXGF/lyrflUoS1k/S65JqX0pcBSLGY0dXN3PPGKLtSo2WwhOOgcumTw
+W6V/B2f6H2Mo5wIDAQABo4IBADCB/TAdBgNVHQ4EFgQUQGU7pRPxk9Tg9OEK9Ugu
+T1ltNVMwgc0GA1UdIwSBxTCBwoAUQGU7pRPxk9Tg9OEK9UguT1ltNVOhgZ6kgZsw
+gZgxCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJOVjERMA8GA1UEBxMITEFTVkVHQVMx
+EjAQBgNVBAoTCUJJS0xFLkNPTTERMA8GA1UECxMIRGFuQmlrbGUxGTAXBgNVBAMT
+EGZvcnVtZ3JvdXBlci5jb20xJzAlBgkqhkiG9w0BCQEWGHN1cHBvcnRAZm9ydW1n
+cm91cGVyLmNvbYIJAJvYoJv4SRGrMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEF
+BQADgYEAbaSCE5f867ayLle08tisR5Lp9hs9qfOWPmgQUWG5cPtFV2OZK14UUZNN
+OP13VxMW5B5F+BY08jObeu1dIj7snVWBkWvP6LuUuOjqcY15baZhR0aYhBSRSuxb
+heet+H4QAT+9uiGSaXy2mHLXqIq5/lCZSAmL4PkOky0RRnqc9F8=
+-----END CERTIFICATE-----
+subject=/C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+issuer=/C=US/ST=NV/L=LASVEGAS/O=BIKLE.COM/OU=DanBikle/CN=forumgrouper.com/emailAddress=support@forumgrouper.com
+---
+No client certificate CA names sent
+---
+SSL handshake has read 1112 bytes and written 316 bytes
+---
+New, TLSv1/SSLv3, Cipher is AES256-SHA
+Server public key is 1024 bit
+SSL-Session:
+    Protocol  : TLSv1
+    Cipher    : AES256-SHA
+    Session-ID: 39803AFEC9FE7B168ED428E843F1E22997CFECFF77A7F880FF641C2B6AD29E32
+    Session-ID-ctx: 
+    Master-Key: 276889D5C9F5E4991A7F9CF37D23F46AE75A8C558D91B5B5CCFCEBFB3070C7614B388F8B7CB36BB35B7B7FF91A2C3952
+    Key-Arg   : None
+    Start Time: 1248896831
+    Timeout   : 300 (sec)
+    Verify return code: 18 (self signed certificate)
+---
+

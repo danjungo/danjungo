@@ -1,0 +1,367 @@
+
+%style{:type=>"text/css"}
+  <!-- .txt{font-weight:bold; font-size:13pt} -->
+
+
+
+%h5 PostgreSQL 8.4 Installation on Mac OS/X 10.5.7
+%span.date Dan Bikle -- http://bikle.com -- 2009-07-24
+
+%p
+
+%span.txt I just finished installing PostgreSQL 8.4 on my Mac which is running OS/X 10.5.7.
+
+%p
+
+%span.txt I wrote some notes and captured some screenshots along the way.
+
+%p
+
+%span.txt I started with a google of "PostgreSQL download" and it sent me here:
+
+%p
+%a{:href=>"http://www.enterprisedb.com/products/pgdownload.do"}
+  %span.txt http://www.enterprisedb.com/products/pgdownload.do
+%p
+
+%span.txt I saw:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u1.png"}/
+%p
+
+%span.txt The download gave me a click-able object and a README file:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u2.png"}/
+%p
+
+%span.txt The README discussed the file /etc/sysctl.conf and how to edit it. I edited my /etc/sysctl.conf file and now it looks like this:
+
+%pre
+  %code
+    kern.sysv.shmmax=1610612736
+    kern.sysv.shmall=393216
+    kern.sysv.shmmin=1
+    kern.sysv.shmmni=32
+    kern.sysv.shmseg=8
+    kern.maxprocperuid=512
+    kern.maxproc=2048
+
+%span.txt After I edited /etc/sysctl.conf, I rebooted my Mac.
+
+%p
+
+%span.txt Then I clicked on the click-able object and this window came up:
+
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u3.png"}/
+%p
+
+%span.txt It is grayed-out because my image capture program was active when I captured the image.
+
+%p
+
+%span.txt After I clicked next, I dealt with a series of forms:
+
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u4.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u5.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u6.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u7.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u8.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u9.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u10.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u11.png"}/
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u12.png"}/
+%p
+
+%span.txt I checked the process list on my Mac:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u13.png"}/
+%p
+
+%span.txt Next, I looked at the directory where the software landed:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u14.png"}/
+%p
+
+%span.txt I made a note of where the uninstaller was located:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u15.png"}/
+%p
+
+%span.txt I then noticed that some new GUI applications were installed in the OS/X Applications folder:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u16.png"}/
+%p
+
+%span.txt I clicked on the pgAdmin utility:
+
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u17.png"}/
+%p
+%p
+%img{:src=>"http://sites.google.com/site/pg101112/pg/u18.png"}/
+%p
+
+%span.txt At this point I was convinced that PostgreSQL was installed.
+
+%p
+
+%span.txt Next, I focused my attention on the task of connecting it to Ruby on Rails.
+
+%p
+
+%div.txt 
+  I started the task by sending some keywords to google:
+  %br
+  "ruby rails postgresql database.yml"
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u19.png"}/
+%p
+
+%span.txt I did some reading:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u20.png"}/
+%p
+
+%span.txt I did some more reading:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u21.png"}/
+%p
+
+%span.txt I did some more reading:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u22.png"}/
+%p
+
+%span.txt I tried and failed to "gem install pg":
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u23.png"}/
+%p
+
+%span.txt Oops I forgot to add a token to my path so rubygems could find the pg_config utility.
+
+%p
+
+%span.txt Here was my fix:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u24.png"}/
+%p
+
+%span.txt I tried again to "gem install pg":
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u25.png"}/
+%p
+
+%span.txt Since that failed I decided to try  to "gem install postgres":
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u26.png"}/
+%p
+
+%span.txt I struggled a bit to find the solution.  I captured a screen during that effort:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u27.png"}/
+%p
+
+%div.txt
+  Well the fix to the problem of rubygems getting confused by
+  libxml2.2.dylib was for me to unset the environment variable:
+  DYLD_LIBRARY_PATH.  I had set it a few weeks before during some work I
+  had done with Oracle Instant Client.  I am not using Oracle Instant
+  Client now so I don't really need to have DYLD_LIBRARY_PATH set to a value:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u28.png"}/
+%p
+
+%span.txt Next, I ran a rails command to create a Rails application which wanted a PostgreSQL connection:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u29.png"}/
+%p
+
+%span.txt I looked in the config directory for the database.yml file which contains syntax I wanted to study:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u30.png"}/
+%p
+
+%div.txt
+  I noticed that the password was blank.  
+  Perhaps there is a way to connect to the database without a password?
+  Oracle offers this ability as a security feature. 
+  Perhaps PostgreSQL offers this feature also?
+  I searched the web and found that PostgreSQL offers this feature.
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u31.png"}/
+%p
+
+%span.txt The feature is controlled by a file named pg_hba.conf:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u32.png"}/
+%p
+
+%span.txt The file has a description of the feature as well as the configuration directives to implement it:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u33.png"}/
+%p
+
+%span.txt On my Mac, pg_hba.conf was/is configured to require connection to PostgreSQL with a password:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u34.png"}/
+%p
+
+%div.txt
+  Notice the tokens "md5".  They direct this configuration.  If I change them to "trust", 
+  I will be able to connect with no password assuming I pass the other filters listed as:
+  TYPE, DATABASE, USER, CIDR-ADDRESS
+
+%p
+
+%span.txt Next, I studied the database.yml file.  Then I created a database to match it using a shell command: 
+
+%p
+%pre
+  %code
+    createdb pgsql10_development
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u35.png"}/
+%p
+
+%div.txt
+  Next, the database.yml file suggested that I needed a user named pgsql10.
+  How do I create pgsql10?
+  Ask google:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u36.png"}/
+%p
+
+%span.txt Then issue a shell command: 
+
+%p
+%pre
+  %code
+    createuser pgsql10
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u37.png"}/
+%p
+
+%span.txt Next, I told Rails that I wanted the password to be the single letter: "p"
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u38.png"}/
+%p
+
+%span.txt Then,  I told PostgreSQL that I wanted the password to be the single letter: "p"
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u39.png"}/
+%p
+
+%span.txt Then, I tested the connection between Rails and PostgreSQL with the shell command, script/dbconsole:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u40.png"}/
+%p
+
+%span.txt I created a table, inserted some data, and then dropped the table:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u41.png"}/
+%p
+
+%span.txt I get out of that CLI with the \q command:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u42.png"}/
+%p
+
+%span.txt I tested the Rails-PostgreSQL connection more by creating a scaffold, running a migration and then creating an AR object:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u43.png"}/
+%p
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u44.png"}/
+%p
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u45.png"}/
+%p
+
+%span.txt Next, I returned to pgAdmin utility to see if my new database, user, and table was in there somewhere:
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u46.png"}/
+%p
+
+%span.txt Yes, indeed.  I see them in there!
+
+%p
+%div{:style=>"overflow: scroll; width: 650px;"}
+  %img{:src=>"http://sites.google.com/site/pg101112/pg/u47.png"}/
+%p

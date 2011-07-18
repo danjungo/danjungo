@@ -1,0 +1,2087 @@
+<h5>Crunch Value Line Option Data With Oracle and Ruby</h5>
+<span class="date">Dan Bikle -- http://bikle.com -- 2009-07-13</span>
+<hr />
+<pre style="color: black; background: white; font: bold;">
+<h2>Topics</h2>
+<a href="#motivation">Motivation</a>
+<a href="#vlvl10">Value Line</a>
+<a href="#vlod10">Value Line Options Data</a>
+<a href="#evlod10">Extract VL Options Data</a>
+<a href="#tvlod10">Transform VL Options Data</a>
+<a href="#lvlod10">Load VL Options Data</a>
+<a href="#mixsvmvlod">Mix SVM With VL Options Data</a>
+<a href="#conclusion1">Conclusion</a>
+
+
+<h2 id="motivation">Motivation</h2>
+An investor searching for indicators of future prices of options
+contracts will likely be drawn to the web.
+
+A company named Value Line sells information about options contracts:
+
+<a target="a" href="http://www.google.com/search?q=value+line+options+survey">http://www.google.com/search?q=value+line+options+survey</a>
+
+Is Value Line information useful to us?
+
+
+
+<h2 id="vlvl10">Value Line</h2>
+Value Line is a well known company.
+Some information about Value Line can be found on wikipedia:
+
+<a target="a" href="http://en.wikipedia.org/wiki/Value_Line">http://en.wikipedia.org/wiki/Value_Line</a>
+
+Many reference departments of public libraries subscribe to Value Line
+publications:
+
+<a target="a" href="http://www.google.com/search?q=public+libraries+value+line">http://www.google.com/search?q=public+libraries+value+line</a>
+
+<h2 id="vlod10">Value Line Options Data</h2>
+
+For subscribers, at the end of each trading day, Value Line publishes
+zip files.  Each zip file contains CSV files which can be loaded into
+a spreadsheet:
+
+<a target="a" href="http://www.google.com/search?q=value+line+options+survey+csv">http://www.google.com/search?q=value+line+options+survey+csv</a>
+
+Since CSV data is organized into rows and columns, it is easily loaded into Oracle.
+
+If you want information about the names of columns and their
+significance, we suggest that you register for a Value Line Options
+Survey account and then contact their support department:
+
+<a target="a" href="https://www.ec-server.valueline.com/products/product.html">https://www.ec-server.valueline.com/products/product.html</a>
+<a target="a" href="https://www.ec-server.valueline.com/products/elect6.html">https://www.ec-server.valueline.com/products/elect6.html</a>
+
+Support: vloptions@valueline.com
+
+In the next three sections we describe some of the details associated
+with loading CSV data from Value Line into Oracle.
+
+<h2 id="evlod10">Extract VL Options Data</h2>
+
+In database jargon ETL is an acronym for "Extract, Transform, and Load".
+
+The first step to extraction is to download a pair of zip files from
+a section of the Value Line web site which is available to subscribers.
+
+When we do this we see something similar to the following:
+
+<pre><code class="ruby">
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ ls -l CALLS.ZIP PUTS.ZIP
+-rw-r--r-- 1 oracle dba 8059986 2009-06-19 17:02 CALLS.ZIP
+-rw-r--r-- 1 oracle dba 8427163 2009-06-19 17:02 PUTS.ZIP
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ du -sh  CALLS.ZIP PUTS.ZIP
+7.7M    CALLS.ZIP
+8.1M    PUTS.ZIP
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+</code></pre>
+
+A demo of unzipping the files is displayed below:
+
+<pre><code class="ruby">
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ unzip -o CALLS.ZIP
+Archive:  CALLS.ZIP
+  inflating: calls1.csv              
+  inflating: calls2.csv              
+  inflating: calls3.csv              
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ unzip -o PUTS.ZIP
+Archive:  PUTS.ZIP
+  inflating: puts1.csv               
+  inflating: puts2.csv               
+  inflating: puts3.csv               
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ du -sh calls?.csv puts?.csv
+9.8M    calls1.csv
+9.0M    calls2.csv
+9.8M    calls3.csv
+9.8M    puts1.csv
+9.0M    puts2.csv
+9.8M    puts3.csv
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ ls -l  calls?.csv puts?.csv
+-rw-r--r-- 1 oracle dba 10187142 2009-06-19 17:00 calls1.csv
+-rw-r--r-- 1 oracle dba  9351794 2009-06-19 17:00 calls2.csv
+-rw-r--r-- 1 oracle dba 10160915 2009-06-19 17:01 calls3.csv
+-rw-r--r-- 1 oracle dba 10199457 2009-06-19 17:01 puts1.csv
+-rw-r--r-- 1 oracle dba  9365793 2009-06-19 17:01 puts2.csv
+-rw-r--r-- 1 oracle dba 10183314 2009-06-19 17:02 puts3.csv
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+</code></pre>
+
+To understand the structure of the CSV data, we load the first 30 rows
+of calls1.csv into a spreadsheet 54 columns wide:
+
+<div style="overflow: scroll;  height: 600px; width:640px;"> 
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/ssw.png" />
+</div>
+
+After studying the above spreadsheet we built a SQL*Loader control file to 
+copy the data into an oracle table:
+<pre><code class="sql">
+LOAD DATA
+INFILE 'calls1.csv'
+APPEND INTO TABLE vlc
+FIELDS TERMINATED BY ','
+TRAILING NULLCOLS
+(
+   COMPANY                          CHAR NULLIF (COMPANY=BLANKS)
+ , DIVD                             CHAR NULLIF (DIVD=BLANKS)
+ , CMRK                             CHAR NULLIF (CMRK=BLANKS)
+ , TECHRANK                         CHAR NULLIF (TECHRANK=BLANKS)
+ , UPDOWNCM                         CHAR NULLIF (UPDOWNCM=BLANKS)
+ , HISTVO                           CHAR NULLIF (HISTVO=BLANKS)
+ , INDUST                           CHAR NULLIF (INDUST=BLANKS)
+ , CMPRICE                          CHAR NULLIF (CMPRICE=BLANKS)
+ , VOLF                             CHAR NULLIF (VOLF=BLANKS)
+ , TKR                              CHAR NULLIF (TKR=BLANKS)
+ , PORC                             CHAR NULLIF (PORC=BLANKS)
+ , STRIKE                           CHAR NULLIF (STRIKE=BLANKS)
+ , OPTKR                            CHAR NULLIF (OPTKR=BLANKS)
+ , RECORDNMBR                       CHAR NULLIF (RECORDNMBR=BLANKS)
+ , EXPDAY                           DATE "MM/DD/YYYY" NULLIF (EXPDAY=BLANKS)
+ , OI                               CHAR NULLIF (OI=BLANKS)
+ , VOL                              CHAR NULLIF (VOL=BLANKS)
+ , BID                              CHAR NULLIF (BID=BLANKS)
+ , ASK                              CHAR NULLIF (ASK=BLANKS)
+ , EST                              CHAR NULLIF (EST=BLANKS)
+ , DLTA                             CHAR NULLIF (DLTA=BLANKS)
+ , BIDOPRK                          CHAR NULLIF (BIDOPRK=BLANKS)
+ , ASKOPRK                          CHAR NULLIF (ASKOPRK=BLANKS)
+ , BIDUNOV                          CHAR NULLIF (BIDUNOV=BLANKS)
+ , ASKUNOV                          CHAR NULLIF (ASKUNOV=BLANKS)
+ , RVOPT                            CHAR NULLIF (RVOPT=BLANKS)
+ , TENPERC                          CHAR NULLIF (TENPERC=BLANKS)
+ , TENPERC_MINUS                    CHAR NULLIF (TENPERC_MINUS=BLANKS)
+ , CCRK                             CHAR NULLIF (CCRK=BLANKS)
+ , CCBE                             CHAR NULLIF (CCBE=BLANKS)
+ , CCRV                             CHAR NULLIF (CCRV=BLANKS)
+ , CCPA                             CHAR NULLIF (CCPA=BLANKS)
+ , CCPRT                            CHAR NULLIF (CCPRT=BLANKS)
+ , CCMAX                            CHAR NULLIF (CCMAX=BLANKS)
+ , ITMOTM                           CHAR NULLIF (ITMOTM=BLANKS)
+ , THETA                            CHAR NULLIF (THETA=BLANKS)
+ , BIDIMPLIE                        CHAR NULLIF (BIDIMPLIE=BLANKS)
+ , ASKIMPLIE                        CHAR NULLIF (ASKIMPLIE=BLANKS)
+ , VOLFADJ                          CHAR NULLIF (VOLFADJ=BLANKS)
+ , FORECASTPRTBSTRK                 CHAR NULLIF (FORECASTPRTBSTRK=BLANKS)
+ , BIDPRBSTRK                       CHAR NULLIF (BIDPRBSTRK=BLANKS)
+ , ASKPRBSTRK                       CHAR NULLIF (ASKPRBSTRK=BLANKS)
+ , PCTDBLE                          CHAR NULLIF (PCTDBLE=BLANKS)
+ , MARGIN                           CHAR NULLIF (MARGIN=BLANKS)
+ , YLDMGN                           CHAR NULLIF (YLDMGN=BLANKS)
+ , MXMGN                            CHAR NULLIF (MXMGN=BLANKS)
+ , ROBUY                            CHAR NULLIF (ROBUY=BLANKS)
+ , ROWRITE                          CHAR NULLIF (ROWRITE=BLANKS)
+ , ROCC                             CHAR NULLIF (ROCC=BLANKS)
+ , GAMMA                            CHAR NULLIF (GAMMA=BLANKS)
+ , VEGA                             CHAR NULLIF (VEGA=BLANKS)
+ , RHO                              CHAR NULLIF (RHO=BLANKS)
+ , TIMPRPCT                         CHAR NULLIF (TIMPRPCT=BLANKS)
+ , BIDASKPCNT                       CHAR NULLIF (BIDASKPCNT=BLANKS)
+ , pricedate                        CHAR NULLIF (pricedate=BLANKS)
+)
+</code></pre>
+
+
+Then, we built a table to receive the data:
+<pre><code class="sql">
+22:33:51 SQL> 
+22:33:52 SQL> desc vlc
+ Name                       Null?    Type
+ -------------------------- -------- ------------------
+ COMPANY                             VARCHAR2(55)
+ DIVD                                VARCHAR2(55)
+ CMRK                                VARCHAR2(55)
+ TECHRANK                            VARCHAR2(55)
+ UPDOWNCM                            VARCHAR2(55)
+ HISTVO                              VARCHAR2(55)
+ INDUST                              VARCHAR2(55)
+ CMPRICE                             VARCHAR2(55)
+ VOLF                                VARCHAR2(55)
+ TKR                                 VARCHAR2(55)
+ PORC                                VARCHAR2(55)
+ STRIKE                              VARCHAR2(55)
+ OPTKR                               VARCHAR2(55)
+ RECORDNMBR                          VARCHAR2(55)
+ EXPDAY                              DATE
+ OI                                  VARCHAR2(55)
+ VOL                                 VARCHAR2(55)
+ BID                                 VARCHAR2(55)
+ ASK                                 VARCHAR2(55)
+ EST                                 VARCHAR2(55)
+ DLTA                                VARCHAR2(55)
+ BIDOPRK                             VARCHAR2(55)
+ ASKOPRK                             VARCHAR2(55)
+ BIDUNOV                             VARCHAR2(55)
+ ASKUNOV                             VARCHAR2(55)
+ RVOPT                               VARCHAR2(55)
+ TENPERC                             VARCHAR2(55)
+ TENPERC_MINUS                       VARCHAR2(55)
+ CCRK                                VARCHAR2(55)
+ CCBE                                VARCHAR2(55)
+ CCRV                                VARCHAR2(55)
+ CCPA                                VARCHAR2(55)
+ CCPRT                               VARCHAR2(55)
+ CCMAX                               VARCHAR2(55)
+ ITMOTM                              VARCHAR2(55)
+ THETA                               VARCHAR2(55)
+ BIDIMPLIE                           VARCHAR2(55)
+ ASKIMPLIE                           VARCHAR2(55)
+ VOLFADJ                             VARCHAR2(55)
+ FORECASTPRTBSTRK                    VARCHAR2(55)
+ BIDPRBSTRK                          VARCHAR2(55)
+ ASKPRBSTRK                          VARCHAR2(55)
+ PCTDBLE                             VARCHAR2(55)
+ MARGIN                              VARCHAR2(55)
+ YLDMGN                              VARCHAR2(55)
+ MXMGN                               VARCHAR2(55)
+ ROBUY                               VARCHAR2(55)
+ ROWRITE                             VARCHAR2(55)
+ ROCC                                VARCHAR2(55)
+ GAMMA                               VARCHAR2(55)
+ VEGA                                VARCHAR2(55)
+ RHO                                 VARCHAR2(55)
+ TIMPRPCT                            VARCHAR2(55)
+ BIDASKPCNT                          VARCHAR2(55)
+ PRICEDATE                           DATE
+
+22:33:56 SQL> 
+22:33:57 SQL> 
+</code></pre>
+
+Then we used SQL*Loader to copy the CSV data in the table:
+
+<pre><code class="ruby">
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ sqlldr trade/t control=vlc_append.ctl \
+skip=12 bindsize=20971520 readsize=20971520 rows=123456
+
+SQL*Loader: Release 11.1.0.6.0 - Production on Sat Jun 20 22:37:05 2009
+
+Copyright (c) 1982, 2007, Oracle.  All rights reserved.
+
+Commit point reached - logical record count 1477
+Commit point reached - logical record count 2954
+Commit point reached - logical record count 4431
+Commit point reached - logical record count 5908
+Commit point reached - logical record count 7385
+Commit point reached - logical record count 8862
+Commit point reached - logical record count 10339
+Commit point reached - logical record count 11816
+Commit point reached - logical record count 13293
+Commit point reached - logical record count 14770
+Commit point reached - logical record count 16247
+Commit point reached - logical record count 17724
+Commit point reached - logical record count 19201
+Commit point reached - logical record count 20678
+Commit point reached - logical record count 22155
+Commit point reached - logical record count 23632
+Commit point reached - logical record count 25109
+Commit point reached - logical record count 26586
+Commit point reached - logical record count 28063
+Commit point reached - logical record count 29540
+Commit point reached - logical record count 31017
+Commit point reached - logical record count 32494
+Commit point reached - logical record count 33971
+Commit point reached - logical record count 34162
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ grep loaded vlc_append.log
+Table VLC, loaded from every logical record.
+  34162 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+oracle@zareason:~/vlsql/md/csv/VL3$ 
+</code></pre>
+
+After we filled the vlc table with call options (and vlp which
+captured put options) we were ready to start the next step in our effort.
+
+
+
+<h2 id="tvlod10">Transform VL Options Data</h2>
+
+With vlc and vlp full of data from the CSV files, we relied on syntax
+similar to that displayed below to transform the options data:
+<pre><code class="sql">
+UPDATE vlc
+SET pricedate = TO_DATE('06/19/2009','MM/DD/YYYY')
+WHERE pricedate IS NULL
+/
+
+UPDATE vlp
+SET pricedate = TO_DATE('06/19/2009','MM/DD/YYYY')
+WHERE pricedate IS NULL
+/
+
+INSERT INTO porcs_c
+(
+pricedate
+,company
+,cmrk
+,techrank
+,updowncm
+,histvo
+,indust
+,cmprice
+,volf
+,tkr
+,porc
+,strike
+,optkr
+,expday
+,oi
+,vol
+,bid
+,ask
+,bidoprk
+,askoprk
+,bidunov
+,askunov
+,itmotm
+)
+SELECT
+pricedate
+,company
+,cmrk
+,techrank
+,updowncm
+,histvo
+,indust
+,cmprice
+,volf
+,tkr
+,porc
+,strike
+,optkr
+,expday
+,oi
+,vol
+,bid
+,ask
+,bidoprk
+,askoprk
+,bidunov
+,askunov
+,itmotm
+FROM vlc
+/
+
+INSERT INTO porcs_p
+(
+pricedate
+,company
+,cmrk
+,techrank
+,updowncm
+,histvo
+,indust
+,cmprice
+,volf
+,tkr
+,porc
+,strike
+,optkr
+,expday
+,oi
+,vol
+,bid
+,ask
+,bidoprk
+,askoprk
+,bidunov
+,askunov
+,itmotm
+)
+SELECT
+pricedate
+,company
+,cmrk
+,techrank
+,updowncm
+,histvo
+,indust
+,cmprice
+,volf
+,tkr
+,porc
+,strike
+,optkr
+,expday
+,oi
+,vol
+,bid
+,ask
+,bidoprk
+,askoprk
+,bidunov
+,askunov
+,itmotm
+FROM vlp
+/
+</code></pre>
+
+The steps and syntax listed above describe the general method we used
+to fill the tables porcs_c and porcs_p from CSV files we downloaded
+each day.
+
+Some of the details of filling both porcs_c and porcs_p from CSV files
+are proprietary and thus omitted from this paper.
+
+We can, however, show the amount of data we have collected.
+
+The queries below list the amount of data we have gathered thus far in
+both porcs_c and porcs_p:
+<pre><code class="sql">
+23:20:13 SQL> 
+23:20:13 SQL> l
+  1  SELECT TO_CHAR(pricedate,'YYYY-MM'),COUNT(TO_CHAR(pricedate,'YYYY-MM'))
+  2  FROM porcs_c
+  3  GROUP BY TO_CHAR(pricedate,'YYYY-MM')
+  4* ORDER BY TO_CHAR(pricedate,'YYYY-MM')
+23:20:14 SQL> /
+
+TO_CHAR COUNT(TO_CHAR(PRICEDATE,'YYYY-MM'))
+------- -----------------------------------
+2003-02                              828706
+2003-03                              954166
+2003-04                              940774
+2003-05                              924963
+2003-06                              971897
+2003-07                             1045454
+2003-08                              920535
+2003-09                             1095871
+2003-10                             1239138
+2003-11                             1041251
+2003-12                             1170174
+2004-01                             1035176
+2004-02                              968493
+2004-03                             1256077
+2004-04                              332646
+2004-05                              625697
+2004-06                             1215128
+2004-07                             1013141
+2004-08                             1101926
+2004-10                               65000
+2007-10                              315606
+2007-11                             1483933
+2007-12                             1593079
+2008-01                             1835203
+2008-02                             1885670
+2008-03                             2087839
+2008-04                             2288295
+2008-05                             1339221
+2008-06                             2070624
+2008-07                             2305573
+2008-08                             2226775
+2008-09                             2264874
+2008-10                             2725266
+2008-11                             2473364
+2008-12                             2809052
+2009-01                             2258234
+2009-02                             2218512
+2009-03                             2576386
+2009-04                             2463333
+2009-05                             2364456
+
+40 rows selected.
+
+Elapsed: 00:01:46.99
+</code></pre>
+A chart of the above report is displayed below.
+The counts for puts are nearly identical so they are not displayed:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/call_monthly_data_counts.png" />
+
+
+Notice that we have a large gap in our data.  
+This data is simply not available to us.
+
+<pre><code class="sql">
+23:22:05 SQL> 
+23:22:50 SQL> 
+23:22:50 SQL> SELECT COUNT(pricedate)FROM porcs_c;
+
+COUNT(PRICEDATE)
+----------------
+        60331508
+
+Elapsed: 00:00:59.39
+23:24:07 SQL> 
+23:24:23 SQL> 
+
+23:25:23 SQL> 
+23:25:24 SQL> 
+23:25:24 SQL> l
+  1  SELECT TO_CHAR(pricedate,'YYYY-MM'),COUNT(TO_CHAR(pricedate,'YYYY-MM'))
+  2  FROM porcs_p
+  3  GROUP BY TO_CHAR(pricedate,'YYYY-MM')
+  4* ORDER BY TO_CHAR(pricedate,'YYYY-MM')
+23:25:25 SQL> /
+
+TO_CHAR COUNT(TO_CHAR(PRICEDATE,'YYYY-MM'))
+------- -----------------------------------
+2003-02                              825322
+2003-03                              951415
+2003-04                              939670
+2003-05                              926197
+2003-06                              975568
+2003-07                             1046564
+2003-08                              919801
+2003-09                             1096446
+2003-10                             1242371
+2003-11                             1043345
+2003-12                             1172303
+2004-01                             1041257
+2004-02                              971822
+2004-03                             1258312
+2004-04                              333671
+2004-05                              621764
+2004-06                             1153453
+2004-07                             1008096
+2004-08                             1094053
+2007-10                              253254
+2007-11                             1483970
+2007-12                             1593105
+2008-01                             1835232
+2008-02                             1709651
+2008-03                             1879090
+2008-04                             2288286
+2008-05                             1339231
+2008-06                             2070522
+2008-07                             2305734
+2008-08                             2226740
+2008-09                             2264998
+2008-10                             2725272
+2008-11                             2473965
+2008-12                             2809273
+2009-01                             2258972
+2009-02                             2218577
+2009-03                             2576254
+2009-04                             2462821
+2009-05                             2364429
+
+39 rows selected.
+
+Elapsed: 00:01:26.32
+23:26:53 SQL> 
+23:29:08 SQL> 
+23:29:09 SQL> SELECT COUNT(pricedate)FROM porcs_p;
+
+COUNT(PRICEDATE)
+----------------
+        59760806
+
+Elapsed: 00:01:17.42
+23:30:35 SQL> 
+23:31:59 SQL> 
+</code></pre>
+
+We can see that we have roughly 39 months worth of data.
+
+The total number of rows is 60331508 + 59760806 rows.
+
+This is 120 million rows of data.
+
+Certainly this is enough data to determine if Value Line provides us
+with predictive attributes when we buy their data.
+
+Also it is enough data for SVM to find correlations, assuming they
+exist, between option-contract-attributes and corresponding future
+price behavior.
+
+With porcs_c and porcs_p full of 120 million rows of data, we consider
+the Transform (the T in ETL) step to be done.
+
+<h2 id="lvlod10">Load VL Options Data</h2>
+
+We consider the L in ETL to correspond with the task of filling a fact
+table with data to be query-able.
+
+The syntax displayed below does this for us:
+<pre><code class="sql">
+--
+-- cr_vlm20.sql
+--
+
+-- Builds a table full of data useful for backtesting
+
+CONNECT u2/u
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
+
+CREATE TABLE vlm10 COMPRESS AS SELECT 
+ 'c_'||tkr||strike||expday||pricedate optid
+,'c_'||tkr||strike||expday            optsig
+,1 porc,ask,bid,pricedate
+FROM porcs_c
+WHERE ask != 0 -- We dont divide by 0
+ORDER BY 'c_'||tkr||strike||expday||pricedate 
+/
+
+INSERT INTO vlm10 SELECT 
+ 'p_'||tkr||strike||expday||pricedate optid
+,'p_'||tkr||strike||expday            optsig
+,-1 porc,ask,bid,pricedate
+FROM porcs_p
+WHERE ask != 0 -- We dont divide by 0
+ORDER BY 'p_'||tkr||strike||expday||pricedate 
+/
+
+ANALYZE TABLE vlm10 ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+CREATE TABLE vlmpg COMPRESS AS SELECT optid,pg20,porc,pdate FROM
+(
+  SELECT
+  optid
+  ,porc
+  ,pricedate pdate
+  ,(LEAD(bid,10,bid)OVER(PARTITION BY optsig ORDER BY optid)-ask)/ask     pg20
+  ,(LEAD(pricedate,20,pricedate)OVER(PARTITION BY optsig ORDER BY optid)) pdate20
+  FROM vlm10
+  WHERE ask != 0 -- We dont divide by 0
+  ORDER BY optid
+)
+-- Avoid large date gaps in the data
+WHERE pdate20 - pdate &lt; 35
+/
+
+ANALYZE TABLE vlmpg ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+-- Filter out contracts we know we do not want.
+-- Look at the WHERE clauses below:
+CREATE TABLE vlm20 COMPRESS AS SELECT
+ 'c_'||tkr||strike||expday||pricedate optid
+,1 porc
+,tkr
+,pricedate pdate -- shorten the name of pricedate
+,expday - pricedate days2exp
+,0+REPLACE(volf,'%','')volf
+,0+ask ask
+,0+cmprice cmprice
+,0+oi     oi
+,0+vol    vol
+,(ask-bid)/ask ask_bid_r
+,0+bidoprk bidoprk
+,0+askoprk askoprk
+,0+REPLACE(bidunov,'%','')bidunov
+,0+REPLACE(askunov,'%','')askunov
+,0+REPLACE(itmotm,'%','')itmotm
+,0+cmrk cmrk
+,0+techrank techrank
+FROM porcs_c
+WHERE 0+ask>0 AND 0+cmprice>0
+AND   0+ask BETWEEN 2.0 AND 20.0 AND (ask-bid)/ask &lt; 0.07
+AND expday - pricedate > 33
+AND (ABS(cmprice - strike)/cmprice) &lt; 0.2
+AND 0+oi+vol > 0
+/
+
+INSERT INTO vlm20 SELECT
+ 'p_'||tkr||strike||expday||pricedate optid
+,-1 porc
+,tkr
+,pricedate pdate -- shorten the name of pricedate
+,expday - pricedate days2exp
+,0+REPLACE(volf,'%','')volf
+,0+ask ask
+,0+cmprice cmprice
+,0+oi     oi
+,0+vol    vol
+,(ask-bid)/ask ask_bid_r
+,0+bidoprk bidoprk
+,0+askoprk askoprk
+,0+REPLACE(bidunov,'%','')bidunov
+,0+REPLACE(askunov,'%','')askunov
+,0+REPLACE(itmotm,'%','')itmotm
+,0+cmrk cmrk
+,0+techrank techrank
+FROM porcs_p
+WHERE 0+ask>0 AND 0+cmprice>0
+AND   0+ask BETWEEN 2.0 AND 20.0 AND (ask-bid)/ask &lt; 0.07
+AND expday - pricedate > 33
+AND (ABS(cmprice - strike)/cmprice) &lt; 0.2
+AND 0+oi+vol > 0
+/
+
+ALTER TABLE vlm20 MODIFY optid VARCHAR2(33);
+
+ANALYZE TABLE vlm20 ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+-- Now build back-testing table full of attributes
+CREATE TABLE vlmatt COMPRESS AS SELECT
+b.optid
+,b.porc
+,tkrnum
+,b.pdate -- Cannot have this in sme or bme, but I need it to build them
+,0 + TO_CHAR ( ROUND(b.pdate, 'MM'),'MM' ) mnth_round
+,days2exp
+,sysdate - b.pdate dayspast
+,b.ask_bid_r
+,b.askoprk
+,b.askunov
+,b.bidoprk
+,b.bidunov
+,b.ask
+,b.cmprice
+,b.cmrk
+,b.itmotm
+,b.oi
+,b.techrank
+,b.vol
+,b.volf
+,pg20
+,CASE WHEN pg20 &lt; 0.2 THEN 'nup' ELSE 'up' END aapg20
+FROM vlm20 b, vlmpg p, tkr2num t
+WHERE b.optid = p.optid AND b.tkr = t.tkr
+/
+
+ANALYZE TABLE vlmatt ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+CREATE TABLE vfact COMPRESS AS SELECT
+pg20
+,porc
+,0+TO_CHAR(pdate,'YYYYMMDD')day_id
+,mnth_round
+,askoprk
+,CASE WHEN ABS(askunov) &lt; 60 THEN ROUND(askunov,-1) WHEN askunov &lt; -60 THEN -60 ELSE 60 END askunov
+,bidoprk
+,CASE WHEN ABS(bidunov) &lt; 60 THEN ROUND(bidunov,-1) WHEN bidunov &lt; -60 THEN -60 ELSE 60 END bidunov
+,cmrk
+,techrank
+FROM vlmatt
+/
+
+ANALYZE TABLE vfact ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+</code></pre>
+
+Creation of the the vfact table completes the "L" phase of our ETL effort.
+
+We then focus on running a few simple queries against vfact.
+
+We are on a quest for obvious correlations between dimension values in
+that table and Average 20 Day Percent Gain.
+
+Results:
+
+<pre><code class="sql">
+00:49:48 SQL> 
+00:49:54 SQL> 
+00:49:54 SQL> @qry_vfact.sql
+00:49:55 SQL> --
+00:49:55 SQL> -- qry_vfact.sql
+00:49:55 SQL> --
+00:49:55 SQL> 
+00:49:55 SQL> -- Compare calls to puts
+00:49:55 SQL> SELECT
+00:49:55   2  porc, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact GROUP BY porc;
+
+      PORC ROUND(AVG(PG20),3)   COUNT(*)
+---------- ------------------ ----------
+         1              -.073    4291658
+        -1              -.017    4188353
+
+Elapsed: 00:00:00.02
+</code></pre>
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/avg20_day_pct_gain.png" />
+
+Compare the above query to the query below:
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- Maybe askoprk IN (1,2) gives better results?
+00:49:55 SQL> SELECT
+00:49:55   2  porc, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  WHERE askoprk IN (1,2) GROUP BY porc
+00:49:55   5  /
+
+      PORC ROUND(AVG(PG20),3)   COUNT(*)
+---------- ------------------ ----------
+         1              -.054     948785
+        -1              -.041     938635
+
+Elapsed: 00:00:00.00
+</code></pre>
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/askoprk12.png" />
+
+It appears that when askoprk is either 1 or 2, it yields better
+performing calls and worse performing puts.
+
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- See if cmrk is predictive
+00:49:55 SQL> SELECT
+00:49:55   2  porc, cmrk, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  GROUP BY porc, cmrk ORDER BY porc, cmrk;
+
+      PORC       CMRK ROUND(AVG(PG20),3)   COUNT(*)
+---------- ---------- ------------------ ----------
+        -1          0               .021     589739
+        -1          1               .006     445170
+        -1          2              -.016     877977
+        -1          3              -.037    1744745
+        -1          4              -.021     434807
+        -1          5               .009      95915
+         1          0              -.116     537111
+         1          1              -.088     472675
+         1          2              -.074     941900
+         1          3              -.061    1825549
+         1          4              -.058     424037
+         1          5              -.071      90386
+
+12 rows selected.
+
+Elapsed: 00:00:00.01
+</code></pre>
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/cmrk_vs_pg20_p.png" />
+<br />
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/cmrk_vs_pg20_c.png" />
+
+It appears that cmrk is more predictive for calls than it is for puts.
+
+For calls, I was suprised that cmrk-5 calls performed better than cmrk-1 calls.
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- Perhaps askunov is predictive?
+00:49:55 SQL> SELECT
+00:49:55   2  porc, askunov, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  GROUP BY porc, askunov ORDER BY porc, askunov;
+
+      PORC    ASKUNOV ROUND(AVG(PG20),3)   COUNT(*)
+---------- ---------- ------------------ ----------
+        -1        -60              -.035      14133
+        -1        -50              -.051      94552
+        -1        -40               -.07     281441
+        -1        -30              -.082     350557
+        -1        -20              -.078     327871
+        -1        -10              -.043     299264
+        -1          0              -.003     293087
+        -1         10               .024     371764
+        -1         20               .028     416791
+        -1         30               .028     398466
+        -1         40               .017     334495
+        -1         50               .005     271326
+        -1         60              -.025     734606
+         1        -60              -.017      13209
+         1        -50              -.022      57537
+         1        -40              -.021     218413
+         1        -30              -.026     356614
+         1        -20              -.035     407121
+         1        -10              -.053     412378
+         1          0              -.075     405638
+         1         10              -.093     480037
+         1         20                -.1     498811
+         1         30              -.106     431890
+         1         40              -.102     321582
+         1         50              -.095     227363
+         1         60              -.083     461065
+
+26 rows selected.
+
+Elapsed: 00:00:00.00
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/askunov_vs_pg20_p.png" />
+<br />
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/askunov_vs_pg20_c.png" />
+
+The attribute askunov seems more predictive for calls than it does for puts.
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- Techrank? It has a nice name. Is it predictive?
+00:49:55 SQL> SELECT
+00:49:55   2  porc,techrank, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  GROUP BY porc,techrank ORDER BY porc,techrank;
+
+      PORC   TECHRANK ROUND(AVG(PG20),3)   COUNT(*)
+---------- ---------- ------------------ ----------
+        -1          0               .001     669645
+        -1          1               -.02     205593
+        -1          2               -.02     709231
+        -1          3              -.019    1883974
+        -1          4              -.029     587946
+        -1          5              -.014     131964
+         1          0              -.093     647787
+         1          1              -.077     211059
+         1          2              -.074     746762
+         1          3              -.071    1957821
+         1          4              -.059     597633
+         1          5              -.063     130595
+         1                         -.598          1
+
+13 rows selected.
+
+Elapsed: 00:00:00.00
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/techrank_vs_pg20_p.png" />
+<br />
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/techrank_vs_pg20_c.png" />
+
+The attribute techrank seems more predictive for calls than it does for puts.
+
+For calls, I was suprised that techrank-5 calls performed better than
+techrank-1 calls.
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- look at years
+00:49:55 SQL> SELECT
+00:49:55   2  porc, ROUND(AVG(pg20),3),SUBSTR('x'||day_id,2,4),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  GROUP BY porc,SUBSTR('x'||day_id,2,4)
+00:49:55   5  ORDER BY porc,SUBSTR('x'||day_id,2,4)
+00:49:55   6  /
+
+      PORC ROUND(AVG(PG20),3) SUBS   COUNT(*)
+---------- ------------------ ---- ----------
+        -1               -.13 2003     842907
+        -1               -.04 2004     536124
+        -1               .055 2007     327003
+        -1               .066 2008    1717196
+        -1              -.096 2009     765123
+         1               .014 2003    1033343
+         1              -.054 2004     633744
+         1              -.159 2007     358239
+         1              -.138 2008    1599296
+         1              -.026 2009     667036
+
+10 rows selected.
+
+Elapsed: 00:00:00.01
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/yearly_avg20day_pg_p.png" />
+<br />
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/yearly_avg20day_pg_c.png" />
+
+Obviously, puts had a much better return than calls during 2008.
+<pre><code class="sql">
+00:49:55 SQL> 
+00:49:55 SQL> -- look at months
+00:49:55 SQL> SELECT
+00:49:55   2  porc, mnth_round, ROUND(AVG(pg20),3),COUNT(*)
+00:49:55   3  FROM vfact
+00:49:55   4  GROUP BY porc,mnth_round
+00:49:55   5  ORDER BY porc,mnth_round
+00:49:55   6  /
+
+      PORC MNTH_ROUND ROUND(AVG(PG20),3)   COUNT(*)
+---------- ---------- ------------------ ----------
+        -1          1               .076     373293
+        -1          2              -.053     438289
+        -1          3              -.016     460640
+        -1          4              -.183     357438
+        -1          5              -.166     300050
+        -1          6              -.033     401058
+        -1          7               .072     294085
+        -1          8              -.064     414379
+        -1          9               .094     321075
+        -1         10               .311     181996
+        -1         11               .088     304826
+        -1         12              -.146     341224
+         1          1              -.153     382791
+         1          2              -.073     448388
+         1          3              -.059     446156
+         1          4               .044     360514
+         1          5               .029     304051
+         1          6              -.045     425891
+         1          7              -.145     300545
+         1          8              -.051     424543
+         1          9              -.126     333979
+         1         10              -.185     186725
+         1         11              -.146     329514
+         1         12              -.035     348561
+
+24 rows selected.
+
+Elapsed: 00:00:00.00
+00:49:55 SQL> 
+00:51:29 SQL> 
+</code></pre>
+
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/puts_monthly_avg20day_pg.png" />
+<br />
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/calls_monthly_avg20day_pg.png" />
+
+The above results are a bit abnormal when compared with data collected
+for stocks over a much wider time span (1998 to 2009):
+
+<a target="a" href="http://bikle.com/protected/sim">http://bikle.com/protected/sim</a>
+
+We compare the results of the calls to the stocks in the above link.
+During the spring months calls performed well.
+This coincides with the pattern we found for stocks between the years 1998 and 2009.
+
+In the autumn though, calls bucked the trend.  This is a consequence of
+the data we collected; it is dominated by 2008.  During the autumn of
+2008, stocks and thus calls fell hard.
+
+
+<h2 id="mixsvmvlod">Mix SVM With VL Options Data</h2>
+
+The SVM algorithm is useful for classifying data into two classes.
+
+Specifically we want to divide option contracts (both puts and calls)
+into a two classes: a class which has a future value increase and a
+class which will not increase.  We consider the dividing line to be
+20%.  Any contract with a future value increase of 20% or more in 20
+trading days is in the "up" class.  All other contracts will be in 
+the "nup" class.
+
+A general discussion about the SVM algorithm and its classification
+abilities can be found on the web:
+<ul>
+<li /><a target='a' href='http://www.google.com/search?q=svm+algorithm'>http://www.google.com/search?q=svm+algorithm</a>
+<li /><a target='a' href='http://en.wikipedia.org/wiki/Support_vector_machine'>http://en.wikipedia.org/wiki/Support_vector_machine</a>
+<li /><a target='a' href='http://www.google.com/search?q=svm+algorithm+site%3Aoracle.com'>http://www.google.com/search?q=svm+algorithm+site%3Aoracle.com</a>
+</ul>
+
+
+We continue this section with a discussion about the script, vlm.rb,
+which is displayed below:
+<pre><code class="ruby">
+#!/usr/bin/env ruby
+
+# vlm.rb
+
+# Demo: ruby -r vlm.rb -e 'Vl.new.write_score_sql_script'
+
+# Ruby script which uses nested loops to generate much SQL.
+# The SQL drives the SVM algorithm resident within Oracle Data Miner.
+
+class Vlm
+  require 'rubygems'
+  require 'oci8'
+  def write_score_sql_script
+    some_dates_a = []
+    date_sql = "SELECT DISTINCT TO_CHAR(pdate,'YYYY-MM-DD') "
+    date_sql &lt;&lt; "FROM vlmatt WHERE pdate>TO_DATE('2003-03-01','YYYY-MM-DD') "
+    OCI8.new('u2','u').exec(date_sql){ |r| some_dates_a &lt;&lt; r.to_s }
+    p("Found #{some_dates_a.size.to_s} dates in vlmatt.")
+    p("Check your directory for a new file.")
+    some_dates_a.sort.each do |pdate|
+
+sqlplus_syntax = &lt;&lt;ENDsqlplus_syntax1
+--
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,porc
+,mnth_round
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlmatt
+WHERE pdate='#{pdate}'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,porc
+,tkrnum
+,mnth_round
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlmatt
+WHERE 35+pdate &lt; '#{pdate}'
+/
+ALTER SYSTEM FLUSH SHARED_POOL;
+@cr_bme.sql
+PURGE RECYCLEBIN;
+--
+
+ENDsqlplus_syntax1
+      (fha = File.open("vlm_scorer.sql","a")).write(sqlplus_syntax); fha.close
+    end # some_dates_a.each do
+  end # def write_score_sql_script
+end # class
+
+Vlm.new.write_score_sql_script
+# end of vlm.rb
+</code></pre>
+
+The main idea behind the above script is that it creates a large SQL script.
+
+The large SQL script is named vlm_scorer.sql which makes a series of
+calls to another SQL script.
+
+This second SQL script, cr_bme.sql, is called for each day in the past
+which we have Value Line Data for.
+
+How many days?
+
+A simple grep command will tell us:
+<pre><code class="ruby">
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ grep cr_bme.sql vlm_scorer.sql | wc -l
+732
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+</code></pre>
+So, the Ruby script vlm.rb is a script which allows use to call
+cr_bme.sql for each of the 732 days which we have data for.
+
+We show the first and last calls from vlm_scorer.sql to give you an
+idea about how it calls cr_bme.sql:
+<pre><code class="sql">
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ head -56 vlm_scorer.sql
+--
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,porc
+,mnth_round
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlmatt
+WHERE pdate='2003-03-03'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,porc
+,tkrnum
+,mnth_round
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlmatt
+WHERE 35+pdate &lt; '2003-03-03'
+/
+@cr_bme.sql
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+
+
+
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ tail -56 vlm_scorer.sql
+--
+CREATE OR REPLACE VIEW sme AS SELECT 
+optid
+,porc
+,mnth_round
+,tkrnum
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,null aapg20
+FROM vlmatt
+WHERE pdate='2009-05-29'
+/
+CREATE OR REPLACE VIEW bme AS SELECT 
+optid
+,porc
+,tkrnum
+,mnth_round
+,days2exp
+,dayspast
+,ask_bid_r
+,askoprk
+,askunov
+,bidoprk
+,bidunov
+,ask
+,cmprice
+,cmrk
+,itmotm
+,oi
+,techrank
+,vol
+,volf
+,histvo
+,aapg20
+FROM vlmatt
+WHERE 35+pdate &lt; '2009-05-29'
+/
+@cr_bme.sql
+
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+oracle@zareason:~/vlsql/vlm$ 
+</code></pre>
+
+Notice the columns in the bme view.  Many of them correspond to
+attributes provided by Value Line.  It is our hope that some of them
+alone or when combined with others will provide predictive power to
+the SVM algorithm.
+
+If you want information about the names of columns and their
+significance, we suggest that you register for a Value Line Options
+Survey account and then contact their support department:
+
+<a target="a" href="https://www.ec-server.valueline.com/products/product.html">https://www.ec-server.valueline.com/products/product.html</a>
+<a target="a" href="https://www.ec-server.valueline.com/products/elect6.html">https://www.ec-server.valueline.com/products/elect6.html</a>
+
+Support: vloptions@valueline.com
+
+Turning our attention to the SQL script, we see that the mechanics of
+vlm_scorer.sql are simple.  The script creates a view named sme.
+Next, It creates a view named bme.  It then calls cr_bme.sql
+
+And it does this over and over 732 times.
+
+Notice that the columns of the views sme and bme match.  Well, except
+one column; the most important column, which is aapg20.
+
+In the view sme, aapg20 is NULL; and for good reason; we are
+simulating the situation that we do not know what the value of aapg20
+is yet.  We will rely on SVM to predict the value.
+
+In other words, we are pretending that we don't know the aapg20 value
+so we can ask SVM to predict it and then we will determine if SVM can
+accurately predict the value of aapg20.
+
+In the view bme, aapg20 is not NULL; we know what it is since it is
+derived from the percentage gain of option contracts in the past.
+
+Also notice the WHERE clause of the sme view:
+WHERE pdate='2009-05-29'
+
+Obviously this means that sme will contain rows with information about
+option contracts for one specific day.
+
+The view bme has a different WHERE clause:
+WHERE 35+pdate &lt; '2009-05-29'
+
+This means that bme will contain rows for many days where pdate is 35
+days before '2009-05-29'.
+
+Perhaps now it might be obvious how SVM will work in this setup.
+
+The view bme contains many rows which SVM learns from.  SVM then
+processes this information in a way which allows it to predict the
+value of aapg20 in the view sme.
+
+After vlm_scorer.sql creates sme and bme, it calls cr_bme.sql which is
+displayed below:
+<div style="overflow: scroll; height: 400px; width: 650px;">
+<pre><code class="sql">
+--
+-- cr_bme.sql
+--
+
+-- usage: cr_bme.sql 
+
+-- A script which feeds data to SVM and captures the results in table vlm_predictions
+
+DEFINE target     = 'aapg20'
+DEFINE model_name = 'vl_model'
+DEFINE bldtable   = 'bme'
+DEFINE scoretable = 'sme'
+DEFINE case_id    = 'optid'
+
+-- Define a variable to help me exclude some columns from some data mining calls
+DEFINE exclude1 = "'&target','&case_id'"
+
+-- Builds an SVM model using pl/sql.
+
+-----------------------------------------------------------------------
+--                            BUILD THE MODEL
+-----------------------------------------------------------------------
+
+-- Cleanup old build data preparation objects for repeat runs
+DELETE svmc_miss_num;
+DELETE svmc_miss_cat;
+DELETE svmc_clip;
+DELETE svmc_norm;
+
+
+-- CREATE AND POPULATE A SETTINGS TABLE
+--
+-- DROP   TABLE svmc_settings ;
+-- CREATE TABLE svmc_settings ( setting_name  VARCHAR2(30), setting_value VARCHAR2(30));
+-- DELETE svmc_settings;
+
+-- The default classification algorithm is Naive Bayes. So override
+-- this choice to SVM using a settings table.
+-- SVM chooses a kernel type automatically. This choice can be overriden
+-- by the user. Linear kernel is preferred high dimensional data, and
+-- Gaussian kernel for low dimensional data. Here we use linear kernel
+-- to demonstrate the get_model_details_svm() API, which applies only for
+-- models.
+--
+
+-- Do this once and then comment it out.
+-- That makes script go faster.
+-- -- BEGIN
+-- -- -- Populate settings table
+-- --   INSERT INTO svmc_settings (setting_name, setting_value) VALUES
+-- --   (dbms_data_mining.algo_name, dbms_data_mining.algo_support_vector_machines);
+-- -- 
+-- --   INSERT INTO svmc_settings (setting_name, setting_value) VALUES
+-- --   (dbms_data_mining.svms_kernel_function, dbms_data_mining.svms_gaussian);
+-- -- 
+-- --   INSERT INTO svmc_settings (setting_name, setting_value) VALUES
+-- --   (dbms_data_mining.svms_kernel_cache_size,320123123);
+-- --   COMMIT;
+-- -- END;
+-- -- /
+
+-- SELECT * FROM svmc_settings;
+
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW svmc_winsor';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW svmc_build_prep';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW xformed_build_miss_num';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW xformed_build_miss_cat';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
+--------------------------------
+-- PREPARE BUILD (TRAINING) DATA
+--
+
+-- 1. Missing Value treatment for all Predictors and
+-- 2. Outlier Treatment and
+-- 3. Normalization are performed below.
+--    NOTE: that unlike SVM regression, the classification target is NOT
+--    normalized here.
+
+BEGIN
+  -- Perform missing value treatment for all predictors
+  -- create miss tables
+  --  DBMS_DATA_MINING_TRANSFORM.CREATE_MISS_NUM (miss_table_name => 'svmc_miss_num');
+  --  DBMS_DATA_MINING_TRANSFORM.CREATE_MISS_CAT (miss_table_name => 'svmc_miss_cat');
+
+  -- populate miss tables
+  DBMS_DATA_MINING_TRANSFORM.INSERT_MISS_NUM_MEAN (
+    miss_table_name => 'svmc_miss_num',
+    data_table_name => '&bldtable',
+    exclude_list    => DBMS_DATA_MINING_TRANSFORM.COLUMN_LIST (&exclude1));
+
+  DBMS_DATA_MINING_TRANSFORM.INSERT_MISS_CAT_MODE (
+    miss_table_name => 'svmc_miss_cat',
+    data_table_name => '&bldtable',
+    exclude_list    => DBMS_DATA_MINING_TRANSFORM.COLUMN_LIST (&exclude1));
+
+  -- xform input data to replace missing values
+  DBMS_DATA_MINING_TRANSFORM.XFORM_MISS_NUM(
+    miss_table_name => 'svmc_miss_num',
+    data_table_name => '&bldtable',
+    xform_view_name => 'xformed_build_miss_num');
+  DBMS_DATA_MINING_TRANSFORM.XFORM_MISS_CAT(
+    miss_table_name => 'svmc_miss_cat',
+    data_table_name => '&bldtable',
+    xform_view_name => 'xformed_build_miss_cat');
+
+  -- Perform outlier treatment.
+  -- create clip table
+  --  DBMS_DATA_MINING_TRANSFORM.CREATE_CLIP (clip_table_name => 'svmc_clip');
+
+  -- populate clip table
+  DBMS_DATA_MINING_TRANSFORM.INSERT_CLIP_WINSOR_TAIL (
+    clip_table_name => 'svmc_clip',
+    data_table_name => '&bldtable',
+    tail_frac       => 0.025,
+    exclude_list    => DBMS_DATA_MINING_TRANSFORM.COLUMN_LIST (&exclude1));
+
+  -- xform input data to winsorized data
+  DBMS_DATA_MINING_TRANSFORM.XFORM_CLIP(
+    clip_table_name => 'svmc_clip',
+    data_table_name => '&bldtable',
+    xform_view_name => 'svmc_winsor');
+
+  -- create normalization table
+  --  DBMS_DATA_MINING_TRANSFORM.CREATE_NORM_LIN (norm_table_name => 'svmc_norm');
+
+  -- populate normalization table based on winsorized data
+  DBMS_DATA_MINING_TRANSFORM.INSERT_NORM_LIN_MINMAX (
+    norm_table_name => 'svmc_norm',
+    data_table_name => 'svmc_winsor',
+    exclude_list    => DBMS_DATA_MINING_TRANSFORM.COLUMN_LIST (&exclude1));
+
+  -- normalize the original data
+  DBMS_DATA_MINING_TRANSFORM.XFORM_NORM_LIN (
+    norm_table_name => 'svmc_norm',
+    data_table_name => '&bldtable',
+    xform_view_name => 'svmc_build_prep');
+END;
+/
+
+---------------------
+-- CREATE A NEW MODEL
+--
+-- Cleanup old model with the same name for repeat runs
+BEGIN DBMS_DATA_MINING.DROP_MODEL('&model_name');
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+
+-- Build a new SVM Model
+BEGIN
+  DBMS_DATA_MINING.CREATE_MODEL(
+    model_name          => '&model_name',
+    mining_function     => dbms_data_mining.classification,
+    data_table_name     => 'svmc_build_prep',
+    case_id_column_name => '&case_id',
+    target_column_name  => '&target',
+    settings_table_name => 'svmc_settings');
+END;
+/
+
+-----------------------------------------------------------------------
+--                               APPLY/score THE MODEL
+-----------------------------------------------------------------------
+
+-- Cleanup old scoring data preparation objects for repeat runs
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW xformed_apply_miss_num';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW xformed_apply_miss_cat';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+BEGIN EXECUTE IMMEDIATE 'DROP VIEW svmc_apply_prep';
+EXCEPTION WHEN OTHERS THEN NULL; END;
+/
+-----------------------
+-- PREPARE SCORING DATA
+--
+-- If the data for model creation has been prepared, then the data
+-- to be scored using the model must be prepared in the same manner
+-- in order to obtain meaningful results.
+--
+-- 1. Missing Value treatment for all Predictors and
+-- 2. Normalization
+-- No outlier treatment will be performed during test and apply. The
+-- normalization step is sufficient, since the normalization parameters
+-- already capture the effects of outlier treatment done with build data.
+--
+BEGIN
+  -- Xform Test data to replace missing values
+  DBMS_DATA_MINING_TRANSFORM.XFORM_MISS_NUM(
+    miss_table_name => 'svmc_miss_num',
+    data_table_name => '&scoretable',
+    xform_view_name => 'xformed_apply_miss_num');
+
+  DBMS_DATA_MINING_TRANSFORM.XFORM_MISS_CAT(
+    miss_table_name => 'svmc_miss_cat',
+    data_table_name => '&scoretable',
+    xform_view_name => 'xformed_apply_miss_cat');
+
+  -- Normalize the data to be scored
+  DBMS_DATA_MINING_TRANSFORM.XFORM_NORM_LIN (
+    norm_table_name => 'svmc_norm',
+    data_table_name => '&scoretable',
+    xform_view_name => 'svmc_apply_prep');
+END;
+/
+
+-- Get prob and the prediction:
+-- DROP TABLE vlm_predictions;
+-- CREATE TABLE vlm_predictions(optid VARCHAR2(35),prob_up NUMBER,run_date DATE);
+
+INSERT INTO vlm_predictions (optid,prob_up,run_date)
+SELECT
+optid
+,PREDICTION_PROBABILITY(&model_name,'up' USING *)prob_up
+,sysdate
+FROM svmc_apply_prep
+/
+</code></pre>
+</div>
+The comments in the above script do a good job of describing what the
+script does.  We summarize the actions in the list below:
+<ul>
+<li />Define a set of sqlplus variables
+<li />Prepare database objects required by SVM model builder
+<li />Call DBMS_DATA_MINING.CREATE_MODEL()
+<li />Prepare database objects required to apply the model
+<li />Apply the model via SQL function call: PREDICTION_PROBABILITY()
+<li />Collect SVM predictions in table: vlm_predictions
+</ul>
+
+We offer links to some documentation:
+<ul>
+<li /><a target='a' href='http://www.google.com/search?q=DBMS_DATA_MINING+CREATE_MODEL+site%3Aoracle.com'>http://www.google.com/search?q=DBMS_DATA_MINING+CREATE_MODEL+site%3Aoracle.com</a>
+<li /><a target='a' href='http://www.google.com/search?q=SQL+function+PREDICTION_PROBABILITY+site%3Aoracle.com'>http://www.google.com/search?q=SQL+function+PREDICTION_PROBABILITY+site%3Aoracle.com</a>
+</ul>
+
+After we used vlm.rb to write vlm_scorer.sql we started vlm_scorer.sql
+at 2009-06-21 09:58.  The script finished at 2009-07-07 09:32 which is
+a duration of 16 days.  The hardware was a simple desktop Linux box.
+
+Vendor: <a target='a' href='http://ZaReason.com'>http://ZaReason.com</a>
+
+CPU:  AMD Athlon(tm) 64 X2 Dual Core Processor 6000+
+<a target='a' href='http://en.wikipedia.org/wiki/Athlon_64_X2'>http://en.wikipedia.org/wiki/Athlon_64_X2</a>
+
+RAM:  2 GB
+1 Disk:
+  HITACHI Deskstar P7K500 HDP725050GLA360 (0A35415) 500GB 7200 RPM 16MB
+  Cache SATA 3.0Gb/s 3.5-inch Internal Hard Drive
+  <a target='a' href='http://www.newegg.com/Product/Product.aspx?Item=N82E16822145215'>http://www.newegg.com/Product/Product.aspx?Item=N82E16822145215</a>
+
+The Oracle RDBMS was an unpatched install of 11g:
+  Oracle Database 11g Enterprise Edition Release 11.1.0.6.0 - 64bit Production
+  With the Partitioning, OLAP, Data Mining and Real Application Testing options
+  <a target='a' href='http://www.oracle.com/technology/products/database/oracle11g/index.html'>http://www.oracle.com/technology/products/database/oracle11g/index.html</a>
+
+The Linux Kernel:
+  - Linux zareason 2.6.24-21-generic #1 SMP Mon Aug 25 16:57:51 UTC 2008 x86_64 GNU/Linux
+  - <a target='a' href='http://en.wikipedia.org/wiki/Linux_kernel  '>http://en.wikipedia.org/wiki/Linux_kernel  </a>
+
+The Linux Distribution:
+  oracle@zareason:/etc$ 
+  oracle@zareason:/etc$ head /etc/lsb-release
+  DISTRIB_ID=Ubuntu
+  DISTRIB_RELEASE=8.04
+  DISTRIB_CODENAME=hardy
+  DISTRIB_DESCRIPTION="Ubuntu 8.04.1"
+  oracle@zareason:/etc$ 
+  oracle@zareason:/etc$ 
+  <a target='a' href='http://en.wikipedia.org/wiki/List_of_Ubuntu_releases#Ubuntu_8.04_LTS_.28Hardy_Heron.29'>http://en.wikipedia.org/wiki/List_of_Ubuntu_releases#Ubuntu_8.04_LTS_.28Hardy_Heron.29</a>
+
+
+After vlm_scorer.sql finished, we ran a simple set of SQL queries to
+analyze the results:
+<pre><code class="sql">
+13:41:24 SQL> --
+13:41:24 SQL> -- qry_vlm_predictions.sql
+13:41:24 SQL> --
+13:41:24 SQL> 
+13:41:24 SQL> -- First look at just the predictions:
+13:41:24 SQL> SELECT ROUND(prob_up,1),COUNT(ROUND(prob_up,1))
+13:41:24   2  FROM vlm_predictions
+13:41:24   3  GROUP BY ROUND(prob_up,1)
+13:41:24   4  ORDER BY ROUND(prob_up,1)
+13:41:24   5  /
+
+ROUND(PROB_UP,1) COUNT(ROUND(PROB_UP,1))
+---------------- -----------------------
+               0                  110977
+              .1                  784944
+              .2                 1210350
+              .3                  936659
+              .4                  692765
+              .5                  671133
+              .6                  769430
+              .7                  969763
+              .8                 1192671
+              .9                  912205
+               1                   73932
+
+11 rows selected.
+
+Elapsed: 00:00:10.78
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/vlm_predictions.png" />
+
+<pre><code class="sql">
+18:35:18 SQL> CREATE TABLE vlm_pred_pg COMPRESS AS SELECT
+18:35:18   2  v.optid
+18:35:18   3  ,prob_up
+18:35:18   4  ,pg20
+18:35:18   5  ,porc
+18:35:18   6  ,pdate
+18:35:18   7  FROM vlm_predictions v, vlmpg g
+18:35:18   8  WHERE v.optid = g.optid
+18:35:18   9  /
+
+Table created.
+
+Elapsed: 00:19:35.62
+18:54:54 SQL> 
+18:54:54 SQL> ANALYZE TABLE vlm_pred_pg ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+Table analyzed.
+
+Elapsed: 00:00:14.61
+
+19:04:51 SQL> -- Look for correlation between prediction and pg20
+19:04:51 SQL> SELECT ROUND(prob_up,1),ROUND(AVG(pg20),3)avg_pg20,COUNT(ROUND(prob_up,1))
+19:04:51   2  FROM  vlm_pred_pg
+19:04:51   3  GROUP BY ROUND(prob_up,1)
+19:04:51   4  ORDER BY ROUND(prob_up,1)
+19:04:51   5  /
+
+ROUND(PROB_UP,1)   AVG_PG20 COUNT(ROUND(PROB_UP,1))
+---------------- ---------- -----------------------
+               0      -.053                  110971
+              .1      -.068                  784887
+              .2      -.069                 1210257
+              .3      -.053                  936567
+              .4      -.042                  692692
+              .5      -.034                  671077
+              .6      -.031                  769358
+              .7      -.026                  969684
+              .8      -.028                 1192522
+              .9      -.048                  912090
+               1      -.076                   73924
+
+11 rows selected.
+
+Elapsed: 00:00:06.47
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/corr_pred_pg20.png" />
+
+Notice the label at the bottom of the spreadsheet:
+"Predicted Probability of being 'up'"
+
+Another term for this measure is SVM confidence level, or just
+confidence level.  It tells us in precise numeric terms how confident
+SVM is about its predictions.
+
+The above chart shows that as SVM confidence increases, its ability to
+pinpoint higher performing contracts also increases.  Well, except at the
+ends were SVM is extremely unconfident or where it is over 90% confident.
+
+So, if we accept confidence levels between 0.2 and 0.8, we can be
+confident that SVM has the ability to separate higher performing
+contracts from lower performing contracts.
+
+Next, we look at puts, confidence levels, average 20 day percent gain
+for months which historically tend to be good for puts:
+
+<pre><code class="sql">
+19:04:57 SQL> 
+19:04:57 SQL> -- Look at puts for rounded months: 1,6,7,8,9
+19:04:57 SQL> SELECT ROUND(prob_up,1),ROUND(AVG(pg20),3)avg_pg20,COUNT(ROUND(prob_up,1))
+19:04:57   2  FROM  vlm_pred_pg
+19:04:57   3  WHERE porc = -1
+19:04:57   4  AND TO_CHAR(ROUND(pdate,'MM'),'MM')IN('01','06','07','08','09')
+19:04:57   5  GROUP BY ROUND(prob_up,1)
+19:04:57   6  ORDER BY ROUND(prob_up,1)
+19:04:57   7  /
+
+ROUND(PROB_UP,1)   AVG_PG20 COUNT(ROUND(PROB_UP,1))
+---------------- ---------- -----------------------
+               0      -.024                   26427
+              .1      -.047                  178585
+              .2      -.041                  257261
+              .3       -.01                  213094
+              .4       .034                  159965
+              .5       .056                  140764
+              .6       .053                  156699
+              .7       .048                  199664
+              .8       .037                  266759
+              .9        .02                  189968
+               1      -.006                   14581
+
+11 rows selected.
+
+Elapsed: 00:00:08.31
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/corr_pred_pg20_p.png" />
+
+The shape of the above chart suggests that for confidence levels
+between 0.1 and 0.5, SVM works very well.  Then as it becomes more
+confident, its ability to locate better performing puts becomes
+degraded.  Still, however, confidence levels between 0.6 and 0.9 would
+lead the investor to money-making-puts.
+
+Also the  confidence levels between 0.6 and 0.9 would
+lead the investor to puts which perform better than average.
+
+The simple query listed below shows us how to quickly obtain the average:
+<pre><code class="sql">
+17:16:07 SQL> -- Look at entire average
+17:16:07 SQL> SELECT 100*ROUND(AVG(pg20),3), COUNT(*)
+17:16:07   2  FROM vfact
+17:16:07   3  WHERE porc = -1 -- porc is 1 for calls, -1 for puts
+17:16:07   4  AND mnth_round IN('01','06','07','08','09')
+17:16:07   5  /
+
+100*ROUND(AVG(PG20),3)   COUNT(*)
+---------------------- ----------
+                   2.2    1803890
+
+Elapsed: 00:00:00.00
+17:16:07 SQL> 
+</code></pre>
+
+Next, we look at calls, confidence levels, average 20 day percent gain
+for months which historically tend to be good for calls:
+
+<pre><code class="sql">
+19:05:05 SQL> 
+19:05:05 SQL> -- Look at calls for rounded months: 3,4,10,11
+19:05:05 SQL> SELECT ROUND(prob_up,1),ROUND(AVG(pg20),3)avg_pg20,COUNT(ROUND(prob_up,1))
+19:05:05   2  FROM  vlm_pred_pg
+19:05:05   3  WHERE porc = 1
+19:05:05   4  AND TO_CHAR(ROUND(pdate,'MM'),'MM')IN('03','04','10','11')
+19:05:05   5  GROUP BY ROUND(prob_up,1)
+19:05:05   6  ORDER BY ROUND(prob_up,1)
+19:05:05   7  /
+
+ROUND(PROB_UP,1)   AVG_PG20 COUNT(ROUND(PROB_UP,1))
+---------------- ---------- -----------------------
+               0      -.085                   15818
+              .1      -.077                  135626
+              .2      -.115                  247059
+              .3      -.084                  162303
+              .4      -.069                  115892
+              .5      -.057                  108087
+              .6      -.048                  112322
+              .7      -.047                  128418
+              .8      -.049                  140420
+              .9      -.049                  102603
+               1      -.117                    6989
+
+11 rows selected.
+
+Elapsed: 00:00:07.31
+</code></pre>
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/corr_pred_pg20_c.png" />
+
+The shape of the above chart suggests that for confidence levels
+between 0.2 and 0.9, which is most of the levels, that as SVM becomes
+more confident, it can pinpoint calls which have a higher average 20
+day percent gain.
+
+To drive the point home, we show some data about the average 20 day
+percent gain for all calls:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/avg20_day_pct_gain.png" />
+
+The average 20 day percent gain for all calls is -7.3%.
+
+Notice that for confidence levels 0.6, 0.7, 0.8, and 0.9, SVM easily
+picks calls which perform better than the average:
+
+Confidence Avg20day_pct_gain
+   .6      -.4.8%
+   .7      -.4.7%
+   .8      -.4.9%
+   .9      -.4.9%
+
+
+It even outperformed calls which Value Line flags as superior:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/askoprk12.png" />
+
+It is obvious that all of the calls lost money.  This is not the fault of SVM.
+It is a consequence of the actual data which is dominated by the year 2008.
+Stocks, and thus calls, lost much value in 2008.
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/call_monthly_data_counts.png" />
+
+Since SVM does a better job of classifying calls than puts, can we use
+confidence levels of calls to classify puts?
+
+The answer is yes.
+
+We used the script below to correlate call-confidence-levels with
+average 20 day percent gain for puts.
+
+<pre><code class="sql">
+16:39:02 SQL> --
+16:39:02 SQL> -- qry_cjp.sql
+16:39:02 SQL> --
+16:39:02 SQL> 
+16:39:02 SQL> -- Queries calls joined with puts sort by call-prob_up and put_pg20
+16:39:02 SQL> 
+16:39:02 SQL> -- Get some calls 1st
+16:39:02 SQL> CREATE OR REPLACE VIEW cjp_c AS SELECT
+16:39:02   2  optid optid_c
+16:39:02   3  ,REPLACE(optid,'c_','p_')optid_p
+16:39:02   4  ,prob_up confidence_c
+16:39:02   5  FROM vlm_predictions
+16:39:02   6  WHERE optid LIKE 'c%'
+16:39:02   7  /
+
+View created.
+
+Elapsed: 00:00:00.73
+16:39:03 SQL> 
+16:39:03 SQL> -- Now, Get some puts
+16:39:03 SQL> CREATE OR REPLACE VIEW cjp_p AS SELECT
+16:39:03   2  optid optid_p
+16:39:03   3  FROM vlm_predictions
+16:39:03   4  WHERE optid LIKE 'p%'
+16:39:03   5  /
+
+View created.
+
+Elapsed: 00:00:00.05
+16:39:03 SQL> 
+16:39:03 SQL> -- Join em to connect each put with corresponding call-confidence-level
+16:39:03 SQL> CREATE OR REPLACE VIEW cjp AS SELECT
+16:39:03   2  p.optid_p, confidence_c
+16:39:03   3  FROM cjp_c c, cjp_p p
+16:39:03   4  WHERE c.optid_p = p.optid_p
+16:39:03   5  /
+
+View created.
+
+Elapsed: 00:00:00.05
+16:39:03 SQL> 
+16:39:03 SQL> -- Now join again to get connect pg20 to the put and the call-confidence-level
+16:39:03 SQL> CREATE OR REPLACE VIEW cjp_pg20 AS SELECT
+16:39:03   2  optid_p, confidence_c, pg20
+16:39:03   3  FROM cjp, vlmpg v
+16:39:03   4  WHERE optid_p = optid
+16:39:03   5  AND TO_CHAR(ROUND(pdate,'MM'),'MM')IN('01','06','07','08','09')
+16:39:03   6  /
+
+View created.
+
+Elapsed: 00:00:00.02
+16:39:03 SQL> 
+16:39:03 SQL> -- Correlate confidence_c to pg20
+16:39:03 SQL> SELECT ROUND(confidence_c,1)call_confidence,ROUND(AVG(pg20),3)put_avg_pg20,COUNT(*)
+16:39:03   2  FROM cjp_pg20
+16:39:03   3  GROUP BY ROUND(confidence_c,1)
+16:39:03   4  ORDER BY ROUND(confidence_c,1)
+16:39:03   5  /
+
+CALL_CONFIDENCE PUT_AVG_PG20   COUNT(*)
+--------------- ------------ ----------
+              0        -.036      10822
+             .1            0      89556
+             .2          .03     112371
+             .3         .047     100076
+             .4         .048      91157
+             .5         .047      86579
+             .6         .041      93258
+             .7         .028     108699
+             .8         .018     118745
+             .9         .036      76421
+              1         .076       3584
+
+11 rows selected.
+
+Elapsed: 00:05:47.29
+16:44:50 SQL> 
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/qry_cjp.png" />
+
+The above graph tells us that call confidence levels do not work as
+well for puts as they do for calls.  Still however, the investor would
+make money from puts if he used the lower call confidence levels 0.2,
+0.3, and 0.4.
+
+Compare this to the return for all puts which were bought using a
+strategy based solely on the month of the year:
+
+<pre><code class="sql">
+17:16:07 SQL> --
+17:16:07 SQL> -- qry_puts16789.sql
+17:16:07 SQL> --
+17:16:07 SQL> 
+17:16:07 SQL> -- Query the return of puts bought based on a "time of year" strategy developed during study of ETFs:
+17:16:07 SQL> -- http://bikle.com/protected/sim
+17:16:07 SQL> 
+17:16:07 SQL> -- Look at monthly averages first
+17:16:07 SQL> SELECT ROUND(AVG(pg20),3), mnth_round, COUNT(*)
+17:16:07   2  FROM vfact
+17:16:07   3  WHERE porc = -1 -- porc is 1 for calls, -1 for puts
+17:16:07   4  AND mnth_round IN('01','06','07','08','09')
+17:16:07   5  GROUP BY mnth_round
+17:16:07   6  ORDER BY mnth_round
+17:16:07   7  /
+
+ROUND(AVG(PG20),3) MNTH_ROUND   COUNT(*)
+------------------ ---------- ----------
+              .076          1     373293
+             -.033          6     401058
+              .072          7     294085
+             -.064          8     414379
+              .094          9     321075
+
+Elapsed: 00:00:00.01
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/qry_puts16789.png" />
+
+Notice that we have 3 points (months) which were significantly above
+zero and two that were below zero.
+
+Now average over all five months.
+
+<pre><code class="sql">
+17:16:07 SQL> 
+17:16:07 SQL> -- Look at entire average
+17:16:07 SQL> SELECT 100*ROUND(AVG(pg20),3), COUNT(*)
+17:16:07   2  FROM vfact
+17:16:07   3  WHERE porc = -1 -- porc is 1 for calls, -1 for puts
+17:16:07   4  AND mnth_round IN('01','06','07','08','09')
+17:16:07   5  /
+
+100*ROUND(AVG(PG20),3)   COUNT(*)
+---------------------- ----------
+                   2.2    1803890
+
+Elapsed: 00:00:00.00
+17:16:07 SQL> 
+</code></pre>
+
+The above output was charted in a spreadsheet:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/Home/qry_puts16789_avg.png" />
+
+
+A comparison of the above average and the averages of puts linked to
+low call-confidence-levels reveals that low call-confidence-levels can
+lead us to superior returns for puts.
+
+So yes, we can use confidence levels of calls to classify puts.
+
+<h2 id="conclusion1">Conclusion</h2>
+We are interested in the average 20 day price percentage gain of stock
+option contracts (puts and calls).
+
+Currently, each day that the options market closes, Value Line provides us over
+230,00 rows of option contract data.
+
+We have collected over 100 million of these rows spanning 39 months.
+
+Additionally, each row has a rich set of attributes.
+
+When we load these rows into a fact table and then query it, no single
+attribute appears to be strongly correlated with the average 20 day
+percentage gain of the rows.
+
+When we feed this data to the SVM algorithm, however, we found that
+SVM has an ability to correlate a mixture of the attributes with
+future option contract performance.
+
+Also we found that Oracle's implementation of SVM is both easy to
+operate and well suited for processing a large amount of data.
+
+The amount of syntax we used to operate SVM in Oracle easily fit
+within this web page.  This is an important finding; SVM has a
+reputation for being difficult to operate due to the programming
+effort required to feed data to SVM.
+
+Our operation of the algorithm yielded the observation that
+percentage gain of call option contracts is easier to classify than
+the gain of puts.  
+
+The predictive power of SVM coupled with Value Line data and monthly
+patterns of stock market movements provides the options trader an edge
+in the market.
+
+</pre>

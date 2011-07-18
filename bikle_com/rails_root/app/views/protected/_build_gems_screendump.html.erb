@@ -1,0 +1,125 @@
+<pre><code>
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ pwd
+/pt/w/iw
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ ll iwantcrminfo.tgz 
+-rw-r--r-- 1 oracle dba 29399433 2009-08-30 11:51 iwantcrminfo.tgz
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ tar zxf iwantcrminfo.tgz 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ ls -la
+total 30724
+drwxr-xr-x  4 oracle dba     4096 2009-09-02 14:37 ./
+drwxr-xr-x  3 oracle dba     4096 2009-08-30 01:44 ../
+-rw-r--r--  1 oracle dba 29399433 2009-08-30 11:51 iwantcrminfo.tgz
+drwxr-xr-x 14 oracle dba     4096 2009-08-29 19:50 rs/
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ 
+oracle@zareason:/pt/w/iw$ cd rs
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ ls -la
+total 84
+drwxr-xr-x 14 oracle dba  4096 2009-08-29 19:50 ./
+drwxr-xr-x  4 oracle dba  4096 2009-09-02 14:37 ../
+drwxr-xr-x  6 oracle dba  4096 2009-08-23 14:55 app/
+drwxr-xr-x  5 oracle dba  4096 2009-08-30 02:33 config/
+-rw-r--r--  1 oracle dba   186 2009-08-23 14:55 config.ru
+drwxr-xr-x  3 oracle dba  4096 2009-08-29 19:02 db/
+drwxr-xr-x  2 oracle dba  4096 2009-08-23 14:55 doc/
+drwxr-xr-x  8 oracle dba  4096 2009-08-30 11:39 .git/
+-rw-r--r--  1 oracle dba    60 2009-08-23 18:22 .gitignore
+drwxr-xr-x  3 oracle dba  4096 2009-08-23 14:55 lib/
+drwxr-xr-x  2 oracle dba  4096 2009-08-30 11:41 log/
+-rwxr-xr-x  1 oracle dba   100 2009-08-29 19:50 mongrel_rails.sh*
+drwxr-xr-x  7 oracle dba  4096 2009-08-30 11:03 public/
+-rw-r--r--  1 oracle dba   307 2009-08-23 14:55 Rakefile
+-rw-r--r--  1 oracle dba 10011 2009-08-23 14:55 README
+drwxr-xr-x  3 oracle dba  4096 2009-08-23 14:55 script/
+drwxr-xr-x  7 oracle dba  4096 2009-08-23 14:55 test/
+drwxr-xr-x  6 oracle dba  4096 2009-08-23 14:55 tmp/
+drwxr-xr-x  5 oracle dba  4096 2009-08-23 16:13 vendor/
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ find . -name '*.o' -print
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xpointer.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_html_parser_context.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_encoding.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xpath_expression.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_html_parser_options.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_node.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_sax_parser.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_input_cbg.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_schema.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xinclude.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_parser_options.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_io.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_relaxng.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_dtd.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_parser.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_document.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_namespace.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xpath_context.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/libxml.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_error.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_parser_context.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_reader.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_namespaces.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_attr_decl.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xpath_object.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_sax2_handler.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_xpath.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_html_parser.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_attr.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_cbg.o
+./vendor/gems/libxml-ruby-1.1.3/ext/libxml/ruby_xml_attributes.o
+./vendor/gems/mongrel-1.1.5/ext/http11/http11.o
+./vendor/gems/mongrel-1.1.5/ext/http11/http11_parser.o
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ find . -name '*.o' -print|xargs rm -f
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ find . -name '*.o' -print
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ rake -T gems
+(in /pt/w/iw/rs)
+rake gems                      # List the gems that this rails application ...
+rake gems:build                # Build any native extensions for unpacked gems
+rake gems:build:force          # Force the build of all gems
+rake gems:install              # Installs all required gems.
+rake gems:refresh_specs        # Regenerate gem specifications in correct f...
+rake gems:unpack               # Unpacks all required gems into vendor/gems.
+rake gems:unpack:dependencies  # Unpacks all required gems and their depend...
+rake rails:freeze:gems         # Lock this application to the current gems ...
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ rake gems:build:force
+(in /pt/w/iw/rs)
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/httpclient-2.1.2'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/soap4r-1.5.8'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/sqlite3-ruby-1.2.4'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/uuidtools-1.0.7'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/haml-2.0.9'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/rack-1.0.0'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/libxml-ruby-1.1.3'
+Built gem: '/u2/pt/w/iw/rs/vendor/gems/mongrel-1.1.5'
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+oracle@zareason:/pt/w/iw/rs$ 
+</code></pre>

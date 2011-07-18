@@ -1,0 +1,11 @@
+/*--------------------------------------------------------------
+ Local.css
+ Add any personal changes that you'd like to make to the theme
+ in this template.
+ --------------------------------------------------------------*/
+#content pre code.shell {
+color:#000066; font-weight:bold;
+}
+
+div.txt_b13pt{font-weight:bold; font-size:13pt}
+

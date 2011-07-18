@@ -1,0 +1,119 @@
+
+%style{:type=>"text/css"}
+  <!-- .txt{font-weight:bold; font-size:13pt} -->
+
+%h5 Data Mining Valueline Puts Data With SVM Algorithm
+%span.date Dan Bikle -- http://bikle.com -- 2009-07-25
+
+%p
+
+%span.txt After I finished the document,
+%a{:href=>"http://bikle.com/protected/vlm"}
+  %span.txt Crunch Value Line Option Data With Oracle and Ruby
+%span.txt , I asked two questions:
+%p
+%span.txt 1. "What if I separate the puts-data from the calls-data?"
+%p
+%span.txt 2. "Will this help SVM run faster and/or be more accurate?"
+
+%p
+
+%span.txt I started this effort by writing an SQL script which prepares puts-data for SVM.
+
+%p
+
+%span.txt The script is listed below:
+
+%p
+
+= render :partial => "vlp_prep4svm_sql"
+
+%p
+
+%span.txt The duration of the above script was 116 minutes.
+
+%p 
+
+%span.txt Next, I wrote a ruby script to generate a large SQL script:
+
+%p
+= render :partial => "vlp_vlp_rb"
+
+%span.txt The top and bottom of the resulting SQL script are displayed below:
+
+
+%p
+= render :partial => "vlp_vlp_scorer"
+
+%p
+
+%span.txt Then, I ran the SQL script.
+
+%p
+
+%div.txt
+  The duration of the SQL script was about 3.5 days.  This was a huge
+  improvement over the 16 day duration of my previous effort.  From that
+  perspective alone, it makes sense to separate puts-data from
+  calls-data.
+
+%p
+
+%span.txt Next, I wrote a SQL script to interpret the results.
+
+%p
+
+%span.txt Output from the script is displayed below:
+
+%p
+
+= render :partial => "vlp_qry_vlp_predictions"
+
+%p
+
+%span.txt I copied some output from the above script into to spreadsheets and charted the results:
+
+%p
+
+%img{:src=>"http://sites.google.com/site/xvlpx10/vlp/allmonths.png"}/
+
+%p
+%span.txt It is clear in the above chart that as SVM becomes more confident, its predictions yield more lucrative put contracts.
+
+%p
+%div.txt
+  At this URL, 
+  %a{:href=>"http://bikle.com/protected/sim"}http://bikle.com/protected/sim/
+  , we point out that stocks are cold during the months 1,6,7,8,9
+%p
+
+%span.txt The chart below displays SVM behavior for those months:
+%p
+%img{:src=>"http://sites.google.com/site/xvlpx10/vlp/months16789.png"}/
+
+%p
+%span.txt For a large range of confidence levels, 0.2 to 1.0, higher SVM confidence levels yielded better results.
+
+%p
+%span.txt An options trader using SVM would have gained an average of about 5.5% for each month that he used this strategy.
+
+%p
+%span.txt When we compare the above results to the results described here, 
+
+%a{:href=>"http://bikle.com/protected/vlm"}
+  %span.txt http://bikle.com/protected/vlm
+
+%span.txt , we see that SVM was more accurate when it was focused solely on puts-data.
+
+%p
+
+%h2 Conclusion
+
+%span.txt It is a good idea to separate puts-data from calls-data before feeding them to SVM for data mining.  
+
+%p
+
+%div.txt
+  In particular the duration of the SVM run was cut over 50%.  Also
+  comparison of charts from the two methods showed a clear increase in
+  accuracy when the two types of data were separated.

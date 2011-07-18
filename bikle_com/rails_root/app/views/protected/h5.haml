@@ -1,0 +1,705 @@
+
+%h5 A Recipe For An HTML5 iPhone Web App
+%span.date Dan Bikle -- http://bikle.com -- 2009-09-03
+%br/
+%br/
+%br/
+%h2
+  %a{:href => "#motivation11"}Motivation
+%h2
+  %a{:href => "#ingredients11"}Ingredients
+%h2
+  %a{:href => "#installation11"}Installation
+%h2
+  %a{:href => "#operation11"}Start Rails
+%h2
+  %a{:href => "#start_iphone_web_app"}Start iPhone Web App
+%h2
+  %a{:href => "#conclusion11"}Conclusion
+%br/
+This page describes "
+=render :partial => "iwantcrminfo"
+" which is a demonstration iPhone Web app.  
+%br/
+It can be used to access Sugar Accounts inside of SugarCRM On Demand.
+%br/
+%br/
+
+%h2#motivation11 Motivation
+
+HTML5 Web apps can be compared to "native" iPhone apps:
+
+%ul
+  %li A native iPhone app requires much more effort to write than a HTML5 Web app
+  %li Native iPhone apps are installed from the App Store
+  %li Web apps are not installed; they run in the browser
+  %li Native iPhone apps have access to all hardware resident on the iPhone
+  %li Web apps access some hardware capabilities
+  %li Like a native app, An HTML5 Web app can store data in the smartphone
+  %li Like a native app, An HTML5 Web app can operate while "offline"
+  %li An HTML5 Web app runs on any smartphone which supports HTML5
+  %li A native iPhone app only runs on iPhone
+
+
+The App Store offers some features to the iPhone end-user:
+
+%ul
+  %li A reliable software installation experience
+  %li A source of reliable software
+
+The App Store offers some features to the iPhone developer:
+
+%ul
+  %li A reliable software distribution platform
+  %li A reliable revenue collection mechanism
+
+The App Store presents some hurdles to the iPhone end-user:
+
+%ul
+  %li Software installation requires the end user to have an iTunes account
+  %li The App Store search engine may not be optimal
+
+The App Store presents some hurdles to the iPhone developer:
+
+%ul
+  %li Native iPhone apps must be approved by Apple
+  %li Approval takes a week or more
+  %li Bug fixes are delayed by the approval process
+  %li Bug fix deployment is controlled by end-user
+
+The above hurdles presented by the App Store make it less than optimal for distributing "Enterprise" iPhone apps.
+
+%br/
+%br/
+Characteristics of "enterprise" apps:
+
+%ul
+  %li They don't need access to most hardware features (like the camera)
+  %li They should be centrally controlled/maintained by IT experts
+  %li End-users operate them to implement business processes
+  %li An example would be an app which connects the end-user to a CRM system
+
+
+It is obvious that most enterprise apps should be deployed as Web apps.
+%br/
+%br/
+%br/
+
+%h2#ingredients11 Ingredients
+
+Like most recipes, this recipe requires you to collect some ingredients and then follow some instructions.
+%br/
+The ingredients for this recipe are listed below:
+%br/
+%ul
+  %li
+    %a{:href => "#sugarcrm_account"}SugarCRM Account
+  %li
+    %a{:href => "#mac_or_linux"}Computer Running Mac OS/X, Linux, Free BSD or Solaris
+  %li
+    %a{:href => "#ruby_on_rails"}Ruby on Rails
+  %li
+    %a{:href => "#gems4this_recipe"}Gems For This Recipe
+  %li
+    %a{:href => "#iwantcrminfo11"}
+      =render :partial => "iwantcrminfo"
+      Rails Application
+  %li
+    %a{:href => "#safari11"}Safari
+  %li
+    %a{:href => "#webkit11"}Webkit
+  %li
+    %a{:href => "#firefox11"}Firefox
+
+%br/
+
+%h4#sugarcrm_account SugarCRM Account
+It is easy to obtain a SugarCRM Account.  Follow this link: 
+%br/
+%a{:target => "s",:href => "http://www.google.com/search?q=+SugarCRM+OnDemand"}http://www.google.com/search?q=+SugarCRM+OnDemand
+%br/
+You need to make note of three pieces of information about that account:
+%br/
+%ul
+  %li Username (probably "admin")
+  %li Password
+  %li Account URL (something like: http://eval.sugarondemand.com/bobsmith/)
+%br/
+%br/
+Login and create 3 "Sugar Accounts".  Give them names like IBM, Oracle, and Cisco.
+%br/
+Make sure each Sugar Account has a Billing City.
+%br/
+The combination of name and Billing City will appear on your iPhone later in this recipe.
+%br/
+%br/
+If you want to short-circuit this recipe and go straight to the punch-line,
+you can now use your iPhone to see the Sugar Accounts you just created.
+%br/
+Instructions are here:
+%br/
+%br/
+%a{:href => "#start_iphone_web_app"}Start iPhone Web App
+%br/
+%br/
+
+%h4#mac_or_linux Computer running Mac OS/X, Linux, Free BSD or Solaris
+You need a laptop or desktop computer running Mac OS/X, Linux, Free BSD or Solaris.
+%br/
+It is possible to build and test an HTML5 Web app on Windows but this recipe is suboptimal for that effort.
+%br/
+%br/
+If your only computer runs Windows, consider renting a cheap Linux host on the net and using that to fill the "server" role of this recipe.  Windows offers good X-Windows support (via cygwin).  So, you can use X-Windows (running emacs or vim) to edit files and run shell commands on the Linux host.
+%br/
+%br/
+Firefox 3.5.x or Safari 4.x running on Windows might do an adequate job of emulating Safari running on an iPhone.
+I'm not sure though, I have not tried it.
+%br/
+%br/
+If you like this recipe and then start building HTML5 web apps, you will want to deploy the server portion on a host on the web which is running Mac OS/X, Linux, Free BSD or Solaris.
+%br/
+%br/
+You might avoid some hair-pulling if you ensure that the OS of your development environment matches the OS of your production host on the net.
+%br/
+
+
+%h4#ruby_on_rails Ruby On Rails
+This is more of a task than an ingredient.
+You want to install Ruby on Rails on your computer.
+I use this mini-recipe to install Ruby On Rails on any computer:
+%ul
+  %li
+    Install Ruby 1.8.7
+  %li
+    Install Ruby Gems 1.3.1 (which depends on Ruby)
+  %li
+    Install Ruby on Rails 2.3.x (which depends on Ruby Gems)
+  %li
+    More details here:
+    %a{:href => "http://RubyOnRails.org", :target => "r"}http://RubyOnRails.org
+
+%br/
+If you have problems with the above mini-recipe, you might try a "packaged-rails" solution named "BitNami":
+%br/
+%a{:href => "http://bitnami.org/stack/rubystack", :target => "b11"}http://bitnami.org/stack/rubystack
+%br/
+%br/
+I tried using BitNami to install Rails on an XP-Windows-laptop.
+It seemed to install okay but the "gem" command gave me errors.
+%br/
+%br/
+This recipe depends on the gem command so I powered down the XP-Windows-laptop and declared it a dud.
+%br/
+%br/
+For Mac, Linux, BSD, and Solaris I don't use BitNami because I already have the 3-step-mini-recipe (listed above) which never fails.
+%br/
+
+
+%h4#gems4this_recipe Gems For This Recipe
+Collect the gems listed below; they are simple files. Put them in a convenient directory.
+%ul
+  %li
+    haml, version: 2.0.9
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/52102/haml-2.0.9.gem", :target => "m" }http://rubyforge.org/frs/download.php/52102/haml-2.0.9.gem
+  %li
+    httpclient, version: 2.1.2
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/25673/httpclient-2.1.2.gem", :target => "n" }http://rubyforge.org/frs/download.php/25673/httpclient-2.1.2.gem
+  %li
+    libxml-ruby,  version: 1.1.3
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/53631/libxml-ruby-1.1.3.gem", :target => "o" }http://rubyforge.org/frs/download.php/53631/libxml-ruby-1.1.3.gem
+  %li
+    mongrel, version: 1.1.5
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/37321/mongrel-1.1.5.gem", :target => "p" }http://rubyforge.org/frs/download.php/37321/mongrel-1.1.5.gem
+  %li
+    rack, version: 1.0.0
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/55681/rack-1.0.0.gem", :target => "q" }http://rubyforge.org/frs/download.php/55681/rack-1.0.0.gem
+  %li
+    soap4r,  version: 1.5.8
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/25771/soap4r-1.5.8.gem", :target => "r" }http://rubyforge.org/frs/download.php/25771/soap4r-1.5.8.gem
+  %li
+    sqlite3-ruby,  version: 1.2.4
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/42054/sqlite3-ruby-1.2.4.gem", :target => "s" }http://rubyforge.org/frs/download.php/42054/sqlite3-ruby-1.2.4.gem
+  %li
+    uuidtools, version: 1.0.7
+    %br/
+    %a{:href => "http://rubyforge.org/frs/download.php/47866/uuidtools-1.0.7.gem", :target => "t" }http://rubyforge.org/frs/download.php/47866/uuidtools-1.0.7.gem
+
+%h4#iwantcrminfo11
+  =render :partial => "iwantcrminfo"
+  Rails Application
+The software you want is here:
+
+%h3 
+  %a{:href => "http://sites.google.com/site/html5iphone/iw/iwantcrminfo.tgz"}
+    http://sites.google.com/site/html5iphone/iw/
+    %span{:style => "color:red;"}iwant
+    %span{:style => "color:green;"}crm
+    %span{:style => "color:blue;"}.info
+    \.tgz
+%br/
+I wrote the above software; it is the main point of this recipe.
+%br/
+%br/
+Download this software and put it in a convenient directory.  For you, maybe a good place would be: ~/iw/
+%br/
+
+
+%h4#safari11 Safari
+Safari 4 is useful for simulating the Safari browser in an iPhone.
+%br/
+But, you do not need Safari 4 to implement this recipe.
+%br/
+If you want to use Safari, you obtain Safari from Apple:
+%br/
+%a{:href => "http://www.apple.com/safari/"}http://www.apple.com/safari/
+%br/
+%br/
+Safari only runs on Mac and Windows.
+%br/
+If you are implementing this recipe on Linux, FreeBSD, or Solaris, you
+can use Firefox 3.5.x to simulate the Safari browser in an iPhone.
+
+%h4#webkit11 Webkit
+Webkit is useful for tracing JavaScript on a Mac running Safari.
+%br/
+You obtain Webkit from this URL:
+%br/
+%a{:href => "http://webkit.org/", :target => "v"}http://webkit.org/
+%br/
+When I run Webkit on my Mac, it brings up a copy of Safari.
+%br/
+I access Webkit functionality from the "Develop" tab of Safari.
+%br/
+More information about Webkit:
+%br/
+%a{:href => "http://en.wikipedia.org/wiki/WebKit", :target => "w"}http://en.wikipedia.org/wiki/WebKit
+%br/
+%br/
+
+%h4#firefox11 Firefox
+Firefox 3.5.x is useful for simulating the Safari browser in an iPhone.
+%br/
+You obtain the Firefox browser from this URL:
+%br/
+%a{:href => "http://Firefox.com", :target => "u"}http://Firefox.com
+%br/
+%br/
+Firefox runs well on Linux.  This means that you can use Firefox on Linux to simulate an iPhone Safari browser.
+%br/
+%br/
+%br/
+
+
+At this point you have collected all the ingredients for this recipe.
+%br/
+%br/
+
+%h2#installation11 Installation
+
+%br/
+%a{:href => "#pickhome"}
+  Decide on a Home for 
+  =render :partial => "iwantcrminfo"
+  software
+%br/
+%a{:href => "#install_iwantcrminfo"}
+  Install
+  =render :partial => "iwantcrminfo"
+  software
+%br/
+%a{:href => "#install_somegems11"}Install Some Gems
+%br/
+%br/
+%h4#pickhome 
+  Decide on a Home for 
+  =render :partial => "iwantcrminfo"
+  software
+%br/
+On my Mac I decided to put my 
+=render :partial => "iwantcrminfo"
+software in this directory: /pt/w/iw/
+%br/
+%br/
+On your computer, maybe you could put it here: ~/iw/
+
+%br/
+%br/
+%h4#install_iwantcrminfo 
+  Install 
+  =render :partial => "iwantcrminfo"
+  software
+Now that you have gathered all your ingredients, it is time to follow some instructions.
+%br/
+Here is the shell command to un-tar the 
+=render :partial => "iwantcrminfo"
+software:
+%br/
+%br/
+tar zxf iwantcrminfo.tgz
+%br/
+%br/
+So, locate the 
+=render :partial => "iwantcrminfo"
+software you downloaded when you were collecting ingredients.
+Then, un-tar the 
+=render :partial => "iwantcrminfo"
+software into a convenient directory;
+cd to that directory and type ls -la.  You should see something like this:
+
+=render :partial => "lsla_iwantcrm"
+
+If you are a Rails developer, the above listing should look familiar.  
+It is a copy of a Rails Root directory.
+%br/
+%br/
+
+At that point you can consider the 
+=render :partial => "iwantcrminfo"
+software to be "installed".
+%br/
+%br/
+%h4#install_somegems11 Install Some Gems 
+%br/
+%br/
+
+Gems are packages of software.  All Rails sites depend on gems.
+You may install the gems in two places depending on your preference:
+%ul
+  %li Inside the Ruby Installation
+  %li Inside the Rails Installation
+
+When I build or deploy a Rails site, my preference is to install the gems inside the Rails installation.
+A gem which is installed inside a Rails installation affects only that Rails installation.
+
+You may, however, prefer to install the gems inside your Ruby Installation. Why? Because it is easier.
+
+The shell commands listed below will install the gems inside your Ruby Installation:
+=render :partial => "gem_install_em"
+
+If you decide to install the gems inside your ruby Installation, you should then remove the gems which I put inside of the 
+=render :partial => "iwantcrminfo"
+software.
+
+They are easy to find, they are in this subdirectory:
+%br/
+%br/
+vendor/gems
+%br/
+%br/
+You remove them with this shell command:
+%br/
+rm -rf vendor/gems
+%br/
+%br/
+If you are wary of removing them, just move them to a convenient location with a shell command like this:
+%br/
+mv vendor/gems ~/my_vendor_gems
+%br/
+%br/
+
+If you decide to use the gems which I placed in the 
+=render :partial => "iwantcrminfo"
+software, then they will need to go through the "build" task.
+You do the "build" task with a simple shell command:
+%br/
+%br/
+rake gems:build:force
+%br/
+%br/
+If that command issues errors, try removing "dot-o" files:
+%br/
+%br/
+find vendor/gems -name '*.o' -print | xargs rm -f
+%br/
+%br
+Then try:
+%br/
+%br/
+rake gems:build:force
+%br/
+%br/
+If you encounter problems, study this screen dump of me un-tarring the 
+=render :partial => "iwantcrminfo"
+software and then building the gems:
+%br/
+=render :partial => "build_gems_screendump"
+%br/
+%br/
+Also I should point out that these gems depend on C libraries on your computer.  On my computer which runs Ubuntu Linux I needed to install some C libraries.
+%br/
+%br/
+Installation of C libraries on a Linux computer is a large topic.  Google is very helpful for tackling this task.
+%br/
+%br/
+To scratch the surface of this topic, though, I display command line examples I used to install some C libraries on my Ubuntu Linux computer:
+%br/
+%br/
+sudo apt-get install libxml2 libxml2-dev
+%br/
+sudo apt-get install libsqlite3-dev
+%br/
+%br/
+%br/
+If you cannot install the gems into either your Ruby installation or the 
+=render :partial => "iwantcrminfo"
+software,
+send me e-mail: bikle@bikle.com
+%br/
+
+
+
+%br/
+%br/
+%h2#operation11 Start Rails
+
+After you install the gems, you begin the task of operating the Rails site which serves the 
+=render :partial => "iwantcrminfo"
+web app to Safari on your iPhone.
+This is an easy task; you run this shell command:
+%br/
+%br/
+\./mongrel_rails.sh 
+%br/
+%br/
+The above shell command depends on a script named "mongrel_rails".  The shell command assumes that mongrel_rails is installed under vendor/gems.
+If, however, you moved or removed vendor/gems then you need to fix the shell command.
+The script, mongrel_rails, should be in the same directory as all the other gem-executables.
+To find that directory type the command: "which ruby"
+%br/
+%br/
+Then use the "ls" command to verify that mongrel_rails is in the same directory as ruby.
+Then edit the mongrel_rails.sh script so it references the correct location of mongrel_rails.
+%br/
+%br/
+Once I got the mongrel_rails.sh script working on my Mac, I ran it; here is a screen dump:
+%br/
+=render :partial => "screendump_mongrel_rails"
+%br/
+%br/
+%h2#start_iphone_web_app Start iPhone Web App
+%br/
+You have two ways to start the
+=render :partial => "iwantcrminfo"
+web app:
+%ul
+  %li 
+    Browse
+    %a{:target => "iw11", :href => "http://iWantCRM.info"}
+      http://
+      =render :partial => "iwantcrminfo"
+    with your iPhone
+  %li 
+    Browse your local copy of 
+    =render :partial => "iwantcrminfo"
+    with your iPhone
+%br/
+%br/
+Here is a discussion about running it "locally".
+%br/
+The IP address of my desktop computer is this:
+%br/
+192.168.1.53
+%br/
+%br/
+So, I typed this URL into Safari on my iPhone simulator:
+%br/
+%br/
+http://192.168.1.53:3000/
+%br/
+%br
+My simulator showed me something like this:
+%br/
+%img{:src => "http://sites.google.com/site/html5iphone/iw/iw10.png"}/
+%br/
+%img{:src => "http://sites.google.com/site/html5iphone/iw/iw11.png"}/
+%br/
+.txt_b13pt
+  I tapped the "Fast Login" link:
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw12.png"}/
+  %br/
+  The above form was prompting me for information about my SugarCRM account on servers hosted by 
+  %br/
+  %a{:href => "http://eval.sugarondemand.com/"}http://eval.sugarondemand.com/
+  %br/
+  %br/
+  Note that the URL needs to be of this form:
+  %br/
+  http://eval.sugarondemand.com/bobsmith/soap.php?wsdl
+  %br/
+  %br/
+  Which is DIFFERENT than this:
+  %br/
+  %br/
+  http://eval.sugarondemand.com/bobsmith
+  %br/
+  %br/
+  I have typed in the wrong URL many times.  Please do learn from my mistakes.
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw13.png"}/
+  %br/
+  If you type in the correct information from the SugarCRM account you created when collecting ingredients, you should see something like this:
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw14.png"}/
+  %br/
+  %br/
+  Note that the background color is white.  This is a signal that you are connected to the web.
+  Now, tap the link: "Accounts On Web".  You should see the Sugar Accounts you had created when you were collecting ingredients for this recipe:
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw15.png"}/
+  %br/
+  %br/
+  Next, tap the "Copy To Phone" buttons.  The buttons disappear which signals that the Sugar Accounts have been copied from the web into your phone.
+  Each button triggers an Ajax call to the Rails site which returns HTML to the phone.  What Safari does with this HTML is new and special.
+  It uses HTML5 technology (and code that I wrote) to copy the HTML into a Sqlite database running INSIDE the phone:
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw16.png"}/
+  %br/
+  %br/
+  Tap on the first Sugar Account.  You should then see details about it.  Again, the background color is white; you are still "On The Web":
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw17.png"}/
+  %br/
+  %br/
+  Tap the link: "Accounts In Phone".  The background color changes to light-blue; you are looking at data which is "In The Phone":
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw18.png"}/
+  %br/
+  %br/
+  Tap on the first Sugar Account.  You should then see details about it.  Again, the background color is light-blue; you are still "In The Phone":
+  %br/
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/iw19.png"}/
+  %br/
+  %br/
+  So, you have just seen a simple demonstration of an HTML5 feature: 
+  The ability of the browser to store data in an intimately connected Sqlite database.
+  This feature allows Web apps to compete with Native apps.
+  %br/
+  %br/
+  The next useful HTML5 feature is "offline-capability".  
+  This feature allows a Web app to function while the phone is disconnected from the web.
+  %br/
+  %br/
+  Firefox demonstrates this feature best since it allows you to disconnect the browser from the web with two mouse clicks.
+  %br/
+  %br/
+  A series of Firefox screen shots are displayed below which demonstrate HTML5 "offline-capability".  
+  First I use Firefox to connect to the site and click the link "Accounts On Web":
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/ol2.png"}/
+  %br/
+  %br/
+  Next, I ask Firefox to "Work Offline":
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/ol3.png"}/
+  %br/
+  %br/
+  Then, I try to see "Accounts On Web":
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/ol4.png"}/
+  %br/
+  %br/
+  Next, I try the "Home" link (which is http://192.168.1.53:3000/).  
+  The Web app responds with a message that it is in offline mode.  
+  Also notice that some of the links in the menu have been lined-out and disabled: 
+  %br/
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/ol5.png"}/
+  %br/ 
+  This is a key feature of HTML5.  A Web app running HTML4 would not be able to do this.
+  %br/ 
+  Actually you are seeing are two features:
+  %ul
+    %li Offline detection ability
+    %li Ability to operate while offline
+  %br/
+  %br/
+  Then I try the link "Accounts In Phone":
+  %img{:src => "http://sites.google.com/site/html5iphone/iw/ol6.png"}/
+  %br/ 
+  This is another feature of HTML5: the ability to interact with a Sqlite database intimately connected to the browser.
+  %br/ 
+  These three features allow you to write Web apps which seriously compete with native apps in the realm of functionality.
+  %br/ 
+  %br/ 
+
+%h2#conclusion11 Conclusion
+%br/
+A traditional iPhone app is written in the Objective-C language.
+
+Objective-C is optimal for writing native apps like games or musical instrument simulators.
+
+Objective-C exposes the full capability of the iPhone hardware to you the developer.
+%br/
+%br/
+But Objective-C is difficult to learn and write.
+%br/
+%br/
+
+In 2008 (and 2009 perhaps), startup-companies came to life based on the idea that
+iPhone developers wanted an easier method of writing iPhone apps.
+The prominent example of this is:
+%a{:href => "http://PhoneGap.com",:target => "pg"}http://PhoneGap.com
+%br/
+%br/
+Developers wanted methods for writing apps which did simpler things like display stock quotes or tweet.
+%br/
+%br/
+These startups offered frameworks which allowed the developer to
+write iPhone apps using higher level languages like HTML,
+JavaScript, and Ruby.  
+%br/
+%br/
+These frameworks made iPhone app development similar to web development.
+%br/
+%br/
+Also these frameworks offered cross-platform compatibility.  
+An app written with the PhoneGap framework could run on these types of smartphones:
+%br/
+%ul
+  %li iPhone
+  %li Android
+  %li BlackBerry
+%br/
+As of September 2009, Safari in an iPhone supports HTML5 features well enough for me to write "enterprise" mobile applications.
+Mobile application development frameworks now have serious competition from HTML5.
+%br/
+%br/
+HTML5 is supported in other types of smartphones.  If you write
+an iPhone web app which does not use hardware like camera or GPS, then
+porting that web app to another type of smartphone should be easier than writing the app from scratch in Android or BlackBerry JME.
+%br/
+%br/
+
+In late August 2009, RIM acquired a company called "Torch Mobile".  It
+probably means that HTML5 support is coming to the RIM BlackBerry smartphone.
+%br/
+%a{:href => "http://www.google.com/search?q=torch+mobile", :target => "tm"}http://www.google.com/search?q=torch+mobile
+
+
+%br/
+%br/
+
+Now, you the developer can write iPhone web apps using higher level
+languages: HTML5, JavaScript, SQL, Ruby on Rails, PHP, Python, and Java.
+
+%br/
+%br/
+
+And one important advantage you will have over the developer using the
+frameworks (or Objective-C) is that any iPhone web app that you write,
+does not need to be approved by the Apple App Store.
+%br/
+%br/

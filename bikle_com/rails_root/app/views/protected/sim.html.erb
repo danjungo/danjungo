@@ -1,0 +1,721 @@
+<h5>Sell in May and Go Away?</h5>
+<pre style="color: black; background: white; ">
+<span class="date">Dan Bikle -- http://bikle.com -- 2009-07-13</span>
+
+Many of us will remember October 2008.
+
+Another month which sticks in my memory is May 2008.
+
+During that month I heard the phrase, "Sell in May and Go Away."
+
+The message being that summer is not a good time to hold stocks.
+
+Should we "Sell in May and Go Away?" 
+
+And if yes, when should we come back?
+
+We start by building a shell script to obtain pricing data from yahoo:
+<pre><code class="ruby">
+#! /bin/sh
+
+# wget.sh
+
+# Use wget to download csv files full of pricing data from finance.yahoo.com
+
+. /oracle/.orcl
+
+set -x
+
+# cd to the right place
+cd /oracle/vlsql/md/sim/
+
+# wget em
+wget --output-document=DIA.csv http://ichart.finance.yahoo.com/table.csv?s=DIA
+wget --output-document=MDY.csv http://ichart.finance.yahoo.com/table.csv?s=MDY
+wget --output-document=SPY.csv http://ichart.finance.yahoo.com/table.csv?s=SPY
+wget --output-document=XLB.csv http://ichart.finance.yahoo.com/table.csv?s=XLB
+wget --output-document=XLE.csv http://ichart.finance.yahoo.com/table.csv?s=XLE
+wget --output-document=XLF.csv http://ichart.finance.yahoo.com/table.csv?s=XLF
+wget --output-document=XLI.csv http://ichart.finance.yahoo.com/table.csv?s=XLI
+wget --output-document=XLK.csv http://ichart.finance.yahoo.com/table.csv?s=XLK
+wget --output-document=XLV.csv http://ichart.finance.yahoo.com/table.csv?s=XLV
+</code></pre>
+
+
+
+<h2>Results of Above Script</h2>
+
+The above script gives us a set of .csv files with appropriate names.
+
+<pre><code class="ruby">
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ ll *csv
+-rw-r--r-- 1 oracle dba 148962 2009-06-15 02:20 DIA.csv
+-rw-r--r-- 1 oracle dba 174759 2009-06-15 02:20 MDY.csv
+-rw-r--r-- 1 oracle dba 215309 2009-06-15 02:20 SPY.csv
+-rw-r--r-- 1 oracle dba 127152 2009-06-15 02:20 XLB.csv
+-rw-r--r-- 1 oracle dba 128525 2009-06-15 02:20 XLE.csv
+-rw-r--r-- 1 oracle dba 128869 2009-06-15 02:20 XLF.csv
+-rw-r--r-- 1 oracle dba 126368 2009-06-15 02:20 XLI.csv
+-rw-r--r-- 1 oracle dba 127814 2009-06-15 02:20 XLK.csv
+-rw-r--r-- 1 oracle dba 125970 2009-06-15 02:20 XLV.csv
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ 
+oracle@zareason:~/vlsql/md/sim$ 
+</code></pre>
+
+
+
+<h2>Load the .csv Files Into an Oracle Table</h2>
+
+The next step of extracting the Yahoo data is accomplished with the
+Oracle utility named SQL*Loader.
+
+A shell script which calls SQL*Loader is listed below: 
+
+<pre><code class="ruby">
+#! /bin/sh
+
+# etfmas.sh
+
+. /oracle/.orcl
+
+set -x
+
+cd /oracle/vlsql/md/sim/
+
+cat DIA.csv | awk -F, '{print "DIA,"$1",DIA"$1","$6","$7}' | grep 0 > etfmas.csv
+cat MDY.csv | awk -F, '{print "MDY,"$1",MDY"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat SPY.csv | awk -F, '{print "SPY,"$1",SPY"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLB.csv | awk -F, '{print "XLB,"$1",XLB"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLE.csv | awk -F, '{print "XLE,"$1",XLE"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLF.csv | awk -F, '{print "XLF,"$1",XLF"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLI.csv | awk -F, '{print "XLI,"$1",XLI"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLK.csv | awk -F, '{print "XLK,"$1",XLK"$1","$6","$7}' | grep 0 >> etfmas.csv
+cat XLV.csv | awk -F, '{print "XLV,"$1",XLV"$1","$6","$7}' | grep 0 >> etfmas.csv
+
+
+sqlplus trade/t &lt;&lt;EOF
+DROP   TABLE etfmas;
+CREATE TABLE etfmas(tkr VARCHAR2(4),ydate DATE,tkr_date VARCHAR2(15),yvol NUMBER,yprice NUMBER)COMPRESS;
+EOF
+
+sqlldr trade/t bindsize=20971520 readsize=20971520 rows=123456 control=etfmas.ctl
+grep loaded etfmas.log
+
+
+sqlplus trade/t &lt;&lt;EOF
+@etfmas.sql
+EOF
+
+# end of script
+</code></pre>
+
+The above script depends on a SQL*Loader control file which is displayed below:
+
+<pre><code class="sql">
+LOAD DATA
+INFILE 'etfmas.csv'
+replace INTO TABLE etfmas
+FIELDS TERMINATED BY ','
+TRAILING NULLCOLS
+(
+tkr       CHAR             NULLIF (tkr=BLANKS)
+,ydate    DATE "YYYY-MM-DD" NULLIF (ydate=BLANKS)
+,tkr_date CHAR             NULLIF (tkr_date=BLANKS)
+,yvol     DECIMAL EXTERNAL NULLIF (yvol=BLANKS)
+,yprice   DECIMAL EXTERNAL NULLIF (yprice=BLANKS)
+)
+</code></pre>
+
+
+<h2>The Table etfmas</h2>
+
+The above shell script runs in about 5 seconds.
+
+The data lands in a table named etfmas.
+
+<pre><code class="sql">
+13:55:54 SQL> @etfmas.sql
+13:55:58 SQL> --
+13:55:58 SQL> -- etfmas.sql
+13:55:58 SQL> --
+13:55:58 SQL> COLUMN years FORMAT 999.9
+13:55:58 SQL> SELECT
+13:55:58   2  tkr,COUNT(*)
+13:55:58   3  ,MIN(ydate)
+13:55:58   4  ,MAX(ydate)
+13:55:58   5  ,(MAX(ydate)-MIN(ydate))/365 years
+13:55:58   6  FROM etfmas
+13:55:58   7  GROUP BY tkr ORDER BY tkr
+13:55:58   8  /
+
+TKR    COUNT(*) MIN(YDATE) MAX(YDATE)  YEARS
+---- ---------- ---------- ---------- ------
+DIA        2889 1998-01-20 2009-07-10   11.5
+MDY        3498 1995-08-18 2009-07-10   13.9
+SPY        4143 1993-01-29 2009-07-10   16.5
+XLB        2653 1998-12-22 2009-07-10   10.6
+XLE        2653 1998-12-22 2009-07-10   10.6
+XLF        2653 1998-12-22 2009-07-10   10.6
+XLI        2653 1998-12-22 2009-07-10   10.6
+XLK        2653 1998-12-22 2009-07-10   10.6
+XLV        2653 1998-12-22 2009-07-10   10.6
+
+9 rows selected.
+
+Elapsed: 00:00:00.06
+13:55:58 SQL> 
+</code></pre>
+
+Notice the time spans.  For the SPY ETF we have data going back to
+1993.  If these ETFs display either seasonal or monthly price
+patterns, we should be able to see them.
+
+
+<h2>Match Prices With Future Prices</h2>
+
+Next, we build a view which matches each price of an ETF to a price
+which is 40 trading days in the future.
+
+Also we get a corresponding percentage gain.
+
+<pre><code class="sql">
+--
+-- cr_sim.sql
+--
+
+-- In a subquery, for each tkr_date we obtain the leading price
+-- (yprice40) which is 40 trading days ahead in the future.  
+
+-- With yprice40, we get the percentage gain for that 40 day period.
+
+-- Also we get the month to see if it is predictive.
+
+CREATE OR REPLACE VIEW sim40 AS SELECT tkr_date,tkr,ydate,yprice,yprice40
+,100*(yprice40 - yprice)/yprice pg
+,0 + TO_CHAR ( ydate,'MM' ) mnth
+FROM
+(
+  SELECT
+  tkr_date,tkr,ydate,yprice
+  ,LEAD(yprice,40,NULL)OVER(PARTITION BY tkr ORDER BY tkr_date)yprice40
+  FROM etfmas
+  ORDER BY tkr_date
+)
+WHERE yprice40 IS NOT NULL AND yprice > 0
+/
+
+SET PAGESIZE 123
+
+-- Look at tkr
+SELECT tkr,ROUND(AVG(pg),2)FROM sim40
+GROUP BY tkr ORDER BY tkr;
+
+-- Look at mnth
+SELECT mnth,ROUND(AVG(pg),2)FROM sim40 
+GROUP BY mnth ORDER BY mnth;
+
+-- Look at tkr and mnth
+SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40 
+GROUP BY tkr,mnth ORDER BY tkr,mnth;
+
+-- Look at tkr and mnth, but order by pg
+SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40 
+GROUP BY tkr,mnth ORDER BY ROUND(AVG(pg),2);
+</code></pre>
+
+
+Here is a screen dump from the above sql script:
+
+<pre><code class="sql">
+13:59:42 SQL> 
+13:59:44 SQL> @cr_sim.sql
+13:59:51 SQL> --
+13:59:51 SQL> -- cr_sim.sql
+13:59:51 SQL> --
+13:59:51 SQL> 
+13:59:51 SQL> -- In a subquery, for each tkr_date we obtain the leading price
+13:59:51 SQL> -- (yprice40) which is 40 trading days ahead in the future.
+13:59:51 SQL> 
+13:59:51 SQL> -- With yprice40, we get the percentage gain for that 40 day period.
+13:59:51 SQL> 
+13:59:51 SQL> -- Also we get the month to see if it is predictive.
+13:59:51 SQL> 
+13:59:51 SQL> CREATE OR REPLACE VIEW sim40 AS SELECT tkr_date,tkr,ydate,yprice,yprice40
+13:59:51   2  ,100*(yprice40 - yprice)/yprice pg
+13:59:51   3  ,0 + TO_CHAR ( ydate,'MM' ) mnth
+13:59:51   4  FROM
+13:59:51   5  (
+13:59:51   6    SELECT
+13:59:51   7    tkr_date,tkr,ydate,yprice
+13:59:51   8    ,LEAD(yprice,40,NULL)OVER(PARTITION BY tkr ORDER BY tkr_date)yprice40
+13:59:51   9    FROM etfmas
+13:59:51  10    ORDER BY tkr_date
+13:59:51  11  )
+13:59:51  12  WHERE yprice40 IS NOT NULL AND yprice > 0
+13:59:51  13  /
+
+View created.
+
+Elapsed: 00:00:00.03
+13:59:51 SQL> 
+13:59:51 SQL> SET PAGESIZE 123
+13:59:51 SQL> 
+13:59:51 SQL> -- Look at tkr
+13:59:51 SQL> SELECT tkr,ROUND(AVG(pg),2)FROM sim40
+13:59:51   2  GROUP BY tkr ORDER BY tkr;
+
+TKR  ROUND(AVG(PG),2)
+---- ----------------
+DIA               .58
+MDY              1.58
+SPY               1.2
+XLB              1.06
+XLE              1.86
+XLF              -.09
+XLI               .47
+XLK               -.3
+XLV               .32
+
+9 rows selected.
+
+Elapsed: 00:00:00.28
+</code></pre>
+
+The above data was copied to a spreadsheet and charted:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_tkr.png" />
+
+The two ETFs, MDY and XLE performed the best.
+
+The two ETFs, XLF and XLK performed the worst
+
+
+Instead of averaging over tkr, we average over month:
+
+<pre><code class="sql">
+13:59:51 SQL> 
+13:59:51 SQL> -- Look at mnth
+13:59:51 SQL> SELECT mnth,ROUND(AVG(pg),2)FROM sim40
+13:59:51   2  GROUP BY mnth ORDER BY mnth;
+
+      MNTH ROUND(AVG(PG),2)
+---------- ----------------
+         1             -.83
+         2             2.77
+         3             5.53
+         4             2.82
+         5            -1.09
+         6            -1.28
+         7            -1.08
+         8            -2.73
+         9              .09
+        10             3.59
+        11             1.96
+        12             -.72
+
+12 rows selected.
+
+Elapsed: 00:00:00.32
+</code></pre>
+
+The above data was copied to a spreadsheet and charted:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_mnth.png" />
+
+The chart tells me that I should sell in May and go away.
+I should then return to the market in October.
+
+Let's drill down into each of the ETF tkrs for each month.
+
+<pre><code class="sql">
+13:59:51 SQL> 
+13:59:51 SQL> -- Look at tkr and mnth
+13:59:51 SQL> SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40
+13:59:51   2  GROUP BY tkr,mnth ORDER BY tkr,mnth;
+
+TKR        MNTH ROUND(AVG(PG),2)
+---- ---------- ----------------
+DIA           1            -1.39
+DIA           2             2.64
+DIA           3             5.04
+DIA           4             1.71
+DIA           5            -1.62
+DIA           6             -.94
+DIA           7            -1.63
+DIA           8            -3.26
+DIA           9             1.21
+DIA          10             4.28
+DIA          11             1.75
+DIA          12            -1.33
+MDY           1             1.08
+MDY           2             2.33
+MDY           3             5.45
+MDY           4              4.3
+MDY           5              .07
+MDY           6            -1.51
+MDY           7             -.81
+MDY           8            -1.57
+MDY           9              .67
+MDY          10             4.32
+MDY          11             2.56
+MDY          12             1.46
+SPY           1              .15
+SPY           2              1.5
+SPY           3             3.43
+SPY           4             2.92
+SPY           5              .42
+SPY           6             -.32
+SPY           7              -.4
+SPY           8             -.92
+SPY           9             1.28
+SPY          10             3.41
+SPY          11             1.96
+SPY          12              .74
+XLB           1              .19
+XLB           2             4.98
+XLB           3             8.01
+XLB           4             2.41
+XLB           5            -2.85
+XLB           6            -1.92
+XLB           7            -2.72
+XLB           8            -4.89
+XLB           9               .4
+XLB          10             6.18
+XLB          11             3.46
+XLB          12            -1.14
+XLE           1             3.26
+XLE           2             6.26
+XLE           3             7.54
+XLE           4             5.15
+XLE           5             -.23
+XLE           6            -1.52
+XLE           7             -.11
+XLE           8            -1.78
+XLE           9            -2.74
+XLE          10             1.83
+XLE          11             2.48
+XLE          12             1.15
+XLF           1            -3.36
+XLF           2             4.13
+XLF           3             7.92
+XLF           4              2.1
+XLF           5            -2.49
+XLF           6            -1.39
+XLF           7             -.61
+XLF           8            -2.87
+XLF           9             -.49
+XLF          10               .6
+XLF          11             -1.1
+XLF          12             -4.3
+XLI           1             -2.4
+XLI           2             3.46
+XLI           3             7.83
+XLI           4             3.27
+XLI           5            -2.03
+XLI           6             -1.2
+XLI           7             -.81
+XLI           8            -3.52
+XLI           9             -1.1
+XLI          10             3.29
+XLI          11             1.25
+XLI          12            -3.25
+XLK           1            -3.98
+XLK           2                0
+XLK           3             2.28
+XLK           4             1.77
+XLK           5             -.77
+XLK           6            -2.32
+XLK           7            -2.22
+XLK           8            -3.53
+XLK           9             1.61
+XLK          10             5.15
+XLK          11             1.18
+XLK          12            -2.86
+XLV           1            -2.05
+XLV           2              .43
+XLV           3             3.46
+XLV           4             1.41
+XLV           5            -1.41
+XLV           6             -.98
+XLV           7             -.82
+XLV           8            -3.66
+XLV           9            -1.12
+XLV          10             2.95
+XLV          11             3.92
+XLV          12             1.45
+
+108 rows selected.
+
+Elapsed: 00:00:00.13
+</code></pre>
+
+Some of the above data was copied to a spreadsheet and charted.
+
+The two best:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_mdy.png" />
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_xle.png" />
+
+The two worst:
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_xlf.png" />
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_look_xlk.png" />
+
+
+Run the above query again but order by avg_pg rather than by tkr.
+
+Notice that the two "bad"  tkrs, XLF and XLK congregate near the top of the output.
+Notice that the two "good" tkrs, MDY and XLE congregate near the top of the output.
+
+Also we see the "bad" months near the top and the "good" months near the bottom.
+
+<pre><code class="sql">
+13:59:52 SQL> 
+13:59:52 SQL> -- Look at tkr and mnth, but order by pg
+13:59:52 SQL> SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40
+13:59:52   2  GROUP BY tkr,mnth ORDER BY ROUND(AVG(pg),2);
+
+TKR        MNTH ROUND(AVG(PG),2)
+---- ---------- ----------------
+XLB           8            -4.89
+XLF          12             -4.3
+XLK           1            -3.98
+XLV           8            -3.66
+XLK           8            -3.53
+XLI           8            -3.52
+XLF           1            -3.36
+DIA           8            -3.26
+XLI          12            -3.25
+XLF           8            -2.87
+XLK          12            -2.86
+XLB           5            -2.85
+XLE           9            -2.74
+XLB           7            -2.72
+XLF           5            -2.49
+XLI           1             -2.4
+XLK           6            -2.32
+XLK           7            -2.22
+XLV           1            -2.05
+XLI           5            -2.03
+XLB           6            -1.92
+XLE           8            -1.78
+DIA           7            -1.63
+DIA           5            -1.62
+MDY           8            -1.57
+XLE           6            -1.52
+MDY           6            -1.51
+XLV           5            -1.41
+XLF           6            -1.39
+DIA           1            -1.39
+DIA          12            -1.33
+XLI           6             -1.2
+XLB          12            -1.14
+XLV           9            -1.12
+XLF          11             -1.1
+XLI           9             -1.1
+XLV           6             -.98
+DIA           6             -.94
+SPY           8             -.92
+XLV           7             -.82
+XLI           7             -.81
+MDY           7             -.81
+XLK           5             -.77
+XLF           7             -.61
+XLF           9             -.49
+SPY           7              -.4
+SPY           6             -.32
+XLE           5             -.23
+XLE           7             -.11
+XLK           2                0
+MDY           5              .07
+SPY           1              .15
+XLB           1              .19
+XLB           9               .4
+SPY           5              .42
+XLV           2              .43
+XLF          10               .6
+MDY           9              .67
+SPY          12              .74
+MDY           1             1.08
+XLE          12             1.15
+XLK          11             1.18
+DIA           9             1.21
+XLI          11             1.25
+SPY           9             1.28
+XLV           4             1.41
+XLV          12             1.45
+MDY          12             1.46
+SPY           2              1.5
+XLK           9             1.61
+DIA           4             1.71
+DIA          11             1.75
+XLK           4             1.77
+XLE          10             1.83
+SPY          11             1.96
+XLF           4              2.1
+XLK           3             2.28
+MDY           2             2.33
+XLB           4             2.41
+XLE          11             2.48
+MDY          11             2.56
+DIA           2             2.64
+SPY           4             2.92
+XLV          10             2.95
+XLE           1             3.26
+XLI           4             3.27
+XLI          10             3.29
+SPY          10             3.41
+SPY           3             3.43
+XLV           3             3.46
+XLB          11             3.46
+XLI           2             3.46
+XLV          11             3.92
+XLF           2             4.13
+DIA          10             4.28
+MDY           4              4.3
+MDY          10             4.32
+XLB           2             4.98
+DIA           3             5.04
+XLE           4             5.15
+XLK          10             5.15
+MDY           3             5.45
+XLB          10             6.18
+XLE           2             6.26
+XLE           3             7.54
+XLI           3             7.83
+XLF           3             7.92
+XLB           3             8.01
+
+108 rows selected.
+
+Elapsed: 00:00:00.13
+13:59:52 SQL> 
+13:59:54 SQL> 
+</code></pre>
+
+<h2>Analysis</h2>
+
+Over all the months, the ETFs which gave good average returns where
+MDY and XLE.
+
+Over all the ETFs, the months which gave good average returns where 
+2, 3, 4, 10, 11.
+
+Over all the ETFs, the months which gave bad  average returns where 
+1, 5, 6, 7, 8, 12
+
+So the statement, "Sell in May and Go-Away" has some validity.
+
+And when should we return?
+
+Answer: October.
+
+Matching the "good" ETFs with the "good" months does give good results:
+
+<pre><code class="sql">
+
+15:34:44 SQL> --
+15:34:44 SQL> -- good2.sql
+15:34:44 SQL> --
+15:34:44 SQL> 
+15:34:44 SQL> SELECT ROUND(AVG(pg),2)FROM sim40
+15:34:44   2  WHERE tkr IN('MDY','XLE')
+15:34:44   3  AND   mnth IN(2,3,4,10,11)
+15:34:44   4  /
+
+ROUND(AVG(PG),2)
+----------------
+            4.22
+
+Elapsed: 00:00:00.01
+15:34:44 SQL> 
+15:34:44 SQL> SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40
+15:34:44   2  WHERE tkr IN('MDY','XLE')
+15:34:44   3  AND   mnth IN(2,3,4,10,11)
+15:34:44   4  GROUP BY tkr,mnth ORDER BY tkr,mnth
+15:34:44   5  /
+
+TKR        MNTH ROUND(AVG(PG),2)
+---- ---------- ----------------
+MDY           2             2.33
+MDY           3             5.45
+MDY           4              4.3
+MDY          10             4.32
+MDY          11             2.56
+XLE           2             6.26
+XLE           3             7.54
+XLE           4             5.15
+XLE          10             1.83
+XLE          11             2.48
+
+10 rows selected.
+
+Elapsed: 00:00:00.00
+</code></pre>
+
+The above data was copied to a spreadsheet and charted.
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_good2.png" />
+
+And matching bad ETFs with bad rounded months gives bad results
+(which might be good for One brave enough to short the market):
+
+<pre><code class="sql">
+16:13:00 SQL> --
+16:13:00 SQL> -- bad2.sql
+16:13:00 SQL> --
+16:13:00 SQL> 
+16:13:00 SQL> SELECT ROUND(AVG(pg),2)FROM sim40
+16:13:00   2  WHERE tkr IN('XLF','XLK')
+16:13:00   3  AND   mnth IN(1, 5, 6, 7, 8, 12)
+16:13:00   4  /
+
+ROUND(AVG(PG),2)
+----------------
+           -2.57
+
+Elapsed: 00:00:00.01
+16:13:00 SQL> 
+16:13:00 SQL> SELECT tkr,mnth,ROUND(AVG(pg),2)FROM sim40
+16:13:00   2  WHERE tkr IN('XLF','XLK')
+16:13:00   3  AND   mnth IN(1, 5, 6, 7, 8, 12)
+16:13:00   4  GROUP BY tkr,mnth ORDER BY tkr,mnth
+16:13:00   5  /
+
+TKR        MNTH ROUND(AVG(PG),2)
+---- ---------- ----------------
+XLF           1            -3.36
+XLF           5            -2.49
+XLF           6            -1.39
+XLF           7             -.61
+XLF           8            -2.87
+XLF          12             -4.3
+XLK           1            -3.98
+XLK           5             -.77
+XLK           6            -2.32
+XLK           7            -2.22
+XLK           8            -3.53
+XLK          12            -2.86
+
+12 rows selected.
+
+Elapsed: 00:00:00.12
+</code></pre>
+
+The above data was copied to a spreadsheet and charted.
+
+<img src="http://sites.google.com/a/bikle.com/vlm/sim/sim_bad2.png" />
+
+<h2>Conclusion</h2>
+
+Over the past 16 years, monthly price patterns are apparent.
+
+An investment strategy which recognizes both strong ETFs and monthly
+price patterns would be a wise way to participate in the stock market.
+
+</pre>

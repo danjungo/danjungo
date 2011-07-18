@@ -1,0 +1,109 @@
+<pre><code class="sql">
+--
+-- prep4svm.sql
+--
+
+CONNECT u2/u
+
+ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD';
+
+DROP   TABLE vlp10;
+CREATE TABLE vlp10 COMPRESS AS SELECT 
+ tkr||strike||expday||pricedate optid
+,tkr||strike||expday            optsig
+,ask,bid,pricedate
+FROM porcs_p
+WHERE ask != 0 -- We dont divide by 0
+AND LENGTH(tkr) &lt;6 -- avoid strange looking tkrs
+AND LENGTH(tkr||strike||expday||pricedate) &lt;33
+-- AND cmrk='5'
+ORDER BY tkr||strike||expday||pricedate 
+/
+
+ALTER TABLE vlp10 MODIFY optid VARCHAR2(33);
+ANALYZE TABLE vlp10 ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+DROP   TABLE vlppg;
+CREATE TABLE vlppg COMPRESS AS SELECT optid,pg20,pdate FROM
+(
+  SELECT
+  optid
+  ,pricedate pdate
+  ,(LEAD(bid,10,bid)OVER(PARTITION BY optsig ORDER BY optid)-ask)/ask     pg20
+  ,(LEAD(pricedate,20,pricedate)OVER(PARTITION BY optsig ORDER BY optid)) pdate20
+  FROM vlp10
+  WHERE ask != 0 -- We dont divide by 0
+  ORDER BY optid
+)
+-- Avoid large date gaps in the data
+WHERE pdate20 - pdate &lt; 35
+/
+
+ALTER TABLE vlppg MODIFY optid VARCHAR2(33);
+ANALYZE TABLE vlppg ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+DROP   TABLE vlp20;
+CREATE TABLE vlp20 COMPRESS AS SELECT
+tkr||strike||expday||pricedate optid
+,tkr
+,pricedate pdate -- shorten the name of pricedate
+,expday - pricedate days2exp
+,0+REPLACE(volf,'%','')volf
+,0+REPLACE(histvo,'%','')histvo
+,0+ask     ask
+,0+cmprice cmprice
+,0+oi     oi
+,0+vol    vol
+,(ask-bid)/ask ask_bid_r
+,0+bidoprk bidoprk
+,0+askoprk askoprk
+,0+REPLACE(bidunov,'%','')bidunov
+,0+REPLACE(askunov,'%','')askunov
+,0+REPLACE(itmotm,'%','')itmotm
+,0+cmrk cmrk
+,0+techrank techrank
+FROM porcs_p
+WHERE 0+ask>0 AND 0+cmprice>0
+AND   0+ask BETWEEN 2.0 AND 20.0 AND (ask-bid)/ask &lt; 0.07
+AND expday - pricedate > 33
+AND (ABS(cmprice - strike)/cmprice) &lt; 0.2
+AND 0+oi+vol > 0
+AND LENGTH(tkr||strike||expday||pricedate) &lt;33
+/
+
+ALTER TABLE vlp20 MODIFY optid VARCHAR2(33);
+
+ANALYZE TABLE vlp20 ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+-- Now build back-testing table full of attributes
+
+DROP   TABLE vlpatt;
+CREATE TABLE vlpatt COMPRESS AS SELECT
+b.optid
+,tkrnum
+,b.pdate -- Cannot have this in sme or bme, but I need it to build them
+,days2exp
+,sysdate - b.pdate dayspast
+,b.ask_bid_r
+,b.askoprk
+,b.askunov
+,b.bidoprk
+,b.bidunov
+,b.ask
+,b.cmprice
+,b.cmrk
+,b.itmotm
+,b.oi
+,b.techrank
+,b.vol
+,b.volf
+,b.histvo
+,pg20
+,CASE WHEN pg20 &lt; 0.2 THEN 'nup' ELSE 'up' END aapg20
+FROM vlp20 b, vlppg p, tkr2num t
+WHERE b.optid = p.optid AND b.tkr = t.tkr
+/
+
+ANALYZE TABLE vlpatt ESTIMATE STATISTICS SAMPLE 9 PERCENT;
+
+</code></pre>

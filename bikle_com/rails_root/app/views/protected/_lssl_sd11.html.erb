@@ -1,0 +1,183 @@
+
+[bikle@ion software]$ 
+[bikle@ion software]$ mkdir lighttpd-1.4.20-ssl
+[bikle@ion software]$ cd lighttpd-1.4.20-ssl/
+[bikle@ion lighttpd-1.4.20-ssl]$ tar jxf ../lighttpd-1.4.20.tar.bz2 
+[bikle@ion lighttpd-1.4.20-ssl]$ ls -la
+total 12
+drwxr-xr-x  3 bikle dba 4096 Jul 29 05:28 ./
+drwxr-xr-x 10 bikle dba 4096 Jul 29 05:28 ../
+drwxr-xr-x  7 bikle dba 4096 Sep 29  2008 lighttpd-1.4.20/
+[bikle@ion lighttpd-1.4.20-ssl]$ cd lighttpd-1.4.20/
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ ./configure --prefix=/lssl --with-openssl --with-openssl-libs=/usr/lib
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... i686-pc-linux-gnu
+
+snip...
+
+checking for bzip2 support... yes
+checking for BZ2_bzCompress in -lbz2... no
+configure: error: bzip2-headers and/or libs where not found, install them or build with --without-bzip2
+[bikle@ion lighttpd-1.4.20]$ 
+
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ rm -rf lighttpd-1.4.20/
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ tar jxf ../lighttpd-1.4.20.tar.bz2
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ 
+[bikle@ion lighttpd-1.4.20-ssl]$ cd lighttpd-1.4.20/
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ ./configure --prefix=/lssl --with-openssl --with-openssl-libs=/usr/lib --without-bzip2
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... i686-pc-linux-gnu
+
+snip...
+
+config.status: creating openwrt/control
+config.status: creating openwrt/lighttpd.mk
+config.status: creating config.h
+config.status: executing depfiles commands
+
+Plugins:
+
+enabled:
+  mod_access
+  mod_accesslog
+  mod_alias
+  mod_auth
+  mod_cgi
+  mod_compress
+  mod_dirlisting
+  mod_evhost
+  mod_expire
+  mod_extforward
+  mod_fastcgi
+  mod_flv_streaming
+  mod_indexfiles
+  mod_proxy
+  mod_redirect
+  mod_rewrite
+  mod_rrdtool
+  mod_scgi
+  mod_secdownload
+  mod_setenv
+  mod_simple_vhost
+  mod_ssi
+  mod_staticfile
+  mod_status
+  mod_trigger_b4_dl
+  mod_userdir
+  mod_usertrack
+  mod_webdav
+disabled:
+  mod_cml
+  mod_magnet
+  mod_mysql_vhost
+
+Features:
+
+
+enabled:
+  auth-crypt
+  compress-deflate
+  compress-gzip
+  large-files
+  network-ipv6
+  network-openssl
+  regex-conditionals
+disabled:
+  auth-ldap
+  compress-bzip2
+  stat-cache-fam
+  storage-gdbm
+  storage-memcache
+  webdav-locks
+  webdav-properties
+
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+
+
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ make
+make  all-recursive
+make[1]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+Making all in src
+make[2]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20/src'
+gcc -DHAVE_CONFIG_H -DLIBRARY_DIR="\"/lssl/lib\"" -DSBIN_DIR="\"/lssl/sbin\"" -I. -I..   -D_REENTRANT -D__EXTENSIONS__ -DOPENSSL_NO_KRB5 -I/usr/local/in\
+clude -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES  -g -O2 -Wall -W -Wshadow -pedantic -std=gnu99 -MT lemon.o -MD -MP -MF .deps/lemon.Tpo -\
+c -o lemon.o lemon.c
+
+
+snip....
+
+make[2]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+make[1]: Leaving directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+
+
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ make install
+Making install in src
+make[1]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20/src'
+make  install-am
+make[2]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20/src'
+make[3]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20/src'
+test -z "/lssl/lib" || /bin/mkdir -p "/lssl/lib"
+ /bin/sh ../libtool   --mode=install /usr/bin/install -c  'mod_flv_streaming.la' '/lssl/lib/mod_flv_streaming.la'
+/usr/bin/install -c .libs/mod_flv_streaming.so /lssl/lib/mod_flv_streaming.so
+/usr/bin/install -c .libs/mod_flv_streaming.lai /lssl/lib/mod_flv_streaming.la
+PATH="$PATH:/sbin" ldconfig -n /lssl/lib
+----------------------------------------------------------------------
+Libraries have been installed in:
+   /lssl/lib
+
+
+snip...
+
+make[1]: Leaving directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20/openwrt'
+make[1]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+make[2]: Entering directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+make[1]: Leaving directory `/home/bikle/software/lighttpd-1.4.20-ssl/lighttpd-1.4.20'
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+
+
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ /lssl/sbin/lighttpd -v
+lighttpd-1.4.20 (ssl) - a light and fast webserver
+Build-Date: Jul 29 2009 05:38:24
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+[bikle@ion lighttpd-1.4.20]$ 
+
+
+
