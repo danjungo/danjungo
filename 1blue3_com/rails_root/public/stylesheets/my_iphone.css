@@ -1,0 +1,82 @@
+/* my_iphone.css */
+table.grid {
+	table-layout: fixed;
+	cellspacing: 20px;
+	width: 100%;
+	border-collapse: collapse;
+	position: relative;
+	margin: 0 0 20px 0;
+	padding: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border: 1px solid #999999;
+	background: #ffffff;
+	font-size: 80%;
+	border: 0;
+}
+table.grid td {
+	border-bottom: 1px solid #BBBBBB;
+	padding:10px;
+	margin:0;
+}
+table.grid tr:last-of-type td {
+	border-bottom: none;
+}
+.gridleft {
+	text-align: right;
+	width: 35%;
+	color: #4183C4;
+}
+.gridright {
+	text-align: left;
+	font-weight:bold;
+}
+.menu_icon {
+  border:none;
+	vertical-align:middle;
+	padding-right: 4px;
+	margin-top: -4px;
+}
+/* show the hidden back button */
+.right_button {margin: -45px 0 0 0}
+.left_button {display: inline}
+
+.green_bold{color:green;font-weight:bold;}
+
+.toolbar > h1 {font-size: 17px;}
+
+.in_phone {
+  background: #dff;
+}
+
+.on_web {
+  background: white;
+}
+
+span.title_12d4 {
+  font-weight:bold; font-size: 16px;
+}
+
+form.panel {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 10px;
+    background: #c8c8c8 url(/iui/iui/pinstripes.png);
+}
+
+/* Use this to hide span-elements in layout which are used to pass data from Rails to JavaScript */
+.this_is_hidden {display: none;}
+
+span.blue_text {color:blue;}
+
+/* Use this to signal that we are offline */
+span.we_offline {text-decoration:line-through}
+span.offline_msg {color: red;}
+
+/* Styling for EM scrapes */
+span.title10 {color: rgb(52, 102, 153);}
+li.home_html {
+  font-weight: bold;
+  font-size:   13px;
+}
