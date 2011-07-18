@@ -1,0 +1,2 @@
+module Ashp::UsrsHelper
+end

@@ -1,0 +1,194 @@
+== About
+
+login_sugar is a modification of salted_login generator 1.1.1 that works
+out of the box on Rails 1.2.3
+
+Changes:
+  - tests all pass out of the box on Rails 1.2.3
+  - using ActiveRecord::Migrations for db setup
+  - put underscores in first_name and last_name user attributes
+  - replaced Mock Time extension with a Mock Clock.
+  - README_USER_LOGIN is a one stop readme
+  - contains a default configuration zip
+  - session references se symbols
+  - localization removed
+  - removed deprecated code
+
+More about salted_login_generator at http://rubyforge.org/projects/salted-login
+
+== Prerequisite
+
+If you are on Windoze, see http://wiki.rubyonrails.com/rails/pages/iconv/
+
+== Installation
+
+If you are working with a fresh rails 1.2.3 project, you can unzip the included
+default_login_sugar_setup.zip file in your RAILS_ROOT directory. It contains
+preconfigured application controller, environment.rb, application_helper.rb and
+test_helper.rb that should work if you used User as your controller names when
+running the generator. If you do this, you can skip down to the PHASE II
+section below. BUT DON'T DO THIS IF YOU HAVE ALREADY MODIFIED YOUR RAILS APP
+as it will overwrite your existing files. Of course, you should have those
+under source control anyhow...
+
+-  PHASE I -
+
+After generating the login system, edit your app/controllers/application.rb
+file. The beginning of your ApplicationController should look something like
+this:
+
+  require 'usr_system'
+
+  class ApplicationController < ActionController::Base
+    include UsrSystem
+    helper :usr
+    before_filter :authenticate_user
+
+Add the following at the end of your config/environment.rb file:
+
+  require 'environments/usr_environment'
+
+Add the following line to the top of your test/test_helper.rb:
+
+  require 'user_notify'
+
+- PHASE II -
+
+Under the 'environments' subdirectory, you'll find usr_environment.rb.
+Edit this file as necessary.
+
+Import the usr model into the database.
+
+You'll have to create your development and test databases first and configure your
+config/database.yml appropriately.
+
+You can use the provided migration script in
+db/migrate/migration_login_sugar__rename_this_to_fit_your_project.rb.
+
+This migration table is meant as an example and you can extend it, however I suggest first
+completing the stock installation and running the tests to confirm installation, then create
+a new migration to add your new columns.
+
+Rename db/migrate/migration_login_sugar__rename_this_to_fit_your_project.rb to
+db/migrate/###_login_sugar.rb where ### is the proper new migration level. For example,
+if this is your first migration for this rails project, use 001. If you name it something
+other than ###_login_sugar.rb then you'll need to edit the file and change the class name
+of the migration in the class definition as well.
+
+Then run:
+
+  rake db:migrate
+
+Go ahead and run the unit and functional tests now:
+
+  rake
+
+These should all pass.
+
+Finally, you must properly configure ActionMailer for your mail settings. For
+example, I have the following in config/environments/development.rb (for a
+.Mac account, and without my username and password, obviously):
+
+ActionMailer::Base.server_settings = {
+  :address => "smtp.mac.com",
+  :port => 25,
+  :domain => "smtp.mac.com",
+  :user_name => "<your user name here>",
+  :password => "<your password here>",
+  :authentication => :login
+}
+
+You'll need to configure it properly so that email can be sent. One of the
+easiest ways to test your configuration is to temporarily reraise exceptions
+from the signup method (so that you get the actual mailer exception string).
+In the rescue statement, put a single "raise" statement in. Once you've
+debugged any setting problems, remove that statement to get the proper flash
+error handling back.
+
+== How to use it
+
+Now you can go around and happily add "before_filter :authenticate_user" to the
+controllers which you would like to protect. 
+
+After integrating the login system with your rails application navigate to your
+new controller's signup method. There you can create a new account. After you
+are done you should have a look at your DB. Your freshly created usr
+will be there but the password will be a sha1 hashed 40 digit mess. I find
+this should be the minimum of security which every page offering login &
+password should give its customers. Now you can move to one of those 
+controllers which you protected with the before_filter :authenticate_user snippet.
+You will automatically be re-directed to your freshly created login controller
+and you are asked for a password. After entering valid account data you will be
+taken back to the controller which you requested earlier. Simple huh?
+
+== Tips & Tricks
+
+How do I...
+
+  ... access the user who is currently logged in
+
+  A: You can get the usr object from the session using @session[:usr]
+     Example: 
+       Welcome <%= @session[:usr].name %>
+
+  ... restrict access to only a few methods? 
+  
+  A: Use before_filters build in scoping. 
+     Example: 
+       before_filter :authenticate_user, :only => [:myaccount, :changepassword]
+       before_filter :authenticate_user, :except => [:index]
+     
+  ... check if a user is logged-in in my views?
+  
+  A: @session[:usr] will tell you. Here is an example helper which you can use to make this more pretty:
+     Example: 
+       def usr?
+         !@session[:usr].nil?
+       end
+
+  ... return a user to the page they came from before logging in?
+F
+  A: The user will be send back to the last url which called the method "store_location"
+     Example:
+       User was at /articles/show/1, wants to log in.
+       in articles_controller.rb, add store_location to the show function and
+       send the user to the login form. 
+       After he logs in he will be send back to /articles/show/1
+
+You can find more help at http://wiki.rubyonrails.com/rails/show/SaltedLoginGenerator
+
+== Troubleshooting
+
+One of the more common problems people have seen is that after verifying an
+account by following the emailed URL, they are unable to login via the
+normal login method since the verified field is not properly set in the
+usr model's row in the DB.
+
+The most common cause of this problem is that the DB and session get out of
+sync. In particular, it always happens for me after recreating the DB if I
+have run the server previously. To fix the problem, remove the /tmp/ruby*
+session files (from wherever they are for your installation) while the server
+is stopped, and then restart. This usually is the cause of the problem.
+
+A forthcoming release will probably fix this via a well placed reset_session
+call (or requirement to add it after running the generator) so that it is done
+automatically on startup.
+
+== Changelog
+
+login_sugar
+0.9.5 security updates. compatible with rails 1.2.3
+0.9.4 removed scaffold references, removed localization, added generator rake task
+0.9.3 fixed Clock.now, symbolized session references
+0.9.2 fixed localization reference for sign in form (thanks Nym)
+0.9.1 fixed double first_name replacing last_name (thanks BobF)
+0.9.0 first release, modified salted_login 1.1.1
+
+salted_login
+
+1.0.9 Fixed hardcoded generator name (in controller test and schema) and README
+1.0.8 Generator/schema fixes and some README fixes/improvements
+1.0.7 Fixed bad bug with missing attr_accessor :new_password in user class
+1.0.6 Proper delete support and bug fixes
+1.0.5 Lots of fixes and changes (see rubyforge.org/salted-login)
+1.0.0 First gem release

@@ -1,0 +1,149 @@
+<div class="non-as-links">
+<p />
+<h2>Fragment Building Demo</h2>
+<p />
+1.
+<p />
+Watch me create some fragments.  I start here:
+<%= link_to("Build/Edit Fragments", :controller => "ashp/frgmnts") %>
+<p />
+I Press "create" in the upper right area.
+<p />
+I pick a name which is likely to be unique.
+<p />
+I like a name which tells me something about the  <%= link_to("EDGAR Input Report", :controller => "ashp/rpts") %>.
+<p />
+For example GOOG would work well for me since I walked through the steps to <%= link_to("Specify EDGAR Input Report", :controller => "ashp/rpts") %>
+and <%= link_to("Specify Edgar411 Output Report", :controller => "ashp/outputrpts") %>.
+<p />
+My first fragment name: GOOG-10k-2006-f100
+<p />
+This tells me that I'm working on fragment 100 of the GOOG-10k-2006 report.
+<p />
+I like to start counting at 100.  You can start at 0 or 1 if you don't like 100.
+<p />
+2.
+<p />
+Next, I specify an Output Report (from the pull-down) which will be built from fragments (a final fragment actually).
+<p />
+Next, I need to specify an input.
+<p />
+I have 3 choices:
+<p />
+<ul>
+<li />A Parent Fragment (Not a valid choice since this is my first fragment)
+<li />EDGAR Report Full of Fragments
+<li />Input URL (Which could be any URL of the internet; this is used for testing purposes)
+</ul>
+<p />
+So in this case I have one choice.
+<p />
+I pick the appropriate EDGAR Report Full of Fragments from the pull down.
+<p />
+3.
+<p />
+Next, I pick "Type of Expression".
+<p />
+"hpricot-enumerable" is the best choice.
+<p />
+Next, I write an expression to build this fragment.
+<p />
+For most of the EDGAR reports, I like the expression below:
+<p />
+table,[0,999]
+<p />
+The above hpricot-enumerable expression will cut up the EDGAR report into many pieces (HTML tables actually).
+<p />
+It will start at the 0th table and keep cutting until no tables are left or it is at table 999.
+<p />
+Edgar411.com will display each table inside a numbered rectangle.
+<p />
+Once I press "Create", Edgar411.com will get busy for a minute or six.
+<p />
+It needs time to download the large EDGAR report from the SEC website and then cut it up.
+<p />
+When it's done, I will see some information about the newly created fragment:
+<p />
+<a href='/GOOG-10K-2006-f100.jpg'>GOOG-10K-2006-f100.jpg</a>
+<p />
+Clap your hands, I just created my first fragment.
+<p />
+4.
+<p />
+I click the render link and then go looking for the Balance Sheet in the report.
+<p />
+I found it and it looks like this:
+<p />
+<a href='/GOOG-10K-2006-f100-bs.jpg'>GOOG-10K-2006-f100-bs.jpg</a>
+<p />
+Notice that it is in rectangle number 151.
+<p />
+5.
+<p />
+Next, I start work on the 2nd fragment which will contain ONLY the Balance Sheet.
+<p />
+I click 'Create' and enter these values:
+<p />
+Fragment Name: GOOG-10k-2006-f101
+<p />
+Output Report: GOOG-10-K-2006-12-31-Balance Sheet
+<p />
+Parent Fragment: GOOG-10k-2006-f100
+<p />
+Expression: table,[151,1]
+<p />
+Expression Type: hpricot-enumerable
+<p />
+The above expression will scrape only one table (starting at table number 151).
+<p />
+Once I save the values, Edgar411.com should only need a few seconds.
+<p />
+All the HTML it needs is stored locally in the Parent, not the SEC website.
+<p />
+I see info about the second fragment:
+<p />
+<a href='/GOOG-10K-2006-f101-bs.jpg'>GOOG-10K-2006-f101-bs.jpg</a>
+
+<p />
+Here is how it renders:
+<p />
+<a href='/GOOG-10K-2006-f101-bs0.jpg'>GOOG-10K-2006-f101-bs0.jpg</a>
+<p />
+6.
+<p />
+Next, I create a third fragment which contains almost identical HTML to the second fragment.
+<p />
+I only replace the "0" in the upper Left Hand Corner with this title:
+<p />
+GOOG-10-K-2006-12-31-Balance Sheet
+<p />
+To do this, I click 'Create' and enter these values:
+<p />
+Fragment Name: GOOG-10k-2006-f102
+<p />
+Output Report: GOOG-10-K-2006-12-31-Balance Sheet
+<p />
+Parent Fragment: GOOG-10k-2006-f101
+<p />
+Expression: sub(/0/,"GOOG-10-K-2006-12-31-Balance Sheet")
+<p />
+Expression Type: sub
+<p />
+After I save, I see this:
+<p />
+<a href='/GOOG-10K-2006-f102.jpg'>GOOG-10K-2006-f102.jpg</a>
+<p />
+Here is what renders:
+<p />
+<a href='/GOOG-10K-2006-f102-bs.jpg'>GOOG-10K-2006-f102-bs.jpg</a>
+<p />
+So, I only needed 3 fragments to build a simple Balance Sheet report from an enormous EDGAR Input Report.
+<p />
+Now that I know what the final fragment name is, I can finish this screen:
+<p />
+<%= link_to("Specify Edgar411 Output Report", :controller => "ashp/outputrpts") %>
+<p />
+After I type the name of the final fragment into the above screen, I should see something like this:
+<p />
+<a href='/GOOG-10K-2006-or1.jpg'>GOOG-10K-2006-or1.jpg</a>
+<p />

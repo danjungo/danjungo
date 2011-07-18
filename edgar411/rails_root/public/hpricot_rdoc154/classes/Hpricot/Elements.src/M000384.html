@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>filter (Hpricot::Elements)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/hpricot/elements.rb, line 270</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">nodes</span>, <span class="ruby-identifier">expr</span>, <span class="ruby-identifier">truth</span> = <span class="ruby-keyword kw">true</span>)
+        <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">expr</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-identifier">_</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">m</span> = <span class="ruby-operator">*</span><span class="ruby-identifier">expr</span>.<span class="ruby-identifier">match</span>(<span class="ruby-node">/^(?:#{ATTR_RE}|#{BRACK_RE}|#{FUNC_RE}|#{CUST_RE}|#{CATCH_RE})/</span>)
+            <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">_</span>
+
+            <span class="ruby-identifier">expr</span> = <span class="ruby-identifier">$'</span>
+            <span class="ruby-identifier">m</span>.<span class="ruby-identifier">compact!</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'@'</span>
+                <span class="ruby-identifier">m</span>[<span class="ruby-value">0</span>] = <span class="ruby-node">&quot;@#{m.slice!(2,1)}&quot;</span>
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'['</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\d+$/</span>
+                <span class="ruby-identifier">m</span> = [<span class="ruby-value str">&quot;:&quot;</span>, <span class="ruby-value str">&quot;nth&quot;</span>, <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;:&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;not&quot;</span>
+                <span class="ruby-identifier">nodes</span>, = <span class="ruby-constant">Elements</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">nodes</span>, <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>], <span class="ruby-keyword kw">false</span>)
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-node">&quot;#{m[0]}#{m[1]}&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(:even|:odd)$/</span>
+                <span class="ruby-identifier">new_nodes</span> = []
+                <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each_with_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span>,<span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">new_nodes</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">n</span>) <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">i</span> <span class="ruby-operator">%</span> <span class="ruby-value">2</span> <span class="ruby-operator">==</span> (<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;even&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)) }
+                <span class="ruby-identifier">nodes</span> = <span class="ruby-identifier">new_nodes</span>
+            <span class="ruby-keyword kw">elsif</span> <span class="ruby-node">&quot;#{m[0]}#{m[1]}&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(:first|:last)$/</span>
+                <span class="ruby-identifier">nodes</span> = [<span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>])]
+            <span class="ruby-keyword kw">else</span>
+                <span class="ruby-identifier">meth</span> = <span class="ruby-node">&quot;filter[#{m[0]}#{m[1]}]&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">empty?</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">meth</span> <span class="ruby-keyword kw">and</span> <span class="ruby-constant">Traverse</span>.<span class="ruby-identifier">method_defined?</span> <span class="ruby-identifier">meth</span>
+                    <span class="ruby-identifier">args</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+                <span class="ruby-keyword kw">else</span>
+                    <span class="ruby-identifier">meth</span> = <span class="ruby-node">&quot;filter[#{m[0]}]&quot;</span>
+                    <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Traverse</span>.<span class="ruby-identifier">method_defined?</span> <span class="ruby-identifier">meth</span>
+                        <span class="ruby-identifier">args</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+                    <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">i</span> = <span class="ruby-value">-1</span>
+                <span class="ruby-identifier">nodes</span> = <span class="ruby-constant">Elements</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> 
+                                      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+                                      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">meth</span>, <span class="ruby-operator">*</span>([<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>] <span class="ruby-operator">+</span> [<span class="ruby-identifier">i</span>])) <span class="ruby-operator">?</span> <span class="ruby-identifier">truth</span> <span class="ruby-operator">:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">truth</span>
+                                  <span class="ruby-keyword kw">end</span>]
+            <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+        [<span class="ruby-identifier">nodes</span>, <span class="ruby-identifier">expr</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

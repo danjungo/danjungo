@@ -1,0 +1,18 @@
+
+development:
+  bucket_name: danmeBUCKET
+  access_key_id: '885H5W8BJ6ZG2CMVKQNR2'
+  secret_access_key: 'm2uo88cRsun1sgHfYWPsjvWW9giZ888888qpkuefwLnZ'
+  use_persistent: true
+
+test:
+  bucket_name: danmeBUCKET
+  access_key_id: '885H5W8BJ6ZG2CMVKQNR2'
+  secret_access_key: 'm2uo88cRsun1sgHfYWPsjvWW9giZ888888qpkuefwLnZ'
+  use_persistent: false
+
+production:
+  bucket_name: danmeBUCKET
+  access_key_id: '885H5W8BJ6ZG2CMVKQNR2'
+  secret_access_key: 'm2uo88cRsun1sgHfYWPsjvWW9giZ888888qpkuefwLnZ'
+  use_persistent: false

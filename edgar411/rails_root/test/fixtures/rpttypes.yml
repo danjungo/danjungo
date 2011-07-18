@@ -1,0 +1,20 @@
+10-K:
+  id: 1
+  name: 10-K
+  usr_id: 100
+
+10-Q:
+  id: 2
+  name: 10-Q
+  usr_id: 100
+
+10-KA:
+  id: 3
+  name: 10-K/A
+  usr_id: 100
+
+10-QA:
+  id: 4
+  name: 10-Q/A
+  usr_id: 100
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_uswebgen (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 278</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_uswebgen</span>
+    <span class="ruby-ivar">@uswebgen</span> = <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">TestFiles</span><span class="ruby-operator">::</span><span class="ruby-constant">USWEBGEN</span>)
+    <span class="ruby-comment cmt"># sent by brent beardsley, hpricot 0.3 had problems with all the links.</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">67</span>, (<span class="ruby-ivar">@uswebgen</span><span class="ruby-operator">/</span><span class="ruby-identifier">:a</span>).<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

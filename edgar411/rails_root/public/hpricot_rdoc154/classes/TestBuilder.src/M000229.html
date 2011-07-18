@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_latin1_entities (TestBuilder)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_builder.rb, line 19</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_latin1_entities</span>
+    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Hpricot</span>() { <span class="ruby-identifier">b</span> <span class="ruby-value str">&quot;\200\225&quot;</span> }
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;&lt;b&gt;&amp;#8364;&amp;#8226;&lt;/b&gt;&quot;</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">to_html</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;\342\202\254\342\200\242&quot;</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value str">&quot;text()&quot;</span>).<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

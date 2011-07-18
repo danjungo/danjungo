@@ -1,0 +1,2 @@
+module Ashp::BcrmbsHelper
+end

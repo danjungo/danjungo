@@ -1,0 +1,2 @@
+module Ashp::RpttypesHelper
+end

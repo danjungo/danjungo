@@ -1,0 +1,3 @@
+/pt/c/log/hello.txt
+
+This file keeps log/ alive in the land of git.

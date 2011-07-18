@@ -1,0 +1,2 @@
+module SttcHelper
+end

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_filter_by_attr (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 26</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_filter_by_attr</span>
+    <span class="ruby-ivar">@boingboing</span> = <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">TestFiles</span><span class="ruby-operator">::</span><span class="ruby-constant">BOINGBOING</span>)
+
+    <span class="ruby-comment cmt"># this link is escaped in the doc</span>
+    <span class="ruby-identifier">link</span> = <span class="ruby-value str">'http://www.youtube.com/watch?v=TvSNXyNw26g&amp;search=chris%20ware'</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">link</span>, <span class="ruby-ivar">@boingboing</span>.<span class="ruby-identifier">at</span>(<span class="ruby-node">&quot;a[@href='#{link}']&quot;</span>)[<span class="ruby-value str">'href'</span>]
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

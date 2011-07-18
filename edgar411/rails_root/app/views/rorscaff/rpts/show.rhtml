@@ -1,0 +1,8 @@
+<% for column in Rpt.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @rpt.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @rpt %> |
+<%= link_to 'Back', :action => 'list' %>

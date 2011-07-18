@@ -1,0 +1,2 @@
+module Asls::UsrsHelper
+end

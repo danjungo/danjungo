@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>tag! (Hpricot::Builder)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/hpricot/builder.rb, line 48</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tag!</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">ele_id</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@auto_validation</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@tagset</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@tagset</span>.<span class="ruby-identifier">tagset</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">tag</span>)
+              <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidXhtmlError</span>, <span class="ruby-node">&quot;no element `#{tag}' for #{tagset.doctype}&quot;</span>
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_hash</span>)
+              <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">to_hash</span>
+              
+              <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@tagset</span>.<span class="ruby-identifier">forms</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">tag</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">attrs</span>[<span class="ruby-identifier">:id</span>]
+                <span class="ruby-identifier">attrs</span>[<span class="ruby-identifier">:name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">attrs</span>[<span class="ruby-identifier">:id</span>]
+              <span class="ruby-keyword kw">end</span>
+              
+              <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+                  <span class="ruby-identifier">atname</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">intern</span>
+                  <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/:/</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@tagset</span>.<span class="ruby-identifier">tagset</span>[<span class="ruby-identifier">tag</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">atname</span>
+                      <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidXhtmlError</span>, <span class="ruby-node">&quot;no attribute `#{k}' on #{tag} elements&quot;</span>
+                  <span class="ruby-keyword kw">end</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">atname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:id</span>
+                      <span class="ruby-identifier">ele_id</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_s</span>
+                      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@elements</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">ele_id</span>
+                          <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidXhtmlError</span>, <span class="ruby-node">&quot;id `#{ele_id}' already used (id's must be unique).&quot;</span>
+                      <span class="ruby-keyword kw">end</span>
+                  <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># turn arguments into children or attributes</span>
+      <span class="ruby-identifier">childs</span> = []
+      <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">childs</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-identifier">args</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">attrs</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:to_html</span>
+          <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">make</span>(<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_html</span>)
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">x</span>
+          <span class="ruby-constant">Text</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">xs</span>(<span class="ruby-identifier">x</span>))
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">flatten</span>)
+      <span class="ruby-identifier">attrs</span> = <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hsh</span>, <span class="ruby-identifier">ath</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">ath</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">hsh</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">xs</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">hsh</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># create the element itself</span>
+      <span class="ruby-identifier">f</span> = <span class="ruby-constant">Elem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">STag</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">attrs</span>), <span class="ruby-identifier">childs</span>, <span class="ruby-constant">ETag</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>))
+
+      <span class="ruby-comment cmt"># build children from the block</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">build</span>(<span class="ruby-identifier">f</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@children</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+      <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

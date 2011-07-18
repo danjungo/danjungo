@@ -1,0 +1,10 @@
+div.main div.pkey-show {
+  margin-left: 0 px;
+}
+
+input#prompt4post{
+  color: green;
+}
+
+/* div.yui-b>div.hfeed>div>div.hentry> */
+div.pkey-show>ul>li{list-style-type: disc; list-style-position: inside;}

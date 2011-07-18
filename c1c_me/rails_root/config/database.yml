@@ -1,0 +1,47 @@
+# SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+notdevelopment:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+mysqlproduction:
+  adapter: mysql
+  database: c1cme
+  username: c1cme
+  password: c
+#  socket: /tmp/mysql.sock
+#  socket: /var/lib/mysql/mysql.sock
+
+mysqldevelopment:
+  adapter: mysql
+  database: c1cme
+  username: c1cme
+  password: c
+#  socket: /tmp/mysql.sock
+#  socket: /var/lib/mysql/mysql.sock
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: c1c
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: c1c
+  pool: 5
+
+
+

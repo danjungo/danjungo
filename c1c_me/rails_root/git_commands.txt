@@ -1,0 +1,5 @@
+/pt/w/c1cme/c10/git_commands.txt
+
+commands:
+  - git co -b BRANCH10
+  - git checkout -b BRANCH10 --track origin/BRANCH10

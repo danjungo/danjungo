@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_kleene_star (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 231</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_kleene_star</span>
+    <span class="ruby-comment cmt"># bug noticed by raja bhatia</span>
+    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Hpricot</span>(<span class="ruby-value str">&quot;&lt;span class='small'&gt;1&lt;/span&gt;&lt;div class='large'&gt;2&lt;/div&gt;&lt;div class='small'&gt;3&lt;/div&gt;&lt;span class='blue large'&gt;4&lt;/span&gt;&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">&quot;*[@class*='small']&quot;</span>).<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">&quot;*.small&quot;</span>).<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">&quot;.small&quot;</span>).<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">search</span>(<span class="ruby-value str">&quot;.large&quot;</span>).<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

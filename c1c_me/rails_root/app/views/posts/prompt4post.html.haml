@@ -1,0 +1,30 @@
+
+%hr/
+%br/
+%br/
+%br/
+
+.hentry
+  %h4 
+    c1c.me write a short-URL-blog-post for 
+    %a{:href => "http://twitter.com", :target => "t"}http://twitter.com
+    %br/
+    %br/
+    %br/
+    Click Here! =&gt;
+    %a{:href => "/#{@short_url}"}="http://c1c.me/#{@short_url}"
+
+%br/
+%br/
+
+%form.MainForm{:name => "prompt4post_form", :action => "/posts/redirect_user_guess", :method => "get"}
+  .hentry
+    %h4 
+      Or, think up a short URL =&gt;
+      http://c1c.me/
+      %input{:name => "a_short_url"}
+      %input#prompt4post{:value => "Try it",:type => "submit"}
+
+%br/
+%br/
+%hr/

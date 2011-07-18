@@ -1,0 +1,60 @@
+<div class="non-as-links">
+<p />
+<h2>Data Entry Instructions</h2> for:
+<ul>
+<li />
+<%= link_to("Add/Edit Stock Symbols", :controller => "ashp/symbls") %>
+<li />
+<%= link_to("Specify EDGAR Input Reports", :controller => "ashp/rpts") %>
+<li />
+<%= link_to("Specify Edgar411 Output Reports", :controller => "ashp/outputrpts") %>
+</ul>
+<p />
+1.
+<p />
+When I add and edit stock symbols it is easy.
+<p />
+I just type data into a simple form:
+<p />
+<%= link_to("Add/Edit Stock Symbols", :controller => "ashp/symbls") %>
+<p />
+2.
+<p />
+When I <%= link_to("Specify EDGAR Input Reports", :controller => "ashp/rpts") %> that is also easy.
+<p />
+I can find EDGAR 10-K and 10-Q Reports here:
+<p />
+<a href='http://www.sec.gov/edgar/searchedgar/companysearch.html'>http://www.sec.gov/edgar/searchedgar/companysearch.html</a>
+<p />
+The above site will ask if I want to exclude the Ownership Forms.
+<p />
+I always choose to exclude  the Ownership Forms.
+<p />
+Once I find a report at the above site, I "specify" it here:
+<p />
+<%= link_to("Specify EDGAR Input Reports", :controller => "ashp/rpts") %>
+<p />
+3.
+<p />
+When I <%= link_to("Specify Edgar411 Output Reports", :controller => "ashp/outputrpts") %> I need to know about
+<%= link_to("fragments", :controller => "ashp/frgmnts") %>.
+<p />
+And, when I <%= link_to("Build/Edit Fragments", :controller => "ashp/frgmnts") %> I need to know how each will flow to an Edgar411 Output Report.
+<p />
+It is a circular depdency.
+<p />
+What do I do?
+<p />
+It is wisest to specify at least the name when I <%= link_to("Specify Edgar411 Output Reports", :controller => "ashp/outputrpts") %>.
+Then, I <%= link_to("Build/Edit Fragments", :controller => "ashp/frgmnts") %> for that  Edgar411 Output Report.
+<p />
+When I finish <%= link_to("Build/Edit Fragments", :controller => "ashp/frgmnts") %>, I will know the name of the final fragment.
+<p />
+At that time I return to  <%= link_to("Specify Edgar411 Output Reports", :controller => "ashp/outputrpts") %> and enter the name of the final fragment.
+<p />
+4.
+<p />
+Sometimes when I <%= link_to("Build/Edit Fragments", :controller => "ashp/frgmnts") %>,
+I refer to my <%= link_to("fragment building demo", :action => "frgmnt_demo", :controller => "sttc") %>.
+<p />
+</div>

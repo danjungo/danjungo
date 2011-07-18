@@ -1,0 +1,7 @@
+calendar_date_select -v=1.15
+desert -v=0.5.3
+htmlentities -v=4.2.0
+icalendar -v=1.1.0
+rest-client -v=1.0.4
+
+

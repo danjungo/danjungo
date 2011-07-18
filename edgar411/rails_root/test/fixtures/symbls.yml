@@ -1,0 +1,21 @@
+orcl:
+  id: 1
+  name: ORCL
+  cname: Oracle Corporation
+  usr_id: 100
+
+sunw:
+  id: 2
+  name: SUNW
+  cname: Sun Microsystems, Inc.
+  usr_id: 100
+
+goog:
+  id: 3
+  name: GOOG
+  cname: Google, Inc.
+  usr_id: 100
+
+
+
+

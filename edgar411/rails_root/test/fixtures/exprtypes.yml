@@ -1,0 +1,40 @@
+hpricot:
+  id: 1
+  name: hpricot
+  usr_id: 100
+
+string:
+  id: 2
+  name: string-sandwich
+  usr_id: 100
+
+gsub:
+  id: 3
+  name: gsub
+  usr_id: 100
+
+sub:
+  id: 4
+  name: sub
+  usr_id: 100
+
+regexp:
+  id: 5
+  name: regexp-enumerable
+  usr_id: 100
+
+enum:
+  id: 7
+  name: hpricot-enumerable
+  usr_id: 100
+
+glue:
+  id: 8
+  name: glue-fragment-to-parent
+  usr_id: 100
+
+peel:
+  id: 9
+  name: peel-off-outer-tag
+  usr_id: 100
+

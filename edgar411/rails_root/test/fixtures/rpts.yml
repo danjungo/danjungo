@@ -1,0 +1,17 @@
+orclrpt:
+  id: 1
+  name: ORCL-10-K-2007-03-31
+  uurl: http://www.sec.gov/Archives/edgar/data/1341439/000095013407014478/f31530e10vk.htm
+  enddate: 2007-03-31
+  symbl_id: 1
+  usr_id: 100
+  rpttype_id: 1
+
+googlerpt:
+  id: 2
+  name: GOOG-10-K-2006-12-31
+  uurl: http://www.sec.gov/Archives/edgar/data/1288776/000119312507044494/d10k.htm
+  enddate: 2006-12-31
+  symbl_id: 3
+  usr_id: 100
+  rpttype_id: 1

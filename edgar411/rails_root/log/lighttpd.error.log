@@ -1,0 +1,149 @@
+2007-07-04 01:09:33: (log.c.75) server started 
+2007-07-07 15:40:26: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 15:40:45: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 15:40:46: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 15:42:37: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 15:42:59: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 15:43:00: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:63: warning: don't put space before argument parentheses
+ 
+2007-07-07 22:49:02: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/helpers/form_column_helpers.rb:98: warning: Object#type is deprecated; use Object#class
+/pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-07 23:24:04: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/views/../../vendor/plugins/active_scaffold/frontends/default/views/destroy.rjs:3: warning: parenthesize argument(s) for future version
+ 
+2007-07-07 23:29:10: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-07 23:52:17: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:11: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-07 23:52:32: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:11: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-07 23:54:43: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:11: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-07 23:54:57: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:01:15: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:11: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:01:53: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:22:35: (server.c.1252) [note] graceful shutdown started 
+2007-07-08 00:22:35: (log.c.135) server stopped 
+2007-07-08 00:23:01: (log.c.75) server started 
+2007-07-08 00:26:05: (server.c.1252) [note] graceful shutdown started 
+2007-07-08 00:26:05: (log.c.135) server stopped 
+2007-07-08 00:26:19: (log.c.75) server started 
+2007-07-08 00:27:21: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:27:36: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:28:13: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:28:27: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:32:47: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:23: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:34:32: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:23: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:36:27: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:12: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:39:29: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:12: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:43:56: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 00:53:33: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/helpers/ashp/frgmnts_helper.rb:12: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 01:03:02: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 01:07:08: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 01:35:31: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/attribute_params.rb:86: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 01:35:47: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb:15: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 10:34:36: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/plugins/active_scaffold/lib/helpers/list_column_helpers.rb:15: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 11:22:46: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:349: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-08 12:22:24: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../vendor/rails/actionpack/lib/action_view/helpers/form_helper.rb:356: warning: Object#type is deprecated; use Object#class
+ 
+2007-07-09 02:18:14: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/views/../../vendor/plugins/active_scaffold/frontends/default/views/destroy.rjs:3: warning: parenthesize argument(s) for future version
+ 
+2007-07-10 15:40:40: (server.c.1252) [note] graceful shutdown started 
+2007-07-10 15:40:40: (log.c.135) server stopped 
+2007-07-10 15:57:15: (log.c.75) server started 
+2007-07-10 16:43:37: (server.c.1252) [note] graceful shutdown started 
+2007-07-10 16:43:48: (log.c.135) server stopped 
+2007-07-10 16:44:20: (log.c.75) server started 
+2007-07-11 14:54:45: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:113: warning: else without rescue is useless
+ 
+2007-07-11 14:54:59: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:113: warning: else without rescue is useless
+ 
+2007-07-11 15:00:37: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:113: warning: else without rescue is useless
+ 
+2007-07-12 15:12:00: (server.c.1252) [note] graceful shutdown started 
+2007-07-12 15:12:00: (log.c.135) server stopped 
+2007-07-12 15:48:27: (log.c.75) server started 
+2007-07-12 22:09:29: (server.c.1252) [note] graceful shutdown started 
+2007-07-12 22:09:29: (log.c.135) server stopped 
+2007-07-13 21:03:07: (log.c.75) server started 
+2007-07-14 13:17:24: (server.c.1252) [note] graceful shutdown started 
+2007-07-14 13:17:24: (log.c.135) server stopped 
+2007-07-14 13:17:45: (log.c.75) server started 
+2007-07-14 13:23:29: (server.c.1252) [note] graceful shutdown started 
+2007-07-14 13:23:29: (log.c.135) server stopped 
+2007-07-14 13:23:43: (log.c.75) server started 
+2007-07-14 13:39:20: (server.c.1252) [note] graceful shutdown started 
+2007-07-14 13:39:20: (log.c.135) server stopped 
+2007-07-14 13:39:31: (log.c.75) server started 
+2007-07-14 13:40:54: (server.c.1252) [note] graceful shutdown started 
+2007-07-14 13:40:54: (log.c.135) server stopped 
+2007-07-14 13:41:05: (log.c.75) server started 
+2007-07-14 18:21:37: (server.c.1252) [note] graceful shutdown started 
+2007-07-14 18:21:37: (log.c.135) server stopped 
+2007-07-14 18:21:49: (log.c.75) server started 
+2007-07-15 14:24:05: (server.c.1252) [note] graceful shutdown started 
+2007-07-15 14:24:18: (log.c.135) server stopped 
+2007-07-15 14:29:04: (log.c.75) server started 
+2007-07-15 16:34:10: (server.c.1252) [note] graceful shutdown started 
+2007-07-15 16:34:10: (log.c.135) server stopped 
+2007-07-15 16:43:37: (log.c.75) server started 
+2007-07-15 16:43:57: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/controllers/ashp/frgmnts_controller.rb:195: warning: else without rescue is useless
+ 
+2007-07-15 17:40:57: (server.c.1252) [note] graceful shutdown started 
+2007-07-15 17:40:57: (log.c.135) server stopped 
+2007-07-15 17:41:51: (log.c.75) server started 
+2007-07-15 20:07:58: (server.c.1252) [note] graceful shutdown started 
+2007-07-15 20:07:58: (log.c.135) server stopped 
+2007-07-15 20:08:41: (log.c.75) server started 
+2007-07-16 12:09:15: (server.c.1252) [note] graceful shutdown started 
+2007-07-16 12:09:15: (log.c.135) server stopped 
+2007-07-16 14:19:59: (log.c.75) server started 
+2007-07-16 16:11:33: (server.c.1252) [note] graceful shutdown started 
+2007-07-16 16:11:33: (log.c.135) server stopped 
+2007-07-16 16:46:18: (log.c.75) server started 
+2007-07-18 11:52:30: (server.c.1252) [note] graceful shutdown started 
+2007-07-18 11:52:30: (log.c.135) server stopped 
+2007-07-18 16:02:21: (log.c.75) server started 
+2007-07-19 01:11:44: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/edgar411/e11/public/../config/../app/views/../../vendor/plugins/active_scaffold/frontends/default/views/destroy.rjs:3: warning: parenthesize argument(s) for future version
+ 
+2007-07-19 16:00:46: (server.c.1252) [note] graceful shutdown started 
+2007-07-19 16:00:46: (log.c.135) server stopped 
+2007-07-19 16:01:04: (log.c.75) server started 
+2007-07-20 16:19:32: (server.c.1252) [note] graceful shutdown started 
+2007-07-20 16:19:32: (log.c.135) server stopped 
+2007-07-21 04:52:08: (log.c.75) server started 
+2007-07-22 00:21:29: (server.c.1252) [note] graceful shutdown started 
+2007-07-22 00:21:29: (log.c.135) server stopped 
+2007-07-22 01:12:30: (log.c.75) server started 
+2007-07-22 14:56:19: (server.c.1252) [note] graceful shutdown started 
+2007-07-22 14:56:19: (log.c.135) server stopped 
+2007-07-22 17:42:57: (log.c.75) server started 
+2007-07-22 17:43:56: (server.c.1252) [note] graceful shutdown started 
+2007-07-22 17:43:56: (log.c.135) server stopped 
+2007-07-25 08:50:04: (log.c.75) server started 
+2007-07-25 10:06:39: (server.c.1252) [note] graceful shutdown started 
+2007-07-25 10:06:39: (log.c.135) server stopped 

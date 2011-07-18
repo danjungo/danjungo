@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <!--
+   <link rel="stylesheet" href="http://yui.yahooapis.com/2.2.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+   -->
+   <link rel="stylesheet" href="/stylesheets/reset-fonts-grids.css" type="text/css">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= javascript_include_tag :defaults %>
+  <%= active_scaffold_includes %>
+  <%= stylesheet_link_tag "application" %>
+   <title>edgar411.com</title>
+</head>
+<body>
+<div id="doc3" class="yui-t7"> <!-- doc1 is narrow, doc2 is wide, doc3 is stretchy -->
+   <div id="hd"><h1><a href="/">http://edgar411.com</a></h1></div>
+   <div id="bd">
+        <div class="yui-g">
+    <div class="yui-gb first">
+        <div class="yui-u first">
+        <!-- YOUR DATA GOES HERE -->
+<p />
+<!-- Google CSE Search Box Begins  with watermark -->
+  <img src="http://www.google.com/coop/images/google_custom_search_smwidb.gif" alt="Google Custom Search" />
+  <form id="searchbox_013792173911716421330:ejhom2oemz4" action="http://www.google.com/cse" target="cse">
+    <input type="hidden" name="cx" value="013792173911716421330:ejhom2oemz4" />
+    <input type="hidden" name="cof" value="FORID:0" />
+    <input name="q" type="text" size="27" />
+    <br />
+    <input type="submit" name="sa" value="Search" />
+  </form>
+  <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_013792173911716421330%3Aejhom2oemz4"></script>
+<!-- Google CSE Search Box Ends -->
+<p />
+<%= link_to("Add/Edit Symbols", :controller => "asmy/symbls") %>
+<p />
+<%= link_to("Add/Edit Reports", :controller => "asmy/rpts") %>
+<p />
+<%= link_to("Add/Edit Fragments", :controller => "asmy/frgmnts") %>
+<p />
+<%= link_to("Add/Edit Results", :controller => "asmy/rslts") %>
+<p />
+
+
+                </div>
+        <div class="yui-u">
+        <%= yield %>
+                </div>
+        <div class="yui-u">
+        <!-- YOUR DATA GOES HERE -->
+<!-- c3 adsense -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-8965802770706416";
+google_ad_width = 110;
+google_ad_height = 32;
+google_ad_format = "110x32_as_rimg";
+google_cpa_choice = "CAAQ9cyWhAIaCA6kHGcklJV5KPmNxXQwAA";
+google_ad_channel = "6891349371";
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br />
+<script type="text/javascript"><!--
+google_ad_client = "pub-8965802770706416";
+//google_alternate_color = "0000FF";
+google_alternate_color = "CCCCFF";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+//2007-07-01: e4
+google_ad_channel = "3785199959";
+google_ui_features = "rc:6";
+//-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!-- c3 adsense -->
+
+                </div>
+    </div>
+</div>
+
+        </div>
+   <div id="ft">Built with
+     <a target="y" href='http://developer.yahoo.com/yui/'>Yahoo! YUI</a> and <a target="r" href='http://api.rubyonrails.com/'>Rails</a>
+  </div>
+</div>
+</body>
+</html>
+

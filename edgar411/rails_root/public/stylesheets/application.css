@@ -1,0 +1,78 @@
+/* I want banner bigger and bolder */
+span.e411banner a{ font-size: 27px; color: #1F7F00;   font-weight: bold; }
+span.e411banner a:hover { font-size: 28px;}
+
+/* I want h1 bigger and bolder */
+h1{font-size:150%;font-weight:bold;}
+
+/* frgmnt-frgtxt is out of control. I constrain it with scroll bars. */
+div.frgmnt-frgtxt{ overflow: scroll; height: 200px; width: 200px; }
+
+/* login status needs to be both small and noticeable and same green as AS-green */
+span.login-status{ color: #1F7F00 }
+
+/* I like a-tags to hover better */
+/* .non-as-links a:hover {color: white; background-color:#1F7F00;} */
+.hover-better a:hover {color: white; background-color:#1F7F00;}
+a, a:visited {color:#0066CC; text-decoration:none;}
+
+/* Make text message at end of frgtxt more noticeable */
+span.snipmsg { color: #1F7F00;   font-weight: bold; }
+
+
+/* CSS below is from AS demo */
+/* http://ActiveScaffold.com */
+
+/* Code
+   =========================== */
+
+code{
+font-size: 120%;
+line-height: 140%;
+background-color: #ddd;
+}
+
+pre{
+background: #333;
+color: #fffed8;
+border: 1px inset #aaa;
+overflow:auto;
+padding: 3px 5px;
+margin: 5px 0;
+}
+
+pre code {
+background-color: transparent;
+}
+
+/* Code :: Ruby
+   =========================== */
+
+span.comment{
+  font-style: italic;
+  color: #98C1DC;
+}
+span.keywords{
+  font-weight: bold;
+  color:#cda869;
+}
+span.string{
+  color:#8f9d6a !important;
+}
+span.brackets{
+  color:#efe900;
+}
+span.symbol{
+  color:#CF6A4C;
+}
+span.instance{
+  color:#7587a6;
+}
+span.constants{
+  color:#cf6a4c;
+}
+span.method{
+  color:#f8f097;
+}
+
+

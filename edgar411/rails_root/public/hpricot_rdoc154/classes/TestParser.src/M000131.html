@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_body_newlines (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 247</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_body_newlines</span>
+    <span class="ruby-ivar">@immob</span> = <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">TestFiles</span><span class="ruby-operator">::</span><span class="ruby-constant">IMMOB</span>)
+    <span class="ruby-identifier">body</span> = <span class="ruby-ivar">@immob</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">:body</span>)
+    {<span class="ruby-value str">'background'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span>, <span class="ruby-value str">'bgcolor'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'#ffffff'</span>, <span class="ruby-value str">'text'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'#000000'</span>, <span class="ruby-value str">'marginheight'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'10'</span>,
+     <span class="ruby-value str">'marginwidth'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'10'</span>, <span class="ruby-value str">'leftmargin'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'10'</span>, <span class="ruby-value str">'topmargin'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'10'</span>, <span class="ruby-value str">'link'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'#000066'</span>,
+     <span class="ruby-value str">'alink'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'#ff6600'</span>, <span class="ruby-value str">'hlink'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;#ff6600&quot;</span>, <span class="ruby-value str">'vlink'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;#000000&quot;</span>}.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">v</span>, <span class="ruby-identifier">body</span>[<span class="ruby-identifier">k</span>]
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

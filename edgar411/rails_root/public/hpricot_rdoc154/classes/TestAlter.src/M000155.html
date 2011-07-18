@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_change_attributes (TestAlter)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_alter.rb, line 37</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_change_attributes</span>
+    <span class="ruby-identifier">all_ps</span> = (<span class="ruby-ivar">@basic</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;p&quot;</span>).<span class="ruby-identifier">attr</span>(<span class="ruby-value str">&quot;title&quot;</span>, <span class="ruby-value str">&quot;Some Title&quot;</span>)
+    <span class="ruby-identifier">all_as</span> = (<span class="ruby-ivar">@basic</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;a&quot;</span>).<span class="ruby-identifier">attr</span>(<span class="ruby-value str">&quot;href&quot;</span>, <span class="ruby-value str">&quot;http://my_new_href.com&quot;</span>)
+    <span class="ruby-identifier">all_lb</span> = (<span class="ruby-ivar">@basic</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;link&quot;</span>).<span class="ruby-identifier">attr</span>(<span class="ruby-value str">&quot;href&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> }
+    <span class="ruby-identifier">assert_changed</span>(<span class="ruby-ivar">@basic</span>, <span class="ruby-value str">&quot;p&quot;</span>, <span class="ruby-identifier">all_ps</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">&quot;title&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;Some Title&quot;</span>}
+    <span class="ruby-identifier">assert_changed</span>(<span class="ruby-ivar">@basic</span>, <span class="ruby-value str">&quot;a&quot;</span>, <span class="ruby-identifier">all_as</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">&quot;href&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;http://my_new_href.com&quot;</span>}
+    <span class="ruby-identifier">assert_changed</span>(<span class="ruby-ivar">@basic</span>, <span class="ruby-value str">&quot;link&quot;</span>, <span class="ruby-identifier">all_lb</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">&quot;href&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;link&quot;</span> }
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

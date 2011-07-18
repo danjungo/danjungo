@@ -1,0 +1,58 @@
+
+bikle:
+  id: 100
+  login: bikle
+  salted_password: f2dfc2dfe95b35aee13744f7a7de84fc854ac576 # abc123
+  salt: 9224be2e40f2c68f33ec4d5c1d67663528f65a80
+  email: Dan.Bikle@gmail.com
+  verified: true
+  deleted: false
+
+## # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+##
+## tesla:
+##   id: 1000001
+##   login: tesla
+##   salted_password: ef94c16f6c124a4e84cc215c164767bfa25f6e92 # atest
+##   salt: 7f8b036f9b647d46d22abdbfc8113f44a88f9889
+##   email: tesla@example.com
+##   verified: true
+##   deleted: false
+##
+## long_usr:
+##   id: 1000003
+##   login: long_usr
+##   salted_password: c841391e1d29100a4920de7a8fbb4b0fd180c6c0 # alongtest
+##   salt: c068e3671780f16898c0a8295ae8d82cc59713e2
+##   email: long_usr@example.com
+##   verified: true
+##   deleted: false
+##
+## deletable_usr:
+##   id: 1000004
+##   login: deletable_usr
+##   salted_password: c841391e1d29100a4920de7a8fbb4b0fd180c6c0 # alongtest
+##   salt: c068e3671780f16898c0a8295ae8d82cc59713e2
+##   email: deletable_usr@example.com
+##   verified: true
+##   deleted: false
+##
+## deleted_usr:
+##   id: 1000005
+##   login: deleted_usr
+##   salted_password: ef94c16f6c124a4e84cc215c164767bfa25f6e92 # atest
+##   salt: 7f8b036f9b647d46d22abdbfc8113f44a88f9889
+##   email: deleted_usr@example.com
+##   verified: true
+##   deleted: true
+##
+## unverified_usr:
+##   id: 1000006
+##   login: unverified_usr
+##   salted_password: ef94c16f6c124a4e84cc215c164767bfa25f6e92 # atest
+##   salt: 7f8b036f9b647d46d22abdbfc8113f44a88f9889
+##   email: unverified_usr@example.com
+##   verified: false
+##   security_token: random_token_string
+##   token_expiry: <%= (Clock.now + 1.day).strftime("%y-%m-%d %H:%M:%S") %> # for mysql, add .strftime("%y-%m-%d %H:%M:%S")
+##   deleted: false

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_wrap (TestAlter)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_alter.rb, line 24</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_wrap</span>
+    <span class="ruby-identifier">ohmy</span> = (<span class="ruby-ivar">@basic</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;p.ohmy&quot;</span>).<span class="ruby-identifier">wrap</span>(<span class="ruby-value str">&quot;&lt;div id='wrapper'&gt;&lt;/div&gt;&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'wrapper'</span>, <span class="ruby-identifier">ohmy</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">parent</span>[<span class="ruby-value str">'id'</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'ohmy'</span>, <span class="ruby-constant">Hpricot</span>(<span class="ruby-ivar">@basic</span>.<span class="ruby-identifier">to_html</span>).<span class="ruby-identifier">at</span>(<span class="ruby-value str">&quot;#wrapper&quot;</span>).<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span>][<span class="ruby-value str">'class'</span>]
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

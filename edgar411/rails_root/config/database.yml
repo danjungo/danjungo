@@ -1,0 +1,15 @@
+development:
+  encoding: unicode
+  adapter: postgresql
+  database: e11d
+
+test:
+  encoding: unicode
+  adapter: postgresql
+  database: e11t
+
+production:
+  encoding: unicode
+  adapter: postgresql
+  database: e11p
+

@@ -1,0 +1,3 @@
+# Logfile created on Wed Jul 25 10:07:48 -0700 2007 by logger.rb/1.5.2.9
+SQL (0.000934)  SET client_encoding TO 'unicode'
+SQL (0.088443)  DELETE FROM sessions

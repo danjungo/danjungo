@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ActiveScaffold::Helpers::ViewHelpers</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ActiveScaffold::Helpers::ViewHelpers</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/vendor/plugins/active_scaffold/lib/helpers/view_helpers_rb.html">
+                vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+All extra helpers that should be included in the View. Also a dumping
+ground for uncategorized helpers.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000147">active_scaffold_config</a>&nbsp;&nbsp;
+      <a href="#M000148">active_scaffold_config_for</a>&nbsp;&nbsp;
+      <a href="#M000149">active_scaffold_controller_for</a>&nbsp;&nbsp;
+      <a href="#M000154">active_scaffold_includes</a>&nbsp;&nbsp;
+      <a href="#M000161">column_calculation</a>&nbsp;&nbsp;
+      <a href="#M000159">column_class</a>&nbsp;&nbsp;
+      <a href="#M000160">column_empty?</a>&nbsp;&nbsp;
+      <a href="#M000153">form_remote_upload_tag</a>&nbsp;&nbsp;
+      <a href="#M000150">generate_temporary_id</a>&nbsp;&nbsp;
+      <a href="#M000152">in_subform?</a>&nbsp;&nbsp;
+      <a href="#M000157">link_to_visibility_toggle</a>&nbsp;&nbsp;
+      <a href="#M000155">loading_indicator_tag</a>&nbsp;&nbsp;
+      <a href="#M000151">option_tags_for</a>&nbsp;&nbsp;
+      <a href="#M000156">params_for</a>&nbsp;&nbsp;
+      <a href="#M000158">render_action_link</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="Ids.html">ActiveScaffold::Helpers::Ids</a></span>
+        <span class="include-name"><a href="Associations.html">ActiveScaffold::Helpers::Associations</a></span>
+        <span class="include-name"><a href="Pagination.html">ActiveScaffold::Helpers::Pagination</a></span>
+        <span class="include-name"><a href="ListColumns.html">ActiveScaffold::Helpers::ListColumns</a></span>
+        <span class="include-name"><a href="FormColumns.html">ActiveScaffold::Helpers::FormColumns</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
+
+        <div class="method-heading">
+          <a href="#M000147" class="method-signature">
+          <span class="method-name">active_scaffold_config</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+access to the configuration variable
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000147-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000147-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 17</span>
+17:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_config</span>
+18:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">active_scaffold_config</span>
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
+
+        <div class="method-heading">
+          <a href="#M000148" class="method-signature">
+          <span class="method-name">active_scaffold_config_for</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000148-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000148-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 21</span>
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_config_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+22:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">active_scaffold_config_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+23:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000149" class="method-detail">
+        <a name="M000149"></a>
+
+        <div class="method-heading">
+          <a href="#M000149" class="method-signature">
+          <span class="method-name">active_scaffold_controller_for</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000149-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000149-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 25</span>
+25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_controller_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+26:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">active_scaffold_controller_for</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+27:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000154" class="method-detail">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+          <a href="#M000154" class="method-signature">
+          <span class="method-name">active_scaffold_includes</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+easy way to include <a href="../../ActiveScaffold.html">ActiveScaffold</a>
+assets
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000154-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000154-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 80</span>
+80:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active_scaffold_includes</span>
+81:         <span class="ruby-identifier">js</span> = <span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">javascripts</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+82:           <span class="ruby-identifier">javascript_include_tag</span>(<span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-identifier">:javascript</span>, <span class="ruby-identifier">name</span>))
+83:         <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">''</span>)
+84: 
+85:         <span class="ruby-identifier">css</span> = <span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-identifier">:stylesheet</span>, <span class="ruby-value str">&quot;stylesheet.css&quot;</span>))
+86:         <span class="ruby-identifier">ie_css</span> = <span class="ruby-identifier">stylesheet_link_tag</span>(<span class="ruby-constant">ActiveScaffold</span><span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">Core</span>.<span class="ruby-identifier">asset_path</span>(<span class="ruby-identifier">:stylesheet</span>, <span class="ruby-value str">&quot;stylesheet-ie.css&quot;</span>))
+87: 
+88:         <span class="ruby-identifier">js</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">css</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\n&lt;!--[if IE]&gt;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">ie_css</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;&lt;![endif]--&gt;\n&quot;</span>
+89:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
+
+        <div class="method-heading">
+          <a href="#M000161" class="method-signature">
+          <span class="method-name">column_calculation</span><span class="method-args">(column)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 174</span>
+174:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_calculation</span>(<span class="ruby-identifier">column</span>)
+175:         <span class="ruby-identifier">calculation</span> = <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">model</span>.<span class="ruby-identifier">calculate</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">calculate</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:all_conditions</span>), <span class="ruby-identifier">:include</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:active_scaffold_joins</span>))
+176:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000159" class="method-detail">
+        <a name="M000159"></a>
+
+        <div class="method-heading">
+          <a href="#M000159" class="method-signature">
+          <span class="method-name">column_class</span><span class="method-args">(column, column_value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000159-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 156</span>
+156:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_class</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">column_value</span>)
+157:         <span class="ruby-identifier">classes</span> = []
+158:         <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{column.name}-column&quot;</span>
+159:         <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">css_class</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">css_class</span>.<span class="ruby-identifier">nil?</span>
+160:         <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'empty'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column_empty?</span> <span class="ruby-identifier">column_value</span>
+161:         <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'sorted'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">user</span>.<span class="ruby-identifier">sorting</span>.<span class="ruby-identifier">sorts_on?</span>(<span class="ruby-identifier">column</span>)
+162:         <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'numeric'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">column</span> <span class="ruby-keyword kw">and</span> [<span class="ruby-identifier">:decimal</span>, <span class="ruby-identifier">:float</span>, <span class="ruby-identifier">:integer</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span>)
+163:         <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
+164:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000160" class="method-detail">
+        <a name="M000160"></a>
+
+        <div class="method-heading">
+          <a href="#M000160" class="method-signature">
+          <span class="method-name">column_empty?</span><span class="method-args">(column_value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000160-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 166</span>
+166:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_empty?</span>(<span class="ruby-identifier">column_value</span>)
+167:         <span class="ruby-identifier">empty</span> = <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">nil?</span>
+168:         <span class="ruby-identifier">empty</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column_value</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:empty?</span>
+169:         <span class="ruby-identifier">empty</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">column_value</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'&amp;nbsp;'</span>)
+170:         <span class="ruby-identifier">empty</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">column_value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">active_scaffold_config</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">empty_field_text</span>)
+171:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">empty</span>
+172:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000153" class="method-detail">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+          <a href="#M000153" class="method-signature">
+          <span class="method-name">form_remote_upload_tag</span><span class="method-args">(url_for_options = {}, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000153-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000153-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 64</span>
+64:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_remote_upload_tag</span>(<span class="ruby-identifier">url_for_options</span> = {}, <span class="ruby-identifier">options</span> = {})
+65:         <span class="ruby-identifier">onsubmits</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] <span class="ruby-operator">?</span> [ <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] ] <span class="ruby-operator">:</span> [ ]
+66:         <span class="ruby-comment cmt"># simulate a &quot;loading&quot;. the setTimeout prevents the Form.disable from being called before the submit, so that data actually posts.</span>
+67:         <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;setTimeout(function() { #{options[:loading]} }, 10); &quot;</span>
+68:         <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;return true&quot;</span> <span class="ruby-comment cmt"># make sure the form still submits</span>
+69: 
+70:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] = <span class="ruby-identifier">onsubmits</span> <span class="ruby-operator">*</span> <span class="ruby-value str">';'</span>
+71:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:target</span>] = <span class="ruby-identifier">action_iframe_id</span>(<span class="ruby-identifier">url_for_options</span>)
+72:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:multipart</span>] = <span class="ruby-keyword kw">true</span>
+73: 
+74:         <span class="ruby-identifier">output</span>=<span class="ruby-value str">&quot;&quot;</span>
+75:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;&lt;iframe id='#{action_iframe_id(url_for_options)}' name='#{action_iframe_id(url_for_options)}' style='display:none'&gt;&lt;/iframe&gt;&quot;</span>
+76:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">form_tag</span>(<span class="ruby-identifier">url_for_options</span>, <span class="ruby-identifier">options</span>)
+77:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000150" class="method-detail">
+        <a name="M000150"></a>
+
+        <div class="method-heading">
+          <a href="#M000150" class="method-signature">
+          <span class="method-name">generate_temporary_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Uncategorized
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000150-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000150-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 33</span>
+33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_temporary_id</span>
+34:         (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">*</span><span class="ruby-value">1000</span>).<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>
+35:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000152" class="method-detail">
+        <a name="M000152"></a>
+
+        <div class="method-heading">
+          <a href="#M000152" class="method-signature">
+          <span class="method-name">in_subform?</span><span class="method-args">(column, parent_record)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Should this column be displayed in the subform?
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000152-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000152-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 48</span>
+48:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">in_subform?</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">parent_record</span>)
+49:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>
+50: 
+51:         <span class="ruby-comment cmt"># Polymorphic associations can't appear because they *might* be the reverse association, and because you generally don't assign an association from the polymorphic side ... I think.</span>
+52:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">polymorphic_association?</span>
+53: 
+54:         <span class="ruby-comment cmt"># We don't have the UI to currently handle habtm in subforms</span>
+55:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">macro</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:has_and_belongs_to_many</span>
+56: 
+57:         <span class="ruby-comment cmt"># A column shouldn't be in the subform if it's the reverse association to the parent</span>
+58:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">association</span>.<span class="ruby-identifier">reverse_for?</span>(<span class="ruby-identifier">parent_record</span>.<span class="ruby-identifier">class</span>)
+59:         <span class="ruby-comment cmt">#return false if column.association.klass == parent_record.class</span>
+60: 
+61:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+62:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="#M000157" class="method-signature">
+          <span class="method-name">link_to_visibility_toggle</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a javascript-based link that toggles the visibility of some element
+on the page. By default, it toggles the visibility of the sibling after the
+one it&#8216;s nested in. You may pass custom javascript logic in
+options[:of] to change that, though. For example, you could say :of =&gt;
+&#8217;$(&quot;my_div_id&quot;)&#8217;. You may also flag whether the other
+element is visible by default or not, and the initial text will adjust
+accordingly.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000157-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000157-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 113</span>
+113:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">link_to_visibility_toggle</span>(<span class="ruby-identifier">options</span> = {})
+114:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:of</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'$(this.parentNode).next()'</span>
+115:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>] = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>].<span class="ruby-identifier">nil?</span>
+116: 
+117:         <span class="ruby-identifier">link_text</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default_visible</span>] <span class="ruby-operator">?</span> <span class="ruby-value str">'hide'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'show'</span>
+118:         <span class="ruby-identifier">link_to_function</span> <span class="ruby-identifier">as_</span>(<span class="ruby-identifier">link_text</span>), <span class="ruby-node">&quot;e = #{options[:of]}; e.toggle(); this.innerHTML = (e.style.display == 'none') ? '#{as_('show')}' : '#{as_('hide')}'&quot;</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'visibility-toggle'</span>
+119:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000155" class="method-detail">
+        <a name="M000155"></a>
+
+        <div class="method-heading">
+          <a href="#M000155" class="method-signature">
+          <span class="method-name">loading_indicator_tag</span><span class="method-args">(options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+a general-use loading indicator (the &quot;stuff is happening, please
+wait&quot; feedback)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000155-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000155-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 92</span>
+92:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loading_indicator_tag</span>(<span class="ruby-identifier">options</span>)
+93:         <span class="ruby-identifier">image_tag</span> <span class="ruby-value str">&quot;/images/active_scaffold/default/indicator.gif&quot;</span>, <span class="ruby-identifier">:style</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;visibility:hidden;&quot;</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">loading_indicator_id</span>(<span class="ruby-identifier">options</span>), <span class="ruby-identifier">:alt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;loading indicator&quot;</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;loading-indicator&quot;</span>
+94:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000151" class="method-detail">
+        <a name="M000151"></a>
+
+        <div class="method-heading">
+          <a href="#M000151" class="method-signature">
+          <span class="method-name">option_tags_for</span><span class="method-args">(select_options, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Turns [[label, value]] into &lt;option&gt; tags Takes optional parameter of
+:include_blank
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000151-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000151-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 39</span>
+39:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">option_tags_for</span>(<span class="ruby-identifier">select_options</span>, <span class="ruby-identifier">options</span> = {})
+40:         <span class="ruby-identifier">select_options</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">0</span>,[<span class="ruby-identifier">as_</span>(<span class="ruby-value str">'- select -'</span>),<span class="ruby-keyword kw">nil</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:include_blank</span>]
+41:         <span class="ruby-identifier">select_options</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
+42:           <span class="ruby-identifier">label</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">option</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">option</span>[<span class="ruby-value">1</span>]
+43:           <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-value str">&quot;&lt;option value=&quot;</span><span class="ruby-node">&quot;&gt;#{label}&lt;/option&gt;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;&lt;option value=\&quot;#{value}\&quot;&gt;#{label}&lt;/option&gt;&quot;</span>
+44:         <span class="ruby-keyword kw">end</span>
+45:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000156" class="method-detail">
+        <a name="M000156"></a>
+
+        <div class="method-heading">
+          <a href="#M000156" class="method-signature">
+          <span class="method-name">params_for</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000156-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000156-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 96</span>
+ 96:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">params_for</span>(<span class="ruby-identifier">options</span> = {})
+ 97:         <span class="ruby-comment cmt"># :adapter and :position are one-use rendering arguments. they should not propagate.</span>
+ 98:         <span class="ruby-comment cmt"># :sort, :sort_direction, and :page are arguments that stored in the session. they need not propagate.</span>
+ 99:         <span class="ruby-comment cmt"># and wow. no we don't want to propagate :record.</span>
+100:         <span class="ruby-comment cmt"># :commit is a special rails variable for form buttons</span>
+101:         <span class="ruby-identifier">blacklist</span> = [<span class="ruby-identifier">:adapter</span>, <span class="ruby-identifier">:position</span>, <span class="ruby-identifier">:sort</span>, <span class="ruby-identifier">:sort_direction</span>, <span class="ruby-identifier">:page</span>, <span class="ruby-identifier">:record</span>, <span class="ruby-identifier">:commit</span>, <span class="ruby-identifier">:_method</span>]
+102:         <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@params_for</span>
+103:           <span class="ruby-ivar">@params_for</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">clone</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">blacklist</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span> }
+104:           <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>] = <span class="ruby-value str">'/'</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:controller</span>].<span class="ruby-identifier">first</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">==</span> <span class="ruby-value str">'/'</span> <span class="ruby-comment cmt"># for namespaced controllers</span>
+105:           <span class="ruby-ivar">@params_for</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@params_for</span>[<span class="ruby-identifier">:id</span>].<span class="ruby-identifier">nil?</span>
+106:         <span class="ruby-keyword kw">end</span>
+107:         <span class="ruby-ivar">@params_for</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+108:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000158" class="method-detail">
+        <a name="M000158"></a>
+
+        <div class="method-heading">
+          <a href="#M000158" class="method-signature">
+          <span class="method-name">render_action_link</span><span class="method-args">(link, url_options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000158-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000158-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/active_scaffold/lib/helpers/view_helpers.rb, line 121</span>
+121:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_action_link</span>(<span class="ruby-identifier">link</span>, <span class="ruby-identifier">url_options</span>)
+122:         <span class="ruby-identifier">url_options</span> = <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">clone</span>
+123:         <span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:action</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">action</span>
+124:         <span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:controller</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">controller</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">controller</span>
+125:         <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">merge!</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">parameters</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">parameters</span>
+126: 
+127:         <span class="ruby-identifier">html_options</span> = {<span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">action</span>}
+128:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">inline?</span>
+129:           <span class="ruby-comment cmt"># NOTE this is in url_options instead of html_options on purpose. the reason is that the client-side</span>
+130:           <span class="ruby-comment cmt"># action link javascript needs to submit the proper method, but the normal html_options[:method]</span>
+131:           <span class="ruby-comment cmt"># argument leaves no way to extract the proper method from the rendered tag.</span>
+132:           <span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:_method</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">method</span>
+133:         <span class="ruby-keyword kw">else</span>
+134:           <span class="ruby-comment cmt"># Needs to be in html_options to as the adding _method to the url is no longer supported by Rails</span>
+135:           <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:method</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">method</span>
+136:         <span class="ruby-keyword kw">end</span>
+137: 
+138:         <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:confirm</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">confirm</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">confirm?</span>
+139:         <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:position</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">position</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">position</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">inline?</span>
+140:         <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:class</span>] <span class="ruby-operator">+=</span> <span class="ruby-value str">' action'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">inline?</span>
+141:         <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:popup</span>] = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">popup?</span>
+142:         <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">action_link_id</span>(<span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:action</span>],<span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:id</span>])
+143: 
+144:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">dhtml_confirm?</span>
+145:           <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:class</span>] <span class="ruby-operator">+=</span> <span class="ruby-value str">' action'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">link</span>.<span class="ruby-identifier">inline?</span>
+146:           <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:page_link</span>] = <span class="ruby-value str">'true'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">link</span>.<span class="ruby-identifier">inline?</span>
+147:           <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:dhtml_confirm</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">dhtml_confirm</span>.<span class="ruby-identifier">value</span>
+148:           <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:onclick</span>] = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">dhtml_confirm</span>.<span class="ruby-identifier">onclick_function</span>(<span class="ruby-identifier">controller</span>,<span class="ruby-identifier">action_link_id</span>(<span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:action</span>],<span class="ruby-identifier">url_options</span>[<span class="ruby-identifier">:id</span>]))
+149:         <span class="ruby-keyword kw">end</span>
+150: 
+151:         <span class="ruby-comment cmt"># issue 260, use url_options[:link] if it exists. This prevents DB data from being localized.</span>
+152:         <span class="ruby-identifier">label</span> = <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:link</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">label</span>
+153:         <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">label</span>, <span class="ruby-identifier">url_options</span>, <span class="ruby-identifier">html_options</span>
+154:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

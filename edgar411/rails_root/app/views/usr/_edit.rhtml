@@ -1,0 +1,30 @@
+<div class="usr_edit">
+  <%= hidden_field 'usr', 'form', :value => 'edit' %>
+  <table>
+    <tr class="two_columns">
+      <td class="prompt"><label>First Name:</label></td>
+      <td class="value"><%= text_field 'usr', 'first_name' %></td>
+    </tr>
+    <tr class="two_columns">
+      <td class="prompt"><label>Last Name:</label></td>
+      <td class="value"><%= text_field 'usr', 'last_name' %></td>
+    </tr>
+    <tr class="two_columns">
+      <td class="prompt"><label>Login:</label></td>
+      <td class="value">
+        <%= @usr.new_record? ? text_field( 'usr', 'login' ) : @usr.login %>
+      </td>
+    </tr>
+    <tr class="two_columns">
+      <td class="prompt"><label>Email:</label></td>
+      <td class="value"><%= text_field 'usr', 'email' %></td>
+    </tr>
+    <% if submit %>
+     <tr>
+       <td>
+         <%= submit_tag usr.new_record? ? 'signup' : 'change_settings', :class => 'two_columns' %>
+       </td>
+     </tr>
+    <% end %>
+  </table>
+</div>

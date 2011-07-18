@@ -1,0 +1,2 @@
+page.alert "Hello from RJS.  This works if it is called via link_to_remote.  Otherwise I just see a screen of JavaScript."
+

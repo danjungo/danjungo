@@ -1,0 +1,2 @@
+module Asls::OutputrptsHelper
+end

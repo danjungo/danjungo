@@ -1,0 +1,1187 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: c1cme
+-- ------------------------------------------------------
+-- Server version	5.0.67-community
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `c1cme`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `c1cme` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `c1cme`;
+
+--
+-- Table structure for table `activities`
+--
+
+DROP TABLE IF EXISTS `activities`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `activities` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `action` varchar(50) default NULL,
+  `item_id` int(11) default NULL,
+  `item_type` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_activities_on_created_at` (`created_at`),
+  KEY `index_activities_on_user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `activities`
+--
+
+LOCK TABLES `activities` WRITE;
+/*!40000 ALTER TABLE `activities` DISABLE KEYS */;
+INSERT INTO `activities` VALUES (1,1,'logged_in',NULL,NULL,'2009-11-25 18:59:35'),(2,1,'joined_the_site',NULL,NULL,'2009-11-25 19:00:47'),(3,1,'updated_profile',NULL,NULL,'2009-11-25 19:02:11');
+/*!40000 ALTER TABLE `activities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ads`
+--
+
+DROP TABLE IF EXISTS `ads`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ads` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `html` text,
+  `frequency` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `start_date` datetime default NULL,
+  `end_date` datetime default NULL,
+  `location` varchar(255) default NULL,
+  `published` tinyint(1) default '0',
+  `time_constrained` tinyint(1) default '0',
+  `audience` varchar(255) default 'all',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ads`
+--
+
+LOCK TABLES `ads` WRITE;
+/*!40000 ALTER TABLE `ads` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ads` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `albums`
+--
+
+DROP TABLE IF EXISTS `albums`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `albums` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) default NULL,
+  `description` text,
+  `user_id` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `view_count` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `albums`
+--
+
+LOCK TABLES `albums` WRITE;
+/*!40000 ALTER TABLE `albums` DISABLE KEYS */;
+/*!40000 ALTER TABLE `albums` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assets`
+--
+
+DROP TABLE IF EXISTS `assets`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `assets` (
+  `id` int(11) NOT NULL auto_increment,
+  `filename` varchar(255) default NULL,
+  `width` int(11) default NULL,
+  `height` int(11) default NULL,
+  `content_type` varchar(255) default NULL,
+  `size` int(11) default NULL,
+  `attachable_type` varchar(255) default NULL,
+  `attachable_id` int(11) default NULL,
+  `updated_at` datetime default NULL,
+  `created_at` datetime default NULL,
+  `thumbnail` varchar(255) default NULL,
+  `parent_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `assets`
+--
+
+LOCK TABLES `assets` WRITE;
+/*!40000 ALTER TABLE `assets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `tips` text,
+  `new_post_text` varchar(255) default NULL,
+  `nav_text` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `choices`
+--
+
+DROP TABLE IF EXISTS `choices`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `choices` (
+  `id` int(11) NOT NULL auto_increment,
+  `poll_id` int(11) default NULL,
+  `description` varchar(255) default NULL,
+  `votes_count` int(11) default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `choices`
+--
+
+LOCK TABLES `choices` WRITE;
+/*!40000 ALTER TABLE `choices` DISABLE KEYS */;
+/*!40000 ALTER TABLE `choices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clippings`
+--
+
+DROP TABLE IF EXISTS `clippings`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `clippings` (
+  `id` int(11) NOT NULL auto_increment,
+  `url` varchar(255) default NULL,
+  `user_id` int(11) default NULL,
+  `image_url` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `favorited_count` int(11) default '0',
+  PRIMARY KEY  (`id`),
+  KEY `index_clippings_on_created_at` (`created_at`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `clippings`
+--
+
+LOCK TABLES `clippings` WRITE;
+/*!40000 ALTER TABLE `clippings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clippings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(50) default '',
+  `created_at` datetime NOT NULL,
+  `commentable_id` int(11) NOT NULL default '0',
+  `commentable_type` varchar(15) NOT NULL default '',
+  `user_id` int(11) NOT NULL default '0',
+  `recipient_id` int(11) default NULL,
+  `comment` text,
+  `author_name` varchar(255) default NULL,
+  `author_email` varchar(255) default NULL,
+  `author_url` varchar(255) default NULL,
+  `author_ip` varchar(255) default NULL,
+  `notify_by_email` tinyint(1) default '1',
+  PRIMARY KEY  (`id`),
+  KEY `fk_comments_user` (`user_id`),
+  KEY `index_comments_on_recipient_id` (`recipient_id`),
+  KEY `index_comments_on_created_at` (`created_at`),
+  KEY `index_comments_on_commentable_type` (`commentable_type`),
+  KEY `index_comments_on_commentable_id` (`commentable_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contests`
+--
+
+DROP TABLE IF EXISTS `contests`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `contests` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `begin_date` datetime default NULL,
+  `end_date` datetime default NULL,
+  `raw_post` text,
+  `post` text,
+  `banner_title` varchar(255) default NULL,
+  `banner_subtitle` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `contests`
+--
+
+LOCK TABLES `contests` WRITE;
+/*!40000 ALTER TABLE `contests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `countries`
+--
+
+DROP TABLE IF EXISTS `countries`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `countries` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=221 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `countries`
+--
+
+LOCK TABLES `countries` WRITE;
+/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+INSERT INTO `countries` VALUES (1,'Abuja'),(2,'Afghanistan'),(3,'Akrotiri'),(4,'Albania'),(5,'Algeria'),(6,'American Samoa'),(7,'Andorra'),(8,'Angola'),(9,'Anguilla'),(10,'Antarctica'),(11,'Antigua'),(12,'Argentina'),(13,'Armenia'),(14,'Aruba'),(15,'Ashmore and Cartier Islands'),(16,'Australia'),(17,'Austria'),(18,'Azerbaijan'),(19,'Bahrain'),(20,'Bangladesh'),(21,'Barbados'),(22,'Belarus'),(23,'Belgium'),(24,'Belize'),(25,'Benin'),(26,'Bermuda'),(27,'Bhutan'),(28,'Bolivia'),(29,'Bosnia and Herzegovina'),(30,'Botswana'),(31,'Brazil'),(32,'British Virgin Islands'),(33,'Brunei'),(34,'Bulgaria'),(35,'Burkina Faso'),(36,'Burundi'),(37,'Canada'),(38,'Cambodia'),(39,'Cameroon'),(40,'Cape Verde'),(41,'Cayman Islands'),(42,'Central African Republic'),(43,'Chad'),(44,'Chile'),(45,'China'),(46,'Colombia'),(47,'Comoros'),(48,'Costa Rica'),(49,'Cote d\'Ivoire'),(50,'Croatia'),(51,'Cuba'),(52,'Curacao'),(53,'Cyprus'),(54,'Czech Republic'),(55,'Democratic Republic Congo'),(56,'Denmark'),(57,'Djibouti'),(58,'Dominica'),(59,'Dominican Republic'),(60,'Ecuador'),(61,'Egypt'),(62,'El Salvador'),(63,'Equatorial Guinea'),(64,'Eritrea'),(65,'Estonia'),(66,'Ethiopia'),(67,'Falkland Islands'),(68,'Faroe Islands'),(69,'Federated States of Micronesia'),(70,'Fiji'),(71,'Finland'),(72,'France'),(73,'French Guiana'),(74,'French Polynesia'),(75,'Gabon'),(76,'Georgia'),(77,'Germany'),(78,'Ghana'),(79,'Gibraltar'),(80,'Greece'),(81,'Greenland'),(82,'Grenada'),(83,'Guatemala'),(84,'Guinea'),(85,'Guinea-Bissau'),(86,'Guyana'),(87,'Haiti'),(88,'Honduras'),(89,'Hong Kong'),(90,'Hungary'),(91,'Iceland'),(92,'India'),(93,'Indonesia'),(94,'Iran'),(95,'Iraq'),(96,'Ireland'),(97,'Israel'),(98,'Italy'),(99,'Jamaica'),(100,'Japan'),(101,'Jordan'),(102,'Kazakhstan'),(103,'Kenya'),(104,'Kiribati'),(105,'Kuwait'),(106,'Kyrgyzstan'),(107,'Lagos'),(108,'Latvia'),(109,'Lebanon'),(110,'Lesotho'),(111,'Liberia'),(112,'Libya'),(113,'Liechtenstein'),(114,'Lithuania'),(115,'Luxembourg'),(116,'Macau'),(117,'Macedonia'),(118,'Madagascar'),(119,'Malawi'),(120,'Malaysia'),(121,'Maldives'),(122,'Mali'),(123,'Malta'),(124,'Marshall Islands'),(125,'Martinique'),(126,'Mauritania'),(127,'Mauritius'),(128,'Mexico'),(129,'Moldova'),(130,'Monaco'),(131,'Mongolia'),(132,'Morocco'),(133,'Mozambique'),(134,'Myanmar'),(135,'Namibia'),(136,'Nauru'),(137,'Nepal'),(138,'Netherlands'),(139,'Netherlands Antilles'),(140,'New Zealand'),(141,'Nicaragua'),(142,'Niger'),(143,'Nigeria'),(144,'North Korea'),(145,'Northern Ireland'),(146,'Northern Mariana Islands'),(147,'Norway'),(148,'Oman'),(149,'Pakistan'),(150,'Palau'),(151,'Panama'),(152,'Papua New Guinea'),(153,'Paraguay'),(154,'Peru'),(155,'Philippines'),(156,'Poland'),(157,'Portugal'),(158,'Qatar'),(159,'Republic of the Congo'),(160,'Romania'),(161,'Russia'),(162,'Rwanda'),(163,'Saint Kitts and Nevis'),(164,'Saint Vincent and the Grenadines'),(165,'Samoa'),(166,'San Marino'),(167,'Sao Tome and Principe'),(168,'Saudi Arabia'),(169,'Senegal'),(170,'Serbia and Montenegro'),(171,'Seychelles'),(172,'Sierra Leone'),(173,'Singapore'),(174,'Slovakia'),(175,'Slovenia'),(176,'Solomon Islands'),(177,'Somalia'),(178,'South Africa'),(179,'South Korea'),(180,'Spain'),(181,'Sri Lanka'),(182,'St. Lucia'),(183,'Sudan'),(184,'Suriname'),(185,'Swaziland'),(186,'Sweden'),(187,'Switzerland'),(188,'Syria'),(189,'Taiwan'),(190,'Tajikistan'),(191,'Tanzania'),(192,'Thailand'),(193,'The Bahamas'),(194,'The Gambia'),(195,'Timor-Leste'),(196,'Togo'),(197,'Tonga'),(198,'Trinidad and Tobago'),(199,'Tunisia'),(200,'Turkey'),(201,'Turkmenistan'),(202,'Tuvalu'),(203,'US Virgin Islands'),(204,'Uganda'),(205,'Ukraine'),(206,'United Arab Emirates'),(207,'United Kingdom'),(208,'United States'),(209,'Uruguay'),(210,'Uzbekistan'),(211,'Vanuatu'),(212,'Vatican City'),(213,'Venezuela'),(214,'Vietnam'),(215,'Wales'),(216,'West Bank and Gaza'),(217,'Western Sahara'),(218,'Yemen'),(219,'Zambia'),(220,'Zimbabwe');
+/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `user_id` int(11) default NULL,
+  `start_time` datetime default NULL,
+  `end_time` datetime default NULL,
+  `description` text,
+  `metro_area_id` int(11) default NULL,
+  `location` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favorites`
+--
+
+DROP TABLE IF EXISTS `favorites`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `favorites` (
+  `id` int(11) NOT NULL auto_increment,
+  `updated_at` datetime default NULL,
+  `created_at` datetime default NULL,
+  `favoritable_type` varchar(255) default NULL,
+  `favoritable_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `ip_address` varchar(255) default '',
+  PRIMARY KEY  (`id`),
+  KEY `fk_favorites_user` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `favorites`
+--
+
+LOCK TABLES `favorites` WRITE;
+/*!40000 ALTER TABLE `favorites` DISABLE KEYS */;
+/*!40000 ALTER TABLE `favorites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `forums`
+--
+
+DROP TABLE IF EXISTS `forums`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `forums` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(255) default NULL,
+  `topics_count` int(11) default '0',
+  `sb_posts_count` int(11) default '0',
+  `position` int(11) default NULL,
+  `description_html` text,
+  `owner_type` varchar(255) default NULL,
+  `owner_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `forums`
+--
+
+LOCK TABLES `forums` WRITE;
+/*!40000 ALTER TABLE `forums` DISABLE KEYS */;
+/*!40000 ALTER TABLE `forums` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `friendship_statuses`
+--
+
+DROP TABLE IF EXISTS `friendship_statuses`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `friendship_statuses` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `friendship_statuses`
+--
+
+LOCK TABLES `friendship_statuses` WRITE;
+/*!40000 ALTER TABLE `friendship_statuses` DISABLE KEYS */;
+INSERT INTO `friendship_statuses` VALUES (1,'pending'),(2,'accepted'),(3,'denied');
+/*!40000 ALTER TABLE `friendship_statuses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `friendships`
+--
+
+DROP TABLE IF EXISTS `friendships`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `friendships` (
+  `id` int(11) NOT NULL auto_increment,
+  `friend_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `initiator` tinyint(1) default '0',
+  `created_at` datetime default NULL,
+  `friendship_status_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_friendships_on_user_id` (`user_id`),
+  KEY `index_friendships_on_friendship_status_id` (`friendship_status_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `friendships`
+--
+
+LOCK TABLES `friendships` WRITE;
+/*!40000 ALTER TABLE `friendships` DISABLE KEYS */;
+/*!40000 ALTER TABLE `friendships` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `homepage_features`
+--
+
+DROP TABLE IF EXISTS `homepage_features`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `homepage_features` (
+  `id` int(11) NOT NULL auto_increment,
+  `created_at` datetime default NULL,
+  `url` varchar(255) default NULL,
+  `title` varchar(255) default NULL,
+  `description` text,
+  `updated_at` datetime default NULL,
+  `content_type` varchar(255) default NULL,
+  `filename` varchar(255) default NULL,
+  `parent_id` int(11) default NULL,
+  `thumbnail` varchar(255) default NULL,
+  `size` int(11) default NULL,
+  `width` int(11) default NULL,
+  `height` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `homepage_features`
+--
+
+LOCK TABLES `homepage_features` WRITE;
+/*!40000 ALTER TABLE `homepage_features` DISABLE KEYS */;
+/*!40000 ALTER TABLE `homepage_features` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `invitations`
+--
+
+DROP TABLE IF EXISTS `invitations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `invitations` (
+  `id` int(11) NOT NULL auto_increment,
+  `email_addresses` varchar(255) default NULL,
+  `message` varchar(255) default NULL,
+  `user_id` int(11) default NULL,
+  `created_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `invitations`
+--
+
+LOCK TABLES `invitations` WRITE;
+/*!40000 ALTER TABLE `invitations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invitations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL auto_increment,
+  `sender_id` int(11) default NULL,
+  `recipient_id` int(11) default NULL,
+  `sender_deleted` tinyint(1) default '0',
+  `recipient_deleted` tinyint(1) default '0',
+  `subject` varchar(255) default NULL,
+  `body` text,
+  `read_at` datetime default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `messages`
+--
+
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `metro_areas`
+--
+
+DROP TABLE IF EXISTS `metro_areas`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `metro_areas` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `state_id` int(11) default NULL,
+  `country_id` int(11) default NULL,
+  `users_count` int(11) default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=273 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `metro_areas`
+--
+
+LOCK TABLES `metro_areas` WRITE;
+/*!40000 ALTER TABLE `metro_areas` DISABLE KEYS */;
+INSERT INTO `metro_areas` VALUES (1,'Abilene',44,208,0),(2,'Akron',36,208,0),(3,'Albany',33,208,0),(4,'Albuquerque',32,208,0),(5,'Alexandria',19,208,0),(6,'Allentown',39,208,0),(7,'Amarillo',44,208,0),(8,'Anchorage',2,208,0),(9,'Ann Arbor',23,208,0),(10,'Appleton',50,208,0),(11,'Asheville',34,208,0),(12,'Athens',11,208,0),(13,'Atlanta',11,208,0),(14,'Auburn / Lewiston',20,208,0),(15,'Augusta',11,208,0),(16,'Austin',44,208,0),(17,'Bakersfield',5,208,0),(18,'Baltimore',21,208,0),(19,'Bangor',20,208,0),(20,'Baton Rouge',19,208,0),(21,'Beaumont',44,208,0),(22,'Bellevue',48,208,0),(23,'Bellingham',48,208,0),(24,'Bend',38,208,0),(25,'Billings',27,208,0),(26,'Binghamton',33,208,0),(27,'Birmingham',1,208,0),(28,'Bismarck',35,208,0),(29,'Bloomington',15,208,0),(30,'Boise',13,208,0),(31,'Boston',22,208,0),(32,'Boulder',6,208,0),(33,'Bowling Green',18,208,0),(34,'Bozeman',27,208,0),(35,'Bridgeport / Stamford',7,208,0),(36,'Buffalo',33,208,0),(37,'Burlington',46,208,0),(38,'Cape Cod',22,208,0),(39,'Cape Coral / Fort Myers',10,208,0),(40,'Carson City',29,208,0),(41,'Casper',51,208,0),(42,'Cedar Rapids',16,208,0),(43,'Central Alaska',2,208,0),(44,'Central Coast',5,208,0),(45,'Central Jersey',31,208,0),(46,'Charleston',41,208,0),(47,'Charleston',49,208,0),(48,'Charlotte',34,208,0),(49,'Charlottesville',47,208,0),(50,'Chattanooga',43,208,0),(51,'Cheyenne',51,208,0),(52,'Chicago',14,208,0),(53,'Chico',5,208,0),(54,'Cincinnati',36,208,0),(55,'Cleveland',36,208,0),(56,'College Station',44,208,0),(57,'Colorado Springs',6,208,0),(58,'Columbia',41,208,0),(59,'Columbus',36,208,0),(60,'Concord',30,208,0),(61,'Corpus Christi',44,208,0),(62,'Corvallis',38,208,0),(63,'Dallas / Fort Worth',44,208,0),(64,'Davenport',16,208,0),(65,'Dayton',36,208,0),(66,'Daytona Beach',10,208,0),(67,'Denver',6,208,0),(68,'Des Moines',16,208,0),(69,'Detroit',23,208,0),(70,'Dothan',1,208,0),(71,'Dover',8,208,0),(72,'Duluth',24,208,0),(73,'East Bay',5,208,0),(74,'East Lansing',23,208,0),(75,'Eastern Idaho',13,208,0),(76,'Eau Claire',50,208,0),(77,'El Paso',44,208,0),(78,'Erie',39,208,0),(79,'Eugene',38,208,0),(80,'Evansville',15,208,0),(81,'Fargo',35,208,0),(82,'Farmington',32,208,0),(83,'Fayetteville',4,208,0),(84,'Fayetteville',34,208,0),(85,'Flint',23,208,0),(86,'Florence',41,208,0),(87,'Fort Lauderdale',10,208,0),(88,'Fort Smith',4,208,0),(89,'Fort Wayne',15,208,0),(90,'Fresno',5,208,0),(91,'Gainesville',10,208,0),(92,'Grand Forks',35,208,0),(93,'Grand Rapids',23,208,0),(94,'Great Falls',27,208,0),(95,'Green Bay',50,208,0),(96,'Greensboro',34,208,0),(97,'Greenville',34,208,0),(98,'Greenville',41,208,0),(99,'Gulfport / Biloxi',25,208,0),(100,'Harrisburg',39,208,0),(101,'Hartford',7,208,0),(102,'Hattiesburg',25,208,0),(103,'Hawaii',12,208,0),(104,'Hoboken / Jersey City',31,208,0),(105,'Houston',44,208,0),(106,'Huntington',49,208,0),(107,'Huntsville / Decatur',1,208,0),(108,'Indianapolis',15,208,0),(109,'Inland Empire',5,208,0),(110,'Ithaca',33,208,0),(111,'Jackson',25,208,0),(112,'Jacksonville',10,208,0),(113,'Jefferson City / Columbia',26,208,0),(114,'Jersey Shore',31,208,0),(115,'Jonesboro',4,208,0),(116,'Juneau',2,208,0),(117,'Kalamazoo / Battle Creek',23,208,0),(118,'Kansas City',26,208,0),(119,'Kearney',28,208,0),(120,'Kingsport',43,208,0),(121,'Knoxville',43,208,0),(122,'La Crosse',50,208,0),(123,'Lafayette',15,208,0),(124,'Lafayette',19,208,0),(125,'Lake Charles',19,208,0),(126,'Lancaster',39,208,0),(127,'Laredo',44,208,0),(128,'Las Cruces',32,208,0),(129,'Las Vegas',29,208,0),(130,'Lawton',37,208,0),(131,'Lexington',18,208,0),(132,'Lima',36,208,0),(133,'Lincoln',28,208,0),(134,'Little Rock',4,208,0),(135,'Logan',45,208,0),(136,'Longview / Tyler',44,208,0),(137,'Los Angeles',5,208,0),(138,'Louisville',18,208,0),(139,'Lowell',22,208,0),(140,'Lubbock',44,208,0),(141,'Lynchburg',47,208,0),(142,'Macon / Warner Robins',11,208,0),(143,'Madison',50,208,0),(144,'Manchester',30,208,0),(145,'Mansfield',36,208,0),(146,'Medford',38,208,0),(147,'Memphis',43,208,0),(148,'Miami',10,208,0),(149,'Midland / Odessa',44,208,0),(150,'Milwaukee',50,208,0),(151,'Minneapolis / St. Paul',24,208,0),(152,'Missoula',27,208,0),(153,'Mobile',1,208,0),(154,'Monroe',19,208,0),(155,'Monterey Bay',5,208,0),(156,'Montgomery',1,208,0),(157,'Morgantown',49,208,0),(158,'Myrtle Beach',41,208,0),(159,'Naples',10,208,0),(160,'Nashville',43,208,0),(161,'Nassau County',33,208,0),(162,'New Haven',7,208,0),(163,'New Orleans',19,208,0),(164,'New York',33,208,0),(165,'Newark',31,208,0),(166,'Newport',40,208,0),(167,'North Jersey',31,208,0),(168,'North Platte',28,208,0),(169,'Northern Arizona',3,208,0),(170,'Northern Colorado',6,208,0),(171,'Northern Indiana',15,208,0),(172,'Ocala',10,208,0),(173,'Ogden',45,208,0),(174,'Oklahoma City',37,208,0),(175,'Olympia',48,208,0),(176,'Omaha',28,208,0),(177,'Orange County',5,208,0),(178,'Orlando',10,208,0),(179,'Oshkosh',50,208,0),(180,'Panama City',10,208,0),(181,'Parkersburg',49,208,0),(182,'Peoria',14,208,0),(183,'Philadelphia',39,208,0),(184,'Phoenix',3,208,0),(185,'Pierre',42,208,0),(186,'Pittsburgh',39,208,0),(187,'Portland',20,208,0),(188,'Portland',38,208,0),(189,'Poughkeepsie',33,208,0),(190,'Providence',40,208,0),(191,'Provo',45,208,0),(192,'Raleigh / Durham',34,208,0),(193,'Rapid City',42,208,0),(194,'Reading',39,208,0),(195,'Redding',5,208,0),(196,'Reno',29,208,0),(197,'Richmond',47,208,0),(198,'Rio Grande Valley',44,208,0),(199,'Roanoke',47,208,0),(200,'Rochester',33,208,0),(201,'Rockford',14,208,0),(202,'Sacramento',5,208,0),(203,'Saginaw / Bay City',23,208,0),(204,'Salem',38,208,0),(205,'Salisbury',21,208,0),(206,'Salt Lake City',45,208,0),(207,'San Angelo',44,208,0),(208,'San Antonio',44,208,0),(209,'San Diego',5,208,0),(210,'San Francisco',5,208,1),(211,'Santa Barbara',5,208,0),(212,'Santa Cruz',5,208,0),(213,'Santa Fe',32,208,0),(214,'Sarasota',10,208,0),(215,'Savannah',11,208,0),(216,'Scottsbluff',28,208,0),(217,'Scranton',39,208,0),(218,'Seattle',48,208,0),(219,'Sheboygan',50,208,0),(220,'Shreveport',19,208,0),(221,'Silicon Valley',5,208,0),(222,'Sioux City',16,208,0),(223,'Sioux Falls',42,208,0),(224,'Sonoma / Napa',5,208,0),(225,'South Jersey',31,208,0),(226,'Southern Georgia',11,208,0),(227,'Spokane',48,208,0),(228,'Springfield',22,208,0),(229,'Springfield',26,208,0),(230,'Saint Cloud',24,208,0),(231,'Saint George',45,208,0),(232,'Saint Louis',26,208,0),(233,'State College',39,208,0),(234,'Stockton / Modesto',5,208,0),(235,'Suffolk County',33,208,0),(236,'Syracuse',33,208,0),(237,'Tacoma',48,208,0),(238,'Tallahassee',10,208,0),(239,'Tampa Bay',10,208,0),(240,'Terre Haute',15,208,0),(241,'Toledo',36,208,0),(242,'Topeka',17,208,0),(243,'Trenton / Princeton',31,208,0),(244,'Tri-Cities',48,208,0),(245,'Tucson',3,208,0),(246,'Tulsa',37,208,0),(247,'Tupelo',25,208,0),(248,'Urbana / Champaign',14,208,0),(249,'Utica',33,208,0),(250,'Ventura County',5,208,0),(251,'Victoria',44,208,0),(252,'Virginia Beach / Norfolk',47,208,0),(253,'Waco',44,208,0),(254,'Washington',9,208,0),(255,'Waterloo',16,208,0),(256,'Wausau',50,208,0),(257,'Wenatchee',48,208,0),(258,'West Palm Beach',10,208,0),(259,'Westchester',33,208,0),(260,'Western Arizona',3,208,0),(261,'Western Colorado',6,208,0),(262,'Wheeling',49,208,0),(263,'Wichita Falls',44,208,0),(264,'Wichita',17,208,0),(265,'Williamsport',39,208,0),(266,'Wilmington',8,208,0),(267,'Wilmington',34,208,0),(268,'Winston Salem',34,208,0),(269,'Worcester',22,208,0),(270,'Yakima',48,208,0),(271,'York',39,208,0),(272,'Youngstown',36,208,0);
+/*!40000 ALTER TABLE `metro_areas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `moderatorships`
+--
+
+DROP TABLE IF EXISTS `moderatorships`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `moderatorships` (
+  `id` int(11) NOT NULL auto_increment,
+  `forum_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_moderatorships_on_forum_id` (`forum_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `moderatorships`
+--
+
+LOCK TABLES `moderatorships` WRITE;
+/*!40000 ALTER TABLE `moderatorships` DISABLE KEYS */;
+/*!40000 ALTER TABLE `moderatorships` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `monitorships`
+--
+
+DROP TABLE IF EXISTS `monitorships`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `monitorships` (
+  `id` int(11) NOT NULL auto_increment,
+  `topic_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `active` tinyint(1) default '1',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `monitorships`
+--
+
+LOCK TABLES `monitorships` WRITE;
+/*!40000 ALTER TABLE `monitorships` DISABLE KEYS */;
+/*!40000 ALTER TABLE `monitorships` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `offerings`
+--
+
+DROP TABLE IF EXISTS `offerings`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `offerings` (
+  `id` int(11) NOT NULL auto_increment,
+  `skill_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `offerings`
+--
+
+LOCK TABLES `offerings` WRITE;
+/*!40000 ALTER TABLE `offerings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `offerings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pages`
+--
+
+DROP TABLE IF EXISTS `pages`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) default NULL,
+  `body` text,
+  `published_as` varchar(16) default 'draft',
+  `page_public` tinyint(1) default '1',
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `pages`
+--
+
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES (1,'About','<p>Your About text goes here.</p>','live',1,'2009-11-25 18:58:02','2009-11-25 18:58:02'),(2,'FAQ','<p>Your FAQ text goes here.</p>','live',1,'2009-11-25 18:58:02','2009-11-25 18:58:02');
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `photos`
+--
+
+DROP TABLE IF EXISTS `photos`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `user_id` int(11) default NULL,
+  `content_type` varchar(255) default NULL,
+  `filename` varchar(255) default NULL,
+  `size` int(11) default NULL,
+  `parent_id` int(11) default NULL,
+  `thumbnail` varchar(255) default NULL,
+  `width` int(11) default NULL,
+  `height` int(11) default NULL,
+  `album_id` int(11) default NULL,
+  `view_count` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_photos_on_parent_id` (`parent_id`),
+  KEY `index_photos_on_created_at` (`created_at`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `photos`
+--
+
+LOCK TABLES `photos` WRITE;
+/*!40000 ALTER TABLE `photos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `photos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `plugin_schema_migrations`
+--
+
+DROP TABLE IF EXISTS `plugin_schema_migrations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `plugin_schema_migrations` (
+  `plugin_name` varchar(255) default NULL,
+  `version` varchar(255) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `plugin_schema_migrations`
+--
+
+LOCK TABLES `plugin_schema_migrations` WRITE;
+/*!40000 ALTER TABLE `plugin_schema_migrations` DISABLE KEYS */;
+INSERT INTO `plugin_schema_migrations` VALUES ('community_engine','1'),('community_engine','2'),('community_engine','3'),('community_engine','4'),('community_engine','5'),('community_engine','6'),('community_engine','7'),('community_engine','8'),('community_engine','9'),('community_engine','10'),('community_engine','11'),('community_engine','12'),('community_engine','13'),('community_engine','14'),('community_engine','15'),('community_engine','16'),('community_engine','17'),('community_engine','18'),('community_engine','19'),('community_engine','20'),('community_engine','21'),('community_engine','22'),('community_engine','23'),('community_engine','24'),('community_engine','25'),('community_engine','26'),('community_engine','27'),('community_engine','28'),('community_engine','29'),('community_engine','30'),('community_engine','31'),('community_engine','32'),('community_engine','33'),('community_engine','34'),('community_engine','35'),('community_engine','36'),('community_engine','37'),('community_engine','38'),('community_engine','39'),('community_engine','40'),('community_engine','41'),('community_engine','42'),('community_engine','43'),('community_engine','44'),('community_engine','45'),('community_engine','46'),('community_engine','47'),('community_engine','49'),('community_engine','50'),('community_engine','51'),('community_engine','52'),('community_engine','53'),('community_engine','54'),('community_engine','55'),('community_engine','56'),('community_engine','57'),('community_engine','58'),('community_engine','59'),('community_engine','60'),('community_engine','61'),('community_engine','62'),('community_engine','63'),('community_engine','64'),('community_engine','65'),('community_engine','66'),('community_engine','67'),('community_engine','68'),('community_engine','69'),('community_engine','70');
+/*!40000 ALTER TABLE `plugin_schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `polls`
+--
+
+DROP TABLE IF EXISTS `polls`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `polls` (
+  `id` int(11) NOT NULL auto_increment,
+  `question` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `post_id` int(11) default NULL,
+  `votes_count` int(11) default '0',
+  PRIMARY KEY  (`id`),
+  KEY `index_polls_on_created_at` (`created_at`),
+  KEY `index_polls_on_post_id` (`post_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `polls`
+--
+
+LOCK TABLES `polls` WRITE;
+/*!40000 ALTER TABLE `polls` DISABLE KEYS */;
+/*!40000 ALTER TABLE `polls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `posts`
+--
+
+DROP TABLE IF EXISTS `posts`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL auto_increment,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `raw_post` text,
+  `post` text,
+  `title` varchar(255) default NULL,
+  `category_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `view_count` int(11) default '0',
+  `contest_id` int(11) default NULL,
+  `emailed_count` int(11) default '0',
+  `favorited_count` int(11) default '0',
+  `published_as` varchar(16) default 'draft',
+  `published_at` datetime default NULL,
+  `pkey` varchar(9) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_posts_on_category_id` (`category_id`),
+  KEY `index_posts_on_published_at` (`published_at`),
+  KEY `index_posts_on_published_as` (`published_as`),
+  KEY `index_posts_on_user_id` (`user_id`),
+  KEY `index_posts_on_pkey` (`pkey`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `posts`
+--
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'admin'),(2,'moderator'),(3,'member');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rsvps`
+--
+
+DROP TABLE IF EXISTS `rsvps`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `rsvps` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `event_id` int(11) default NULL,
+  `attendees_count` int(11) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `rsvps`
+--
+
+LOCK TABLES `rsvps` WRITE;
+/*!40000 ALTER TABLE `rsvps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rsvps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sb_posts`
+--
+
+DROP TABLE IF EXISTS `sb_posts`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `sb_posts` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `topic_id` int(11) default NULL,
+  `body` text,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `forum_id` int(11) default NULL,
+  `body_html` text,
+  PRIMARY KEY  (`id`),
+  KEY `index_sb_posts_on_forum_id` (`forum_id`,`created_at`),
+  KEY `index_sb_posts_on_user_id` (`user_id`,`created_at`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `sb_posts`
+--
+
+LOCK TABLES `sb_posts` WRITE;
+/*!40000 ALTER TABLE `sb_posts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sb_posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+DROP TABLE IF EXISTS `schema_migrations`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+LOCK TABLES `schema_migrations` WRITE;
+/*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
+INSERT INTO `schema_migrations` VALUES ('20091119113956'),('20091120045512');
+/*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL auto_increment,
+  `sessid` varchar(255) default NULL,
+  `data` text,
+  `updated_at` datetime default NULL,
+  `created_at` datetime default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_sessions_on_sessid` (`sessid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skills`
+--
+
+DROP TABLE IF EXISTS `skills`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `skills` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `skills`
+--
+
+LOCK TABLES `skills` WRITE;
+/*!40000 ALTER TABLE `skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `states`
+--
+
+DROP TABLE IF EXISTS `states`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `states` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `states`
+--
+
+LOCK TABLES `states` WRITE;
+/*!40000 ALTER TABLE `states` DISABLE KEYS */;
+INSERT INTO `states` VALUES (1,'AL'),(2,'AK'),(3,'AZ'),(4,'AR'),(5,'CA'),(6,'CO'),(7,'CT'),(8,'DE'),(9,'DC'),(10,'FL'),(11,'GA'),(12,'HI'),(13,'ID'),(14,'IL'),(15,'IN'),(16,'IA'),(17,'KS'),(18,'KY'),(19,'LA'),(20,'ME'),(21,'MD'),(22,'MA'),(23,'MI'),(24,'MN'),(25,'MS'),(26,'MO'),(27,'MT'),(28,'NE'),(29,'NV'),(30,'NH'),(31,'NJ'),(32,'NM'),(33,'NY'),(34,'NC'),(35,'ND'),(36,'OH'),(37,'OK'),(38,'OR'),(39,'PA'),(40,'RI'),(41,'SC'),(42,'SD'),(43,'TN'),(44,'TX'),(45,'UT'),(46,'VT'),(47,'VA'),(48,'WA'),(49,'WV'),(50,'WI'),(51,'WY');
+/*!40000 ALTER TABLE `states` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `taggings`
+--
+
+DROP TABLE IF EXISTS `taggings`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `taggings` (
+  `id` int(11) NOT NULL auto_increment,
+  `tag_id` int(11) default NULL,
+  `taggable_id` int(11) default NULL,
+  `taggable_type` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_taggings_on_tag_id` (`tag_id`),
+  KEY `index_taggings_on_taggable_type` (`taggable_type`),
+  KEY `index_taggings_on_taggable_id` (`taggable_id`),
+  KEY `index_taggings_on_taggable_id_and_taggable_type` (`taggable_id`,`taggable_type`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `taggings`
+--
+
+LOCK TABLES `taggings` WRITE;
+/*!40000 ALTER TABLE `taggings` DISABLE KEYS */;
+INSERT INTO `taggings` VALUES (1,1,1,'User');
+/*!40000 ALTER TABLE `taggings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_tags_on_name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+INSERT INTO `tags` VALUES (1,'moi');
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `topics`
+--
+
+DROP TABLE IF EXISTS `topics`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `topics` (
+  `id` int(11) NOT NULL auto_increment,
+  `forum_id` int(11) default NULL,
+  `user_id` int(11) default NULL,
+  `title` varchar(255) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `hits` int(11) default '0',
+  `sticky` int(11) default '0',
+  `sb_posts_count` int(11) default '0',
+  `replied_at` datetime default NULL,
+  `locked` tinyint(1) default '0',
+  `replied_by` int(11) default NULL,
+  `last_post_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_topics_on_forum_id` (`forum_id`),
+  KEY `index_topics_on_sticky_and_replied_at` (`forum_id`,`sticky`,`replied_at`),
+  KEY `index_topics_on_forum_id_and_replied_at` (`forum_id`,`replied_at`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `topics`
+--
+
+LOCK TABLES `topics` WRITE;
+/*!40000 ALTER TABLE `topics` DISABLE KEYS */;
+/*!40000 ALTER TABLE `topics` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL auto_increment,
+  `login` varchar(255) default NULL,
+  `email` varchar(255) default NULL,
+  `description` text,
+  `avatar_id` int(11) default NULL,
+  `crypted_password` varchar(40) default NULL,
+  `salt` varchar(40) default NULL,
+  `created_at` datetime default NULL,
+  `updated_at` datetime default NULL,
+  `remember_token` varchar(255) default NULL,
+  `remember_token_expires_at` datetime default NULL,
+  `stylesheet` text,
+  `view_count` int(11) default '0',
+  `vendor` tinyint(1) default '0',
+  `activation_code` varchar(40) default NULL,
+  `activated_at` datetime default NULL,
+  `state_id` int(11) default NULL,
+  `metro_area_id` int(11) default NULL,
+  `login_slug` varchar(255) default NULL,
+  `notify_comments` tinyint(1) default '1',
+  `notify_friend_requests` tinyint(1) default '1',
+  `notify_community_news` tinyint(1) default '1',
+  `country_id` int(11) default NULL,
+  `featured_writer` tinyint(1) default '0',
+  `last_login_at` datetime default NULL,
+  `zip` varchar(255) default NULL,
+  `birthday` date default NULL,
+  `gender` varchar(255) default NULL,
+  `profile_public` tinyint(1) default '1',
+  `activities_count` int(11) default '0',
+  `sb_posts_count` int(11) default '0',
+  `sb_last_seen_at` datetime default NULL,
+  `role_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `index_users_on_avatar_id` (`avatar_id`),
+  KEY `index_users_on_featured_writer` (`featured_writer`),
+  KEY `index_users_on_activated_at` (`activated_at`),
+  KEY `index_users_on_vendor` (`vendor`),
+  KEY `index_users_on_login_slug` (`login_slug`),
+  KEY `index_users_on_created_at` (`created_at`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'dan11','dan11@bikle.com','<p>hello</p>',NULL,'db0bebc63271bcfdd40dd570b18868ff781cb8aa','7303b7a0cec28aa122a603d1f54909b53a47d333','2009-11-25 18:59:35','2009-11-25 19:02:11',NULL,NULL,NULL,0,0,NULL,'2009-11-25 19:00:46',5,210,'dan11',1,1,1,208,0,'2009-11-25 18:59:35','94111','1984-11-25','M',1,3,0,'2009-11-25 19:00:47',3);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `votes`
+--
+
+DROP TABLE IF EXISTS `votes`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `votes` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `poll_id` int(11) default NULL,
+  `choice_id` int(11) default NULL,
+  `created_at` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `votes`
+--
+
+LOCK TABLES `votes` WRITE;
+/*!40000 ALTER TABLE `votes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `votes` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2009-11-26 21:01:38

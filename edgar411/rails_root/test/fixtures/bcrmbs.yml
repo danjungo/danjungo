@@ -1,0 +1,43 @@
+symbls:
+  id: 1
+  bckey: symbls
+  name: || <a href='/'>Home</a> | Symbols | <a href='rpts'>Input Reports</a> | <a href='outputrpts'>Output Reports</a> | <a href='frgmnts'>Fragments</a> ||
+  usr_id: 100
+
+rpts:
+  id: 2
+  bckey: rpts
+  name: || <a href='/'>Home</a> | <a href='symbls'>Symbols</a> | Input Reports | <a href='outputrpts'>Output Reports</a> | <a href='frgmnts'>Fragments</a> ||
+  usr_id: 100
+
+outputrpts:
+  id: 3
+  bckey: outputrpts
+  name: || <a href='/'>Home</a> | <a href='symbls'>Symbols</a> | <a href='rpts'>Input Reports</a> | Output Reports | <a href='frgmnts'>Fragments</a> ||
+  usr_id: 100
+
+
+frgmnts:
+  id: 4
+  bckey: frgmnts
+  name: || <a href='/'>Home</a> | <a href='symbls'>Symbols</a> | <a href='rpts'>Input Reports</a> | <a href='outputrpts'>Output Reports</a> | Fragments ||
+  usr_id: 100
+
+usrs:
+  id: 5
+  bckey: usrs
+  name: || <a href='/'>Home</a> | Users | <a href='/asls/symbls'>Symbols</a> | <a href='/asls/rpts'>Input Reports</a> | <a href='/asls/outputrpts'>Output Reports</a> | <a href='/asls/frgmnts'>Fragments</a> ||
+  usr_id: 100
+
+home:
+  id: 6
+  bckey: home
+  name: || Home | <a href='/asls/usrs'>Users</a> | <a href='/asls/symbls'>Symbols</a> | <a href='/asls/rpts'>Input Reports</a> | <a href='/asls/outputrpts'>Output Reports</a> | <a href='/asls/frgmnts'>Fragments</a> ||
+  usr_id: 100
+
+allbc:
+  id: 7
+  bckey: allbc
+  name: ||  <a href='/'>Home</a> | <a href='/asls/usrs'>Users</a> | <a href='/asls/symbls'>Symbols</a> | <a href='/asls/rpts'>Input Reports</a> | <a href='/asls/outputrpts'>Output Reports</a> | <a href='/asls/frgmnts'>Fragments</a> ||
+  usr_id: 100
+

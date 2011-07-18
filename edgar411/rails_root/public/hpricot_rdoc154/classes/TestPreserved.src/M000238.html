@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_escaping_of_attrs (TestPreserved)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_preserved.rb, line 52</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_escaping_of_attrs</span>
+    <span class="ruby-comment cmt"># ampersands in URLs</span>
+    <span class="ruby-identifier">str</span> = <span class="ruby-value str">%{&lt;a href=&quot;http://google.com/search?q=hpricot&amp;amp;l=en&quot;&gt;Google&lt;/a&gt;}</span>
+    <span class="ruby-identifier">link</span> = (<span class="ruby-identifier">doc</span> = <span class="ruby-constant">Hpricot</span>(<span class="ruby-identifier">str</span>)).<span class="ruby-identifier">at</span>(<span class="ruby-identifier">:a</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;http://google.com/search?q=hpricot&amp;l=en&quot;</span>, <span class="ruby-identifier">link</span>[<span class="ruby-value str">'href'</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;http://google.com/search?q=hpricot&amp;l=en&quot;</span>, <span class="ruby-identifier">link</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-value str">'href'</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;http://google.com/search?q=hpricot&amp;l=en&quot;</span>, <span class="ruby-identifier">link</span>.<span class="ruby-identifier">get_attribute</span>(<span class="ruby-value str">'href'</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;http://google.com/search?q=hpricot&amp;amp;l=en&quot;</span>, <span class="ruby-identifier">link</span>.<span class="ruby-identifier">raw_attributes</span>[<span class="ruby-value str">'href'</span>]
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">str</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">to_html</span>
+
+    <span class="ruby-comment cmt"># alter the url</span>
+    <span class="ruby-identifier">link</span>[<span class="ruby-value str">'href'</span>] = <span class="ruby-value str">&quot;javascript:alert(\&quot;AGGA-KA-BOO!\&quot;)&quot;</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">%{&lt;a href=&quot;javascript:alert(&amp;quot;AGGA-KA-BOO!&amp;quot;)&quot;&gt;Google&lt;/a&gt;}</span>, <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">to_html</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

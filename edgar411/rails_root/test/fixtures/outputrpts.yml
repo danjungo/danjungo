@@ -1,0 +1,13 @@
+google bal sheet:
+  id: 1
+  name:  GOOG-10-K-2006-12-31-Balance-Sheet
+  outputrpttype_id: 1
+  rpt_id: 2
+  usr_id: 100
+
+google income statement:
+  id: 2
+  name:  GOOG-10-K-2006-12-31-Income-Statement
+  outputrpttype_id: 3
+  rpt_id: 2
+  usr_id: 100

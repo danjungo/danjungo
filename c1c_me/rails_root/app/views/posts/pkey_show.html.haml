@@ -1,0 +1,64 @@
+%script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/util.js"}
+%script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/basic.js"}
+%script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/abc_launcher.js"}
+
+- @section = (@post.category && @post.category.name)
+- @meta = { :title => "#{@post.title} | #{@post.pkey}", :description => "#{truncate_words(@post.post, 75, '...' )}", :keywords => "#{@post.tags.join(", ") unless @post.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+
+#yui-main
+  .yui-b
+    -box :class => 'hfeed' do  
+      %h3=:users_blog.l :user=>  @user.login
+
+      .hentry.main
+        // %h4.entry-title= link_to "#{@post.title} | pkey= #{@post.pkey}", user_post_path(@user, @post), :rel => 'bookmark'
+        %h4.entry-title= link_to "#{@post.title} <span style='color: #CCC;'>| pkey= #{@post.pkey}</span>", "/#{@post.pkey}", :rel => 'bookmark'
+        // bikle 2009-11-24
+        .pkey-show
+          = @post.post
+          %hr/
+          -if @is_current_user || admin? || moderator?
+            = link_to :edit.l, edit_user_post_path(@post.user, @post)
+            or ...
+            = link_to :delete.l, user_post_path(@post.user, @post), {:method => :delete, :confirm => :permanently_delete_this_post.l}
+            This post
+            %hr/
+          = render :partial => 'polls/poll_ui', :locals => {:poll => @post.polls.first} unless @post.polls.empty?
+          - unless @post.tags.empty?
+            %ul.tags
+              - @post.tags.each do |t|
+                %li=link_to( t.name, tag_url(t), :rel => 'tag')
+          // pkey-show
+      // ends hentry
+    -box :class => 'hfeed comments', :id => 'comments' do      
+      %h3= :post_comments.l 
+      %h2= :add_your_comment.l
+      %p= render :partial => 'comments/comment_form', :locals => {:commentable => @post}
+      %a#newest_comment
+      = render :partial => 'comments/comment', :collection => @comments
+      %span#more_comments_links= more_comments_links(@post)
+    / ends box
+  / yui-b
+/ ends yui-main
+
+.yui-b
+  =render :partial => 'author_profile', :locals => {:user => @user}
+
+  - unless @related.empty?
+    -box :class => 'alt' do
+      %h3=:related_posts.l
+      %ul.list.page
+        - @related.each do |post|
+          %li=link_to truncate("#{post.title} <span style='color: #CCC;'>| pkey= #{@post.pkey}</span>", :length => 75), "/#{post.pkey}"
+
+  - unless @popular_posts.empty?
+    -box :class => 'alt' do
+      %h3=:popular_posts.l
+      %ul.list.page
+        - @popular_posts.each do |post|
+          // %li=link_to truncate("#{post.title} | pkey= #{post.pkey}", :length => 75), user_post_path(post.user, post)      
+          %li=link_to truncate("#{post.title} <span style='color: #CCC;'>| pkey= #{@post.pkey}</span>", :length => 75), "/#{post.pkey}"
+/ sidebar
+
+%script{:type=>"text/javascript", :charset=>"utf-8"}
+  = remote_function :url => {:controller => 'posts', :action => 'update_views', :user_id => @post.user, :id => @post}, :method => :put

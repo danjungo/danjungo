@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Hpricot::Traverse</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Hpricot::Traverse</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/hpricot/elements_rb.html">
+                lib/hpricot/elements.rb
+                </a>
+        <br />
+                <a href="../../files/lib/hpricot/modules_rb.html">
+                lib/hpricot/modules.rb
+                </a>
+        <br />
+                <a href="../../files/lib/hpricot/traverse_rb.html">
+                lib/hpricot/traverse.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000349">%</a>&nbsp;&nbsp;
+      <a href="#M000347">/</a>&nbsp;&nbsp;
+      <a href="#M000329">after</a>&nbsp;&nbsp;
+      <a href="#M000348">at</a>&nbsp;&nbsp;
+      <a href="#M000330">before</a>&nbsp;&nbsp;
+      <a href="#M000317">bogusetag?</a>&nbsp;&nbsp;
+      <a href="#M000351">children_of_type</a>&nbsp;&nbsp;
+      <a href="#M000341">clean_path</a>&nbsp;&nbsp;
+      <a href="#M000316">comment?</a>&nbsp;&nbsp;
+      <a href="#M000343">css_path</a>&nbsp;&nbsp;
+      <a href="#M000310">doc?</a>&nbsp;&nbsp;
+      <a href="#M000314">doctype?</a>&nbsp;&nbsp;
+      <a href="#M000311">elem?</a>&nbsp;&nbsp;
+      <a href="#M000309">filter</a>&nbsp;&nbsp;
+      <a href="#M000328">following</a>&nbsp;&nbsp;
+      <a href="#M000332">get_subnode</a>&nbsp;&nbsp;
+      <a href="#M000336">html</a>&nbsp;&nbsp;
+      <a href="#M000321">index</a>&nbsp;&nbsp;
+      <a href="#M000338">innerHTML</a>&nbsp;&nbsp;
+      <a href="#M000340">innerHTML=</a>&nbsp;&nbsp;
+      <a href="#M000335">innerText</a>&nbsp;&nbsp;
+      <a href="#M000337">inner_html</a>&nbsp;&nbsp;
+      <a href="#M000339">inner_html=</a>&nbsp;&nbsp;
+      <a href="#M000334">inner_text</a>&nbsp;&nbsp;
+      <a href="#M000323">next</a>&nbsp;&nbsp;
+      <a href="#M000324">next_node</a>&nbsp;&nbsp;
+      <a href="#M000344">node_position</a>&nbsp;&nbsp;
+      <a href="#M000322">nodes_at</a>&nbsp;&nbsp;
+      <a href="#M000345">position</a>&nbsp;&nbsp;
+      <a href="#M000327">preceding</a>&nbsp;&nbsp;
+      <a href="#M000325">previous</a>&nbsp;&nbsp;
+      <a href="#M000326">previous_node</a>&nbsp;&nbsp;
+      <a href="#M000315">procins?</a>&nbsp;&nbsp;
+      <a href="#M000346">search</a>&nbsp;&nbsp;
+      <a href="#M000331">swap</a>&nbsp;&nbsp;
+      <a href="#M000312">text?</a>&nbsp;&nbsp;
+      <a href="#M000318">to_html</a>&nbsp;&nbsp;
+      <a href="#M000320">to_original_html</a>&nbsp;&nbsp;
+      <a href="#M000333">to_plain_text</a>&nbsp;&nbsp;
+      <a href="#M000319">to_s</a>&nbsp;&nbsp;
+      <a href="#M000350">traverse_element</a>&nbsp;&nbsp;
+      <a href="#M000352">traverse_text</a>&nbsp;&nbsp;
+      <a href="#M000313">xmldecl?</a>&nbsp;&nbsp;
+      <a href="#M000342">xpath</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000309" class="method-detail">
+        <a name="M000309"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000309.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000309.html');return false;">
+          <span class="method-name">filter</span><span class="method-args">(tok, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000349" class="method-detail">
+        <a name="M000349"></a>
+
+        <div class="method-heading">
+          <span class="method-name">%</span><span class="method-args">(expr)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000348">at</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000347" class="method-detail">
+        <a name="M000347"></a>
+
+        <div class="method-heading">
+          <span class="method-name">/</span><span class="method-args">(expr, &amp;blk)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000346">search</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000329" class="method-detail">
+        <a name="M000329"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000329.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000329.html');return false;">
+          <span class="method-name">after</span><span class="method-args">(html = nil, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds elements immediately <a href="Traverse.html#M000329">after</a> this
+element, contained in the <tt><a href="Traverse.html#M000336">html</a></tt>
+string.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000348" class="method-detail">
+        <a name="M000348"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000348.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000348.html');return false;">
+          <span class="method-name">at</span><span class="method-args">(expr)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Find the first matching node for the CSS or XPath <tt>expr</tt> string.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000330" class="method-detail">
+        <a name="M000330"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000330.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000330.html');return false;">
+          <span class="method-name">before</span><span class="method-args">(html = nil, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds elements immediately <a href="Traverse.html#M000330">before</a> this
+element, contained in the <tt><a href="Traverse.html#M000336">html</a></tt>
+string.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000317" class="method-detail">
+        <a name="M000317"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000317.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000317.html');return false;">
+          <span class="method-name">bogusetag?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object a stranded end tag?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000351" class="method-detail">
+        <a name="M000351"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000351.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000351.html');return false;">
+          <span class="method-name">children_of_type</span><span class="method-args">(tag_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Find children of a given <tt>tag_name</tt>.
+</p>
+<pre>
+  ele.children_of_type('p')
+    #=&gt; [...array of paragraphs...]
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000341" class="method-detail">
+        <a name="M000341"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000341.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000341.html');return false;">
+          <span class="method-name">clean_path</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000316" class="method-detail">
+        <a name="M000316"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000316.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000316.html');return false;">
+          <span class="method-name">comment?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object a <a href="Traverse.html#M000316">comment?</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000343" class="method-detail">
+        <a name="M000343"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000343.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000343.html');return false;">
+          <span class="method-name">css_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds a unique CSS string for this node, from the root of the document
+containing it.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000310" class="method-detail">
+        <a name="M000310"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000310.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000310.html');return false;">
+          <span class="method-name">doc?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object the enclosing HTML or XML document?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000314" class="method-detail">
+        <a name="M000314"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000314.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000314.html');return false;">
+          <span class="method-name">doctype?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object a doctype tag?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000311" class="method-detail">
+        <a name="M000311"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000311.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000311.html');return false;">
+          <span class="method-name">elem?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object an HTML or XML element?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000328" class="method-detail">
+        <a name="M000328"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000328.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000328.html');return false;">
+          <span class="method-name">following</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Find all nodes which follow the current one.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000332" class="method-detail">
+        <a name="M000332"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000332.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000332.html');return false;">
+          <span class="method-name">get_subnode</span><span class="method-args">(*indexes)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000336" class="method-detail">
+        <a name="M000336"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000336.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000336.html');return false;">
+          <span class="method-name">html</span><span class="method-args">(inner = nil, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds an HTML string from the contents of this node.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000321" class="method-detail">
+        <a name="M000321"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000321.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000321.html');return false;">
+          <span class="method-name">index</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000338" class="method-detail">
+        <a name="M000338"></a>
+
+        <div class="method-heading">
+          <span class="method-name">innerHTML</span><span class="method-args">(inner = nil, &amp;blk)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000337">inner_html</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000340" class="method-detail">
+        <a name="M000340"></a>
+
+        <div class="method-heading">
+          <span class="method-name">innerHTML=</span><span class="method-args">(inner)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000337">inner_html</a>=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000335" class="method-detail">
+        <a name="M000335"></a>
+
+        <div class="method-heading">
+          <span class="method-name">innerText</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000334">inner_text</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000337" class="method-detail">
+        <a name="M000337"></a>
+
+        <div class="method-heading">
+          <span class="method-name">inner_html</span><span class="method-args">(inner = nil, &amp;blk)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000336">html</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000339" class="method-detail">
+        <a name="M000339"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000339.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000339.html');return false;">
+          <span class="method-name">inner_html=</span><span class="method-args">(inner)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Inserts new contents into the current node, based on the HTML contained in
+string <tt>inner</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000334" class="method-detail">
+        <a name="M000334"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000334.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000334.html');return false;">
+          <span class="method-name">inner_text</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds a string from the text contained in this node. All HTML elements are
+removed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000323" class="method-detail">
+        <a name="M000323"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000323.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000323.html');return false;">
+          <span class="method-name">next</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the node neighboring this node to the south: just below it. This
+method includes text nodes and comments and such.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000324" class="method-detail">
+        <a name="M000324"></a>
+
+        <div class="method-heading">
+          <span class="method-name">next_node</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000323">next</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000344" class="method-detail">
+        <a name="M000344"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000344.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000344.html');return false;">
+          <span class="method-name">node_position</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000322" class="method-detail">
+        <a name="M000322"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000322.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000322.html');return false;">
+          <span class="method-name">nodes_at</span><span class="method-args">(*pos)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Puts together an array of neighboring nodes based on their proximity to
+this node. So, for example, to get the <a
+href="Traverse.html#M000323">next</a> node, you could use <tt><a
+href="Traverse.html#M000322">nodes_at</a>(1). Or, to get the <a
+href="Traverse.html#M000325">previous</a> node, use &lt;tt&gt;<a
+href="Traverse.html#M000322">nodes_at</a>(1)</tt>.
+</p>
+<p>
+This method also accepts ranges and sets of numbers.
+</p>
+<pre>
+   ele.nodes_at(-3..-1, 1..3) # gets three nodes before and three after
+   ele.nodes_at(1, 5, 7) # gets three nodes at offsets below the current node
+   ele.nodes_at(0, 5..6) # the current node and two others
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000345" class="method-detail">
+        <a name="M000345"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000345.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000345.html');return false;">
+          <span class="method-name">position</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000327" class="method-detail">
+        <a name="M000327"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000327.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000327.html');return false;">
+          <span class="method-name">preceding</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Find all <a href="Traverse.html#M000327">preceding</a> nodes.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000325" class="method-detail">
+        <a name="M000325"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000325.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000325.html');return false;">
+          <span class="method-name">previous</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns to node neighboring this node to the north: just above it. This
+method includes text nodes and comments and such.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000326" class="method-detail">
+        <a name="M000326"></a>
+
+        <div class="method-heading">
+          <span class="method-name">previous_node</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000325">previous</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000315" class="method-detail">
+        <a name="M000315"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000315.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000315.html');return false;">
+          <span class="method-name">procins?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object an XML processing instruction?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000346" class="method-detail">
+        <a name="M000346"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000346.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000346.html');return false;">
+          <span class="method-name">search</span><span class="method-args">(expr, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Searches this node for all elements matching the CSS or XPath
+<tt>expr</tt>. Returns an <a href="Elements.html">Elements</a> array
+containing the matching nodes. If <tt>blk</tt> is given, it is used to
+iterate through the matching set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000331" class="method-detail">
+        <a name="M000331"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000331.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000331.html');return false;">
+          <span class="method-name">swap</span><span class="method-args">(html = nil, &amp;blk)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace this element and its contents with the nodes contained in the
+<tt><a href="Traverse.html#M000336">html</a></tt> string.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000312" class="method-detail">
+        <a name="M000312"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000312.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000312.html');return false;">
+          <span class="method-name">text?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object an HTML text node?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000318" class="method-detail">
+        <a name="M000318"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000318.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000318.html');return false;">
+          <span class="method-name">to_html</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds an HTML string from this node and its contents. If you need to write
+to a stream, try calling <tt>output(io)</tt> as a method on this object.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000320" class="method-detail">
+        <a name="M000320"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000320.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000320.html');return false;">
+          <span class="method-name">to_original_html</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Attempts to preserve the original HTML of the document, only outputing new
+tags for elements which have changed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000333" class="method-detail">
+        <a name="M000333"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000333.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000333.html');return false;">
+          <span class="method-name">to_plain_text</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds a string from the text contained in this node. All HTML elements are
+removed.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000319" class="method-detail">
+        <a name="M000319"></a>
+
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Traverse.html#M000318">to_html</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000350" class="method-detail">
+        <a name="M000350"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000350.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000350.html');return false;">
+          <span class="method-name">traverse_element</span><span class="method-args">(*names) {|element| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<tt><a href="Traverse.html#M000350">traverse_element</a></tt> traverses
+elements in the tree. It yields elements in depth first order.
+</p>
+<p>
+If <em>names</em> are empty, it yields all elements. If non-empty
+<em>names</em> are given, it should be list of universal names.
+</p>
+<p>
+A nested element is yielded in depth first order as follows.
+</p>
+<pre>
+  t = Hpricot('&lt;a id=0&gt;&lt;b&gt;&lt;a id=1 /&gt;&lt;/b&gt;&lt;c id=2 /&gt;&lt;/a&gt;')
+  t.traverse_element(&quot;a&quot;, &quot;c&quot;) {|e| p e}
+  # =&gt;
+  {elem &lt;a id=&quot;0&quot;&gt; {elem &lt;b&gt; {emptyelem &lt;a id=&quot;1&quot;&gt;} &lt;/b&gt;} {emptyelem &lt;c id=&quot;2&quot;&gt;} &lt;/a&gt;}
+  {emptyelem &lt;a id=&quot;1&quot;&gt;}
+  {emptyelem &lt;c id=&quot;2&quot;&gt;}
+</pre>
+<p>
+Universal names are specified as follows.
+</p>
+<pre>
+  t = Hpricot(&lt;&lt;'End')
+  &lt;html&gt;
+  &lt;meta name=&quot;robots&quot; content=&quot;index,nofollow&quot;&gt;
+  &lt;meta name=&quot;author&quot; content=&quot;Who am I?&quot;&gt;
+  &lt;/html&gt;
+  End
+  t.traverse_element(&quot;{http://www.w3.org/1999/xhtml}meta&quot;) {|e| p e}
+  # =&gt;
+  {emptyelem &lt;{http://www.w3.org/1999/xhtml}meta name=&quot;robots&quot; content=&quot;index,nofollow&quot;&gt;}
+  {emptyelem &lt;{http://www.w3.org/1999/xhtml}meta name=&quot;author&quot; content=&quot;Who am I?&quot;&gt;}
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000352" class="method-detail">
+        <a name="M000352"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000352.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000352.html');return false;">
+          <span class="method-name">traverse_text</span><span class="method-args">() {|text| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<tt><a href="Traverse.html#M000352">traverse_text</a></tt> traverses texts
+in the tree
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000313" class="method-detail">
+        <a name="M000313"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000313.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000313.html');return false;">
+          <span class="method-name">xmldecl?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this object an XML declaration?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000342" class="method-detail">
+        <a name="M000342"></a>
+
+        <div class="method-heading">
+          <a href="Traverse.src/M000342.html" target="Code" class="method-signature"
+            onclick="popupCode('Traverse.src/M000342.html');return false;">
+          <span class="method-name">xpath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds a unique XPath string for this node, from the root of the document
+containing it.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+balance:
+  id: 1
+  name: Balance Sheet
+  usr_id: 100
+
+cash:
+  id: 2
+  name: Cash Flow
+  usr_id: 100
+
+income:
+  id: 3
+  name: Income Statement
+  usr_id: 100
