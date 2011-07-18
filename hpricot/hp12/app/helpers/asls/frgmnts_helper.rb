@@ -1,0 +1,2 @@
+module Asls::FrgmntsHelper
+end

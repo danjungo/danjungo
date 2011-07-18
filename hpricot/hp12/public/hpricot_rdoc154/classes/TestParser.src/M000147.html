@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_normally_empty (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_xml.rb, line 10</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_normally_empty</span>
+    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Hpricot</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-value str">&quot;&lt;rss&gt;&lt;channel&gt;&lt;title&gt;this is title&lt;/title&gt;&lt;link&gt;http://fake.com&lt;/link&gt;&lt;/channel&gt;&lt;/rss&gt;&quot;</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;this is title&quot;</span>, (<span class="ruby-identifier">doc</span><span class="ruby-operator">/</span><span class="ruby-identifier">:rss</span><span class="ruby-operator">/</span><span class="ruby-identifier">:channel</span><span class="ruby-operator">/</span><span class="ruby-identifier">:title</span>).<span class="ruby-identifier">text</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">&quot;http://fake.com&quot;</span>, (<span class="ruby-identifier">doc</span><span class="ruby-operator">/</span><span class="ruby-identifier">:rss</span><span class="ruby-operator">/</span><span class="ruby-identifier">:channel</span><span class="ruby-operator">/</span><span class="ruby-identifier">:link</span>).<span class="ruby-identifier">text</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

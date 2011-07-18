@@ -1,0 +1,18 @@
+
+public:
+  id: 1
+  login: public
+  salted_password: 0d67e3dfeb82edee80bf7317b43837c3dc7128c9
+  salt: 688b86d877d77280522f27cb094c74d076aa6e04
+  email: p@hotmail.com
+  verified: true
+  deleted: false
+
+bikle:
+  id: 2
+  login: bikle
+  salted_password: 327fd5d615536fb3a55e66c6b4a57bfb16c51b9f
+  salt: eb2a53b37e8efdaf7328b0b003dd27584160ec12
+  email: b@b.com
+  verified: true
+  deleted: false

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_buffer_error (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 302</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_buffer_error</span>
+    <span class="ruby-identifier">assert_raise</span> <span class="ruby-constant">Hpricot</span><span class="ruby-operator">::</span><span class="ruby-constant">ParseError</span>, <span class="ruby-value str">&quot;ran out of buffer space on element &lt;input&gt;, starting on line 3.&quot;</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">Hpricot</span>(<span class="ruby-node">%{&lt;p&gt;\n\n&lt;input type=&quot;hidden&quot; name=&quot;__VIEWSTATE&quot;  value=&quot;#{((&quot;X&quot; * 2000) + &quot;\n&quot;) * 22}&quot; /&gt;\n\n&lt;/p&gt;}</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

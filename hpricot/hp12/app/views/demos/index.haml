@@ -1,0 +1,399 @@
+%h3 Demonstrations Of <a target="hp" href='/hpricot_rdoc154/index.html'>Hpricot 0.6</a>
+%h5 (Results may be sent to another page or tab)
+%hr
+%h4 Simple Search
+%h4 Sample Syntax:
+%h4 <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").to_html demo:
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.search().to_html"}
+%hr
+%p
+
+%h4
+  Simple Remove
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a[@href*=maps]").remove
+  %p I use hpricot_object.to_html to see the effect.
+  %p Removing comments is a bit more work.  See the comments removal demo a bit further down.
+%form{:id => "searchrmform", :name => "searchrmform", :action => "/demos/search_remove", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchrmformuurl"} URL:
+    %p
+    %input{:id => "searchrmformuurl", :size => "66", :name => "uurl", :value => "http://www.google.com"}
+    %p
+    %label{:for => "searchrmformhpexpr"} .search().remove argument:
+    %p
+    %input{:id => "searchrmformhpexpr", :size => "55", :name => "hpexpr", :value => "a[@href*=maps]"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.to_html"}
+%hr
+%p
+
+%h4
+  Stacked Search
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").search("img").to_html
+%form{:id => "searchsearchform", :name => "searchsearchform", :action => "/demos/search_search", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchsearchformuurl"} URL:
+    %p
+    %input{:id => "searchsearchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchsearchformhpexpr"} First .search() argument:
+    %p
+    %input{:id => "searchsearchformhpexpr", :size => "55", :name => "s1expr", :value => "a"}
+    %p
+    %label{:for => "searchsearchforms2expr"} Second .search() argument:
+    %p
+    %input{:id => "searchsearchforms2expr", :size => "55", :name => "s2expr", :value => "img"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.search().search().to_html"}
+%hr
+%p
+
+%h4
+  "at" Search is similar to Simple Search
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.at("img[@src*=jpg]").to_html
+  %p .at() is useful if I need just 1 element.  If I want more than 1, I use .search() instead.
+%form{:id => "atform", :name => "atform", :action => "/demos/at", :target => "demoout"}
+  %fieldset
+    %label{:for => "atformuurl"} URL:
+    %p
+    %input{:id => "atformuurl", :size => "66", :name => "uurl", :value => "http://news.yahoo.com"}
+    %p
+    %label{:for => "atformhpexpr"} .at() argument:
+    %p
+    %input{:id => "atformhpexpr", :size => "55", :name => "atexpr", :value => "img[@src*=jpg]"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.at().to_html"}
+%hr
+%p
+
+%h4
+  If I need to "peel-off" an outer tag, I use inner_html combined with .at()
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.at("html/head").inner_html
+%form{:id => "innerhtmlform", :name => "innerhtmlform", :action => "/demos/innerhtml", :target => "demoout"}
+  %fieldset
+    %label{:for => "innerhtmlformuurl"} URL:
+    %p
+    %input{:id => "innerhtmlformuurl", :size => "66", :name => "uurl", :value => "http://www.yahoo.com"}
+    %p
+    %label{:for => "innerhtmlformhpexpr"} at().inner_html argument:
+    %p
+    %input{:id => "innerhtmlformhpexpr", :size => "55", :name => "innerhtmlexpr", :value => "html/head"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.at().inner_html"}
+%hr
+%p
+
+
+%h4
+  If .search() gives me several elements and I want the first, I could use first (I'd probably use .at() though).
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("img[@src*=jpg]").first.to_html demo:
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_first", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.yahoo.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "img[@src*=jpg]"}
+    %p
+    %input{:type => "submit", :value => "hpricot_object.search().first.to_html"}
+%hr
+%p
+
+%h4
+  Ruby is well suited for working with <a target="core" href='http://www.ruby-doc.org/core/classes/Enumerable.html'>enumerable</a> objects.
+  %p And, .search() returns an enumerable object.
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").map {|e| "&lt;hr />#{e.to_html}" }.sort.to_s
+  %p
+  %br Here, I loop through the object and attach an &lt;hr /&gt; to the front of each element.
+  %br And I sort it by href.
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_map", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search().map {|e| "&lt;hr /&gt;#{e.to_html}" }.sort.to_s'}
+%hr
+%p
+
+
+%h4
+  I can burrow into an hpricot_object and prepend some HTML to the inside of each element pointed to by the .search() method.
+  %p Sample Syntax Which prepends an &lt;hr /> to the inside of every &lt;a> element:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").prepend("&lt;hr />").to_html
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_prepend", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search().prepend("&lt;hr />").to_html'}
+%hr
+%p
+
+
+%h4
+  I can burrow into an hpricot_object and wrap some HTML around the outside of each element pointed to by the .search() method.
+  %p Sample Syntax which wraps &lt;h1 /&gt; around the outside of every &lt;a&gt; element:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").wrap("&lt;h1&gt;")
+  %p An easy way to see the effect is to just run <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.to_html
+  %p Or, I could run the original search and then use .search("..") to go up a level:
+  %p <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").search("..").to_html
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_wrap", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search("a").search("..").to_html'}
+%hr
+%p
+
+
+%h4
+  If I want to replace an element with some HTML of my choice, I can use .at() combined with .swap()
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.at("div/a").swap("&lt;h1&gt;hpricot.com&lt;/h1&gt;")
+  %p An easy way to see the effect is to just run <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.to_html
+  %p If I know about the parent of the new element, I can search for the parent:
+  %p <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("div").to_html
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_swap", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .at() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "div/a"}
+    %p
+    %label{:for => "parentsearchformsearchexpr"} .search() for parent:
+    %p
+    %input{:id => "parentsearchformsearchexpr", :size => "55", :name => "parentsearchexpr", :value => "div"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search("div").to_html'}
+%hr
+%p
+
+
+%h4
+  I can use Simple Search to find element attributes.
+  Perhaps I need a list of href attributes?
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a[@href*=nytimes.com]").map {|e| '&lt;hr /&gt;' + e.get_attribute(attrname) }.sort.to_s
+  %p The above search is a bit loose.  It will match if 'nytimes.com' appears anywhere in href.
+  %p If I need an exact match, my call to search would look like this:  .search("a[@href='http://www.google.com']")
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search_attributes", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a[@href*=nytimes.com]"}
+    %p
+    %label{:for => "attrname"} attribute_name:
+    %p
+    %input{:id => "attrname", :size => "55", :name => "attrname", :value => "href"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search().map ......' }
+%hr
+%p
+
+
+%h4
+  Perhaps I want to visualize the enumerable returned by .search() ?
+  %p Sample Syntax:
+  i = -1; <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").map{|e| i+=1;"&lt;hr /&gt;#{i}#{e}"}.to_s
+  %p Here, I use .map() to create an array of numbered HTML strings.
+%form{:id => "searchform", :name => "searchform", :action => "/demos/disp_enum", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %input{:type => "submit", :value => 'i = -1; hpricot_object.search("a").map{|e| i+=1;"<hr />#{i}#{e}"}.to_s' }
+%hr
+%p
+
+%h4
+  Perhaps I want to see just a slice of the enumerable returned by .search() ?
+  %p Sample Syntax:
+  i = -1; <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a").map{|e| i+=1;"&lt;hr />#{i}#{e}"}[5,11].to_s
+  %p Here, I get 11 elements from it, starting at element 5.
+%form{:id => "searchform", :name => "searchform", :action => "/demos/disp_enum_slice", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a"}
+    %p
+    %label{:for => "arg1"} starting element:
+    %input{:id => "arg1", :size => "5", :name => "arg1", :value => "5"}
+    %p
+    %label{:for => "arg1"} number of elements returned:
+    %input{:id => "arg2", :size => "5", :name => "arg2", :value => "11"}
+    %p
+    %input{:type => "submit", :value => 'i = -1; hpricot_object.search("a").map{|e| i+=1;"<hr />#{i}#{e}"}[3,2].to_s' }
+%hr
+%p
+
+
+%h4
+  Working with HTML comments
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("body").search("*").map{|e| "&lt;hr />#{e}" if e.comment?}.to_s
+  %p I cannot use .search() to locate HTML comments.
+  %p I can, however, use .search("*") to get a list of all the nodes.
+  %p Then, I loop through the list and ask, "Is this a comment?"
+  %p So, one way to display HTML comments is to use .map() to create an array of HTML strings from a stacked .search()
+%form{:id => "searchform", :name => "searchform", :action => "/demos/disp_comments", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "body"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search("body").search("*").map {|e| "<hr />#{e}" if e.comment?}.to_s '}
+%hr
+%p
+
+%h4
+  Removing HTML comments
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("body").search("*").each{|e| (lst=e.parent.children;e.parent=nil;lst.delete(e)) if e.comment?}
+  %p Removing HTML comments is similar to displaying them.
+  %p I remove HTML comments using a stacked search and a loop.  I use hpricot_object.to_html to see the effect.
+%form{:id => "searchform", :name => "searchform", :action => "/demos/remove_comments", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "body"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.to_html '}
+%hr
+%p
+
+%h4
+  Searching For Text Nodes
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a[text()*='Washington']").to_html
+  %p Notice that this is identical to simple search.  I just need to know this format: [text()*='Washington']
+  %p If I'm looking for an EXACT match, I use this format: [text()='Washington']
+  %p This is similar to searching for an element by its attributes rather than its name.
+  %p See the href searching example above.
+%form{:id => "searchform", :name => "searchform", :action => "/demos/search", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchformsearchexpr"} .search() argument:
+    %p
+    %input{:id => "searchformsearchexpr", :size => "55", :name => "searchexpr", :value => "a[text()*='Washington']"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.search().to_html '}
+%hr
+%p
+
+
+%h4
+  Altering Text Nodes
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("*").each {|e| e.content=e.content().gsub(Regexp.new('bikle.com'), 'bikle.com IS MY SITE!') if e.text? }
+  %p The "getter" method for a text node content is: .content()
+  %p The "setter" method for a text node content is: .content()=
+  %p I use hpricot_object.to_html to see the effect.
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/text_node_alter", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://bikle.com"}
+    %p
+    %label{:for => "oldtext"} old text value:
+    %p
+    %input{:id => "oldtext", :size => "55", :name => "oldtext", :value => "bikle.com"}
+    %p
+    %label{:for => "newtext"} new text value:
+    %p
+    %input{:id => "newtext", :size => "55", :name => "newtext", :value => "bikle.com IS MY SITE!"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.to_html '}
+%hr
+%p
+
+
+%h4
+  Removing Attributes
+  %p Sometimes I want to remove a JavaScript-onclick attribute from an &lt;a&gt; tag.
+  %p Sample Syntax:
+  <a target="hpo" href="/sttc/hpricot_object">hpricot_object</a>.search("a[@onclick]").remove_attr("onclick")
+  %p I use hpricot_object.to_html to see the effect.
+
+%form{:id => "searchform", :name => "searchform", :action => "/demos/remove_attr", :target => "demoout"}
+  %fieldset
+    %label{:for => "searchformuurl"} URL:
+    %p
+    %input{:id => "searchformuurl", :size => "66", :name => "uurl", :value => "http://news.google.com"}
+    %p
+    %label{:for => "searchexpr"} Search Expression:
+    %p
+    %input{:id => "searchexpr", :size => "55", :name => "searchexpr", :value => "a[@onclick]"}
+    %p
+    %label{:for => "attr_name"} Name Of Attribute to be Removed:
+    %p
+    %input{:id => "attr_name", :size => "55", :name => "attr_name", :value => "onclick"}
+    %p
+    %input{:type => "submit", :value => 'hpricot_object.to_html '}
+%hr
+%p

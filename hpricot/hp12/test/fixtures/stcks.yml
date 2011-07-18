@@ -1,0 +1,27 @@
+red:
+  id: 1
+  name: redstack
+
+green:
+  id: 2
+  name: greenstack
+
+blue:
+  id: 3
+  name: bluestack
+
+yellow:
+  id: 4
+  name: yellowstack
+
+orange:
+  id: 5
+  name: orangestack
+
+white:
+  id: 6
+  name: whitestack
+
+black:
+  id: 7
+  name: blackstack

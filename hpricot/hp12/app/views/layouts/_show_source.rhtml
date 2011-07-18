@@ -1,0 +1,18 @@
+<%= show_code("views/layouts", "application.rhtml") -%>
+<%= show_code("views/layouts", "_head.haml") -%>
+<%= show_code("views/layouts", "_t2r2c2.haml") -%>
+<%= show_code("views/layouts", "_show_source.rhtml") -%>
+<%= show_code("../public/stylesheets/sass", "application.sass") -%>
+<%= show_code("../config", "routes.rb") -%>
+
+<%= show_code("controllers", "application.rb") -%>
+<%= show_code("controllers", "#{params[:controller]}_controller.rb") -%>
+<%= show_code("helpers", "application_helper.rb") -%>
+<%= show_code("helpers", "#{params[:controller]}_helper.rb") -%>
+<p />
+The Hpricot Workbench makes use of these models:
+<p />
+<%= show_code("models", "exprtype.rb") -%>
+<%= show_code("models", "stck.rb") -%>
+<%= show_code("models", "frgmnt.rb") -%>
+<%= show_code("models", "usr.rb") -%>

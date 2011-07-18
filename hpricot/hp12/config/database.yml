@@ -1,0 +1,14 @@
+development:
+  encoding: unicode
+  adapter: postgresql
+  database: hp12d
+
+test:
+  encoding: unicode
+  adapter: postgresql
+  database: hp12t
+
+production:
+  encoding: unicode
+  adapter: postgresql
+  database: hp12p

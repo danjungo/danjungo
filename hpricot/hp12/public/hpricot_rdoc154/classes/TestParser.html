@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: TestParser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">TestParser</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/test/test_parser_rb.html">
+                test/test_parser.rb
+                </a>
+        <br />
+                <a href="../files/test/test_paths_rb.html">
+                test/test_paths.rb
+                </a>
+        <br />
+                <a href="../files/test/test_xml_rb.html">
+                test/test_xml.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Test::Unit::TestCase
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000112">scan_basic</a>&nbsp;&nbsp;
+      <a href="#M000120">test_abs_xpath</a>&nbsp;&nbsp;
+      <a href="#M000123">test_alt_predicates</a>&nbsp;&nbsp;
+      <a href="#M000131">test_body_newlines</a>&nbsp;&nbsp;
+      <a href="#M000139">test_buffer_error</a>&nbsp;&nbsp;
+      <a href="#M000148">test_casing</a>&nbsp;&nbsp;
+      <a href="#M000128">test_class_search</a>&nbsp;&nbsp;
+      <a href="#M000118">test_css_negation</a>&nbsp;&nbsp;
+      <a href="#M000130">test_empty_comment</a>&nbsp;&nbsp;
+      <a href="#M000106">test_filter_by_attr</a>&nbsp;&nbsp;
+      <a href="#M000107">test_filter_contains</a>&nbsp;&nbsp;
+      <a href="#M000143">test_filters</a>&nbsp;&nbsp;
+      <a href="#M000108">test_get_element_by_id</a>&nbsp;&nbsp;
+      <a href="#M000109">test_get_element_by_tag_name</a>&nbsp;&nbsp;
+      <a href="#M000124">test_insert_after</a>&nbsp;&nbsp;
+      <a href="#M000125">test_insert_before</a>&nbsp;&nbsp;
+      <a href="#M000134">test_javascripts</a>&nbsp;&nbsp;
+      <a href="#M000144">test_keep_cdata</a>&nbsp;&nbsp;
+      <a href="#M000129">test_kleene_star</a>&nbsp;&nbsp;
+      <a href="#M000137">test_mangled_tags</a>&nbsp;&nbsp;
+      <a href="#M000126">test_many_paths</a>&nbsp;&nbsp;
+      <a href="#M000145">test_namespace</a>&nbsp;&nbsp;
+      <a href="#M000135">test_nested_scripts</a>&nbsp;&nbsp;
+      <a href="#M000132">test_nested_twins</a>&nbsp;&nbsp;
+      <a href="#M000104">test_new_element</a>&nbsp;&nbsp;
+      <a href="#M000147">test_normally_empty</a>&nbsp;&nbsp;
+      <a href="#M000110">test_output_basic</a>&nbsp;&nbsp;
+      <a href="#M000114">test_pace</a>&nbsp;&nbsp;
+      <a href="#M000113">test_positional</a>&nbsp;&nbsp;
+      <a href="#M000121">test_predicates</a>&nbsp;&nbsp;
+      <a href="#M000138">test_procins</a>&nbsp;&nbsp;
+      <a href="#M000119">test_remove_attribute</a>&nbsp;&nbsp;
+      <a href="#M000116">test_reparent</a>&nbsp;&nbsp;
+      <a href="#M000146">test_roundtrip</a>&nbsp;&nbsp;
+      <a href="#M000111">test_scan_basic</a>&nbsp;&nbsp;
+      <a href="#M000115">test_scan_boingboing</a>&nbsp;&nbsp;
+      <a href="#M000105">test_scan_text</a>&nbsp;&nbsp;
+      <a href="#M000141">test_screwed_xmlns</a>&nbsp;&nbsp;
+      <a href="#M000142">test_self_closed_form</a>&nbsp;&nbsp;
+      <a href="#M000103">test_set_attr</a>&nbsp;&nbsp;
+      <a href="#M000117">test_siblings</a>&nbsp;&nbsp;
+      <a href="#M000127">test_stacked_search</a>&nbsp;&nbsp;
+      <a href="#M000122">test_tag_case</a>&nbsp;&nbsp;
+      <a href="#M000149">test_text_tags</a>&nbsp;&nbsp;
+      <a href="#M000136">test_uswebgen</a>&nbsp;&nbsp;
+      <a href="#M000133">test_wildcard</a>&nbsp;&nbsp;
+      <a href="#M000140">test_youtube_attr</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000112" class="method-detail">
+        <a name="M000112"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000112.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000112.html');return false;">
+          <span class="method-name">scan_basic</span><span class="method-args">(doc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000120" class="method-detail">
+        <a name="M000120"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000120.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000120.html');return false;">
+          <span class="method-name">test_abs_xpath</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000123" class="method-detail">
+        <a name="M000123"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000123.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000123.html');return false;">
+          <span class="method-name">test_alt_predicates</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000131.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000131.html');return false;">
+          <span class="method-name">test_body_newlines</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000139.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000139.html');return false;">
+          <span class="method-name">test_buffer_error</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000148.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000148.html');return false;">
+          <span class="method-name">test_casing</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+make sure XML doesn&#8216;t get downcased
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000128.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000128.html');return false;">
+          <span class="method-name">test_class_search</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000118" class="method-detail">
+        <a name="M000118"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000118.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000118.html');return false;">
+          <span class="method-name">test_css_negation</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000130.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000130.html');return false;">
+          <span class="method-name">test_empty_comment</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000106.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000106.html');return false;">
+          <span class="method-name">test_filter_by_attr</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000107.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000107.html');return false;">
+          <span class="method-name">test_filter_contains</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000143.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000143.html');return false;">
+          <span class="method-name">test_filters</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000108.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000108.html');return false;">
+          <span class="method-name">test_get_element_by_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000109.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000109.html');return false;">
+          <span class="method-name">test_get_element_by_tag_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000124" class="method-detail">
+        <a name="M000124"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000124.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000124.html');return false;">
+          <span class="method-name">test_insert_after</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000125.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000125.html');return false;">
+          <span class="method-name">test_insert_before</span><span class="method-args">(</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000134.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000134.html');return false;">
+          <span class="method-name">test_javascripts</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000144.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000144.html');return false;">
+          <span class="method-name">test_keep_cdata</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000129.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000129.html');return false;">
+          <span class="method-name">test_kleene_star</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000137.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000137.html');return false;">
+          <span class="method-name">test_mangled_tags</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000126.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000126.html');return false;">
+          <span class="method-name">test_many_paths</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000145.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000145.html');return false;">
+          <span class="method-name">test_namespace</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000135.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000135.html');return false;">
+          <span class="method-name">test_nested_scripts</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000132.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000132.html');return false;">
+          <span class="method-name">test_nested_twins</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000104.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000104.html');return false;">
+          <span class="method-name">test_new_element</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Test creating a new element
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000147.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000147.html');return false;">
+          <span class="method-name">test_normally_empty</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+normally, the link tags are empty HTML tags. contributed by laudney.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000110.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000110.html');return false;">
+          <span class="method-name">test_output_basic</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000114" class="method-detail">
+        <a name="M000114"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000114.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000114.html');return false;">
+          <span class="method-name">test_pace</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000113" class="method-detail">
+        <a name="M000113"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000113.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000113.html');return false;">
+          <span class="method-name">test_positional</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000121" class="method-detail">
+        <a name="M000121"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000121.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000121.html');return false;">
+          <span class="method-name">test_predicates</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000138.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000138.html');return false;">
+          <span class="method-name">test_procins</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000119" class="method-detail">
+        <a name="M000119"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000119.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000119.html');return false;">
+          <span class="method-name">test_remove_attribute</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000116" class="method-detail">
+        <a name="M000116"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000116.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000116.html');return false;">
+          <span class="method-name">test_reparent</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000146.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000146.html');return false;">
+          <span class="method-name">test_roundtrip</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000111" class="method-detail">
+        <a name="M000111"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000111.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000111.html');return false;">
+          <span class="method-name">test_scan_basic</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000115" class="method-detail">
+        <a name="M000115"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000115.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000115.html');return false;">
+          <span class="method-name">test_scan_boingboing</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000105.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000105.html');return false;">
+          <span class="method-name">test_scan_text</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000141.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000141.html');return false;">
+          <span class="method-name">test_screwed_xmlns</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+ticket 84 by jamezilla
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000142.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000142.html');return false;">
+          <span class="method-name">test_self_closed_form</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reported by Jonathan Nichols on the <a href="Hpricot.html">Hpricot</a> list
+(24 May 2007)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000103.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000103.html');return false;">
+          <span class="method-name">test_set_attr</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000117" class="method-detail">
+        <a name="M000117"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000117.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000117.html');return false;">
+          <span class="method-name">test_siblings</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000127.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000127.html');return false;">
+          <span class="method-name">test_stacked_search</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000122" class="method-detail">
+        <a name="M000122"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000122.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000122.html');return false;">
+          <span class="method-name">test_tag_case</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000149" class="method-detail">
+        <a name="M000149"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000149.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000149.html');return false;">
+          <span class="method-name">test_text_tags</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+be sure tags named &quot;text&quot; are ok
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000136.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000136.html');return false;">
+          <span class="method-name">test_uswebgen</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000133.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000133.html');return false;">
+          <span class="method-name">test_wildcard</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
+
+        <div class="method-heading">
+          <a href="TestParser.src/M000140.html" target="Code" class="method-signature"
+            onclick="popupCode('TestParser.src/M000140.html');return false;">
+          <span class="method-name">test_youtube_attr</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

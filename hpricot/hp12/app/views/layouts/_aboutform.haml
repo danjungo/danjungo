@@ -1,0 +1,11 @@
+
+%form{:id => "aboutform", :name => "aboutform", :action => "/demos/aboutout"}
+  %label{:for => "aboutformuurl"} URL:
+  %p
+  %input{:id => "aboutformuurl", :size => "66", :name => "uurl", :value => "http://www.google.com"}
+  %p
+  %label{:for => "aboutformhpexpr"} Hpricot Search Expression:
+  %p
+  %input{:id => "aboutformhpexpr", :size => "55", :name => "hpexpr", :value => "a"}
+  %p
+  %input{:size => "22", :type => "submit", :value => "Try Hpricot"}

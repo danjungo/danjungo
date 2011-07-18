@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>test_nested_scripts (TestParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File test/test_parser.rb, line 273</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_nested_scripts</span>
+    <span class="ruby-ivar">@week9</span> = <span class="ruby-constant">Hpricot</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">TestFiles</span><span class="ruby-operator">::</span><span class="ruby-constant">WEEK9</span>)
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">14</span>, (<span class="ruby-ivar">@week9</span><span class="ruby-operator">/</span><span class="ruby-value str">&quot;a&quot;</span>).<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">inner_html</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">&quot;GameCenter&quot;</span> }.<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

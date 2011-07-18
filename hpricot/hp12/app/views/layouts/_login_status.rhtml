@@ -1,0 +1,13 @@
+You are
+<br />
+<span class="hpricot-color"> <%=  (session[:usr_id]) ? "logged in as: <b>#{(Usr.find(session[:usr_id]).login.to_s)}</b>" : "Not Logged In" %> </span>
+<p />
+<% if (session[:usr_id] == nil) %>
+  || <%= link_to("Login", :controller => "usr/login") %> |
+  <%= link_to("Register", :controller => "usr/signup") %> |
+  <%= link_to("Why Register?", :controller => "sttc/why_register") %> ||
+<% else %>
+  || <%= link_to("Logout", :controller => "usr/logout") %> |
+  <%= link_to("Change Password", :controller => "usr/change_password") %> ||
+<% end %>
+<p />

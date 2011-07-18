@@ -1,0 +1,291 @@
+2007-08-01 14:59:00: (log.c.75) server started 
+2007-08-02 10:11:25: (server.c.1252) [note] graceful shutdown started 
+2007-08-02 10:11:25: (log.c.135) server stopped 
+2007-08-02 10:11:56: (log.c.75) server started 
+2007-08-02 15:11:30: (mod_fastcgi.c.2551) FastCGI-stderr: /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr:  a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.r 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: b:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple valu 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: es for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elem 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: ents.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multipl 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: e values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hprico 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: t/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: m 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: ultiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/ 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warn 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: ing: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0. 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: 6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: : warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpri 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: cot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements. 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gem 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: s/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/ele 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: ments.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: .8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpric 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: ot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/ 
+2007-08-02 15:11:31: (mod_fastcgi.c.2551) FastCGI-stderr: gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+ 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr:  a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.r 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: b:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple valu 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: es for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elem 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: ents.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multipl 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: e values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hprico 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: t/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: m 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: ultiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/ 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warn 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: ing: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0. 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: 6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: : warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpri 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: cot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements. 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gem 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: s/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/ele 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: ments.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1 
+2007-08-02 15:12:41: (mod_fastcgi.c.2551) FastCGI-stderr: .8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+ 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr:  a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.r 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: b:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple valu 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: es for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elem 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: ents.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multipl 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: e values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hprico 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: t/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: m 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: ultiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/ 
+2007-08-02 15:13:23: (mod_fastcgi.c.2551) FastCGI-stderr: hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warn 
+2007-08-02 15:13:24: (mod_fastcgi.c.2551) FastCGI-stderr: ing: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+ 
+2007-08-02 15:14:11: (mod_fastcgi.c.2551) FastCGI-stderr: /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+ 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr:  a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.r 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: b:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple valu 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: es for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elem 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: ents.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multipl 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: e values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hprico 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: t/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: m 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: ultiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/ 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warn 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: ing: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0. 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: 6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: : warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpri 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: cot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements. 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gem 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: s/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/ele 
+2007-08-02 15:40:44: (mod_fastcgi.c.2551) FastCGI-stderr: ments.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1 
+2007-08-02 15:40:45: (mod_fastcgi.c.2551) FastCGI-stderr: .8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpric 
+2007-08-02 15:40:45: (mod_fastcgi.c.2551) FastCGI-stderr: ot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/ 
+2007-08-02 15:40:45: (mod_fastcgi.c.2551) FastCGI-stderr: gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+/Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:417: warning: multiple values for a block parameter (2 for 1)
+	from /Applications/Locomotive2/Bundles/standardRailsJan2007.locobundle/powerpc/lib/ruby/gems/1.8/gems/hpricot-0.6/lib/hpricot/elements.rb:306
+ 
+2007-08-04 14:26:03: (mod_fastcgi.c.2551) FastCGI-stderr: /pt/webprops/hpricot/hp12/public/../config/../app/views/../../vendor/plugins/active_scaffold/frontends/default/views/destroy.rjs:3: warning: parenthesize argument(s) for future version
+ 
+2007-08-05 10:49:02: (server.c.1252) [note] graceful shutdown started 
+2007-08-05 10:49:02: (log.c.135) server stopped 
+2007-08-05 10:49:31: (log.c.75) server started 
+2007-08-05 10:55:28: (server.c.1252) [note] graceful shutdown started 
+2007-08-05 10:55:28: (log.c.135) server stopped 
+2007-08-05 10:55:38: (log.c.75) server started 
+2007-08-05 11:00:55: (server.c.1252) [note] graceful shutdown started 
+2007-08-05 11:00:55: (log.c.135) server stopped 
+2007-08-05 11:01:06: (log.c.75) server started 
+2007-08-06 15:47:09: (server.c.1252) [note] graceful shutdown started 
+2007-08-06 15:47:09: (log.c.135) server stopped 
+2007-08-06 15:47:26: (log.c.75) server started 
+2007-08-07 14:02:13: (server.c.1252) [note] graceful shutdown started 
+2007-08-07 14:02:13: (log.c.135) server stopped 
+2007-08-07 14:41:44: (log.c.75) server started 
+2007-08-08 12:25:33: (server.c.1252) [note] graceful shutdown started 
+2007-08-08 12:25:33: (log.c.135) server stopped 
+2007-08-10 13:42:59: (log.c.75) server started 
+2007-08-10 15:57:20: (server.c.1252) [note] graceful shutdown started 
+2007-08-10 15:57:20: (log.c.135) server stopped 
+2007-08-11 16:43:01: (log.c.75) server started 
+2007-08-11 20:15:23: (server.c.1252) [note] graceful shutdown started 
+2007-08-11 20:15:23: (log.c.135) server stopped 
+2007-08-11 20:15:33: (log.c.75) server started 
+2007-08-13 17:53:57: (server.c.1252) [note] graceful shutdown started 
+2007-08-13 17:53:57: (log.c.135) server stopped 
+2007-09-22 17:54:36: (log.c.75) server started 
+2007-09-24 12:08:54: (server.c.1252) [note] graceful shutdown started 
+2007-09-24 12:08:54: (log.c.135) server stopped 

@@ -1,0 +1,22 @@
+%hr
+%h3
+  URL:
+  %span.hpricot-color
+    %a{:href => @uurl, :target => "t11"}
+      = @uurl
+%h3
+  Hpricot Search Expression:
+  %span.hpricot-color
+    = params[:hpexpr]
+%hr
+%h3 Rendered HTML From Your Hpricot Object:
+= @myhtml
+%hr
+%h3 HTML From Your Hpricot Object:
+%p
+= h(@myhtml)
+%hr
+%p
+  %b
+    %a{:href => "/demos/about"} Try Again?
+%hr

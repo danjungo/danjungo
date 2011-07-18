@@ -1,0 +1,59 @@
+search:
+  id: 1
+  name: .search()
+
+searchremove:
+  id: 2
+  name: .search().remove
+
+at:
+  id: 3
+  name: .at()
+
+atinnerhtml:
+  id: 5
+  name: .at().inner_html
+
+searchfirst:
+  id: 8
+  name: .search().first
+
+searchlast:
+  id: 11
+  name: .search().last
+
+displayenumerable:
+  id: 14
+  name: display-enumerable()
+
+searchprepend:
+  id: 17
+  name: .search().prepend()
+
+searchprepend:
+  id: 18
+  name: .search().append()
+
+searchwrap:
+  id: 20
+  name: .search().wrap()
+
+atswap:
+  id: 23
+  name: .at().swap()
+
+displaycomments:
+  id: 25
+  name: display-comments
+
+removecomments:
+  id: 28
+  name: remove-comments
+
+gsubtextnodes:
+  id: 30
+  name: gsub(/old/,'new')-textnodes
+
+remove_attr:
+  id: 33
+  name: .search().remove_attr()

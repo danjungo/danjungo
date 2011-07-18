@@ -1,0 +1,53 @@
+!!!
+%html
+  = render(:partial => "layouts/head")
+  %body
+    %table#t2{:width => "100%", :border => "0"}
+      %tr#t2r2
+        %td#t2r2c2.hpricot-color{:valign => "top"}
+          %div.white-color
+            %hr
+            %a{:href => "/"}
+              %img{:src => "/images/hpricot-small.png", :alt => "http://hpricot.com"}
+            %hr
+            %h2
+              <a href="/">http://hpricot.com</a>
+            %hr
+            %p
+              %b
+                %a{:href => "/demos"} Hpricot Demonstrations
+            %p
+              %b
+                %a{:href => "/demos/about"} About
+            %p
+              %b
+                %a{:href => "/sttc/contact"} Contact
+            %p
+              %b
+                %a{:href => "/sttc/maillist"} Mail List
+            %p
+              %b
+                %a{:href => "http://groups.google.com/group/hpricot", :target => "hp"} http://groups.google.com/group/hpricot
+            %p
+              %b
+                %a{:href => "http://code.whytheluckystiff.net/hpricot", :target => "hp"} http://code.whytheluckystiff.net/hpricot
+            %p
+              %b
+                %a{:href => "/hpricot_rdoc154/index.html", :target => "hp"} RDoc of Hpricot 0.6
+            %hr
+            %p= render(:partial => "layouts/login_status")
+            %hr
+            %p
+              %b
+                %a{:href => "/frgmnts"} An Hpricot Workbench
+            %hr
+
+        %td#t2r2c4{:valign => "top"}
+          = yield
+          %hr
+          %h3 Source Code:
+          %div= render(:partial => "layouts/show_source")
+
+        %td#t2r2c6.hpricot-color{:valign => "top"}= render(:partial => "layouts/t2r2c6")
+
+

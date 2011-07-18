@@ -1,0 +1,57 @@
+%h3 FAQ for hpricot.com Workbench
+%hr
+
+%p Q: The hpricot.com Workbench is what?
+A: I use it to craft hpricot expressions.
+%br Once I have an expression I like,
+%br I'll copy/paste the syntax into an application for use there.
+%br
+%p Q: What is a Fragment?
+A: A Fragment is a fragment of HTML pulled out of an hpricot object.
+%br The hpricot object builds the HTML fragment from a website or another Fragment.
+%br
+%p Q: What is a stack?
+A: A stack is a group of Fragments.
+%br I visualize a stack to be like a stack of colored poker chips.
+%br Stacks are useful when I need to provide a variety of Fragments to an application.
+%br Stacks help me visually categorize Fragments which flow into an application.
+%br For example if frgC is built from frgB which is built from frgA,
+%br I will put them in the same stack.
+%br If you use a basket or cart while shopping, you might like stacks.
+%br If you don't like stacks, ignore them.
+%br
+%p Q: How do I build a Fragment?
+A: Click 'create' in the upper right hand corner and fill out the resulting form.
+%br
+%p Q: The form has fields Arg1, Arg2, Arg3, and Arg4.  Why?
+A: Many Hpricot expressions require an argument.
+%br For example .search() needs an argument.
+%br If I want to pull all of the &lt;a> elements out of an hpricot object,
+%br the argument would be ...
+%br a
+%br The workbench would then create and run an expression like this:
+%br @myhtml = hpricot_object.search("a").to_html
+%br
+%p Q: Are any of the argument formats not obvious?
+A: Yes, display-enumerable() requires a format like this:
+%br a,[3,2]
+%br When display-enumerable() sees
+%br a,[3,2]
+%br it will pull all of the &lt;a> elements out of an hpricot object,
+%br then it will load them into an array-like object.
+%br Finally, it will pull 2 elements out of the array-like object
+%br starting at element 3.  Also it will add some HTML syntax to
+%br make it easier to see the 2 elements when rendered.
+%br For example display-enumerable( a,[3,2] ) of http://www.google.com
+%br might give me something like this:
+%br
+%br=h('<hr />0<p /><a href="http://maps.google.com/maps?tab=wl">Maps</a><hr />1<p /><a href="http://mail.google.com/mail?tab=wm">Gmail</a>')
+%p
+%br which renders as this:
+%p
+<hr />0<p /><a href="http://maps.google.com/maps?tab=wl">Maps</a><hr />1<p /><a href="http://mail.google.com/mail?tab=wm">Gmail</a>
+%p
+%p Q: Do any of the workbench supplied expressions require 0 arguments?
+A: Yes: display-comments and remove-comments require no arguments.
+%p
+%b End of FAQ for hpricot.com Workbench

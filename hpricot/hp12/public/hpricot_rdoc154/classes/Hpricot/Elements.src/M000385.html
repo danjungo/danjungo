@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>expand (Hpricot::Elements)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/hpricot/elements.rb, line 315</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">expand</span>(<span class="ruby-identifier">ele1</span>, <span class="ruby-identifier">ele2</span>, <span class="ruby-identifier">excl</span>=<span class="ruby-keyword kw">false</span>)
+      <span class="ruby-identifier">ary</span> = []
+      <span class="ruby-identifier">offset</span> = <span class="ruby-identifier">excl</span> <span class="ruby-value">? </span><span class="ruby-operator">-</span><span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ele1</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">ele2</span>
+        <span class="ruby-comment cmt"># let's quickly take care of siblings</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ele1</span>.<span class="ruby-identifier">parent</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">ele2</span>.<span class="ruby-identifier">parent</span>
+          <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">ele1</span>.<span class="ruby-identifier">parent</span>.<span class="ruby-identifier">children</span>[<span class="ruby-identifier">ele1</span>.<span class="ruby-identifier">node_position</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">ele2</span>.<span class="ruby-identifier">node_position</span><span class="ruby-operator">+</span><span class="ruby-identifier">offset</span>)]
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-comment cmt"># find common parent</span>
+          <span class="ruby-identifier">p</span>, <span class="ruby-identifier">ele1_p</span> = <span class="ruby-identifier">ele1</span>, [<span class="ruby-identifier">ele1</span>]
+          <span class="ruby-identifier">ele1_p</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:parent</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">p</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parent</span>
+          <span class="ruby-identifier">p</span>, <span class="ruby-identifier">ele2_p</span> = <span class="ruby-identifier">ele2</span>, [<span class="ruby-identifier">ele2</span>]
+          <span class="ruby-identifier">ele2_p</span>.<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:parent</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">p</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">parent</span>
+          <span class="ruby-identifier">common_parent</span> = <span class="ruby-identifier">ele1_p</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">ele2_p</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p1</span>, <span class="ruby-identifier">p2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">p2</span> }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">last</span>
+
+          <span class="ruby-identifier">child</span> = <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ele1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">common_parent</span>
+            <span class="ruby-identifier">child</span> = <span class="ruby-identifier">ele2</span>
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">ele2</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">common_parent</span>
+            <span class="ruby-identifier">child</span> = <span class="ruby-identifier">ele1</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">child</span>
+            <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">common_parent</span>.<span class="ruby-identifier">children</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">child</span>.<span class="ruby-identifier">node_position</span><span class="ruby-operator">+</span><span class="ruby-identifier">offset</span>)]
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Elements</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">ary</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

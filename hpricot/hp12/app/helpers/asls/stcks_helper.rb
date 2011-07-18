@@ -1,0 +1,2 @@
+module Asls::StcksHelper
+end

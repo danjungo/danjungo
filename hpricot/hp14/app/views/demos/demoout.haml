@@ -1,0 +1,21 @@
+%hr
+%h3{:style => "color: #F70;"}
+  URL:
+  %a{:href => @uurl, :target => "t11",:style => "color: #360;"}
+    = @uurl
+%h3
+  %div{:style => "color: #F70;"} Hpricot Expression:
+  = @hpexpr
+%hr
+%h3{:style => "color: #F70;"} Rendered HTML From Your Hpricot Object:
+= @myhtml
+%hr
+%h3{:style => "color: #F70;"} HTML From Your Hpricot Object:
+%p
+= h(@myhtml)
+%hr
+%p
+  %a{:style => "font-weight: bold; color: #360;", :href => "/demonstrations"} Try Again?
+%hr
+
+

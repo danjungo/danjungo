@@ -1,0 +1,16 @@
+%h1 About
+
+This site is about Hpricot. You will find some demonstrations here. 
+%hr/
+-form_tag :action => "post_about" do
+  %span.hpricot-color URL:
+  %br/
+  =text_field_tag "uurl", "http://news.google.com", :size => 66
+  %br/
+  %br/
+  %span.hpricot-color Hpricot "search" expression:
+  %br/
+  =text_field_tag "searchexpr", "img", :size => 66
+  %br/
+  %br/
+  =submit_tag "Try Hpricot"

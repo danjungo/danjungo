@@ -1,0 +1,43 @@
+%h3 About
+%p This site is about Hpricot.  You will find some demonstrations here.
+%hr
+%h4 A Quick Demo:
+= render(:partial => "layouts/aboutform")
+%h3
+  Other Expressions To Try! :
+  %p
+  &nbsp; a:first
+  %p
+  &nbsp; a:last
+  %p
+  &nbsp; div
+  %p
+  &nbsp; div#gbar
+  %p
+  &nbsp; div.gb2
+  %p
+  &nbsp; div.gb2>a
+  %p
+  &nbsp; div.gb2/a
+  %p
+  &nbsp; a[text()=Blog Search]
+  %p
+  &nbsp; a[text()=Blogger]/..
+  %p
+  &nbsp; a[text()=Blogger]/../..
+  %p
+  &nbsp; a[text()*=Blog]
+  %p
+  &nbsp; a[@href^=http]
+  %p
+  &nbsp; a[@href*=blog]
+  %p
+  &nbsp; a[@href*=blog]/text()
+  %p
+  &nbsp; a[@href*=blog][text()*=Search]
+  %p
+  &nbsp; a[@href*=blog] | a[@href*=finance]
+
+
+
+

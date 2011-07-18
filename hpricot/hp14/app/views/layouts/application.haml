@@ -1,0 +1,55 @@
+!!!
+
+%html{html_attrs('en-US')}
+  %head
+    %meta{ 'http-equiv' => 'content-type', :content => 'text/html;charset=UTF-8'}
+    %title hpricot.com
+    = stylesheet_link_tag("application")
+  %body
+    %table.main_table{:width => '98%', :border => '1'}
+      %tr.main_tr
+        %td.lhs{:valign => 'top'} 
+          %img{:src => "/images/hpricot-small.png"}
+          %br/
+          %br/
+          =link_to("About",:about)
+          %br/
+          %br/
+          =link_to("Hpricot Demos",:demonstrations)
+          %br/
+          %br/
+          =link_to("Hpricot Google Group","http://groups.google.com/group/hpricot-ml",{:target => "hml"})
+          %br/
+          %br/
+          =link_to("Hpricot Gem","http://gemcutter.org/search?query=hpricot",{:target => "g"})
+          %br/
+          %br/
+          =link_to("http://github.com/hpricot","http://github.com/hpricot",{:target => "t"})
+          %br/
+          %br/
+          =link_to("A Script!",:ascript)
+          %br/
+          %br/
+          =link_to("http://rdoc.info/projects/hpricot/hpricot","http://rdoc.info/projects/hpricot/hpricot",{:target => "t"})
+          %br/
+          %br/
+          The Competition:
+          %br/
+          =link_to("http://rdoc.info/projects/brynary/nokogiri","http://rdoc.info/projects/brynary/nokogiri",{:target => "t"})
+          %br/
+          =link_to("http://rdoc.info/projects/tenderlove/nokogiri","http://rdoc.info/projects/tenderlove/nokogiri",{:target => "t"})
+          %br/
+          =link_to("http://nokogiri.org/tutorials/parsing_an_html_xml_document.html","http://nokogiri.org/tutorials/parsing_an_html_xml_document.html",{:target => "t"})
+          %br/
+          %br/
+          %br/
+          This site was built by Dan Bikle
+          %br/
+          =link_to("http://bikle.com","http://bikle.com",{:target => "b"})
+          %br/
+          And features the "rectangular look"
+
+        %td.rhs{:valign => 'top'}
+          -if flash[:notice]
+            %p{:style => "color:green"}= flash[:notice]
+          =yield

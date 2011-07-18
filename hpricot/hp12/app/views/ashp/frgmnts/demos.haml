@@ -1,0 +1,18 @@
+%h3 Demonstrations
+%hr
+After you press the button,
+%br
+the output might appear in another window.
+%p
+%form{:id => "demoform", :name => "demoform", :action => "/ashp/frgmnts/demoout", :target => "demo"}
+  %label{:for => "demoformuurl"} URL:
+  %p
+  %input{:id => "demoformuurl", :size => "66", :name => "uurl", :value => "http://www.google.com"}
+  %p
+  %label{:for => "demoformhpexpr"} Hpricot Search Expression:
+  %p
+  %input{:id => "demoformhpexpr", :size => "55", :name => "hpexpr", :value => "a"}
+  %p
+  %input{:size => "22", :type => "submit", :value => "Try Demo"}
+
+%hr

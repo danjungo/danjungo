@@ -1,0 +1,21 @@
+%hr
+%h3
+  URL:
+  %a{:href => @uurl, :target => "t11"}
+    = @uurl
+%h3
+  Hpricot Expression: 
+  = @hpexpr
+%hr
+%h3 Rendered HTML From Your Hpricot Object:
+= @myhtml
+%hr
+%h3 HTML From Your Hpricot Object:
+%p
+= h(@myhtml)
+%hr
+%p
+  %b
+    %a{:href => "/demos", :target => "ta"} Pop a new page or tab to ... Try Again?
+%hr
+

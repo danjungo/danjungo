@@ -1,0 +1,21 @@
+td {
+  border-style: solid;
+  border-width: 11px;
+  border-color: black; }
+
+body {
+  background-color: white;
+  width: 98%; }
+
+.hpricot-color {
+  color: #F70; }
+
+.leaf-color {
+  color: #360; }
+
+.white-color {
+  background-color: white; }
+
+h1,h2,h3,h4,a {
+  color: #360;
+}
